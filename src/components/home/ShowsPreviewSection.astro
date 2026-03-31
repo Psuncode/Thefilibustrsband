@@ -13,18 +13,32 @@ import { upcomingShows } from "../../data/shows";
       </div>
     </div>
     <div class="mt-8 grid gap-4">
-      {upcomingShows.map((show) => (
-        <article class="grid gap-4 border-2 border-[var(--color-ink)] bg-white p-5 md:grid-cols-[0.25fr_1fr_0.35fr] md:items-center">
-          <p class="text-sm font-bold uppercase tracking-[0.16em] text-[var(--color-pink)]">{show.date}</p>
+      {upcomingShows.length > 0 ? (
+        upcomingShows.map((show) => (
+          <article class="grid gap-4 border-2 border-[var(--color-ink)] bg-white p-5 md:grid-cols-[0.25fr_1fr_0.35fr] md:items-center">
+            <p class="text-sm font-bold uppercase tracking-[0.16em] text-[var(--color-pink)]">{show.date}</p>
+            <div>
+              <h3 class="text-xl font-black uppercase">{show.venue}</h3>
+              <p class="text-sm text-[var(--color-muted)]">{show.city}</p>
+            </div>
+            <a class="focus-ring inline-flex min-h-11 items-center justify-center bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={show.href}>
+              {show.ctaLabel}
+            </a>
+          </article>
+        ))
+      ) : (
+        <article class="grid gap-4 border-2 border-[var(--color-ink)] bg-white p-5 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h3 class="text-xl font-black uppercase">{show.venue}</h3>
-            <p class="text-sm text-[var(--color-muted)]">{show.city}</p>
+            <h3 class="text-xl font-black uppercase">No shows announced yet</h3>
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-[var(--color-muted)]">
+              Join the community and we&apos;ll make sure you hear about the next live date as soon as it lands.
+            </p>
           </div>
-          <a class="focus-ring inline-flex min-h-11 items-center justify-center bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={show.href}>
-            {show.ctaLabel}
+          <a class="focus-ring inline-flex min-h-11 items-center justify-center bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href="#community">
+            Get show alerts
           </a>
         </article>
-      ))}
+      )}
     </div>
   </div>
 </section>

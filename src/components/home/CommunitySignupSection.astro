@@ -1,7 +1,10 @@
 ---
 import { homepageContent } from "../../data/homepage";
+import { siteMeta } from "../../data/site";
 
 const formAction = import.meta.env.PUBLIC_COMMUNITY_FORM_ACTION;
+const hasFormAction = Boolean(formAction);
+const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Join%20the%20Filibusters%20community`;
 ---
 
 <section id="community" class="bg-white">
@@ -14,21 +17,32 @@ const formAction = import.meta.env.PUBLIC_COMMUNITY_FORM_ACTION;
       <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--color-ink)]/80">
         {homepageContent.community.description}
       </p>
-      <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST">
-        <label class="sr-only" for="email">Email address</label>
-        <input
-          class="min-h-11 flex-1 border border-[var(--color-ink)] bg-white px-4 py-3 text-base text-[var(--color-ink)]"
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email address"
-          autocomplete="email"
-          required
-        />
-        <button class="focus-ring min-h-11 bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" type="submit">
-          Join the community
-        </button>
-      </form>
+      {hasFormAction ? (
+        <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST">
+          <label class="sr-only" for="email">Email address</label>
+          <input
+            class="min-h-11 flex-1 border border-[var(--color-ink)] bg-white px-4 py-3 text-base text-[var(--color-ink)]"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email address"
+            autocomplete="email"
+            required
+          />
+          <button class="focus-ring min-h-11 bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" type="submit">
+            Join the community
+          </button>
+        </form>
+      ) : (
+        <div class="mt-6 border border-[var(--color-ink)] bg-white p-4">
+          <p class="text-sm leading-6 text-[var(--color-ink)]/80">
+            Community signup is being wired up right now. Use email for updates instead of a form submission.
+          </p>
+          <a class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={fallbackHref}>
+            Email for updates
+          </a>
+        </div>
+      )}
     </div>
   </div>
 </section>
