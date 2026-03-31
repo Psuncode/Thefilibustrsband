@@ -9,12 +9,15 @@ import ShowsPreviewSection from "../components/home/ShowsPreviewSection.astro";
 import PersonalityStripSection from "../components/home/PersonalityStripSection.astro";
 import CommunitySignupSection from "../components/home/CommunitySignupSection.astro";
 import FollowPrompt from "../components/home/FollowPrompt.astro";
-import { siteMeta } from "../data/site";
+import { bandFacts, siteMeta } from "../data/site";
 ---
 
-<BaseLayout title={siteMeta.title} description={siteMeta.description}>
+<BaseLayout
+  title={`${siteMeta.title} | Alt Rock Band from ${bandFacts.location.display}`}
+  description={siteMeta.description}
+>
   <Header />
-  <main id="main-content" class="mobile-nav-offset">
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip">
     <HeroSection />
     <LatestReleaseSection />
     <WhyStickAroundSection />

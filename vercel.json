@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.thefilibustersband.com"
+        }
+      ],
+      "destination": "https://thefilibustersband.com/:path*",
+      "permanent": true
+    }
+  ]
+}

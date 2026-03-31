@@ -8,6 +8,10 @@ type ContactPath = {
 };
 
 type ContactPageContent = {
+  meta: {
+    title: string;
+    description: string;
+  };
   hero: {
     eyebrow: string;
     title: string;
@@ -63,6 +67,11 @@ const contactPathCopy = {
 >;
 
 export const contactPage = {
+  meta: {
+    title: "Contact The Filibusters | Booking and Press",
+    description:
+      `Contact The Filibusters for booking, press, and general inquiries. Based in ${bandFacts.location.display}, available for local and regional shows.`
+  },
   hero: {
     eyebrow: "Contact",
     title: `Book ${bandFacts.geoIdentity.bandName} for ${bandFacts.location.city} shows and ${bandFacts.location.region} dates.`,

@@ -149,7 +149,8 @@ export const socialLinks = [
 
 export const siteMeta = {
   title: "The Filibusters",
-  description: "Pop-punk, covers, and chaos worth showing up for.",
+  description:
+    "The Filibusters are an alt rock band from Provo, Utah making loud, emotionally direct songs built for live rooms, late nights, and real connection.",
   url: "https://thefilibustersband.com",
   contactEmail: "thefilibustersband@gmail.com",
   socials: socialLinks.map(({ label, href }) => ({ label, href }))
