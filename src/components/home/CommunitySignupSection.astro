@@ -18,7 +18,7 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Join%20the%20Filib
         {homepageContent.community.description}
       </p>
       {hasFormAction ? (
-        <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST" novalidate>
+        <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST">
           <div class="flex-1">
             <label class="mb-2 block text-sm font-semibold" for="email">Email address</label>
             <input
