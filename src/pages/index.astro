@@ -2,11 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/site/Header.astro";
 import Footer from "../components/site/Footer.astro";
+import HeroSection from "../components/home/HeroSection.astro";
+import LatestReleaseSection from "../components/home/LatestReleaseSection.astro";
 import { siteMeta } from "../data/site";
 ---
 
 <BaseLayout title={siteMeta.title} description={siteMeta.description}>
   <Header />
-  <main>Homepage placeholder</main>
+  <main>
+    <HeroSection />
+    <LatestReleaseSection />
+  </main>
   <Footer />
 </BaseLayout>

@@ -1,0 +1,33 @@
+---
+import { latestRelease } from "../../data/release";
+---
+
+<section id="latest-release" class="bg-[var(--color-ink)] text-white">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-[0.8fr_1.2fr] md:px-6 md:py-16">
+    <img
+      class="w-full max-w-sm border border-white/10 object-cover"
+      src={latestRelease.artwork}
+      alt={`${latestRelease.title} cover art`}
+      width="900"
+      height="900"
+    />
+    <div class="flex flex-col justify-center">
+      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">
+        {latestRelease.eyebrow}
+      </p>
+      <h2 class="mt-3 text-3xl font-black uppercase leading-none md:text-5xl">
+        {latestRelease.title}
+      </h2>
+      <p class="mt-4 max-w-2xl text-base leading-7 text-white/80">
+        {latestRelease.description}
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {latestRelease.links.map((link) => (
+          <a class="focus-ring inline-flex min-h-11 items-center justify-center border border-white/20 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)] hover:border-[var(--color-pink)]" href={link.href} target="_blank" rel="noreferrer">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
