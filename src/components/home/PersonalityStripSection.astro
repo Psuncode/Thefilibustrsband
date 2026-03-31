@@ -1,0 +1,19 @@
+---
+import { homepageContent } from "../../data/homepage";
+---
+
+<section class="bg-[var(--color-ink)] text-white">
+  <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+    <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">Band life</p>
+    <h2 class="mt-3 max-w-3xl text-3xl font-black uppercase leading-none md:text-5xl">
+      {homepageContent.personality.title}
+    </h2>
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
+      {homepageContent.personality.items.map((item) => (
+        <div class="border border-white/15 p-5">
+          <p class="text-base leading-7 text-white/85">{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
