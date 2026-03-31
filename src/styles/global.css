@@ -31,12 +31,12 @@ body {
   font-family: "Inter", system-ui, sans-serif;
 }
 
-main {
+.mobile-nav-offset {
   padding-bottom: calc(var(--bottom-nav-height) + 1rem);
 }
 
 @media (min-width: 768px) {
-  main {
+  .mobile-nav-offset {
     padding-bottom: 0;
   }
 }
