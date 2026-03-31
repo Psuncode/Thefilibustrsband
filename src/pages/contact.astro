@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/site/Footer.astro";
+import Header from "../components/site/Header.astro";
+import { contactPage } from "../data/contact";
+import { iconPaths, siteMeta, socialLinks } from "../data/site";
+
+const createMailtoHref = (email: string, subject: string) => {
+  const params = new URLSearchParams({ subject });
+  return `mailto:${email}?${params.toString()}`;
+};
+
+const pathMailtoLinks = contactPage.paths.map((path) => ({
+  ...path,
+  href: createMailtoHref(path.email, `${siteMeta.title} ${path.title} Inquiry`)
+}));
+
+const primaryMailtoHref = createMailtoHref(
+  contactPage.primary.email,
+  `${siteMeta.title} Contact`
+);
+---
+
+<BaseLayout
+  title={`Contact | ${siteMeta.title}`}
+  description={contactPage.hero.description}
+>
+  <Header />
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip">
+    <section class="border-b border-black/10">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+            {contactPage.hero.eyebrow}
+          </p>
+          <h1 class="display-face mt-3 text-[clamp(2.1rem,8vw,3.75rem)] uppercase leading-[1.02] tracking-[-0.04em]">
+            {contactPage.hero.title}
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-[var(--color-ink)]/78 md:text-lg md:leading-8">
+            {contactPage.hero.description}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[var(--color-paper-soft)]">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+            {contactPage.pathsSection.eyebrow}
+          </p>
+          <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+            {contactPage.pathsSection.title}
+          </h2>
+        </div>
+
+        <div class="mt-8 grid gap-4 lg:grid-cols-3">
+          {pathMailtoLinks.map((path) => (
+            <article class="poster-frame flex h-full flex-col rounded-[1.75rem] p-6">
+              <div>
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+                  {path.title}
+                </p>
+                <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/76">
+                  {path.description}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-2">
+                <a
+                  class="focus-ring inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+                  href={path.href}
+                >
+                  {path.ctaLabel}
+                </a>
+                <p class="mt-3 text-xs leading-5 text-[var(--color-ink)]/58">
+                  Opens your email app with the subject line filled in.
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[var(--color-ink)] text-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+          <div class="max-w-2xl">
+            <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">
+              {contactPage.primary.label}
+            </p>
+            <h2 class="display-face mt-3 max-w-[10ch] text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+              {contactPage.primary.title}
+            </h2>
+            <p class="mt-4 text-base leading-7 text-white/78 md:text-lg md:leading-8">
+              {contactPage.primary.note}
+            </p>
+          </div>
+
+          <div class="rounded-[2rem] border border-white/12 bg-white/6 p-6 md:p-8">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-white/60">
+              {contactPage.primary.emailLabel}
+            </p>
+            <a
+              class="focus-ring mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-yellow)] px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:bg-white"
+              href={primaryMailtoHref}
+            >
+              {contactPage.primary.email}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[var(--color-paper-soft)]/55">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]/80">
+            {contactPage.social.eyebrow}
+          </p>
+          <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] text-[var(--color-ink)]/92 md:text-5xl">
+            {contactPage.social.title}
+          </h2>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/74 md:text-lg">
+            {contactPage.social.note}
+          </p>
+        </div>
+
+        <div class="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {socialLinks.map((social) => (
+            <a
+              class="focus-ring flex min-h-12 items-center justify-between gap-4 rounded-[1.4rem] border border-black/8 bg-white px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:bg-[var(--color-pink)] hover:text-white"
+              href={social.href}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <span class="inline-flex min-w-0 items-center gap-3">
+                <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/8 bg-[var(--color-paper-soft)]">
+                  <svg
+                    aria-hidden="true"
+                    class="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d={iconPaths[social.icon]} />
+                  </svg>
+                </span>
+                <span>{social.label}</span>
+              </span>
+              <span aria-hidden="true" class="shrink-0">-&gt;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

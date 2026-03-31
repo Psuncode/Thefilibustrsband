@@ -1,5 +1,5 @@
 ---
-import { iconPaths, siteMeta, socialLinks } from "../../data/site";
+import { bandFacts, iconPaths, siteMeta, socialLinks } from "../../data/site";
 ---
 
 <footer class="mobile-nav-offset border-t border-black/10 bg-[var(--color-ink)] text-white">
@@ -13,6 +13,9 @@ import { iconPaths, siteMeta, socialLinks } from "../../data/site";
       </div>
       <p class="max-w-lg text-sm leading-7 text-white/75">
         New music, upcoming shows, and band-life updates worth the follow.
+      </p>
+      <p class="max-w-lg text-sm leading-6 text-white/58">
+        {bandFacts.geoLine}
       </p>
       <a
         class="focus-ring inline-flex min-h-11 w-fit items-center justify-center rounded-full bg-[var(--color-yellow)] px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:bg-white"
