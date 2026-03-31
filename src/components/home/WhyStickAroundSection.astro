@@ -4,18 +4,50 @@ import { homepageContent } from "../../data/homepage";
 
 <section class="bg-white">
   <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-    <div class="max-w-3xl">
+    <div class="max-w-4xl">
       <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Why people stick around</p>
       <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
-        Originals, covers, shows, and actual personality.
+        Music for the ones still figuring it out.
       </h2>
     </div>
-    <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      {homepageContent.reasons.map((reason, index) => (
-        <div class:list={["poster-frame rounded-[1.75rem] p-5", index % 2 === 0 ? "bg-white" : "bg-[var(--color-paper-soft)]"]}>
-          <p class="text-base font-semibold leading-6">{reason}</p>
-        </div>
-      ))}
+    <div class="mt-8 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+      <div class="poster-frame relative overflow-hidden rounded-[2rem] bg-[var(--color-paper-soft)] p-6 md:p-8">
+        <div class="absolute right-5 top-5 h-14 w-14 rounded-full border border-[var(--color-pink)]/20 bg-[radial-gradient(circle,rgba(206,32,103,0.22)_0%,rgba(206,32,103,0)_72%)]"></div>
+        <div class="absolute left-6 top-0 h-8 w-24 -translate-y-1/2 rotate-[-3deg] rounded-sm bg-[var(--color-yellow)]/90"></div>
+        <p class="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-pink)]">Pasted to the wall</p>
+        <p class="display-face mt-4 max-w-[12ch] text-4xl uppercase leading-[0.95] tracking-[-0.04em] text-[var(--color-ink)] md:text-6xl">
+          You&apos;re not the only one feeling this way.
+        </p>
+        <p class="mt-5 max-w-2xl text-base leading-7 text-[var(--color-ink)]/72">
+          The songs hit because they do not pretend life is polished. They meet people in the middle of the mess and make that feel loud, honest, and worth sharing.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        {homepageContent.reasons.map((reason, index) => (
+          <div
+            class:list={[
+              "poster-frame rounded-[1.6rem] border p-5 md:p-6",
+              index === 0 && "rotate-[-1.5deg] bg-white",
+              index === 1 && "translate-x-0 bg-[var(--color-paper-soft)] sm:translate-y-4 lg:translate-x-6 lg:translate-y-0",
+              index === 2 && "rotate-[1.5deg] bg-[var(--color-yellow)]/28",
+              index === 3 && "bg-white"
+            ]}
+          >
+            <p class="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]/80">
+              {index === 0 && "Hit harder"}
+              {index === 1 && "Stay louder"}
+              {index === 2 && "Feel it live"}
+              {index === 3 && homepageContent.closing.title}
+            </p>
+            <p class:list={[
+              "mt-3 text-lg leading-7 text-[var(--color-ink)]",
+              index === 3 ? "font-medium" : "font-semibold"
+            ]}>
+              {index === 3 ? homepageContent.closing.description : reason}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>

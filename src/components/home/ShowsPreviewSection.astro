@@ -1,5 +1,11 @@
 ---
 import { upcomingShows } from "../../data/shows";
+
+const showDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
 ---
 
 <section id="shows" class="anchor-section bg-[var(--color-paper-soft)]">
@@ -16,7 +22,9 @@ import { upcomingShows } from "../../data/shows";
       {upcomingShows.length > 0 ? (
         upcomingShows.map((show) => (
           <article class="poster-frame grid gap-4 rounded-[1.75rem] p-5 md:grid-cols-[0.24fr_1fr_auto] md:items-center">
-            <p class="text-sm font-bold uppercase tracking-[0.16em] text-[var(--color-pink)]">{show.date}</p>
+            <time class="text-sm font-bold uppercase tracking-[0.16em] text-[var(--color-pink)]" datetime={show.date}>
+              {showDateFormatter.format(new Date(`${show.date}T00:00:00`))}
+            </time>
             <div>
               <h3 class="text-xl font-black uppercase">{show.venue}</h3>
               <p class="text-sm text-[var(--color-muted)]">{show.city}</p>

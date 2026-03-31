@@ -1,6 +1,8 @@
 ---
 import Analytics from "@vercel/analytics/astro";
 import heroBand from "../assets/images/hero-band.jpg";
+import { siteMeta, socialLinks } from "../data/site";
+import { upcomingShows } from "../data/shows";
 import "../styles/global.css";
 
 interface Props {
@@ -11,6 +13,37 @@ interface Props {
 const { title, description } = Astro.props;
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(heroBand.src, Astro.site);
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    name: siteMeta.title,
+    description: siteMeta.description,
+    url: siteMeta.url,
+    email: siteMeta.contactEmail,
+    image: ogImage.href,
+    sameAs: socialLinks.map(({ href }) => href)
+  },
+  ...upcomingShows.map((show) => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: `${siteMeta.title} at ${show.venue}`,
+    startDate: show.date,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    image: [ogImage.href],
+    performer: {
+      "@type": "MusicGroup",
+      name: siteMeta.title,
+      url: siteMeta.url
+    },
+    location: {
+      "@type": "Place",
+      name: show.venue,
+      address: show.city
+    }
+  }))
+];
 ---
 
 <!doctype html>
@@ -32,7 +65,11 @@ const ogImage = new URL(heroBand.src, Astro.site);
     <meta property="og:url" content={pageUrl.href} />
     <meta property="og:image" content={ogImage.href} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
   </head>
   <body>
     <a class="focus-ring sr-only focus:not-sr-only" href="#main-content">Skip to content</a>

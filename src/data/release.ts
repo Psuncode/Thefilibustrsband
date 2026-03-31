@@ -3,7 +3,7 @@ import breakUpWithYourBoyfriendCover from "../assets/images/break-up-with-your-b
 export const latestRelease = {
   eyebrow: "Latest release",
   title: "Break Up With Your Boyfriend",
-  description: "The new Filibusters release brings the same sharp hooks and chaotic energy from the live set into your headphones.",
+  description: "This one is for the late nights, the overthinking, and the things you do not say out loud. Turn it up and let it hit.",
   artwork: breakUpWithYourBoyfriendCover,
   links: [
     {

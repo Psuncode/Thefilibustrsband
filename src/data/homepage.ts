@@ -1,16 +1,16 @@
 export const homepageContent = {
   hero: {
     eyebrow: "The Filibusters",
-    headline: "Pop-punk covers, real songs, and just enough chaos.",
-    subheadline: "Stream the newest release, catch the next show, and keep up with the band between the noise.",
+    headline: "Feel loud. Feel seen. Feel something.",
+    subheadline: "Alt rock for the ones still figuring it out. New music, live shows, and the kind of songs that stick when life feels loud.",
     primaryCta: { label: "Listen now", href: "#latest-release" },
-    secondaryCta: { label: "Join the community", href: "#community" }
+    secondaryCta: { label: "See shows", href: "#shows" }
   },
   reasons: [
-    "Original songs with replay value",
-    "Covers people actually scream along to",
-    "Live sets that feel bigger in person",
-    "Band-life chaos worth following"
+    "Songs that hit when you do not have the words yet",
+    "Hooks loud enough to stay with you after the set",
+    "Live shows that feel cathartic instead of background noise",
+    "A band voice that meets people where they actually are"
   ],
   personality: {
     feedbackTitle: "Fan feedback",
@@ -20,7 +20,7 @@ export const homepageContent = {
         attribution: "K.C."
       },
       {
-        quote: "The vocals are INSANE and the instruments? Plus they're stage presence is unmatched",
+        quote: "The vocals are INSANE and the instruments? Plus their stage presence is unmatched",
         attribution: "B.S."
       },
       {
@@ -60,7 +60,7 @@ export const homepageContent = {
         attribution: "L.B."
       },
       {
-        quote: "The Filibuster's ability to create audience engagement was amazing! I felt like I was apart of the band.",
+        quote: "The Filibuster's ability to create audience engagement was amazing! I felt like I was a part of the band.",
         attribution: "L.S."
       },
       {
@@ -70,7 +70,13 @@ export const homepageContent = {
     ]
   },
   community: {
-    title: "Join the Filibusters community",
-    description: "Be first to hear new music, show drops, and everything happening between the chaos."
+    title: "Stay close",
+    description: "New music. New shows. Exclusive drops. Be the first to hear what is next.",
+    fallbackDescription: "Drop us an email and we will add you to the list for new music, show dates, and the updates worth checking back for.",
+    fallbackCtaLabel: "Get on the list"
+  },
+  closing: {
+    title: "Be part of it",
+    description: "Music for the ones still figuring it out together."
   }
 } as const;

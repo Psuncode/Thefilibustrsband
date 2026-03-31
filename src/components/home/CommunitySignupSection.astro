@@ -37,10 +37,10 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Join%20the%20Filib
       ) : (
         <div class="mt-6 rounded-[1.5rem] border border-[var(--color-ink)] bg-white p-4">
           <p class="text-sm leading-6 text-[var(--color-ink)]/80">
-            Community signup is being wired up right now. Use email for updates instead of a form submission.
+            {homepageContent.community.fallbackDescription}
           </p>
           <a class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={fallbackHref}>
-            Email for updates
+            {homepageContent.community.fallbackCtaLabel}
           </a>
         </div>
       )}
