@@ -2,12 +2,12 @@
 import { upcomingShows } from "../../data/shows";
 ---
 
-<section id="shows" class="bg-[#f7f3e8]">
+<section id="shows" class="bg-[var(--color-paper-soft)]">
   <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
     <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-      <div>
+      <div class="max-w-3xl">
         <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Shows</p>
-        <h2 class="mt-3 text-3xl font-black uppercase leading-none md:text-5xl">
+        <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
           Come see what the chaos looks like in person.
         </h2>
       </div>
@@ -15,26 +15,26 @@ import { upcomingShows } from "../../data/shows";
     <div class="mt-8 grid gap-4">
       {upcomingShows.length > 0 ? (
         upcomingShows.map((show) => (
-          <article class="grid gap-4 border-2 border-[var(--color-ink)] bg-white p-5 md:grid-cols-[0.25fr_1fr_0.35fr] md:items-center">
+          <article class="poster-frame grid gap-4 rounded-[1.75rem] p-5 md:grid-cols-[0.24fr_1fr_auto] md:items-center">
             <p class="text-sm font-bold uppercase tracking-[0.16em] text-[var(--color-pink)]">{show.date}</p>
             <div>
               <h3 class="text-xl font-black uppercase">{show.venue}</h3>
               <p class="text-sm text-[var(--color-muted)]">{show.city}</p>
             </div>
-            <a class="focus-ring inline-flex min-h-11 items-center justify-center bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={show.href}>
+            <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={show.href}>
               {show.ctaLabel}
             </a>
           </article>
         ))
       ) : (
-        <article class="grid gap-4 border-2 border-[var(--color-ink)] bg-white p-5 md:grid-cols-[1fr_auto] md:items-center">
+        <article class="poster-frame grid gap-4 rounded-[1.75rem] p-5 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <h3 class="text-xl font-black uppercase">No shows announced yet</h3>
             <p class="mt-2 max-w-2xl text-sm leading-6 text-[var(--color-muted)]">
               Join the community and we&apos;ll make sure you hear about the next live date as soon as it lands.
             </p>
           </div>
-          <a class="focus-ring inline-flex min-h-11 items-center justify-center bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href="#community">
+          <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href="#community">
             Get show alerts
           </a>
         </article>
