@@ -2,6 +2,8 @@
 
 ## Local Development
 
+The homepage uses Tailwind utilities plus CSS variables for the official brand palette.
+
 ```bash
 npm install
 npm run dev

@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-ink: #231f20;
+  --color-paper: #ffffff;
+  --color-pink: #ce2067;
+  --color-yellow: #ecdb5d;
+  --color-muted: #6b6770;
+  --color-border: rgba(35, 31, 32, 0.12);
+  --shadow-poster: 0 18px 40px rgba(35, 31, 32, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.focus-ring {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4;
+  outline-color: var(--color-pink);
+}

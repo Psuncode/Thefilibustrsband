@@ -1,5 +1,7 @@
 import { defineConfig } from "astro/config";
+import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
-  site: "https://thefilibustersband.com"
+  site: "https://thefilibustersband.com",
+  integrations: [tailwind()]
 });
