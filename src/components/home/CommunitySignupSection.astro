@@ -18,18 +18,19 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Join%20the%20Filib
         {homepageContent.community.description}
       </p>
       {hasFormAction ? (
-        <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST">
-          <label class="sr-only" for="email">Email address</label>
-          <input
-            class="min-h-11 flex-1 border border-[var(--color-ink)] bg-white px-4 py-3 text-base text-[var(--color-ink)]"
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Email address"
-            autocomplete="email"
-            required
-          />
-          <button class="focus-ring min-h-11 bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" type="submit">
+        <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST" novalidate>
+          <div class="flex-1">
+            <label class="mb-2 block text-sm font-semibold" for="email">Email address</label>
+            <input
+              class="min-h-11 w-full border border-[var(--color-ink)] bg-white px-4 py-3 text-base text-[var(--color-ink)]"
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <button class="focus-ring min-h-11 self-end bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" type="submit">
             Join the community
           </button>
         </form>

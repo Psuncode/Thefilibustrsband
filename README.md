@@ -22,3 +22,10 @@ npm run preview
 
 Only copy assets into `public/images/` if they are used by the homepage.
 Keep all unused brand assets and source files in the local asset folders outside the shipped app.
+
+## Accessibility Checks
+
+- Keyboard navigation works through all interactive elements
+- Visible focus states are preserved
+- Reduced-motion users do not get forced animation
+- No section creates horizontal scroll at 375px width
