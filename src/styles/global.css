@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,11 +7,15 @@
 :root {
   --color-ink: #231f20;
   --color-paper: #ffffff;
+  --color-paper-soft: #f7f3e8;
   --color-pink: #ce2067;
   --color-yellow: #ecdb5d;
   --color-muted: #6b6770;
   --color-border: rgba(35, 31, 32, 0.12);
+  --color-panel: rgba(255, 255, 255, 0.82);
   --shadow-poster: 0 18px 40px rgba(35, 31, 32, 0.12);
+  --shadow-stamp: 0 10px 24px rgba(35, 31, 32, 0.16);
+  --bottom-nav-height: 5.5rem;
 }
 
 html {
@@ -19,11 +25,39 @@ html {
 body {
   margin: 0;
   color: var(--color-ink);
-  background: var(--color-paper);
+  background:
+    radial-gradient(circle at top left, rgba(236, 219, 93, 0.18), transparent 24rem),
+    linear-gradient(180deg, #fffaf4 0%, var(--color-paper) 22rem);
   font-family: "Inter", system-ui, sans-serif;
+}
+
+main {
+  padding-bottom: calc(var(--bottom-nav-height) + 1rem);
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-bottom: 0;
+  }
+}
+
+.display-face {
+  font-family: "Archivo Black", "Inter", system-ui, sans-serif;
 }
 
 .focus-ring {
   @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4;
   outline-color: var(--color-pink);
+}
+
+.poster-frame {
+  box-shadow: var(--shadow-poster);
+  border: 1px solid rgba(35, 31, 32, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.logo-stamp {
+  box-shadow: var(--shadow-stamp);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(35, 31, 32, 0.1);
 }
