@@ -1,0 +1,24 @@
+---
+import { siteMeta } from "../../data/site";
+---
+
+<footer class="border-t border-black/10 bg-[var(--color-ink)] text-white">
+  <div class="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:grid-cols-2 md:px-6">
+    <div>
+      <p class="text-lg font-black uppercase tracking-[0.12em]">The Filibusters</p>
+      <p class="mt-2 max-w-md text-sm text-white/80">
+        New music, live shows, and the chaos in between.
+      </p>
+    </div>
+    <div class="flex flex-col gap-2 text-sm">
+      <a class="focus-ring w-fit hover:text-[var(--color-yellow)]" href={`mailto:${siteMeta.contactEmail}`}>
+        {siteMeta.contactEmail}
+      </a>
+      {siteMeta.socials.map((social) => (
+        <a class="focus-ring w-fit hover:text-[var(--color-yellow)]" href={social.href} target="_blank" rel="noreferrer">
+          {social.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</footer>

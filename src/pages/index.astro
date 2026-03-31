@@ -1,8 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/site/Header.astro";
+import Footer from "../components/site/Footer.astro";
 import { siteMeta } from "../data/site";
 ---
 
 <BaseLayout title={siteMeta.title} description={siteMeta.description}>
+  <Header />
   <main>Homepage placeholder</main>
+  <Footer />
 </BaseLayout>
