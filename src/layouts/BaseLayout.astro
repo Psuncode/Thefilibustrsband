@@ -1,4 +1,6 @@
 ---
+import Analytics from "@vercel/analytics/astro";
+import heroBand from "../assets/images/hero-band.jpg";
 import "../styles/global.css";
 
 interface Props {
@@ -8,7 +10,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/images/hero-band.jpg", Astro.site);
+const ogImage = new URL(heroBand.src, Astro.site);
 ---
 
 <!doctype html>
@@ -16,6 +18,12 @@ const ogImage = new URL("/images/hero-band.jpg", Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap"
+    />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
@@ -29,5 +37,6 @@ const ogImage = new URL("/images/hero-band.jpg", Astro.site);
   <body>
     <a class="focus-ring sr-only focus:not-sr-only" href="#main-content">Skip to content</a>
     <slot />
+    <Analytics />
   </body>
 </html>

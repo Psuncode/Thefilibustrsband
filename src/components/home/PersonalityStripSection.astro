@@ -1,17 +1,59 @@
 ---
 import { homepageContent } from "../../data/homepage";
+
+const feedbackRows = [
+  homepageContent.personality.feedback.filter((_, index) => index % 2 === 0),
+  homepageContent.personality.feedback.filter((_, index) => index % 2 === 1)
+];
 ---
 
 <section class="bg-[var(--color-ink)] text-white">
   <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-    <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">Band life</p>
-    <h2 class="display-face mt-3 max-w-3xl text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
-      {homepageContent.personality.title}
-    </h2>
-    <div class="mt-8 grid gap-4 md:grid-cols-3">
-      {homepageContent.personality.items.map((item, index) => (
-        <div class:list={["rounded-[1.75rem] border p-5", index === 1 ? "border-[var(--color-pink)] bg-[var(--color-pink)]/10" : "border-white/15 bg-white/5"]}>
-          <p class="text-base leading-7 text-white/85">{item}</p>
+    <div class="flex flex-col gap-3">
+      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Proof of life</p>
+      <h2 class="display-face max-w-4xl text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+        {homepageContent.personality.feedbackTitle}
+      </h2>
+      <p class="max-w-2xl text-base leading-7 text-white/68">
+        Real reactions from real sets. Let them roll.
+      </p>
+    </div>
+    <div class="mt-8 flex flex-col gap-4 overflow-hidden md:mt-10 md:gap-5">
+      {feedbackRows.map((row, rowIndex) => (
+        <div class="feedback-marquee-mask">
+          <div class:list={["feedback-track", rowIndex % 2 === 1 && "feedback-track-reverse"]}>
+            {row.map((item, index) => (
+              <blockquote
+                class:list={[
+                  "feedback-card",
+                  index % 3 === 1
+                    ? "border-[var(--color-yellow)]/45 bg-[var(--color-yellow)]/10"
+                    : "border-white/15 bg-white/5"
+                ]}
+              >
+                <p class="text-base leading-7 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
+                <footer class="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)]">
+                  {item.attribution}
+                </footer>
+              </blockquote>
+            ))}
+            {row.map((item, index) => (
+              <blockquote
+                aria-hidden="true"
+                class:list={[
+                  "feedback-card feedback-card-duplicate",
+                  index % 3 === 1
+                    ? "border-[var(--color-yellow)]/45 bg-[var(--color-yellow)]/10"
+                    : "border-white/15 bg-white/5"
+                ]}
+              >
+                <p class="text-base leading-7 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
+                <footer class="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)]">
+                  {item.attribution}
+                </footer>
+              </blockquote>
+            ))}
+          </div>
         </div>
       ))}
     </div>

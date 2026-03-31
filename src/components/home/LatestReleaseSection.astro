@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { latestRelease } from "../../data/release";
 
 const iconPaths = {
@@ -8,10 +9,10 @@ const iconPaths = {
 } as const;
 ---
 
-<section id="latest-release" class="bg-[var(--color-ink)] text-white">
+<section id="latest-release" class="anchor-section bg-[var(--color-ink)] text-white">
   <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-[0.85fr_1.15fr] md:px-6 md:py-16">
     <div class="poster-frame overflow-hidden rounded-[2rem] p-3">
-      <img
+      <Image
         alt={`${latestRelease.title} cover art`}
         class="w-full rounded-[1.25rem] object-cover"
         height="900"

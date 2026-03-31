@@ -1,24 +1,57 @@
 ---
-import { siteMeta } from "../../data/site";
+import { iconPaths, siteMeta, socialLinks } from "../../data/site";
 ---
 
 <footer class="mobile-nav-offset border-t border-black/10 bg-[var(--color-ink)] text-white">
-  <div class="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:grid-cols-2 md:px-6">
-    <div>
-      <p class="text-lg font-black uppercase tracking-[0.12em]">The Filibusters</p>
-      <p class="mt-2 max-w-md text-sm text-white/80">
-        New music, live shows, and the chaos in between.
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:px-6 md:py-12">
+    <div class="space-y-4">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">Stay in the noise</p>
+        <p class="display-face mt-3 max-w-xl text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+          Follow the band where the chaos actually happens.
+        </p>
+      </div>
+      <p class="max-w-lg text-sm leading-7 text-white/75">
+        New music, upcoming shows, and the kind of band-life updates that make people keep checking back.
       </p>
-    </div>
-    <div class="flex flex-col gap-2 text-sm">
-      <a class="focus-ring w-fit hover:text-[var(--color-yellow)]" href={`mailto:${siteMeta.contactEmail}`}>
+      <a
+        class="focus-ring inline-flex min-h-11 w-fit items-center justify-center rounded-full bg-[var(--color-yellow)] px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:bg-white"
+        href={`mailto:${siteMeta.contactEmail}`}
+      >
         {siteMeta.contactEmail}
       </a>
-      {siteMeta.socials.map((social) => (
-        <a class="focus-ring w-fit hover:text-[var(--color-yellow)]" href={social.href} target="_blank" rel="noreferrer">
-          {social.label}
-        </a>
-      ))}
+    </div>
+    <div class="rounded-[2rem] border border-white/10 bg-white/5 p-5 md:p-6">
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-white/60">Connect</p>
+      <div class="mt-4 grid gap-3">
+        {socialLinks.map((social) => (
+          <a
+            class="focus-ring flex min-h-11 items-center justify-between gap-4 rounded-[1.25rem] border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[var(--color-pink)] hover:bg-white/10 hover:text-[var(--color-yellow)]"
+            href={social.href}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <span class="inline-flex items-center gap-3">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/10">
+                <svg
+                  aria-hidden="true"
+                  class="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  viewBox="0 0 24 24"
+                >
+                  <path d={iconPaths[social.icon]} />
+                </svg>
+              </span>
+              <span>{social.label}</span>
+            </span>
+            <span aria-hidden="true" class="text-white/45">-&gt;</span>
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 </footer>
