@@ -31,6 +31,37 @@ type PrimaryNavItem = {
   icon: HeaderIconName;
 };
 
+type FollowPromptLink = {
+  label: string;
+  href: string;
+};
+
+type FollowPromptContent = {
+  title: string;
+  description: string;
+  delayMs: number;
+  cooldownDays: number;
+  links: readonly [FollowPromptLink, FollowPromptLink];
+};
+
+type ListenLink = {
+  label: string;
+  href: string;
+  icon: HeaderIconName;
+};
+
+type ListenPageContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  listenLabel: string;
+  listenLinks: readonly ListenLink[];
+  followEyebrow: string;
+  followTitle: string;
+  followDescription: string;
+  followLinks: readonly ListenLink[];
+};
+
 export const socialLinks = [
   {
     label: "Instagram",
@@ -67,8 +98,69 @@ export const siteMeta = {
   socials: socialLinks.map(({ label, href }) => ({ label, href }))
 } as const;
 
+export const followPrompt = {
+  title: "FOLLOW WHERE IT ACTUALLY MEANS SOMETHING.",
+  description: "Stay close. New songs, new moments, nothing missed.",
+  delayMs: 3000,
+  cooldownDays: 14,
+  links: [
+    {
+      label: "LISTEN NOW",
+      href: "/listen"
+    },
+    {
+      label: "FOLLOW THE BAND",
+      href: "/listen#follow"
+    }
+  ]
+} as const satisfies FollowPromptContent;
+
+export const listenPage = {
+  eyebrow: "Turn It Up",
+  title: "Pick your platform. Keep the band in rotation.",
+  description: "Start listening where you already are, then stay close everywhere else the chaos lands.",
+  listenLabel: "Wherever you listen",
+  listenLinks: [
+    {
+      label: "Spotify",
+      href: "https://open.spotify.com/artist/4Mf8AkUvGERBfOkG8ozuDl?si=sVvFzSJ-Qd-zMQ-ao6ry9g",
+      icon: "spotify"
+    },
+    {
+      label: "Apple Music",
+      href: "https://music.apple.com/us/artist/the-filibusters/1550597371",
+      icon: "apple"
+    },
+    {
+      label: "YouTube",
+      href: "https://www.youtube.com/@TheFilibusters",
+      icon: "youtube"
+    }
+  ],
+  followEyebrow: "Stay Close",
+  followTitle: "Follow the band where the next moment shows up first.",
+  followDescription: "Shows, clips, release noise, and the unfiltered parts that never make it onto the posters.",
+  followLinks: [
+    {
+      label: "TikTok",
+      href: "https://www.tiktok.com/@thefilibustersband",
+      icon: "tiktok"
+    },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/thefilibustersband",
+      icon: "instagram"
+    },
+    {
+      label: "YouTube",
+      href: "https://www.youtube.com/@TheFilibusters",
+      icon: "youtube"
+    }
+  ]
+} as const satisfies ListenPageContent;
+
 export const primaryNav = [
-  { label: "Music", href: "#latest-release", icon: "music" },
-  { label: "Shows", href: "#shows", icon: "ticket" },
-  { label: "Community", href: "#community", icon: "mail" }
+  { label: "Music", href: "/#latest-release", icon: "music" },
+  { label: "Shows", href: "/#shows", icon: "ticket" },
+  { label: "Community", href: "/#community", icon: "mail" }
 ] as const satisfies readonly PrimaryNavItem[];

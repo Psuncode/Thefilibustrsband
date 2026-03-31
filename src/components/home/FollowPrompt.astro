@@ -1,0 +1,194 @@
+---
+import { Image } from "astro:assets";
+import followPromptImage from "../../assets/images/follow-prompt-singer.jpg";
+import { followPrompt } from "../../data/site";
+
+const storageKey = "filibusters-follow-prompt-until";
+const cooldownMs = followPrompt.cooldownDays * 24 * 60 * 60 * 1000;
+const delayMs = followPrompt.delayMs;
+---
+
+<div aria-hidden="true" class="follow-prompt-shell" data-follow-prompt>
+  <div class="follow-prompt-backdrop" data-follow-prompt-close></div>
+
+  <section
+    aria-labelledby="follow-prompt-title"
+    aria-modal="true"
+    class="follow-prompt-dialog"
+    data-follow-prompt-dialog
+    role="dialog"
+    tabindex="-1"
+  >
+    <button
+      aria-label="Close follow prompt"
+      class="follow-prompt-close focus-ring"
+      data-follow-prompt-close
+      type="button"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+
+    <div class="follow-prompt-media">
+      <Image
+        alt="A band promo portrait used to invite listeners to follow The Filibusters."
+        class="follow-prompt-image"
+        height="1600"
+        src={followPromptImage}
+        width="1200"
+      />
+    </div>
+
+    <div class="follow-prompt-content">
+      <h2 class="display-face follow-prompt-title" id="follow-prompt-title">
+        {followPrompt.title}
+      </h2>
+      <p class="follow-prompt-copy">{followPrompt.description}</p>
+
+      <div class="follow-prompt-actions">
+        {followPrompt.links.map((link) => (
+          <a
+            class="focus-ring follow-prompt-action"
+            data-follow-prompt-cta
+            href={link.href}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script define:vars={{ cooldownMs, delayMs, storageKey }}>
+  const focusableSelector = [
+    "a[href]",
+    "button:not([disabled])",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    "[tabindex]:not([tabindex='-1'])"
+  ].join(",");
+
+  document.querySelectorAll("[data-follow-prompt]").forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+
+    const dialog = root.querySelector("[data-follow-prompt-dialog]");
+    const closeControls = root.querySelectorAll("[data-follow-prompt-close]");
+    const ctas = root.querySelectorAll("[data-follow-prompt-cta]");
+
+    let opener = null;
+    let openTimer = 0;
+
+    const readCooldown = () => {
+      try {
+        const raw = window.localStorage.getItem(storageKey);
+        const expiresAt = raw ? Number(raw) : 0;
+
+        return Number.isFinite(expiresAt) ? expiresAt : 0;
+      } catch {
+        return 0;
+      }
+    };
+
+    const writeCooldown = () => {
+      try {
+        window.localStorage.setItem(storageKey, String(Date.now() + cooldownMs));
+      } catch {
+        // Ignore storage failures so the prompt still functions.
+      }
+    };
+
+    const closePrompt = () => {
+      root.classList.remove("is-visible");
+      root.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("follow-prompt-open");
+      window.clearTimeout(openTimer);
+
+      if (opener instanceof HTMLElement && opener.isConnected) {
+        opener.focus();
+      }
+    };
+
+    const trapFocus = (event) => {
+      if (event.key !== "Tab" || !root.classList.contains("is-visible") || !(dialog instanceof HTMLElement)) {
+        return;
+      }
+
+      const focusable = Array.from(dialog.querySelectorAll(focusableSelector)).filter(
+        (node) =>
+          node instanceof HTMLElement &&
+          !node.hasAttribute("disabled") &&
+          node.getAttribute("aria-hidden") !== "true"
+      );
+
+      if (focusable.length === 0) {
+        event.preventDefault();
+        dialog.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    const openPrompt = () => {
+      opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      root.classList.add("is-visible");
+      root.setAttribute("aria-hidden", "false");
+      document.body.classList.add("follow-prompt-open");
+
+      if (dialog instanceof HTMLElement) {
+        const firstFocusable = dialog.querySelector(focusableSelector);
+
+        if (firstFocusable instanceof HTMLElement) {
+          firstFocusable.focus();
+          return;
+        }
+
+        dialog.focus();
+      }
+    };
+
+    const expiresAt = readCooldown();
+
+    if (expiresAt <= Date.now()) {
+      openTimer = window.setTimeout(openPrompt, delayMs);
+    }
+
+    closeControls.forEach((node) => {
+      node.addEventListener("click", () => {
+        writeCooldown();
+        closePrompt();
+      });
+    });
+
+    ctas.forEach((node) => {
+      node.addEventListener("click", () => {
+        writeCooldown();
+        closePrompt();
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && root.classList.contains("is-visible")) {
+        writeCooldown();
+        closePrompt();
+        return;
+      }
+
+      trapFocus(event);
+    });
+  });
+</script>

@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/site/Header.astro";
+import Footer from "../components/site/Footer.astro";
+import { iconPaths, listenPage } from "../data/site";
+---
+
+<BaseLayout title={`Listen | ${listenPage.title}`} description={listenPage.description}>
+  <Header />
+  <main class="listen-page mobile-nav-offset">
+    <div class="listen-page-inner mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-16 pt-8 md:px-6 md:pb-24 md:pt-12">
+      <section class="listen-card grid gap-6 overflow-hidden rounded-[2rem] p-5 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:p-8">
+        <div class="space-y-4">
+          <p class="text-sm font-bold uppercase tracking-[0.22em] text-[var(--color-pink)]">{listenPage.eyebrow}</p>
+          <h1 class="display-face max-w-[12ch] text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+            {listenPage.title}
+          </h1>
+          <p class="max-w-2xl text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">
+            {listenPage.description}
+          </p>
+        </div>
+
+        <div class="rounded-[1.6rem] border border-black/8 bg-[var(--color-ink)] p-4 text-white md:p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-yellow)]">{listenPage.listenLabel}</p>
+          <div class="mt-4 grid gap-3">
+            {listenPage.listenLinks.map((link) => (
+              <a
+                class="focus-ring flex min-h-12 items-center justify-between rounded-[1.2rem] border border-white/12 bg-white/6 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[var(--color-pink)] hover:bg-[var(--color-pink)]"
+                href={link.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span class="inline-flex items-center gap-3">
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/8">
+                    <svg
+                      aria-hidden="true"
+                      class="h-5 w-5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.8"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d={iconPaths[link.icon]} />
+                    </svg>
+                  </span>
+                  <span>{link.label}</span>
+                </span>
+                <span aria-hidden="true">-&gt;</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="listen-card rounded-[2rem] p-5 md:p-8" id="follow">
+        <div class="max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[0.22em] text-[var(--color-pink)]">{listenPage.followEyebrow}</p>
+          <h2 class="display-face mt-3 max-w-[12ch] text-3xl uppercase leading-[0.94] tracking-[-0.04em] md:text-5xl">
+            {listenPage.followTitle}
+          </h2>
+          <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--color-ink)]/78">
+            {listenPage.followDescription}
+          </p>
+        </div>
+
+        <div class="mt-6 grid gap-3 md:grid-cols-3">
+          {listenPage.followLinks.map((link) => (
+            <a
+              class="focus-ring flex min-h-12 items-center justify-between rounded-[1.4rem] border border-black/8 bg-white px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:bg-[var(--color-pink)] hover:text-white"
+              href={link.href}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <span class="inline-flex items-center gap-3">
+                <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/8 bg-[var(--color-paper-soft)]">
+                  <svg
+                    aria-hidden="true"
+                    class="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d={iconPaths[link.icon]} />
+                  </svg>
+                </span>
+                <span>{link.label}</span>
+              </span>
+              <span aria-hidden="true">-&gt;</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
