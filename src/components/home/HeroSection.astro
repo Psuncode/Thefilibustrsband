@@ -2,32 +2,43 @@
 import { homepageContent } from "../../data/homepage";
 ---
 
-<section class="border-b border-black/10 bg-white">
-  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[1.1fr_0.9fr] md:px-6 md:py-16">
-    <div class="order-2 flex flex-col justify-center md:order-1">
-      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">The Filibusters</p>
-      <h1 class="mt-3 max-w-[12ch] text-4xl font-black uppercase leading-none md:text-6xl">
+<section class="border-b border-black/10">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-8 md:grid-cols-[1.2fr_0.8fr] md:px-6 md:py-14">
+    <div class="relative flex flex-col justify-center">
+      <div class="logo-stamp absolute right-0 top-0 hidden -rotate-3 rounded-2xl px-4 py-3 lg:block">
+        <img
+          alt={homepageContent.hero.supportingStampLabel}
+          class="h-10 w-auto"
+          height="48"
+          src="/images/filibusters-logo-text.png"
+          width="160"
+        />
+      </div>
+
+      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">{homepageContent.hero.eyebrow}</p>
+      <h1 class="display-face mt-3 max-w-[12ch] text-4xl uppercase leading-[0.95] tracking-[-0.03em] md:max-w-[16ch] md:text-6xl">
         {homepageContent.hero.headline}
       </h1>
-      <p class="mt-4 max-w-xl text-base leading-7 text-[var(--color-muted)] md:text-lg">
+      <p class="mt-5 max-w-2xl text-base leading-7 text-[var(--color-muted)] md:text-lg">
         {homepageContent.hero.subheadline}
       </p>
-      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-        <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-none bg-[var(--color-pink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:brightness-110" href={homepageContent.hero.primaryCta.href}>
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-pink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:brightness-110" href={homepageContent.hero.primaryCta.href}>
           {homepageContent.hero.primaryCta.label}
         </a>
-        <a class="focus-ring inline-flex min-h-11 items-center justify-center border border-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:bg-[var(--color-yellow)]" href={homepageContent.hero.secondaryCta.href}>
+        <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-ink)] bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:bg-[var(--color-yellow)]" href={homepageContent.hero.secondaryCta.href}>
           {homepageContent.hero.secondaryCta.label}
         </a>
       </div>
     </div>
-    <div class="order-1 md:order-2">
+
+    <div class="poster-frame relative overflow-hidden rounded-[2rem] p-3">
       <img
-        class="aspect-[4/5] w-full object-cover shadow-[var(--shadow-poster)]"
-        src="/images/hero-band.jpg"
         alt="The Filibusters posing together in a candid black-and-white band photo."
-        width="1200"
+        class="aspect-[4/5] w-full rounded-[1.25rem] object-cover"
         height="1500"
+        src="/images/hero-band.jpg"
+        width="1200"
       />
     </div>
   </div>
