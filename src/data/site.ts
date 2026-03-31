@@ -1,18 +1,31 @@
+export const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/thefilibusters/",
+    icon: "instagram"
+  },
+  {
+    label: "Spotify",
+    href: "https://open.spotify.com/artist/4Wv6mktSLS2i6sX2f0Jf9R",
+    icon: "spotify"
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@thefilibusters",
+    icon: "tiktok"
+  }
+] as const;
+
 export const siteMeta = {
   title: "The Filibusters",
-  description: "New music, live shows, and the chaos in between.",
-  contactEmail: "filibustersband@gmail.com",
-  socials: [
-    { label: "Instagram", href: "https://www.instagram.com/thefilibustersband/" },
-    { label: "TikTok", href: "https://www.tiktok.com/@thefilibustersband" },
-    {
-      label: "Spotify",
-      href: "https://open.spotify.com/artist/4Mf8AkUvGERBfOkG8ozuDl?utm_medium=share&utm_source=linktree"
-    },
-    { label: "YouTube", href: "https://www.youtube.com/@TheFilibusters" },
-    {
-      label: "Apple Music",
-      href: "https://music.apple.com/us/artist/the-filibusters/1550597371"
-    }
-  ]
+  description: "Pop-punk, covers, and chaos worth showing up for.",
+  url: "https://thefilibustersband.com",
+  contactEmail: "thefilibustersband@gmail.com",
+  socials: socialLinks.map(({ label, href }) => ({ label, href }))
 } as const;
+
+export const primaryNav = [
+  { label: "Music", href: "#latest-release", icon: "music" },
+  { label: "Shows", href: "#shows", icon: "ticket" },
+  { label: "Community", href: "#community", icon: "mail" }
+] as const;
