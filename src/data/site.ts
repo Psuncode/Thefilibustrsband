@@ -1,3 +1,23 @@
+export type HeaderIconName =
+  | "music"
+  | "ticket"
+  | "mail"
+  | "instagram"
+  | "spotify"
+  | "tiktok";
+
+type SocialLink = {
+  label: string;
+  href: string;
+  icon: HeaderIconName;
+};
+
+type PrimaryNavItem = {
+  label: string;
+  href: string;
+  icon: HeaderIconName;
+};
+
 export const socialLinks = [
   {
     label: "Instagram",
@@ -14,7 +34,7 @@ export const socialLinks = [
     href: "https://www.tiktok.com/@thefilibusters",
     icon: "tiktok"
   }
-] as const;
+] as const satisfies readonly SocialLink[];
 
 export const siteMeta = {
   title: "The Filibusters",
@@ -28,4 +48,4 @@ export const primaryNav = [
   { label: "Music", href: "#latest-release", icon: "music" },
   { label: "Shows", href: "#shows", icon: "ticket" },
   { label: "Community", href: "#community", icon: "mail" }
-] as const;
+] as const satisfies readonly PrimaryNavItem[];
