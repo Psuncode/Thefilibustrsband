@@ -70,7 +70,7 @@ export const contactPage = {
   meta: {
     title: "Contact The Filibusters | Booking and Press",
     description:
-      `Contact The Filibusters for booking, press, and general inquiries. Based in ${bandFacts.location.display}, available for local and regional shows.`
+      `Contact The Filibusters for booking, press, and general inquiries from ${bandFacts.location.display} to regional Utah dates.`
   },
   hero: {
     eyebrow: "Contact",
