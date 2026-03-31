@@ -1,5 +1,7 @@
 # The Filibusters Website
 
+The homepage must output title, description, Open Graph tags, and a favicon.
+
 ## Local Development
 
 The homepage uses Tailwind utilities plus CSS variables for the official brand palette.
