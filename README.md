@@ -15,3 +15,8 @@ npm run dev
 npm run build
 npm run preview
 ```
+
+## Asset Policy
+
+Only copy assets into `public/images/` if they are used by the homepage.
+Keep all unused brand assets and source files in the local asset folders outside the shipped app.
