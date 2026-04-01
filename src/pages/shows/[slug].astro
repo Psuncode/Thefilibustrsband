@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/site/Footer.astro";
+import Header from "../../components/site/Header.astro";
+import { getAllShowSlugs, getShowBySlug } from "../../lib/shows/data";
+import { siteMeta } from "../../data/site";
+
+export async function getStaticPaths() {
+  const slugs = await getAllShowSlugs();
+
+  return slugs.map((slug) => ({
+    params: { slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const show = slug ? await getShowBySlug(slug) : null;
+
+if (!show) {
+  throw new Error(`Unknown show slug: ${slug}`);
+}
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  hour: "numeric",
+  minute: "2-digit"
+});
+---
+
+<BaseLayout
+  title={`${show.title} | ${siteMeta.title}`}
+  description={show.summary || `Show details for ${show.title}.`}
+>
+  <Header />
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-white">
+    <section class="border-b border-black/10">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <article class="max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Show details</p>
+          <h1 class="display-face mt-3 text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+            {show.title}
+          </h1>
+          {show.summary ? (
+            <p class="mt-5 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">
+              {show.summary}
+            </p>
+          ) : null}
+          <dl class="mt-8 grid gap-4 sm:grid-cols-2">
+            <div class="poster-frame rounded-[1.5rem] p-5">
+              <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Date</dt>
+              <dd class="mt-3 text-lg font-semibold">{dateFormatter.format(new Date(show.startsAt))}</dd>
+            </div>
+            <div class="poster-frame rounded-[1.5rem] p-5">
+              <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Venue</dt>
+              <dd class="mt-3 text-lg font-semibold">{show.venue}</dd>
+            </div>
+            <div class="poster-frame rounded-[1.5rem] p-5">
+              <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Location</dt>
+              <dd class="mt-3 text-lg font-semibold">{show.city}, {show.state}</dd>
+            </div>
+            <div class="poster-frame rounded-[1.5rem] p-5">
+              <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Status</dt>
+              <dd class="mt-3 text-lg font-semibold">{show.status}</dd>
+            </div>
+          </dl>
+          {show.body.length > 0 ? (
+            <div class="mt-8 space-y-4">
+              {show.body.map((paragraph) => (
+                <p class="text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{paragraph}</p>
+              ))}
+            </div>
+          ) : null}
+        </article>
+
+        <aside class="poster-frame overflow-hidden rounded-[2rem]">
+          {show.flyerUrl ? (
+            <img
+              alt={`${show.title} flyer or event image`}
+              class="aspect-[4/5] w-full object-cover object-center"
+              loading="lazy"
+              src={show.flyerUrl}
+            />
+          ) : null}
+          <div class="p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Lineup</p>
+          <ul class="mt-4 space-y-2 text-sm leading-6 text-[var(--color-ink)]/76">
+            {(show.lineup.length > 0 ? show.lineup : ["The Filibusters"]).map((entry) => (
+              <li>{entry}</li>
+            ))}
+          </ul>
+          {show.notes ? (
+            <>
+              <p class="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Notes</p>
+              <p class="mt-3 text-sm leading-6 text-[var(--color-ink)]/76">{show.notes}</p>
+            </>
+          ) : null}
+          {show.ticketUrl ? (
+            <a
+              class="focus-ring mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+              href={show.ticketUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Get tickets
+            </a>
+          ) : null}
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,11 +1,13 @@
 ---
-import { upcomingShows } from "../../data/shows";
+import { getUpcomingShows } from "../../lib/shows/data";
 
 const showDateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "long",
   day: "numeric",
   year: "numeric"
 });
+
+const upcomingShows = await getUpcomingShows();
 ---
 
 <section id="shows" class="anchor-section bg-[var(--color-paper-soft)]">
@@ -17,20 +19,23 @@ const showDateFormatter = new Intl.DateTimeFormat("en-US", {
           Come feel it for yourself.
         </h2>
       </div>
+      <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]" href="/shows">
+        View all shows
+      </a>
     </div>
     <div class="mt-8 grid gap-4">
       {upcomingShows.length > 0 ? (
         upcomingShows.map((show) => (
           <article class="poster-frame grid gap-4 rounded-[1.75rem] p-5 md:grid-cols-[0.24fr_1fr_auto] md:items-center">
-            <time class="text-sm font-bold uppercase tracking-[0.16em] text-[var(--color-pink)]" datetime={show.date}>
-              {showDateFormatter.format(new Date(`${show.date}T00:00:00`))}
+            <time class="text-sm font-bold uppercase tracking-[0.16em] text-[var(--color-pink)]" datetime={show.startsAt}>
+              {showDateFormatter.format(new Date(show.startsAt))}
             </time>
             <div>
-              <h3 class="text-xl font-black uppercase">{show.venue}</h3>
-              <p class="text-sm text-[var(--color-muted)]">{show.city}</p>
+              <h3 class="text-xl font-black uppercase">{show.title}</h3>
+              <p class="text-sm text-[var(--color-muted)]">{show.venue} · {show.city}, {show.state}</p>
             </div>
-            <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={show.href}>
-              {show.ctaLabel}
+            <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={show.ticketUrl || `/shows/${show.slug}`}>
+              {show.ticketUrl ? "Get tickets" : "View details"}
             </a>
           </article>
         ))

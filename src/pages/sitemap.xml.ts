@@ -1,10 +1,11 @@
 import type { APIRoute } from "astro";
 import { siteMeta } from "../data/site";
+import { getAllShowSlugs } from "../lib/shows/data";
 
-const routes = ["", "/about", "/contact", "/listen"] as const;
-
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   const lastModified = new Date().toISOString();
+  const showSlugs = await getAllShowSlugs();
+  const routes = ["", "/about", "/contact", "/listen", "/shows", ...showSlugs.map((slug) => `/shows/${slug}`)];
   const urls = routes
     .map((route) => {
       const path = route === "" ? "/" : route;

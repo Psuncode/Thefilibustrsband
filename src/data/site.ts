@@ -291,7 +291,7 @@ export const listenPage = {
 
 export const primaryNav = [
   { label: "Music", href: "/#latest-release", icon: "music" },
-  { label: "Shows", href: "/#shows", icon: "ticket" },
+  { label: "Shows", href: "/shows", icon: "ticket" },
   { label: "About", href: "/about", icon: "info" },
   { label: "Contact", href: "/contact", icon: "mail" }
 ] as const satisfies readonly PrimaryNavItem[];
