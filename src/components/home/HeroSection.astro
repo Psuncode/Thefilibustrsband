@@ -1,40 +1,40 @@
 ---
 import { Image } from "astro:assets";
-import heroBand from "../../assets/images/hero-band.jpg";
+import verticalHero from "../../assets/images/Verticle Hero.jpg";
 import { homepageContent } from "../../data/homepage";
 ---
 
 <section class="border-b border-black/10">
-  <div class="px-4 py-4 md:px-6 md:py-6">
+  <div class="px-4 py-3 md:px-6 md:py-6">
     <div class="relative overflow-hidden rounded-[2rem] border border-black/10 bg-[var(--color-ink)] shadow-[var(--shadow-poster)] md:min-h-[42rem] md:rounded-[2.5rem]">
       <Image
-        alt="The Filibusters posing together in a candid black-and-white band photo."
-        class="absolute inset-0 h-full w-full object-cover object-center"
+        alt="Atticus Wintch performing live for The Filibusters, with crowd energy and another band member visible in the background."
+        class="absolute inset-0 h-full w-full object-cover object-[62%_center] md:object-[center_30%]"
         fetchpriority="high"
-        height="1500"
+        height="768"
         loading="eager"
         sizes="100vw"
-        src={heroBand}
-        width="1200"
+        src={verticalHero}
+        width="512"
       />
-      <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(24,21,22,0.28)_0%,rgba(24,21,22,0.54)_44%,rgba(24,21,22,0.96)_100%)] md:bg-[linear-gradient(90deg,rgba(24,21,22,0.96)_0%,rgba(24,21,22,0.88)_28%,rgba(24,21,22,0.5)_56%,rgba(24,21,22,0.14)_82%,rgba(24,21,22,0.08)_100%)]"></div>
-      <div class="relative z-10 flex min-h-[34rem] items-end p-5 md:min-h-[42rem] md:w-[min(38rem,48vw)] md:items-center md:p-8 lg:w-[42rem] lg:p-12">
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(24,21,22,0.22)_0%,rgba(24,21,22,0.54)_38%,rgba(24,21,22,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(24,21,22,0.97)_0%,rgba(24,21,22,0.88)_30%,rgba(24,21,22,0.45)_58%,rgba(24,21,22,0.1)_100%)]"></div>
+      <div class="relative z-10 flex min-h-[31rem] items-end p-4 md:min-h-[42rem] md:w-[min(38rem,48vw)] md:items-center md:p-8 lg:w-[42rem] lg:p-12">
         <div>
-        <div class="mb-5">
-          <p class="text-sm font-bold uppercase tracking-[0.22em] text-[#f3e7a3]">{homepageContent.hero.eyebrow}</p>
+        <div class="mb-4">
+          <p class="text-[0.78rem] font-bold uppercase tracking-[0.22em] text-[#f3e7a3] md:text-sm">{homepageContent.hero.eyebrow}</p>
         </div>
 
-        <h1 class="display-face max-w-[10ch] text-4xl uppercase leading-[0.92] tracking-[-0.04em] text-[#fffdf7] md:text-[4.35rem] lg:text-[5rem]">
+        <h1 class="display-face max-w-[7.2ch] text-[clamp(2.45rem,10vw,4rem)] uppercase leading-[0.88] tracking-[-0.05em] text-[#fffdf7] md:max-w-[10ch] md:text-[4.35rem] lg:text-[5rem]">
           {homepageContent.hero.headline}
         </h1>
-        <p class="mt-4 max-w-[32rem] text-base leading-7 text-[#fff7dd] md:text-lg md:leading-8">
+        <p class="mt-3 max-w-[19rem] text-[0.98rem] leading-6 text-[#fff7dd] md:mt-4 md:max-w-[32rem] md:text-lg md:leading-8">
           {homepageContent.hero.subheadline}
         </p>
-        <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-pink)] px-7 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_12px_30px_rgba(206,32,103,0.35)] transition hover:brightness-110" href={homepageContent.hero.primaryCta.href}>
+        <div class="mt-6 flex flex-col gap-2.5 sm:flex-row md:mt-7 md:gap-3">
+          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-pink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_12px_30px_rgba(206,32,103,0.35)] transition hover:brightness-110" href={homepageContent.hero.primaryCta.href}>
             {homepageContent.hero.primaryCta.label}
           </a>
-          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-[#fffdf7] px-7 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] shadow-[0_12px_30px_rgba(0,0,0,0.18)] transition hover:bg-[var(--color-yellow)]" href={homepageContent.hero.secondaryCta.href}>
+          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-[#fffdf7] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] shadow-[0_12px_30px_rgba(0,0,0,0.18)] transition hover:bg-[var(--color-yellow)]" href={homepageContent.hero.secondaryCta.href}>
             {homepageContent.hero.secondaryCta.label}
           </a>
         </div>

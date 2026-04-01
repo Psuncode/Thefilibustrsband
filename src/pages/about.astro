@@ -5,6 +5,7 @@ import Header from "../components/site/Header.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { aboutPage } from "../data/about";
 import { siteMeta } from "../data/site";
+import heroBand from "../assets/images/hero-band.jpg";
 
 const listenCta = aboutPage.ctas.find(({ href, label }) =>
   href === "/listen" || label.toLowerCase().includes("listen")
@@ -92,6 +93,20 @@ const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolea
             </div>
           ))}
         </dl>
+      </div>
+    </section>
+
+    <section class="bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="poster-frame overflow-hidden rounded-[2rem] p-3">
+          <Image
+            src={heroBand}
+            alt="The Filibusters together in a band photo."
+            class="aspect-[16/8] w-full rounded-[1.25rem] object-cover object-center"
+            widths={[720, 1080, 1440]}
+            sizes="100vw"
+          />
+        </div>
       </div>
     </section>
 

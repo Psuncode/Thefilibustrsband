@@ -3,15 +3,15 @@ import { bandFacts, iconPaths, secondaryRoutes, siteMeta, socialLinks } from "..
 ---
 
 <footer class="mobile-nav-offset border-t border-black/10 bg-[var(--color-ink)] text-white">
-  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[minmax(0,1fr)_minmax(0,0.82fr)] md:px-6 md:py-12">
+  <div class="mx-auto grid max-w-6xl gap-6 px-4 py-9 md:grid-cols-[minmax(0,1fr)_minmax(0,0.82fr)] md:gap-8 md:px-6 md:py-12">
     <div class="space-y-4">
       <div>
         <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">Stay in the noise</p>
-        <p class="display-face mt-3 max-w-xl text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+        <p class="display-face mt-3 max-w-[9ch] text-[2.2rem] uppercase leading-[0.95] tracking-[-0.03em] md:max-w-xl md:text-5xl">
           Music for the ones still figuring it out.
         </p>
       </div>
-      <p class="max-w-lg text-sm leading-7 text-white/75">
+      <p class="max-w-lg text-sm leading-6 text-white/75 md:leading-7">
         New music, upcoming shows, and band-life updates worth the follow.
       </p>
       <p class="max-w-lg text-sm leading-6 text-white/58">
@@ -24,14 +24,14 @@ import { bandFacts, iconPaths, secondaryRoutes, siteMeta, socialLinks } from "..
         {siteMeta.contactEmail}
       </a>
     </div>
-    <div class="space-y-6 rounded-[2rem] border border-white/10 bg-white/5 p-5 md:p-6">
+    <div class="space-y-5 rounded-[1.75rem] border border-white/10 bg-white/5 p-4 md:space-y-6 md:rounded-[2rem] md:p-6">
       <div>
         <p class="text-sm font-bold uppercase tracking-[0.18em] text-white/60">Connect</p>
-        <div class="mt-4 flex flex-wrap gap-3">
+        <div class="mt-3 flex flex-wrap gap-2.5 md:mt-4 md:gap-3">
           {socialLinks.map((social) => (
             <a
               aria-label={social.label}
-              class="focus-ring inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-[var(--color-pink)] hover:bg-white/10 hover:text-[var(--color-yellow)]"
+              class="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-[var(--color-pink)] hover:bg-white/10 hover:text-[var(--color-yellow)] md:h-12 md:w-12"
               href={social.href}
               rel="noreferrer"
               target="_blank"
@@ -56,7 +56,7 @@ import { bandFacts, iconPaths, secondaryRoutes, siteMeta, socialLinks } from "..
 
       <div>
         <p class="text-sm font-bold uppercase tracking-[0.18em] text-white/60">Explore</p>
-        <div class="mt-4 flex flex-wrap gap-x-5 gap-y-3">
+        <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2.5 md:mt-4 md:gap-x-5 md:gap-y-3">
           {secondaryRoutes.map((route) =>
             route.kind === "modal" ? (
               <button
@@ -77,9 +77,9 @@ import { bandFacts, iconPaths, secondaryRoutes, siteMeta, socialLinks } from "..
           )}
         </div>
       </div>
-      <div class="border-t border-white/10 pt-4">
+      <div class="border-t border-white/10 pt-3 md:pt-4">
         <button
-          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[var(--color-pink)] hover:text-[var(--color-yellow)]"
+          class="focus-ring inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[var(--color-pink)] hover:text-[var(--color-yellow)] sm:w-auto"
           data-subscribe-open
           type="button"
         >

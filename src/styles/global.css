@@ -141,6 +141,8 @@ body.follow-prompt-open {
   position: relative;
   z-index: 1;
   width: min(30rem, 100%);
+  max-height: min(40rem, calc(100vh - 1.7rem));
+  overflow-y: auto;
   border: 1px solid rgba(35, 31, 32, 0.14);
   border-radius: 1.5rem;
   background: rgba(255, 250, 244, 0.98);
@@ -150,8 +152,8 @@ body.follow-prompt-open {
 .subscribe-modal-content {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  padding: 1.2rem 1rem 1rem;
+  gap: 0.72rem;
+  padding: 1rem 0.95rem 0.95rem;
 }
 
 .subscribe-modal-eyebrow {
@@ -166,7 +168,7 @@ body.follow-prompt-open {
 .subscribe-modal-title {
   margin: 0;
   max-width: 11ch;
-  font-size: clamp(1.5rem, 6vw, 2.4rem);
+  font-size: clamp(1.35rem, 6vw, 2.25rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
   text-transform: uppercase;
@@ -181,7 +183,7 @@ body.follow-prompt-open {
 
 .subscribe-modal-promise {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.45rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -191,10 +193,10 @@ body.follow-prompt-open {
   border: 1px solid rgba(35, 31, 32, 0.08);
   border-radius: 1rem;
   background: white;
-  padding: 0.8rem 0.9rem;
-  font-size: 0.86rem;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .subscribe-modal-form,
@@ -449,7 +451,8 @@ body.follow-prompt-open {
   }
 
   .subscribe-modal-content {
-    padding: 1rem 0.9rem 0.95rem;
+    gap: 0.65rem;
+    padding: 0.95rem 0.85rem 0.9rem;
   }
 }
 

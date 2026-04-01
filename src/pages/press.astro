@@ -13,22 +13,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[var(--color-paper-soft)]">
     <section class="border-b border-black/10 bg-white">
-      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
           {pressPage.eyebrow}
         </p>
-        <h1 class="display-face mt-3 max-w-4xl text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+        <h1 class="display-face mt-3 max-w-4xl text-[2.35rem] uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
           {pressPage.title}
         </h1>
-        <p class="mt-4 max-w-3xl text-base leading-7 text-[var(--color-ink)]/76 md:text-lg">
+        <p class="mt-3 max-w-3xl text-[0.98rem] leading-6 text-[var(--color-ink)]/76 md:mt-4 md:text-lg md:leading-7">
           {pressPage.description}
         </p>
       </div>
     </section>
 
     <section>
-      <div class="mx-auto grid max-w-6xl gap-6 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-        <article class="poster-frame rounded-[1.75rem] p-6 md:p-7">
+      <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+        <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Short bio</p>
           <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{pressPage.shortBio}</p>
 
@@ -40,7 +40,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
         </article>
 
-        <article class="poster-frame rounded-[1.75rem] p-6 md:p-7">
+        <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press assets</p>
           <div class="mt-5 grid gap-3">
             {pressPage.approvedAssets.map((asset) => (
@@ -83,10 +83,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section class="bg-white">
-      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <div class="poster-frame rounded-[1.75rem] p-6 md:p-7">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="poster-frame rounded-[1.75rem] p-5 md:p-7">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Approved pull quotes</p>
-          <div class="mt-5 grid gap-4 md:grid-cols-3">
+          <div class="mt-5 grid gap-3 md:grid-cols-3 md:gap-4">
             {pressPage.quotes.map((quote) => (
               <blockquote class="rounded-[1.25rem] border border-black/8 bg-[var(--color-paper-soft)] px-4 py-5 text-sm font-semibold leading-6 text-[var(--color-ink)]/82">
                 “{quote}”

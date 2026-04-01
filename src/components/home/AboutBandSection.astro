@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import heroBand from "../../assets/images/hero-band.jpg";
+import { aboutPage } from "../../data/about";
+---
+
+<section class="bg-white">
+  <div class="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:px-6 md:py-16 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
+    <div class="poster-frame overflow-hidden rounded-[2rem] p-3">
+      <Image
+        src={heroBand}
+        alt="The Filibusters together in a band photo."
+        class="aspect-[16/10] w-full rounded-[1.25rem] object-cover object-center"
+        widths={[720, 1080, 1440]}
+        sizes="(max-width: 1023px) 100vw, 45vw"
+      />
+    </div>
+
+    <div class="max-w-3xl">
+      <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+        About the band
+      </p>
+      <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+        {aboutPage.definition.title}
+      </h2>
+      <p class="mt-4 text-lg font-semibold leading-8 text-[var(--color-ink)]">
+        {aboutPage.definition.intro}
+      </p>
+      <p class="mt-4 text-[0.98rem] leading-6 text-[var(--color-ink)]/74 md:text-base md:leading-7">
+        {aboutPage.definition.body}
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+          href="/about"
+        >
+          Meet the band
+        </a>
+        <a
+          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-[var(--color-paper-soft)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+          href="/shows"
+        >
+          See shows
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -3,22 +3,22 @@ import { homepageContent } from "../../data/homepage";
 ---
 
 <section class="bg-white">
-  <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+  <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
     <div class="max-w-4xl">
-      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Why people stick around</p>
-      <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+      <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">Why people stick around</p>
+      <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
         Music for the ones still figuring it out.
       </h2>
     </div>
-    <div class="mt-8 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-      <div class="poster-frame relative overflow-hidden rounded-[2rem] bg-[var(--color-paper-soft)] p-6 md:p-8">
-        <div class="absolute right-5 top-5 h-14 w-14 rounded-full border border-[var(--color-pink)]/20 bg-[radial-gradient(circle,rgba(206,32,103,0.22)_0%,rgba(206,32,103,0)_72%)]"></div>
-        <div class="absolute left-6 top-0 h-8 w-24 -translate-y-1/2 rotate-[-3deg] rounded-sm bg-[var(--color-yellow)]/90"></div>
+    <div class="mt-7 grid gap-4 lg:grid-cols-[1.2fr_0.8fr] md:mt-8">
+      <div class="poster-frame relative overflow-hidden rounded-[2rem] bg-[var(--color-paper-soft)] p-5 md:p-8">
+        <div class="absolute right-4 top-4 h-11 w-11 rounded-full border border-[var(--color-pink)]/20 bg-[radial-gradient(circle,rgba(206,32,103,0.22)_0%,rgba(206,32,103,0)_72%)] md:right-5 md:top-5 md:h-14 md:w-14"></div>
+        <div class="absolute left-5 top-0 hidden h-8 w-24 -translate-y-1/2 rotate-[-3deg] rounded-sm bg-[var(--color-yellow)]/90 md:block"></div>
         <p class="text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-pink)]">Pasted to the wall</p>
-        <p class="display-face mt-4 max-w-[12ch] text-4xl uppercase leading-[0.95] tracking-[-0.04em] text-[var(--color-ink)] md:text-6xl">
+        <p class="display-face mt-4 max-w-[11ch] text-[2.35rem] uppercase leading-[0.95] tracking-[-0.04em] text-[var(--color-ink)] md:max-w-[12ch] md:text-6xl">
           You&apos;re not the only one feeling this way.
         </p>
-        <p class="mt-5 max-w-2xl text-base leading-7 text-[var(--color-ink)]/72">
+        <p class="mt-4 max-w-2xl text-[0.98rem] leading-6 text-[var(--color-ink)]/72 md:mt-5 md:text-base md:leading-7">
           The songs hit because they do not pretend life is polished. They meet people in the middle of the mess and make that feel loud, honest, and worth sharing.
         </p>
       </div>
@@ -27,9 +27,9 @@ import { homepageContent } from "../../data/homepage";
           <div
             class:list={[
               "poster-frame rounded-[1.6rem] border p-5 md:p-6",
-              index === 0 && "rotate-[-1.5deg] bg-white",
-              index === 1 && "translate-x-0 bg-[var(--color-paper-soft)] sm:translate-y-4 lg:translate-x-6 lg:translate-y-0",
-              index === 2 && "rotate-[1.5deg] bg-[var(--color-yellow)]/28",
+              index === 0 && "bg-white md:rotate-[-1.5deg]",
+              index === 1 && "bg-[var(--color-paper-soft)] sm:translate-y-3 lg:translate-x-6 lg:translate-y-0",
+              index === 2 && "bg-[var(--color-yellow)]/28 md:rotate-[1.5deg]",
               index === 3 && "bg-white"
             ]}
           >
