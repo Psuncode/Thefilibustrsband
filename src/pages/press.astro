@@ -1,0 +1,101 @@
+---
+import Footer from "../components/site/Footer.astro";
+import Header from "../components/site/Header.astro";
+import { pressPage } from "../data/press";
+import { siteMeta } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title={`Press Room | ${siteMeta.title}`}
+  description="Press-ready bio, approved assets, quotes, and contact information for The Filibusters."
+>
+  <Header />
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[var(--color-paper-soft)]">
+    <section class="border-b border-black/10 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+          {pressPage.eyebrow}
+        </p>
+        <h1 class="display-face mt-3 max-w-4xl text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+          {pressPage.title}
+        </h1>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-[var(--color-ink)]/76 md:text-lg">
+          {pressPage.description}
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto grid max-w-6xl gap-6 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+        <article class="poster-frame rounded-[1.75rem] p-6 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Short bio</p>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{pressPage.shortBio}</p>
+
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Long bio</p>
+          <div class="mt-4 space-y-4">
+            {pressPage.longBio.map((paragraph) => (
+              <p class="text-base leading-7 text-[var(--color-ink)]/78">{paragraph}</p>
+            ))}
+          </div>
+        </article>
+
+        <article class="poster-frame rounded-[1.75rem] p-6 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press assets</p>
+          <div class="mt-5 grid gap-3">
+            {pressPage.approvedAssets.map((asset) => (
+              <a
+                class="focus-ring flex items-center justify-between gap-4 rounded-[1.25rem] border border-black/8 bg-white px-4 py-4 text-sm font-semibold text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                href={asset.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>
+                  <span class="block uppercase tracking-[0.12em]">{asset.label}</span>
+                  <span class="mt-1 block text-xs font-medium normal-case leading-5 text-[var(--color-muted)]">
+                    {asset.description}
+                  </span>
+                </span>
+                <span aria-hidden="true">-&gt;</span>
+              </a>
+            ))}
+          </div>
+
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Video</p>
+          <a
+            class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+            href={pressPage.videoLink}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Watch on YouTube
+          </a>
+
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press contact</p>
+          <a
+            class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            href={`mailto:${pressPage.contactEmail}`}
+          >
+            {pressPage.contactLabel}: {pressPage.contactEmail}
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="poster-frame rounded-[1.75rem] p-6 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Approved pull quotes</p>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {pressPage.quotes.map((quote) => (
+              <blockquote class="rounded-[1.25rem] border border-black/8 bg-[var(--color-paper-soft)] px-4 py-5 text-sm font-semibold leading-6 text-[var(--color-ink)]/82">
+                “{quote}”
+              </blockquote>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

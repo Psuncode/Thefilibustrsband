@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import Footer from "../../components/site/Footer.astro";
+import Header from "../../components/site/Header.astro";
+import { communityPosts } from "../../data/community";
+import { siteMeta } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return communityPosts.map((post) => ({
+    params: { slug: post.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const post = communityPosts.find((entry) => entry.slug === slug);
+
+if (!post) {
+  throw new Error(`Unknown community slug: ${slug}`);
+}
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
+---
+
+<BaseLayout
+  title={`${post.title} | ${siteMeta.title}`}
+  description={post.summary}
+>
+  <Header />
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-white">
+    <section class="border-b border-black/10">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <article class="max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+            {post.category}
+          </p>
+          <h1 class="display-face mt-3 text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+            {post.title}
+          </h1>
+          <p class="mt-5 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+            {dateFormatter.format(new Date(post.publishedAt))}
+          </p>
+          <p class="mt-5 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">
+            {post.summary}
+          </p>
+          <div class="mt-8 space-y-4">
+            {post.body.map((paragraph) => (
+              <p class="text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{paragraph}</p>
+            ))}
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <button
+              class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+              data-subscribe-open
+              type="button"
+            >
+              Subscribe
+            </button>
+            {post.relatedShowSlug ? (
+              <a
+                class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                href={`/shows/${post.relatedShowSlug}`}
+              >
+                View related show
+              </a>
+            ) : null}
+          </div>
+        </article>
+
+        <aside class="poster-frame overflow-hidden rounded-[2rem]">
+          <Image
+            src={post.heroImage}
+            alt={post.heroAlt}
+            class="aspect-[4/5] w-full object-cover object-center"
+            widths={[720, 1080]}
+            sizes="(max-width: 1023px) 100vw, 40vw"
+          />
+        </aside>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

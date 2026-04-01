@@ -34,6 +34,15 @@ type ContactPageContent = {
     title: string;
     note: string;
   };
+  resources: {
+    eyebrow: string;
+    title: string;
+    links: readonly {
+      label: string;
+      href: string;
+      description: string;
+    }[];
+  };
 };
 
 const bookingContact = contactPoints.find((entry) => entry.kind === "booking");
@@ -103,5 +112,21 @@ export const contactPage = {
     eyebrow: "Secondary channels",
     title: "Social is for following along, not for inquiries.",
     note: "Use the contact paths above for booking and other requests. Social is where the band posts clips, photos, and updates."
+  },
+  resources: {
+    eyebrow: "Need something else?",
+    title: "Use the route that matches the job.",
+    links: [
+      {
+        label: "Press room",
+        href: "/press",
+        description: "Approved bios, visuals, quotes, and media-ready context."
+      },
+      {
+        label: "Community updates",
+        href: "/community",
+        description: "Band news, release moments, and behind-the-scenes updates."
+      }
+    ]
   }
 } as const satisfies ContactPageContent;

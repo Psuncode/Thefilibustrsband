@@ -1,0 +1,173 @@
+---
+import { subscribePage } from "../../data/subscribe";
+import { siteMeta } from "../../data/site";
+
+const formAction = import.meta.env.PUBLIC_COMMUNITY_FORM_ACTION;
+const hasFormAction = Boolean(formAction);
+const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20The%20Filibusters`;
+---
+
+<div aria-hidden="true" class="subscribe-modal-shell" data-subscribe-modal>
+  <div class="subscribe-modal-backdrop" data-subscribe-close></div>
+
+  <section
+    aria-labelledby="subscribe-modal-title"
+    aria-modal="true"
+    class="subscribe-modal-dialog"
+    data-subscribe-dialog
+    role="dialog"
+    tabindex="-1"
+  >
+    <button
+      aria-label="Close subscribe form"
+      class="subscribe-modal-close focus-ring"
+      data-subscribe-close
+      type="button"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+
+    <div class="subscribe-modal-content">
+      <p class="subscribe-modal-eyebrow">{subscribePage.eyebrow}</p>
+      <h2 class="display-face subscribe-modal-title" id="subscribe-modal-title">
+        {subscribePage.title}
+      </h2>
+      <p class="subscribe-modal-copy">{subscribePage.description}</p>
+
+      <ul class="subscribe-modal-promise">
+        {subscribePage.promise.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+
+      {hasFormAction ? (
+        <form class="subscribe-modal-form" action={formAction} method="POST">
+          <label class="subscribe-modal-label" for="subscribe-modal-email">
+            {subscribePage.form.emailLabel}
+          </label>
+          <input
+            class="subscribe-modal-input"
+            id="subscribe-modal-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+          />
+          <button class="focus-ring subscribe-modal-submit" type="submit">
+            {subscribePage.form.submitLabel}
+          </button>
+        </form>
+      ) : (
+        <div class="subscribe-modal-fallback">
+          <p>{subscribePage.note}</p>
+          <a class="focus-ring subscribe-modal-submit" href={fallbackHref}>
+            {subscribePage.form.fallbackLabel}
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</div>
+
+<script>
+  const focusableSelector = [
+    "a[href]",
+    "button:not([disabled])",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    "[tabindex]:not([tabindex='-1'])"
+  ].join(",");
+
+  document.querySelectorAll("[data-subscribe-modal]").forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+
+    const dialog = root.querySelector("[data-subscribe-dialog]");
+    const openers = document.querySelectorAll("[data-subscribe-open]");
+    const closeControls = root.querySelectorAll("[data-subscribe-close]");
+
+    let opener = null;
+
+    const closeModal = () => {
+      root.classList.remove("is-visible");
+      root.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("follow-prompt-open");
+
+      if (opener instanceof HTMLElement && opener.isConnected) {
+        opener.focus();
+      }
+    };
+
+    const trapFocus = (event) => {
+      if (event.key !== "Tab" || !root.classList.contains("is-visible") || !(dialog instanceof HTMLElement)) {
+        return;
+      }
+
+      const focusable = Array.from(dialog.querySelectorAll(focusableSelector)).filter(
+        (node) =>
+          node instanceof HTMLElement &&
+          !node.hasAttribute("disabled") &&
+          node.getAttribute("aria-hidden") !== "true"
+      );
+
+      if (focusable.length === 0) {
+        event.preventDefault();
+        dialog.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    const openModal = (trigger) => {
+      opener = trigger instanceof HTMLElement ? trigger : document.activeElement;
+      root.classList.add("is-visible");
+      root.setAttribute("aria-hidden", "false");
+      document.body.classList.add("follow-prompt-open");
+
+      if (dialog instanceof HTMLElement) {
+        const firstFocusable = dialog.querySelector(focusableSelector);
+
+        if (firstFocusable instanceof HTMLElement) {
+          firstFocusable.focus();
+          return;
+        }
+
+        dialog.focus();
+      }
+    };
+
+    openers.forEach((node) => {
+      node.addEventListener("click", (event) => {
+        event.preventDefault();
+        openModal(node);
+      });
+    });
+
+    closeControls.forEach((node) => {
+      node.addEventListener("click", closeModal);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && root.classList.contains("is-visible")) {
+        closeModal();
+        return;
+      }
+
+      trapFocus(event);
+    });
+  });
+</script>

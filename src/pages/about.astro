@@ -10,14 +10,17 @@ const listenCta = aboutPage.ctas.find(({ href, label }) =>
   href === "/listen" || label.toLowerCase().includes("listen")
 );
 const showsCta = aboutPage.ctas.find(({ href, label }) =>
-  href === "/#shows" || label.toLowerCase().includes("show")
+  href === "/shows" || label.toLowerCase().includes("show")
+);
+const communityCta = aboutPage.ctas.find(({ href, label }) =>
+  href === "/community" || label.toLowerCase().includes("update")
 );
 const contactCta = aboutPage.ctas.find(({ href, label }) =>
   href === "/contact" || label.toLowerCase().includes("contact")
 );
 
 const heroCtas = [listenCta, contactCta].filter(Boolean);
-const footerCtas = [listenCta, showsCta, contactCta].filter(Boolean);
+const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolean);
 ---
 
 <BaseLayout

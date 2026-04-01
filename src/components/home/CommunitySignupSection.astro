@@ -1,10 +1,8 @@
 ---
 import { homepageContent } from "../../data/homepage";
-import { siteMeta } from "../../data/site";
 
 const formAction = import.meta.env.PUBLIC_COMMUNITY_FORM_ACTION;
 const hasFormAction = Boolean(formAction);
-const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Join%20the%20Filibusters%20community`;
 ---
 
 <section id="community" class="anchor-section bg-white">
@@ -17,6 +15,21 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Join%20the%20Filib
       <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--color-ink)]/80">
         {homepageContent.community.description}
       </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+          href={homepageContent.community.updatesHref}
+        >
+          {homepageContent.community.updatesCtaLabel}
+        </a>
+        <button
+          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-ink)] bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+          data-subscribe-open
+          type="button"
+        >
+          {homepageContent.community.subscribeCtaLabel}
+        </button>
+      </div>
       {hasFormAction ? (
         <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST">
           <div class="flex-1">
@@ -39,9 +52,6 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Join%20the%20Filib
           <p class="text-sm leading-6 text-[var(--color-ink)]/80">
             {homepageContent.community.fallbackDescription}
           </p>
-          <a class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]" href={fallbackHref}>
-            {homepageContent.community.fallbackCtaLabel}
-          </a>
         </div>
       )}
     </div>

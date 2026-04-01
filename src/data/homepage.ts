@@ -4,7 +4,7 @@ export const homepageContent = {
     headline: "Feel loud. Feel seen. Feel something.",
     subheadline: "Alt rock for the ones still figuring it out. New music, live shows, and the kind of songs that stick when life feels loud.",
     primaryCta: { label: "Listen now", href: "#latest-release" },
-    secondaryCta: { label: "See shows", href: "#shows" }
+    secondaryCta: { label: "See shows", href: "/shows" }
   },
   reasons: [
     "Songs that hit when you do not have the words yet",
@@ -72,6 +72,9 @@ export const homepageContent = {
   community: {
     title: "Stay close",
     description: "New music. New shows. Exclusive drops. Be the first to hear what is next.",
+    updatesCtaLabel: "View updates",
+    updatesHref: "/community",
+    subscribeCtaLabel: "Subscribe",
     fallbackDescription: "Drop us an email and we will add you to the list for new music, show dates, and the updates worth checking back for.",
     fallbackCtaLabel: "Get on the list"
   },

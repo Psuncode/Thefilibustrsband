@@ -1,6 +1,7 @@
 # Roadmap Gap Implementation Plan
 
 Date: 2026-03-31
+Updated: 2026-04-01
 
 ## Goal
 
@@ -13,6 +14,8 @@ Routes currently present in `src/pages/`:
 - `/about`
 - `/contact`
 - `/listen`
+- `/shows`
+- `/shows/[slug]`
 
 Current completed spec slices:
 - homepage refinement
@@ -20,6 +23,8 @@ Current completed spec slices:
 - `/contact`
 - GEO/contact refinement
 - `FollowPrompt` plus `/listen`
+- shows foundation with dedicated list and detail pages
+- repo-local Sanity studio scaffolding and show data layer fallback
 
 ## Status By Spec
 
@@ -33,74 +38,38 @@ Current completed spec slices:
   - core GEO/contact refinements are shipped
 - `2026-03-31-follow-prompt-design.md`
   - popup funnel and `/listen` route are shipped
+- `2026-03-31-shows-sanity-implementation.md`
+  - Sanity studio scaffolding, fallback-aware show data utilities, `/shows`, and `/shows/[slug]` are shipped
 
 ### Partially Built
 
 - `2026-03-31-next-phase-roadmap.md`
   - completed from this roadmap:
-    - streaming prompt intent is already covered by `FollowPrompt` and `/listen`
+    - streaming prompt intent is covered by `FollowPrompt` and `/listen`
+    - the shows experience is now covered by `/shows` and `/shows/[slug]`
+    - the initial Sanity foundation for shows is in repo
   - not yet completed:
-    - `Sanity`
-    - `/shows`
-    - `/shows/[slug]`
+    - populated remote Sanity content workflow
     - `/community`
     - real `Kit` email signup flow
     - merch exploration
 
 ## Features Not Yet Built
 
-### 1. Sanity CMS Setup
-
-Not built.
-
-Needed because:
-- shows are still repo data
-- community content has no editor workflow
-- roadmap explicitly chose `Sanity`
-
-Expected scope:
-- Sanity schema setup
-- Astro data fetching at build time
-- local fallback strategy during migration
-
-### 2. Dedicated `/shows` Page
+### 1. `/community` Hub
 
 Not built.
 
 Current state:
-- homepage has a shows preview only
-- there is no standalone `/shows` route
-
-Expected scope:
-- full event list page
-- status-aware rows or cards
-- direct ticket links
-- better internal linking than homepage-only anchors
-
-### 3. Dynamic `/shows/[slug]` Pages
-
-Not built.
-
-Expected scope:
-- one page per show
-- flyer/poster-first layout
-- venue/date/ticket/meta details
-- optional lineup and notes
-
-### 4. `/community` Hub
-
-Not built.
-
-Current state:
-- homepage has only a signup section
-- no journal/news destination exists
+- homepage has a signup section only
+- no journal or updates destination exists yet
 
 Expected scope:
 - mixed hub for news, announcements, release updates, and behind-the-scenes posts
 - fan-journal tone rather than newsroom tone
-- content model designed alongside shows to avoid a second migration
+- content model designed to sit alongside the existing show schema work
 
-### 5. Real Email Flow With `Kit`
+### 2. Real Email Flow With `Kit`
 
 Not built.
 
@@ -112,10 +81,25 @@ Current state:
 Expected scope:
 - email-only signup
 - one main audience
-- branded success/error states
+- branded success and error states
 - replace fallback-first behavior with real submission flow
 
-### 6. `/press`
+### 3. Populated Sanity Workflow
+
+Partially built.
+
+Current state:
+- repo-local studio config exists
+- show schema exists
+- Astro fetch layer already prefers Sanity when env vars are present
+- fallback repo data is still the effective content source unless project credentials and remote documents are added
+
+Expected scope:
+- connect real project credentials
+- create and publish show documents in Sanity
+- verify production builds against remote content
+
+### 4. `/press`
 
 Still not built, but intentionally deferred by earlier specs.
 
@@ -132,7 +116,7 @@ This should stay separate from `/community`.
 
 ## Important Non-Roadmap Gaps
 
-These are not core roadmap items, but they are now visible gaps from the current site and audit work:
+These are not core roadmap items, but they are visible gaps from the current site and earlier audit work.
 
 ### Privacy Policy
 
@@ -140,7 +124,7 @@ Not built.
 
 Reason:
 - repeated live audit warning
-- trust/legal footer gap
+- trust and legal footer gap
 
 ### Editorial/Trust Pages
 
@@ -152,79 +136,79 @@ Reason:
 
 ### Homepage Horizontal Scroll Cleanup
 
-Still not fully resolved from audit output.
+Needs periodic verification whenever layout changes land.
 
-Reason:
-- verification standard in `AGENTS.md` treats horizontal scroll as a blocker
+Current state:
+- current build passes
+- `AGENTS.md` still treats horizontal scroll as a blocker, so this stays a verification requirement rather than a closed one-time task
 
 ## Recommended Build Order
 
-### Slice 1: Shows Foundation
+### Slice 1: Community Foundation
 
 Build first:
-- `/shows`
-- `/shows/[slug]`
+- `/community`
+- shared content architecture for community posts
 
 Reason:
-- highest-value content gap
-- aligns directly with roadmap
-- creates immediate reason to leave homepage anchors behind
+- biggest remaining roadmap surface
+- most visible content gap after shows shipped
 
-### Slice 2: CMS Foundation
+### Slice 2: Email System
 
 Build second:
-- `Sanity` setup
-- migrate show data first
-
-Reason:
-- show data changes often
-- the structure can later be reused for community
-
-### Slice 3: Community Hub
-
-Build third:
-- `/community`
-- shared content architecture with shows
-
-Reason:
-- roadmap explicitly prioritizes this before merch
-- it gives fans a destination beyond static pages
-
-### Slice 4: Email System
-
-Build fourth:
 - `Kit` signup integration
 - replace fallback-first homepage signup behavior
 
 Reason:
-- better after content destinations exist
-- easier to design around real audience acquisition points
+- better once there is a true community destination
+- audience capture should connect to actual recurring content
 
-### Slice 5: Press And Trust Layer
+### Slice 3: Sanity Content Operations
 
-Build fifth:
-- `/press`
-- `/privacy`
-- optional editorial/trust page
+Build third:
+- connect real project credentials
+- move actual show management into Sanity
+- expand schema strategy for community content
 
 Reason:
-- press assets are still pending
-- privacy/trust should ship before community scales up
+- foundation code exists already
+- remaining work is operational/content-model completion rather than route scaffolding
+
+### Slice 4: Press And Trust Layer
+
+Build fourth:
+- `/press`
+- `/privacy`
+- optional editorial or trust page
+
+Reason:
+- good support layer once community and email flows exist
+- improves press readiness and trust signals
+
+### Slice 5: Merch Exploration
+
+Build fifth:
+- merch discovery and fulfillment direction
+
+Reason:
+- explicitly later-phase in the roadmap
+- depends less on the current content architecture than community/email do
 
 ## Recommended Immediate Next Execution Plan
 
 Next implementation session should focus on one bounded slice:
 
-1. Build `/shows`
-2. Build `/shows/[slug]`
-3. Add internal links from homepage and about/contact where relevant
-4. Keep data repo-local first if needed, but shape it for a near-term `Sanity` migration
+1. Build `/community`
+2. Define a Sanity-ready content model for community posts
+3. Add homepage and supporting-page links that point toward `/community`
+4. After that lands, replace the current community signup fallback with real `Kit`
 
-This is the cleanest next move because it creates visible user value without blocking on CMS credentials or external platform setup.
+This is the cleanest next move because the shows slice is already in place, while community plus email is now the main product gap.
 
 ## Open Questions
 
-- whether show pages should launch from repo data first or wait for `Sanity`
-- whether `/community` should launch from static seed content or wait until CMS is ready
+- whether `/community` should launch from static seed content first or directly from Sanity-backed content
 - whether `Kit` integration should be embedded directly or proxied through a serverless endpoint
+- whether show status and event history should expand once remote Sanity content is populated
 - whether `/press` should remain hidden until all assets arrive

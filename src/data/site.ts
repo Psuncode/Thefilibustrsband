@@ -33,6 +33,12 @@ type PrimaryNavItem = {
   icon: HeaderIconName;
 };
 
+type SecondaryRoute = {
+  label: string;
+  href?: string;
+  kind?: "link" | "modal";
+};
+
 type FollowPromptLink = {
   label: string;
   href: string;
@@ -295,3 +301,9 @@ export const primaryNav = [
   { label: "About", href: "/about", icon: "info" },
   { label: "Contact", href: "/contact", icon: "mail" }
 ] as const satisfies readonly PrimaryNavItem[];
+
+export const secondaryRoutes = [
+  { label: "Community", href: "/community", kind: "link" },
+  { label: "Press Room", href: "/press", kind: "link" },
+  { label: "Subscribe", kind: "modal" }
+] as const satisfies readonly SecondaryRoute[];

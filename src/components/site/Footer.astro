@@ -1,9 +1,9 @@
 ---
-import { bandFacts, iconPaths, siteMeta, socialLinks } from "../../data/site";
+import { bandFacts, iconPaths, secondaryRoutes, siteMeta, socialLinks } from "../../data/site";
 ---
 
 <footer class="mobile-nav-offset border-t border-black/10 bg-[var(--color-ink)] text-white">
-  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:px-6 md:py-12">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[minmax(0,1fr)_minmax(0,0.82fr)] md:px-6 md:py-12">
     <div class="space-y-4">
       <div>
         <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">Stay in the noise</p>
@@ -24,36 +24,67 @@ import { bandFacts, iconPaths, siteMeta, socialLinks } from "../../data/site";
         {siteMeta.contactEmail}
       </a>
     </div>
-    <div class="rounded-[2rem] border border-white/10 bg-white/5 p-5 md:p-6">
-      <p class="text-sm font-bold uppercase tracking-[0.18em] text-white/60">Connect</p>
-      <div class="mt-4 grid gap-3">
-        {socialLinks.map((social) => (
-          <a
-            class="focus-ring flex min-h-11 items-center justify-between gap-4 rounded-[1.25rem] border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[var(--color-pink)] hover:bg-white/10 hover:text-[var(--color-yellow)]"
-            href={social.href}
-            rel="noreferrer"
-            target="_blank"
-          >
-            <span class="inline-flex items-center gap-3">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/10">
-                <svg
-                  aria-hidden="true"
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.8"
-                  viewBox="0 0 24 24"
-                >
-                  <path d={iconPaths[social.icon]} />
-                </svg>
-              </span>
-              <span>{social.label}</span>
-            </span>
-            <span aria-hidden="true" class="text-white/45">-&gt;</span>
-          </a>
-        ))}
+    <div class="space-y-6 rounded-[2rem] border border-white/10 bg-white/5 p-5 md:p-6">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-white/60">Connect</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          {socialLinks.map((social) => (
+            <a
+              aria-label={social.label}
+              class="focus-ring inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-[var(--color-pink)] hover:bg-white/10 hover:text-[var(--color-yellow)]"
+              href={social.href}
+              rel="noreferrer"
+              target="_blank"
+              title={social.label}
+            >
+              <svg
+                aria-hidden="true"
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path d={iconPaths[social.icon]} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-white/60">Explore</p>
+        <div class="mt-4 flex flex-wrap gap-x-5 gap-y-3">
+          {secondaryRoutes.map((route) =>
+            route.kind === "modal" ? (
+              <button
+                class="focus-ring text-sm font-semibold text-white/82 transition hover:text-[var(--color-yellow)]"
+                data-subscribe-open
+                type="button"
+              >
+                {route.label}
+              </button>
+            ) : (
+              <a
+                class="focus-ring text-sm font-semibold text-white/82 transition hover:text-[var(--color-yellow)]"
+                href={route.href}
+              >
+                {route.label}
+              </a>
+            )
+          )}
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-4">
+        <button
+          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[var(--color-pink)] hover:text-[var(--color-yellow)]"
+          data-subscribe-open
+          type="button"
+        >
+          Join the email list
+        </button>
       </div>
     </div>
   </div>

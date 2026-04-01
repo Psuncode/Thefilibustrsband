@@ -1,5 +1,21 @@
 # Shows + Sanity Implementation Plan
 
+Status as of 2026-04-01: substantially implemented in the repo.
+
+What is shipped:
+- repo-local Sanity Studio scaffolding and schema registration
+- fallback-aware Sanity show data layer in `src/lib/`
+- dedicated `/shows` route
+- generated `/shows/[slug]` detail routes
+- homepage preview links wired to `/shows`
+- sitemap coverage for `/shows` and show detail pages
+
+What is not represented by code alone:
+- real Sanity project credentials and populated remote content
+- any later roadmap slices outside shows, including `/community` and `Kit`
+
+This plan remains useful as the original implementation checklist, but it is no longer an accurate source for current repo status by itself.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add the first CMS-backed product surface by integrating Sanity and shipping a visual upcoming-shows grid at `/shows` plus event detail pages at `/shows/[slug]`.

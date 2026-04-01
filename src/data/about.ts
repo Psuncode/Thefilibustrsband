@@ -155,7 +155,7 @@ export const aboutPage = {
     },
     {
       question: "Are The Filibusters playing shows?",
-      answer: "Yes. Check the shows section on the homepage for currently listed dates."
+      answer: "Yes. Check the dedicated shows page for currently listed dates and event details."
     },
     {
       question: "What bands are similar to The Filibusters?",
@@ -174,7 +174,11 @@ export const aboutPage = {
     },
     {
       label: "See shows",
-      href: "/#shows"
+      href: "/shows"
+    },
+    {
+      label: "View updates",
+      href: "/community"
     },
     {
       label: "Contact the band",

@@ -1,8 +1,9 @@
 ---
 import Analytics from "@vercel/analytics/astro";
+import SubscribeModal from "../components/site/SubscribeModal.astro";
 import heroBand from "../assets/images/hero-band.jpg";
 import { buildMusicGroupSchema, siteMeta } from "../data/site";
-import { upcomingShows } from "../data/shows";
+import { getUpcomingShows } from "../lib/shows/data";
 import "../styles/global.css";
 
 interface Props {
@@ -14,16 +15,29 @@ const { title, description } = Astro.props;
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(heroBand.src, Astro.site);
 const musicGroupStructuredData = buildMusicGroupSchema({ image: ogImage.href });
+const upcomingShows = await getUpcomingShows();
+
+const getEventStatus = (status: string) => {
+  switch (status) {
+    case "canceled":
+      return "https://schema.org/EventCancelled";
+    case "sold-out":
+    case "announced":
+    default:
+      return "https://schema.org/EventScheduled";
+  }
+};
+
 const structuredData = [
   musicGroupStructuredData,
   ...upcomingShows.map((show) => ({
     "@context": "https://schema.org",
     "@type": "Event",
     name: `${siteMeta.title} at ${show.venue}`,
-    startDate: show.date,
+    startDate: show.startsAt,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    eventStatus: "https://schema.org/EventScheduled",
-    image: [ogImage.href],
+    eventStatus: getEventStatus(show.status),
+    image: [show.flyerUrl || ogImage.href],
     performer: {
       "@type": "MusicGroup",
       name: siteMeta.title,
@@ -32,7 +46,11 @@ const structuredData = [
     location: {
       "@type": "Place",
       name: show.venue,
-      address: show.city
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: show.city,
+        addressRegion: show.state
+      }
     }
   }))
 ];
@@ -72,6 +90,7 @@ const structuredData = [
   <body>
     <a class="focus-ring sr-only focus:not-sr-only" href="#main-content">Skip to content</a>
     <slot />
+    <SubscribeModal />
     <Analytics />
   </body>
 </html>

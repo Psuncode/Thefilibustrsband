@@ -1,0 +1,89 @@
+---
+import { Image } from "astro:assets";
+import Footer from "../../components/site/Footer.astro";
+import Header from "../../components/site/Header.astro";
+import { communityPage, communityPosts } from "../../data/community";
+import { siteMeta } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
+---
+
+<BaseLayout
+  title={`Community | ${siteMeta.title}`}
+  description="Band news, release updates, behind-the-scenes posts, and milestone moments from The Filibusters."
+>
+  <Header />
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[var(--color-paper-soft)]">
+    <section class="border-b border-black/10 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+          {communityPage.eyebrow}
+        </p>
+        <h1 class="display-face mt-3 max-w-4xl text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+          {communityPage.title}
+        </h1>
+        <p class="mt-4 max-w-3xl text-base leading-7 text-[var(--color-ink)]/76 md:text-lg">
+          {communityPage.description}
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="grid gap-5 md:grid-cols-2">
+          {communityPosts.map((post) => (
+            <article class="poster-frame overflow-hidden rounded-[1.75rem]">
+              <a class="block" href={`/community/${post.slug}`}>
+                <Image
+                  src={post.heroImage}
+                  alt={post.heroAlt}
+                  class="aspect-[16/10] w-full object-cover object-center"
+                  widths={[720, 1080]}
+                  sizes="(max-width: 767px) 100vw, 50vw"
+                />
+              </a>
+              <div class="p-5">
+                <div class="flex flex-wrap items-center gap-3">
+                  <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+                    {post.category}
+                  </p>
+                  <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                    {dateFormatter.format(new Date(post.publishedAt))}
+                  </p>
+                </div>
+                <h2 class="mt-4 text-2xl font-black uppercase leading-tight text-[var(--color-ink)]">
+                  <a class="focus-ring rounded-sm" href={`/community/${post.slug}`}>
+                    {post.title}
+                  </a>
+                </h2>
+                <p class="mt-4 text-sm leading-6 text-[var(--color-ink)]/74">{post.summary}</p>
+                <div class="mt-6 flex flex-wrap gap-3">
+                  <a
+                    class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+                    href={`/community/${post.slug}`}
+                  >
+                    Read update
+                  </a>
+                  {post.relatedShowSlug ? (
+                    <a
+                      class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                      href={`/shows/${post.relatedShowSlug}`}
+                    >
+                      Related show
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
