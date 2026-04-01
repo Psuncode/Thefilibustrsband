@@ -29,26 +29,26 @@ const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolea
   description={aboutPage.definition.intro}
 >
   <Header />
-  <main id="main-content" class="mobile-nav-offset overflow-x-clip">
-    <section class="border-b border-black/10">
-      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[linear-gradient(180deg,#fffdf8_0%,#fff7ef_18rem,var(--color-paper-soft)_44rem,var(--color-paper)_100%)]">
+    <section class="border-b border-black/10 bg-white/72">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
         <div class="max-w-4xl">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
             {aboutPage.hero.eyebrow}
           </p>
-          <h1 class="display-face mt-3 text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+          <h1 class="display-face mt-3 max-w-[11ch] text-[2.55rem] uppercase leading-[0.92] tracking-[-0.045em] md:max-w-none md:text-6xl">
             {aboutPage.hero.title}
           </h1>
           {aboutPage.hero.description.map((paragraph) => (
-            <p class="mt-5 max-w-3xl text-base leading-7 text-[var(--color-ink)]/78 md:text-lg md:leading-8">
+            <p class="mt-4 max-w-3xl text-[0.98rem] leading-6 text-[var(--color-ink)]/78 md:mt-5 md:text-lg md:leading-8">
               {paragraph}
             </p>
           ))}
-          <div class="mt-8 flex flex-wrap gap-3">
+          <div class="mt-7 grid gap-3 sm:flex sm:flex-wrap">
             {heroCtas.map((cta, index) => (
               <a
                 class:list={[
-                  "focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] transition",
+                  "focus-ring inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] transition sm:w-auto",
                   index === 0
                     ? "bg-[var(--color-pink)] text-white hover:bg-[var(--color-ink)]"
                     : "border border-black/12 bg-white text-[var(--color-ink)] hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
@@ -64,74 +64,84 @@ const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolea
     </section>
 
     <section class="bg-[var(--color-paper-soft)]">
-      <div class="mx-auto grid max-w-6xl gap-6 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-        <div class="poster-frame rounded-[2rem] p-6 md:p-8">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
-            {aboutPage.definition.title}
-          </p>
-          <p class="mt-4 text-lg font-semibold leading-8 text-[var(--color-ink)]">
-            {aboutPage.definition.intro}
-          </p>
-          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/74">
-            {aboutPage.definition.body}
-          </p>
+      <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div class="poster-frame rounded-[1.75rem] p-5 md:rounded-[2rem] md:p-8">
+          <div class="grid gap-5 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-start">
+            <div>
+              <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+                {aboutPage.definition.title}
+              </p>
+              <div class="mt-4 overflow-hidden rounded-[1.4rem] border border-black/8 bg-white p-2.5 lg:hidden">
+                <Image
+                  src={heroBand}
+                  alt="The Filibusters together in a band photo."
+                  class="aspect-[16/10] w-full rounded-[1rem] object-cover object-center"
+                  widths={[720, 1080, 1440]}
+                  sizes="100vw"
+                />
+              </div>
+              <p class="mt-4 text-[1.05rem] font-semibold leading-7 text-[var(--color-ink)] md:text-lg md:leading-8">
+                {aboutPage.definition.intro}
+              </p>
+              <p class="mt-4 text-[0.96rem] leading-6 text-[var(--color-ink)]/74 md:text-base md:leading-7">
+                {aboutPage.definition.body}
+              </p>
+            </div>
+            <div class="hidden overflow-hidden rounded-[1.5rem] border border-black/8 bg-white p-3 lg:block">
+              <Image
+                src={heroBand}
+                alt="The Filibusters together in a band photo."
+                class="aspect-[16/12] w-full rounded-[1.1rem] object-cover object-center"
+                widths={[720, 1080, 1440]}
+                sizes="(max-width: 1023px) 100vw, 38vw"
+              />
+            </div>
+          </div>
         </div>
-        <div class="max-w-3xl lg:hidden">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
-            {aboutPage.factsSection.eyebrow}
-          </p>
-        </div>
-        <dl class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        <div class="space-y-3">
+          <div class="max-w-3xl">
+            <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+              {aboutPage.factsSection.eyebrow}
+            </p>
+          </div>
+          <dl class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
           {aboutPage.quickFacts.map((fact) => (
-            <div class="poster-frame rounded-[1.5rem] p-5">
+            <div class="poster-frame rounded-[1.35rem] p-4 md:rounded-[1.5rem] md:p-5">
               <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
                 {fact.label}
               </dt>
-              <dd class="mt-3 text-lg font-semibold leading-7 text-[var(--color-ink)]">
+              <dd class="mt-3 text-base font-semibold leading-6 text-[var(--color-ink)] md:text-lg md:leading-7">
                 {fact.value}
               </dd>
             </div>
           ))}
-        </dl>
-      </div>
-    </section>
-
-    <section class="bg-white">
-      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <div class="poster-frame overflow-hidden rounded-[2rem] p-3">
-          <Image
-            src={heroBand}
-            alt="The Filibusters together in a band photo."
-            class="aspect-[16/8] w-full rounded-[1.25rem] object-cover object-center"
-            widths={[720, 1080, 1440]}
-            sizes="100vw"
-          />
+          </dl>
         </div>
       </div>
     </section>
 
     <section>
-      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
         <div class="max-w-3xl">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
             Meet the band
           </p>
-          <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+          <h2 class="display-face mt-3 max-w-[10ch] text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:max-w-none md:text-5xl">
             The people making the noise.
           </h2>
         </div>
-        <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="mt-6 grid gap-3 md:mt-8 md:gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {aboutPage.members.map((member) => (
-            <article class="poster-frame overflow-hidden rounded-[1.75rem]">
+            <article class="poster-frame overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] sm:block">
               <Image
                 src={member.photo}
                 alt={member.alt}
-                class="aspect-[4/5] w-full object-cover object-center"
+                class="aspect-[5/4] w-full object-cover object-center sm:aspect-[4/5]"
                 widths={[480, 720]}
                 sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
               />
-              <div class="p-5">
-                <h3 class="text-xl font-black uppercase leading-tight text-[var(--color-ink)]">
+              <div class="p-4 md:p-5">
+                <h3 class="text-lg font-black uppercase leading-tight text-[var(--color-ink)] md:text-xl">
                   {member.name}
                 </h3>
                 <p class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-muted)]">
@@ -145,13 +155,13 @@ const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolea
     </section>
 
     <section class="bg-[var(--color-ink)] text-white">
-      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
         <div class="max-w-3xl">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)] md:text-sm">
             {aboutPage.story.title}
           </p>
           {aboutPage.story.paragraphs.map((paragraph) => (
-            <p class="mt-4 text-base leading-7 text-white/82 md:text-lg md:leading-8">
+            <p class="mt-4 text-[0.98rem] leading-6 text-white/82 md:text-lg md:leading-8">
               {paragraph}
             </p>
           ))}
@@ -160,8 +170,8 @@ const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolea
     </section>
 
     <section class="bg-[var(--color-paper-soft)]">
-      <div class="mx-auto grid max-w-6xl gap-6 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-        <div class="poster-frame rounded-[1.75rem] p-6">
+      <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <div class="poster-frame order-2 rounded-[1.5rem] p-5 md:order-1 md:rounded-[1.75rem] md:p-6">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
             Similar artists
           </p>
@@ -174,11 +184,11 @@ const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolea
           </div>
         </div>
 
-        <div class="poster-frame rounded-[1.75rem] p-6 md:p-7">
+        <div class="poster-frame order-1 rounded-[1.5rem] p-5 md:order-2 md:rounded-[1.75rem] md:p-7">
           <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">FAQ</h2>
-          <dl class="mt-5 space-y-5">
+          <dl class="mt-4 space-y-4 md:mt-5 md:space-y-5">
             {aboutPage.faq.map((item) => (
-              <div class="border-b border-black/8 pb-5 last:border-b-0 last:pb-0">
+              <div class="border-b border-black/8 pb-4 last:border-b-0 last:pb-0 md:pb-5">
                 <dt class="text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)]">
                   {item.question}
                 </dt>
@@ -193,24 +203,24 @@ const footerCtas = [listenCta, showsCta, communityCta, contactCta].filter(Boolea
     </section>
 
     <section class="border-t border-black/10 bg-white">
-      <div class="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-12 md:px-6 md:py-16 lg:flex-row lg:items-center lg:justify-between">
+      <div class="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-10 md:px-6 md:py-16 lg:flex-row lg:items-center lg:justify-between">
         <div class="max-w-2xl">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
             {aboutPage.ctaSection.eyebrow}
           </p>
-          <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+          <h2 class="display-face mt-3 max-w-[10ch] text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:max-w-none md:text-5xl">
             {aboutPage.ctaSection.title}
           </h2>
-          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/74 md:text-lg">
+          <p class="mt-4 text-[0.98rem] leading-6 text-[var(--color-ink)]/74 md:text-lg md:leading-7">
             {aboutPage.ctaSection.description}
           </p>
         </div>
 
-        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+        <div class="grid gap-3 sm:flex sm:flex-row sm:flex-wrap lg:justify-end">
           {footerCtas.map((cta, index) => (
             <a
               class:list={[
-                "focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] transition",
+                "focus-ring inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] transition sm:w-auto",
                 index === 0
                   ? "bg-[var(--color-ink)] text-white hover:bg-[var(--color-pink)]"
                   : "border border-black/12 bg-[var(--color-paper-soft)] text-[var(--color-ink)] hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
