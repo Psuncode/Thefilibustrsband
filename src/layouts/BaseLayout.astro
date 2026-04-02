@@ -16,6 +16,13 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(heroBand.src, Astro.site);
 const musicGroupStructuredData = buildMusicGroupSchema({ image: ogImage.href });
 const upcomingShows = await getUpcomingShows();
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteMeta.title,
+  url: siteMeta.url,
+  description: siteMeta.description
+};
 
 const getEventStatus = (status: string) => {
   switch (status) {
@@ -28,32 +35,35 @@ const getEventStatus = (status: string) => {
   }
 };
 
-const structuredData = [
-  musicGroupStructuredData,
-  ...upcomingShows.map((show) => ({
-    "@context": "https://schema.org",
-    "@type": "Event",
-    name: `${siteMeta.title} at ${show.venue}`,
-    startDate: show.startsAt,
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    eventStatus: getEventStatus(show.status),
-    image: [show.flyerUrl || ogImage.href],
-    performer: {
-      "@type": "MusicGroup",
-      name: siteMeta.title,
-      url: siteMeta.url
-    },
-    location: {
-      "@type": "Place",
-      name: show.venue,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: show.city,
-        addressRegion: show.state
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    websiteStructuredData,
+    musicGroupStructuredData,
+    ...upcomingShows.map((show) => ({
+      "@type": "Event",
+      name: `${siteMeta.title} at ${show.venue}`,
+      startDate: show.startsAt,
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      eventStatus: getEventStatus(show.status),
+      image: [show.flyerUrl || ogImage.href],
+      performer: {
+        "@type": "MusicGroup",
+        name: siteMeta.title,
+        url: siteMeta.url
+      },
+      location: {
+        "@type": "Place",
+        name: show.venue,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: show.city,
+          addressRegion: show.state
+        }
       }
-    }
-  }))
-];
+    }))
+  ]
+};
 ---
 
 <!doctype html>

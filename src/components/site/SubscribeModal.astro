@@ -7,7 +7,7 @@ const hasFormAction = Boolean(formAction);
 const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20The%20Filibusters`;
 ---
 
-<div aria-hidden="true" class="subscribe-modal-shell" data-subscribe-modal>
+<div aria-hidden="true" class="subscribe-modal-shell" data-subscribe-modal hidden>
   <div class="subscribe-modal-backdrop" data-subscribe-close></div>
 
   <section
@@ -92,6 +92,7 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
       root.classList.remove("is-visible");
       root.setAttribute("aria-hidden", "true");
       document.body.classList.remove("follow-prompt-open");
+      root.hidden = true;
 
       if (opener instanceof HTMLElement && opener.isConnected) {
         opener.focus();
@@ -134,6 +135,7 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
 
     const openModal = (trigger) => {
       opener = trigger instanceof HTMLElement ? trigger : document.activeElement;
+      root.hidden = false;
       root.classList.add("is-visible");
       root.setAttribute("aria-hidden", "false");
       document.body.classList.add("follow-prompt-open");

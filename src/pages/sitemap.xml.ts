@@ -14,6 +14,7 @@ export const GET: APIRoute = async () => {
     "/contact",
     "/listen",
     "/press",
+    "/privacy",
     "/shows",
     ...communityRoutes,
     ...showSlugs.map((slug) => `/shows/${slug}`)

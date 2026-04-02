@@ -18,6 +18,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -27,6 +28,15 @@ body {
     radial-gradient(circle at top left, rgba(236, 219, 93, 0.18), transparent 24rem),
     linear-gradient(180deg, #fffaf4 0%, var(--color-paper) 22rem);
   font-family: "Inter", system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
 }
 
 body.follow-prompt-open {

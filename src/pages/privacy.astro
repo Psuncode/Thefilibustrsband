@@ -1,0 +1,69 @@
+---
+import Footer from "../components/site/Footer.astro";
+import Header from "../components/site/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteMeta } from "../data/site";
+---
+
+<BaseLayout
+  title={`Privacy | ${siteMeta.title}`}
+  description="Privacy information for The Filibusters website, email signup, and contact forms."
+>
+  <Header />
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[var(--color-paper-soft)]">
+    <section class="border-b border-black/10 bg-white">
+      <div class="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-16">
+        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+          Privacy
+        </p>
+        <h1 class="display-face mt-3 max-w-[10ch] text-[2.45rem] uppercase leading-[0.92] tracking-[-0.04em] md:max-w-none md:text-6xl">
+          How this site handles your info.
+        </h1>
+        <p class="mt-4 max-w-3xl text-[0.98rem] leading-6 text-[var(--color-ink)]/78 md:text-lg md:leading-8">
+          The Filibusters website keeps data collection simple. This page explains what may be collected when you browse the site, contact the band, or join the email list.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto grid max-w-4xl gap-4 px-4 py-10 md:px-6 md:py-16">
+        <article class="poster-frame rounded-[1.6rem] p-5 md:rounded-[2rem] md:p-7">
+          <h2 class="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-pink)]">
+            What may be collected
+          </h2>
+          <p class="mt-4 text-[0.98rem] leading-6 text-[var(--color-ink)]/78 md:text-base md:leading-7">
+            Basic analytics may be used to understand visits and page usage. If you send an email or submit your address through the signup form, the band may receive the information you provide, such as your email address and the contents of your message.
+          </p>
+        </article>
+
+        <article class="poster-frame rounded-[1.6rem] p-5 md:rounded-[2rem] md:p-7">
+          <h2 class="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-pink)]">
+            How it is used
+          </h2>
+          <p class="mt-4 text-[0.98rem] leading-6 text-[var(--color-ink)]/78 md:text-base md:leading-7">
+            Contact details are used to respond to messages, share band updates, and send email-list communications when you choose to subscribe. Information is not sold.
+          </p>
+        </article>
+
+        <article class="poster-frame rounded-[1.6rem] p-5 md:rounded-[2rem] md:p-7">
+          <h2 class="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-pink)]">
+            Third-party services
+          </h2>
+          <p class="mt-4 text-[0.98rem] leading-6 text-[var(--color-ink)]/78 md:text-base md:leading-7">
+            The site may use third-party providers for website analytics, hosting, and email signup handling. Those services may process technical information needed to operate the site.
+          </p>
+        </article>
+
+        <article class="poster-frame rounded-[1.6rem] p-5 md:rounded-[2rem] md:p-7">
+          <h2 class="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-pink)]">
+            Contact
+          </h2>
+          <p class="mt-4 text-[0.98rem] leading-6 text-[var(--color-ink)]/78 md:text-base md:leading-7">
+            Questions about privacy can be sent to <a class="font-semibold text-[var(--color-pink)]" href={`mailto:${siteMeta.contactEmail}`}>{siteMeta.contactEmail}</a>.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
