@@ -433,12 +433,16 @@ body.follow-prompt-open {
   }
 
   .follow-prompt-media {
-    display: none;
+    min-height: 8.5rem;
   }
 
   .follow-prompt-content {
     gap: 0.7rem;
     padding: 1rem 0.9rem 0.95rem;
+  }
+
+  .follow-prompt-image {
+    object-position: center 22%;
   }
 
   .follow-prompt-title {
