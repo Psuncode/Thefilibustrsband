@@ -429,35 +429,66 @@ body.follow-prompt-open {
   }
 
   .follow-prompt-dialog {
+    display: block;
+    position: relative;
     max-height: calc(100vh - 1.3rem);
+    background: linear-gradient(180deg, rgba(24, 21, 22, 0.82), rgba(24, 21, 22, 0.94));
   }
 
   .follow-prompt-media {
-    min-height: 8.5rem;
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    pointer-events: none;
+    background: none;
   }
 
   .follow-prompt-content {
+    position: relative;
+    z-index: 1;
     gap: 0.7rem;
-    padding: 1rem 0.9rem 0.95rem;
+    padding: 3.1rem 0.95rem 1rem;
   }
 
   .follow-prompt-image {
+    height: 100%;
     object-position: center 22%;
+    opacity: 0.26;
+    filter: saturate(0.9);
   }
 
   .follow-prompt-title {
     max-width: none;
     font-size: clamp(1.35rem, 8vw, 1.9rem);
+    color: #fffdf7;
   }
 
   .follow-prompt-copy {
     font-size: 0.9rem;
+    color: rgba(255, 247, 221, 0.86);
   }
 
   .follow-prompt-action {
     min-height: 2.7rem;
     font-size: 0.68rem;
     letter-spacing: 0.1em;
+  }
+
+  .follow-prompt-action:last-child {
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #fffdf7;
+  }
+
+  .follow-prompt-action:last-child:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.34);
+    color: #fffdf7;
+  }
+
+  .follow-prompt-close {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #fffdf7;
   }
 
   .subscribe-modal-shell {
