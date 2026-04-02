@@ -229,7 +229,7 @@ export const siteMeta = {
   title: "The Filibusters",
   description: "Pop-punk, covers, and chaos worth showing up for.",
   url: "https://thefilibustersband.com",
-  contactEmail: "thefilibustersband@gmail.com"
+  contactEmail: "filibustersband@gmail.com"
 } as const;
 
 export const socialLinks = [

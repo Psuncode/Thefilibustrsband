@@ -6,24 +6,24 @@ const hasFormAction = Boolean(formAction);
 ---
 
 <section id="community" class="anchor-section bg-white">
-  <div class="mx-auto max-w-4xl px-4 py-12 md:px-6 md:py-16">
-    <div class="poster-frame rounded-[2rem] bg-[var(--color-yellow)] p-6 md:p-10">
-      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Community</p>
-      <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+  <div class="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-16">
+    <div class="poster-frame rounded-[1.75rem] bg-[var(--color-yellow)] p-5 md:rounded-[2rem] md:p-10">
+      <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">Community</p>
+      <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
         {homepageContent.community.title}
       </h2>
-      <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--color-ink)]/80">
+      <p class="mt-3 max-w-2xl text-[0.98rem] leading-6 text-[var(--color-ink)]/80 md:mt-4 md:text-base md:leading-7">
         {homepageContent.community.description}
       </p>
-      <div class="mt-6 flex flex-wrap gap-3">
+      <div class="mt-5 grid gap-2.5 sm:flex sm:flex-wrap sm:gap-3">
         <a
-          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
           href={homepageContent.community.updatesHref}
         >
           {homepageContent.community.updatesCtaLabel}
         </a>
         <button
-          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-ink)] bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+          class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-ink)] bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
           data-subscribe-open
           type="button"
         >
@@ -31,7 +31,7 @@ const hasFormAction = Boolean(formAction);
         </button>
       </div>
       {hasFormAction ? (
-        <form class="mt-6 flex flex-col gap-3 md:flex-row" action={formAction} method="POST">
+        <form class="mt-5 flex flex-col gap-3 md:mt-6 md:flex-row" action={formAction} method="POST">
           <div class="flex-1">
             <label class="mb-2 block text-sm font-semibold" for="email">Email address</label>
             <input
@@ -48,8 +48,8 @@ const hasFormAction = Boolean(formAction);
           </button>
         </form>
       ) : (
-        <div class="mt-6 rounded-[1.5rem] border border-[var(--color-ink)] bg-white p-4">
-          <p class="text-sm leading-6 text-[var(--color-ink)]/80">
+        <div class="mt-4 rounded-[1.35rem] border border-[var(--color-ink)]/70 bg-white/92 px-4 py-3 md:mt-6 md:rounded-[1.5rem] md:p-4">
+          <p class="text-[0.92rem] leading-6 text-[var(--color-ink)]/78 md:text-sm">
             {homepageContent.community.fallbackDescription}
           </p>
         </div>

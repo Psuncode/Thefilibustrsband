@@ -1,21 +1,21 @@
 ---
-import { bandFacts, iconPaths, secondaryRoutes, siteMeta, socialLinks } from "../../data/site";
+import { footerContent, iconPaths, secondaryRoutes, siteMeta, socialLinks } from "../../data/site";
 ---
 
 <footer class="mobile-nav-offset border-t border-black/10 bg-[var(--color-ink)] text-white">
   <div class="mx-auto grid max-w-6xl gap-6 px-4 py-9 md:grid-cols-[minmax(0,1fr)_minmax(0,0.82fr)] md:gap-8 md:px-6 md:py-12">
     <div class="space-y-4">
       <div>
-        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">Stay in the noise</p>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">{footerContent.eyebrow}</p>
         <p class="display-face mt-3 max-w-[9ch] text-[2.2rem] uppercase leading-[0.95] tracking-[-0.03em] md:max-w-xl md:text-5xl">
-          Music for the ones still figuring it out.
+          {footerContent.title}
         </p>
       </div>
       <p class="max-w-lg text-sm leading-6 text-white/75 md:leading-7">
-        New music, upcoming shows, and band-life updates worth the follow.
+        {footerContent.description}
       </p>
       <p class="max-w-lg text-sm leading-6 text-white/58">
-        {bandFacts.geoLine}
+        {footerContent.geoDescription}
       </p>
       <a
         class="focus-ring inline-flex min-h-11 w-fit items-center justify-center rounded-full bg-[var(--color-yellow)] px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:bg-white"

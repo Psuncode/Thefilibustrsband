@@ -8,17 +8,17 @@ const feedbackRows = [
 ---
 
 <section class="bg-[var(--color-ink)] text-white">
-  <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-    <div class="flex flex-col gap-3">
-      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Proof of life</p>
-      <h2 class="display-face max-w-4xl text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+  <div class="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-16">
+    <div class="flex flex-col gap-2.5">
+      <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">Proof of life</p>
+      <h2 class="display-face max-w-4xl text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
         {homepageContent.personality.feedbackTitle}
       </h2>
-      <p class="max-w-2xl text-base leading-7 text-white/68">
+      <p class="max-w-2xl text-[0.96rem] leading-6 text-white/68 md:text-base md:leading-7">
         We could try to explain it, but this says it better.
       </p>
     </div>
-    <div class="mt-8 flex flex-col gap-4 overflow-hidden md:mt-10 md:gap-5">
+    <div class="mt-5 flex flex-col gap-2.5 overflow-hidden md:mt-10 md:gap-5">
       {feedbackRows.map((row, rowIndex) => (
         <div class="feedback-marquee-mask">
           <div class:list={["feedback-track", rowIndex % 2 === 1 && "feedback-track-reverse"]}>
@@ -31,8 +31,8 @@ const feedbackRows = [
                     : "border-white/15 bg-white/5"
                 ]}
               >
-                <p class="text-base leading-7 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
-                <footer class="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)]">
+                <p class="feedback-card-quote text-[0.88rem] leading-5 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
+                <footer class="feedback-card-footer mt-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)] md:mt-5 md:text-xs">
                   {item.attribution}
                 </footer>
               </blockquote>
@@ -47,8 +47,8 @@ const feedbackRows = [
                     : "border-white/15 bg-white/5"
                 ]}
               >
-                <p class="text-base leading-7 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
-                <footer class="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)]">
+                <p class="feedback-card-quote text-[0.88rem] leading-5 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
+                <footer class="feedback-card-footer mt-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)] md:mt-5 md:text-xs">
                   {item.attribution}
                 </footer>
               </blockquote>

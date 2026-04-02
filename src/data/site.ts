@@ -44,6 +44,13 @@ type FollowPromptLink = {
   href: string;
 };
 
+type FooterContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  geoDescription: string;
+};
+
 type FollowPromptContent = {
   title: string;
   description: string;
@@ -158,7 +165,7 @@ export const siteMeta = {
   description:
     "The Filibusters are a Provo, Utah alt rock band making loud, emotionally direct songs for live rooms and late nights.",
   url: "https://www.thefilibustersband.com",
-  contactEmail: "thefilibustersband@gmail.com",
+  contactEmail: "filibustersband@gmail.com",
   socials: socialLinks.map(({ label, href }) => ({ label, href }))
 } as const;
 
@@ -184,6 +191,15 @@ export const bandFacts = {
   },
   geoLine: `${bandGeoIdentity.bandName} are an ${bandGeoIdentity.genre} band ${bandGeoIdentity.basis} ${bandLocation.display}.`
 } as const satisfies BandFacts;
+
+export const footerContent = {
+  eyebrow: "Stay in the noise",
+  title: "Music for the ones still figuring it out.",
+  description:
+    "The Filibusters make alt rock for late nights, loud rooms, and the moments that feel unfinished. Find new music, upcoming shows, and the band updates that matter enough to keep up with.",
+  geoDescription:
+    "Based in Provo, Utah, the band blends high-energy live shows with emotionally direct songs built to feel immediate, personal, and worth coming back to."
+} as const satisfies FooterContent;
 
 export const contactPoints = [
   {
@@ -298,8 +314,8 @@ export const listenPage = {
 export const primaryNav = [
   { label: "Music", href: "/#latest-release", icon: "music" },
   { label: "Shows", href: "/shows", icon: "ticket" },
-  { label: "About", href: "/about", icon: "info" },
-  { label: "Contact", href: "/contact", icon: "mail" }
+  { label: "Contact", href: "/contact", icon: "mail" },
+  { label: "About", href: "/about", icon: "info" }
 ] as const satisfies readonly PrimaryNavItem[];
 
 export const secondaryRoutes = [
