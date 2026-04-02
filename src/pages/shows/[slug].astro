@@ -27,6 +27,21 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   hour: "numeric",
   minute: "2-digit"
 });
+
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const linkifyParagraph = (paragraph: string) =>
+  escapeHtml(paragraph).replace(
+    /(https?:\/\/[^\s<]+)/g,
+    (url) =>
+      `<a class="font-semibold text-[var(--color-pink)] underline underline-offset-4 transition hover:text-[var(--color-ink)]" href="${url}" rel="noreferrer" target="_blank">${url}</a>`
+  );
 ---
 
 <BaseLayout
@@ -68,7 +83,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
           {show.body.length > 0 ? (
             <div class="mt-8 space-y-4">
               {show.body.map((paragraph) => (
-                <p class="text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{paragraph}</p>
+                <p class="text-base leading-7 text-[var(--color-ink)]/78 md:text-lg" set:html={linkifyParagraph(paragraph)}></p>
               ))}
             </div>
           ) : null}

@@ -1,4 +1,5 @@
 import battleWinnerImage from "../assets/images/Battle of the band winner.jpg";
+import utahArtFestivalImage from "../assets/images/Utah Art Festival 2026.png";
 import devotionalUnforumImage from "../assets/Devotional Unforum.png";
 
 export const upcomingShows = [
@@ -37,5 +38,24 @@ export const upcomingShows = [
     ],
     lineup: ["The Filibusters"],
     notes: "Event details are based on the BYU Events Calendar listing and should be confirmed with BYU before attending."
+  },
+  {
+    title: "Utah Arts Festival 2026",
+    slug: "utah-arts-festival-2026",
+    status: "announced",
+    startsAt: "2026-06-20T21:30:00-06:00",
+    venue: "Festival Stage",
+    city: "Salt Lake City",
+    state: "Utah",
+    ticketUrl: "https://www.uaf.org/tix",
+    flyerUrl: utahArtFestivalImage.src,
+    summary: "The Filibusters appear at the Utah Arts Festival on Saturday, June 20, ahead of headliner Shakey Graves.",
+    body: [
+      "The Filibusters play the Utah Arts Festival on Saturday, June 20 at 9:30 PM on the Festival Stage.",
+      "That night features Shakey Graves as the headliner, bringing his Americana, rock and roll, folk, and blues-driven live show to the festival.",
+      "For full festival details, schedule updates, and planning info, learn more at https://www.uaf.org/."
+    ],
+    lineup: ["The Filibusters", "Shakey Graves"],
+    notes: "Set timing, festival access, and ticket details should be confirmed directly with the Utah Arts Festival."
   }
 ] as const;
