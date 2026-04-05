@@ -10,6 +10,21 @@ import type { ShowEntry } from "./types";
 
 const DEFAULT_COUNTRY = "US";
 
+const normalizeOffer = (offer: ShowEntry["offers"]): ShowEntry["offers"] => {
+  if (!offer) return undefined;
+
+  const normalized = {
+    url: offer.url || undefined,
+    price: typeof offer.price === "number" ? offer.price : undefined,
+    priceCurrency: offer.priceCurrency || undefined,
+    availability: offer.availability || undefined,
+    validFrom: offer.validFrom || undefined,
+    isFree: typeof offer.isFree === "boolean" ? offer.isFree : undefined
+  };
+
+  return Object.values(normalized).some((value) => value !== undefined) ? normalized : undefined;
+};
+
 const fallbackEntries: ShowEntry[] = fallbackShows.map((show) => ({
   ...show,
   endsAt: show.endsAt || undefined,
@@ -22,16 +37,7 @@ const fallbackEntries: ShowEntry[] = fallbackShows.map((show) => ({
   organizerName: show.organizerName || undefined,
   organizerUrl: show.organizerUrl || undefined,
   seoDescription: show.seoDescription || show.summary || "",
-  offers: show.offers
-    ? {
-        url: show.offers.url || undefined,
-        price: typeof show.offers.price === "number" ? show.offers.price : undefined,
-        priceCurrency: show.offers.priceCurrency || undefined,
-        availability: show.offers.availability || undefined,
-        validFrom: show.offers.validFrom || undefined,
-        isFree: typeof show.offers.isFree === "boolean" ? show.offers.isFree : undefined
-      }
-    : undefined
+  offers: normalizeOffer(show.offers)
 }));
 
 export const getUpcomingShows = async (): Promise<ShowEntry[]> => {
@@ -39,9 +45,13 @@ export const getUpcomingShows = async (): Promise<ShowEntry[]> => {
 
   try {
     const shows = await sanityClient.fetch(upcomingShowsQuery);
-    return Array.isArray(shows) && shows.length > 0
-      ? shows.map(mapShowEntry)
-      : fallbackEntries;
+    if (!Array.isArray(shows) || shows.length === 0) return fallbackEntries;
+
+    const normalized = shows
+      .map(mapShowEntry)
+      .filter((show): show is ShowEntry => Boolean(show));
+
+    return normalized.length > 0 ? normalized : fallbackEntries;
   } catch {
     return fallbackEntries;
   }
@@ -51,9 +61,12 @@ export const getAllShowSlugs = async (): Promise<string[]> => {
   if (!sanityClient) return fallbackEntries.map((show) => show.slug);
 
   try {
-    const slugs = await sanityClient.fetch<{ slug?: string }[]>(allShowSlugsQuery);
+    const slugs = await sanityClient.fetch(allShowSlugsQuery);
     const normalized = Array.isArray(slugs)
-      ? slugs.map((entry) => entry.slug).filter((slug): slug is string => Boolean(slug))
+      ? slugs
+          .map(mapShowEntry)
+          .filter((show): show is ShowEntry => Boolean(show))
+          .map((show) => show.slug)
       : [];
 
     return normalized.length > 0
@@ -71,9 +84,9 @@ export const getShowBySlug = async (slug: string): Promise<ShowEntry | null> => 
 
   try {
     const show = await sanityClient.fetch(showBySlugQuery, { slug });
-    return show
-      ? mapShowEntry(show)
-      : fallbackEntries.find((entry) => entry.slug === slug) || null;
+    const normalized = show ? mapShowEntry(show) : null;
+
+    return normalized || fallbackEntries.find((entry) => entry.slug === slug) || null;
   } catch {
     return fallbackEntries.find((entry) => entry.slug === slug) || null;
   }

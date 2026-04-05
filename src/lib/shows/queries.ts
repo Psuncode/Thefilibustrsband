@@ -1,6 +1,7 @@
 import type { ShowEntry } from "./types";
 
 const DEFAULT_COUNTRY = "US";
+const VALID_SHOW_STATUSES = new Set(["announced", "sold-out", "canceled"]);
 
 type SanityBlockChild = {
   text?: string;
@@ -13,6 +14,27 @@ type SanityBlock = {
 type SanityShowRecord = Partial<Omit<ShowEntry, "body" | "lineup">> & {
   body?: SanityBlock[];
   lineup?: string[];
+};
+
+const isNonEmptyString = (value: unknown): value is string =>
+  typeof value === "string" && value.trim().length > 0;
+
+const isShowStatus = (value: unknown): value is ShowEntry["status"] =>
+  typeof value === "string" && VALID_SHOW_STATUSES.has(value);
+
+const normalizeOffer = (offer: ShowEntry["offers"]): ShowEntry["offers"] => {
+  if (!offer) return undefined;
+
+  const normalized = {
+    url: offer.url || undefined,
+    price: typeof offer.price === "number" ? offer.price : undefined,
+    priceCurrency: offer.priceCurrency || undefined,
+    availability: offer.availability || undefined,
+    validFrom: offer.validFrom || undefined,
+    isFree: typeof offer.isFree === "boolean" ? offer.isFree : undefined
+  };
+
+  return Object.values(normalized).some((value) => value !== undefined) ? normalized : undefined;
 };
 
 export const upcomingShowsQuery = `*[_type == "show" && startsAt >= now()] | order(startsAt asc){
@@ -37,7 +59,15 @@ export const upcomingShowsQuery = `*[_type == "show" && startsAt >= now()] | ord
   offers
 }`;
 
-export const allShowSlugsQuery = `*[_type == "show"]{"slug": slug.current}`;
+export const allShowSlugsQuery = `*[_type == "show"]{
+  title,
+  "slug": slug.current,
+  status,
+  startsAt,
+  venue,
+  city,
+  state
+}`;
 
 export const showBySlugQuery = `*[_type == "show" && slug.current == $slug][0]{
   title,
@@ -72,33 +102,38 @@ const blocksToParagraphs = (blocks: SanityBlock[] | undefined): string[] =>
         .filter(Boolean)
     : [];
 
-export const mapShowEntry = (show: SanityShowRecord): ShowEntry => ({
-  title: show.title || "Untitled Show",
-  slug: show.slug || "untitled-show",
-  status: show.status || "announced",
-  startsAt: show.startsAt || new Date().toISOString(),
-  endsAt: show.endsAt || undefined,
-  venue: show.venue || "Venue TBA",
-  city: show.city || "City TBA",
-  state: show.state || "State TBA",
-  country: show.country || DEFAULT_COUNTRY,
-  ticketUrl: show.ticketUrl || undefined,
-  summary: show.summary || "",
-  flyerUrl: show.flyerUrl || undefined,
-  body: blocksToParagraphs(show.body),
-  lineup: Array.isArray(show.lineup) ? show.lineup : [],
-  notes: show.notes || undefined,
-  organizerName: show.organizerName || undefined,
-  organizerUrl: show.organizerUrl || undefined,
-  seoDescription: show.seoDescription || show.summary || "",
-  offers: show.offers
-    ? {
-        url: show.offers.url || undefined,
-        price: typeof show.offers.price === "number" ? show.offers.price : undefined,
-        priceCurrency: show.offers.priceCurrency || undefined,
-        availability: show.offers.availability || undefined,
-        validFrom: show.offers.validFrom || undefined,
-        isFree: typeof show.offers.isFree === "boolean" ? show.offers.isFree : undefined
-      }
-    : undefined
-});
+export const mapShowEntry = (show: SanityShowRecord): ShowEntry | null => {
+  if (
+    !isNonEmptyString(show.title) ||
+    !isNonEmptyString(show.slug) ||
+    !isShowStatus(show.status) ||
+    !isNonEmptyString(show.startsAt) ||
+    !isNonEmptyString(show.venue) ||
+    !isNonEmptyString(show.city) ||
+    !isNonEmptyString(show.state)
+  ) {
+    return null;
+  }
+
+  return {
+    title: show.title,
+    slug: show.slug,
+    status: show.status,
+    startsAt: show.startsAt,
+    endsAt: show.endsAt || undefined,
+    venue: show.venue,
+    city: show.city,
+    state: show.state,
+    country: show.country || DEFAULT_COUNTRY,
+    ticketUrl: show.ticketUrl || undefined,
+    summary: show.summary || "",
+    flyerUrl: show.flyerUrl || undefined,
+    body: blocksToParagraphs(show.body),
+    lineup: Array.isArray(show.lineup) ? show.lineup : [],
+    notes: show.notes || undefined,
+    organizerName: show.organizerName || undefined,
+    organizerUrl: show.organizerUrl || undefined,
+    seoDescription: show.seoDescription || show.summary || "",
+    offers: normalizeOffer(show.offers)
+  };
+};
