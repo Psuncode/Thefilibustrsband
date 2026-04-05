@@ -90,6 +90,16 @@ Guidelines:
 
 Treat merch as a later-phase feature after CMS, shows, community, and email flow are stable.
 
+## Deferred SEO Growth Ideas
+
+These ideas came out of the 2026-04-04 SEO foundation brainstorming pass and are intentionally deferred so the current work can stay focused on improving SEO within the existing page set.
+
+Potential next-phase SEO expansions:
+- publish search-targeted community or editorial content around releases, live shows, and participation in the local Utah music scene
+- create venue-focused or city-focused evergreen pages only if search demand and available content justify them
+- extend structured data coverage beyond show pages to applicable community content
+- do a dedicated Core Web Vitals and image delivery pass if performance becomes a measurable search or usability constraint
+
 ## Recommended Build Order
 
 1. Set up `Sanity`
