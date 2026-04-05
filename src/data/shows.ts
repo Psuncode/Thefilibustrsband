@@ -21,13 +21,8 @@ export const upcomingShows = [
     ],
     lineup: ["The Filibusters"],
     notes: "Doors and event timing should be confirmed with the venue.",
-    organizerName: "The Filibusters",
-    organizerUrl: "https://www.thefilibustersband.com",
     seoDescription:
-      "The Filibusters perform at BYU Battle of the Bands 2026 at the BYU Marriott Center in Provo, Utah.",
-    offers: {
-      url: "https://sclcenter.byu.edu/battle-of-the-bands"
-    }
+      "The Filibusters perform at BYU Battle of the Bands 2026 at the BYU Marriott Center in Provo, Utah."
   },
   {
     title: "Devotional: Unforum",
@@ -48,13 +43,8 @@ export const upcomingShows = [
     ],
     lineup: ["The Filibusters"],
     notes: "Event details are based on the BYU Events Calendar listing and should be confirmed with BYU before attending.",
-    organizerName: "The Filibusters",
-    organizerUrl: "https://www.thefilibustersband.com",
     seoDescription:
-      "The Filibusters appear during BYU's Devotional: Unforum on April 14, 2026 at the Marriott Center in Provo, Utah.",
-    offers: {
-      url: "https://calendar.byu.edu/devotionals-forums/devotional-unforum-2026-04-14"
-    }
+      "The Filibusters appear during BYU's Devotional: Unforum on April 14, 2026 at the Marriott Center in Provo, Utah."
   },
   {
     title: "Utah Arts Festival 2026",
@@ -75,12 +65,7 @@ export const upcomingShows = [
     ],
     lineup: ["The Filibusters", "Shakey Graves"],
     notes: "Set timing, festival access, and ticket details should be confirmed directly with the Utah Arts Festival.",
-    organizerName: "The Filibusters",
-    organizerUrl: "https://www.thefilibustersband.com",
     seoDescription:
-      "The Filibusters play the Utah Arts Festival on June 20, 2026 at the Festival Stage in Salt Lake City, Utah, ahead of Shakey Graves.",
-    offers: {
-      url: "https://www.uaf.org/tix"
-    }
+      "The Filibusters play the Utah Arts Festival on June 20, 2026 at the Festival Stage in Salt Lake City, Utah, ahead of Shakey Graves."
   }
 ] as const;

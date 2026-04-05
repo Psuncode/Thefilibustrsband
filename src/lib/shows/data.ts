@@ -9,8 +9,6 @@ import {
 import type { ShowEntry } from "./types";
 
 const DEFAULT_COUNTRY = "US";
-const DEFAULT_ORGANIZER_NAME = "The Filibusters";
-const DEFAULT_ORGANIZER_URL = "https://www.thefilibustersband.com";
 
 const fallbackEntries: ShowEntry[] = fallbackShows.map((show) => ({
   ...show,
@@ -21,8 +19,8 @@ const fallbackEntries: ShowEntry[] = fallbackShows.map((show) => ({
   body: [...show.body],
   lineup: [...show.lineup],
   notes: show.notes || undefined,
-  organizerName: show.organizerName || DEFAULT_ORGANIZER_NAME,
-  organizerUrl: show.organizerUrl || DEFAULT_ORGANIZER_URL,
+  organizerName: show.organizerName || undefined,
+  organizerUrl: show.organizerUrl || undefined,
   seoDescription: show.seoDescription || show.summary || "",
   offers: show.offers
     ? {
