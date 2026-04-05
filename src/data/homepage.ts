@@ -72,12 +72,12 @@ export const homepageContent = {
   },
   community: {
     title: "Stay close",
-    description: "Get updates on new Filibusters music, upcoming live shows in Utah, and the band news worth checking back for.",
+    description: "Get updates on new Filibusters music, live shows in Utah, and the band news worth checking back for.",
     updatesCtaLabel: "View updates",
     updatesHref: "/community",
     subscribeCtaLabel: "Subscribe",
     fallbackDescription:
-      "Drop your email to hear about new music, upcoming Filibusters shows, and band updates from Provo, Utah and beyond.",
+      "Drop your email to hear about new music, Filibusters shows, and band updates from Provo, Utah and beyond.",
     fallbackCtaLabel: "Get on the list"
   },
   closing: {
