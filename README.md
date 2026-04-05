@@ -47,12 +47,13 @@ Run `npm run verify:seo` after SEO-facing changes such as:
 The command checks:
 - `/`
 - `/shows`
-- one current show detail page
+- one current show detail route derived from the live shows listing
 
 It fails on:
 - horizontal overflow at `375px`
 - failed critical document/image/stylesheet requests
 - missing critical SEO tags
+- missing `Event` JSON-LD on the dynamic show detail page
 
 Screenshots are written to `tmp/verify-seo/`.
 
