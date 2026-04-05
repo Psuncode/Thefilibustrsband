@@ -25,7 +25,7 @@ const {
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
 const defaultOgImage = new URL(heroBand.src, Astro.site);
 const resolvedOgImage = ogImage ? new URL(ogImage, Astro.site).href : defaultOgImage.href;
-const musicGroupStructuredData = buildMusicGroupSchema({ image: resolvedOgImage });
+const musicGroupStructuredData = buildMusicGroupSchema({ image: defaultOgImage.href });
 const websiteStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
