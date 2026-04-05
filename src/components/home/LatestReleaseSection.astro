@@ -31,7 +31,14 @@ const iconPaths = {
       </p>
       <div class="mt-5 grid gap-2.5 sm:flex sm:flex-wrap sm:gap-3 md:mt-6">
         {latestRelease.links.map((link) => (
-          <a class="focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[var(--color-pink)] hover:bg-[var(--color-pink)] sm:justify-start" href={link.href} rel="noreferrer" target="_blank">
+          <a
+            class="focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[var(--color-pink)] hover:bg-[var(--color-pink)] sm:justify-start"
+            href={link.href}
+            rel="noreferrer"
+            target="_blank"
+            data-track-music-platform={link.icon}
+            data-track-music-location="homepage-release"
+          >
             <svg aria-hidden="true" class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24">
               <path d={iconPaths[link.icon]} />
             </svg>

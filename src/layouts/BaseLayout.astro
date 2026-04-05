@@ -82,5 +82,34 @@ const structuredDataGraph = [
     <slot />
     <SubscribeModal />
     <Analytics />
+    <script>
+      import { track } from "@vercel/analytics";
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+
+        if (!(target instanceof Element)) {
+          return;
+        }
+
+        const link = target.closest("a[data-track-music-platform]");
+
+        if (!(link instanceof HTMLAnchorElement)) {
+          return;
+        }
+
+        const platform = link.dataset.trackMusicPlatform;
+        const location = link.dataset.trackMusicLocation;
+
+        if (!platform || !location) {
+          return;
+        }
+
+        track("outbound_music_click", {
+          platform,
+          location
+        });
+      });
+    </script>
   </body>
 </html>
