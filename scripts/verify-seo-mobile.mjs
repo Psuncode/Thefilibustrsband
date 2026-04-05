@@ -1,4 +1,4 @@
-import { mkdir, readFile } from "node:fs/promises";
+import { mkdir, rm } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
@@ -13,9 +13,9 @@ const viewport = { width: 375, height: 812 };
 const host = "127.0.0.1";
 const port = 4323;
 const baseUrl = `http://${host}:${port}`;
-const showDataPath = join(repoRoot, "src", "data", "shows.ts");
 const serverStartupTimeoutMs = 30_000;
 const pageTimeoutMs = 15_000;
+const serverShutdownTimeoutMs = 5_000;
 const requestTypesToTrack = new Set(["document", "image", "stylesheet"]);
 const requiredSeoSelectors = [
   'link[rel="canonical"][href]',
@@ -25,18 +25,10 @@ const requiredSeoSelectors = [
   'meta[property="og:image"][content]'
 ];
 
-const readDynamicShowRoute = async () => {
-  const source = await readFile(showDataPath, "utf8");
-  const match = source.match(/slug:\s*"([^"]+)"/);
-
-  if (!match) {
-    throw new Error(`Unable to derive a show slug from ${showDataPath}`);
-  }
-
-  return `/shows/${match[1]}`;
-};
-
 const wait = (ms) => new Promise((resolvePromise) => setTimeout(resolvePromise, ms));
+
+const isMissingProcessError = (error) =>
+  Boolean(error && typeof error === "object" && "code" in error && error.code === "ESRCH");
 
 const sanitizeRouteForFilename = (route) => {
   if (route === "/") return "home";
@@ -61,6 +53,10 @@ const collectEventJsonLd = async (page) => {
       }
     });
   });
+};
+
+const waitForPageReady = async (page) => {
+  await page.waitForSelector("main", { state: "attached", timeout: pageTimeoutMs });
 };
 
 const waitForServerReady = async () => {
@@ -90,6 +86,7 @@ const startLocalServer = () => {
     ["run", "dev", "--", "--host", host, "--port", String(port), "--strictPort"],
     {
       cwd: repoRoot,
+      detached: true,
       stdio: ["ignore", "pipe", "pipe"]
     }
   );
@@ -113,13 +110,33 @@ const startLocalServer = () => {
     if (cleanedUp) return;
     cleanedUp = true;
 
-    if (server.exitCode === null && !server.killed) {
-      shutdownRequested = true;
-      server.kill("SIGTERM");
-      await Promise.race([
+    if (server.exitCode !== null || !server.pid) return;
+
+    shutdownRequested = true;
+
+    const waitForExit = () =>
+      Promise.race([
         new Promise((resolvePromise) => server.once("exit", resolvePromise)),
-        wait(5_000)
+        wait(serverShutdownTimeoutMs)
       ]);
+
+    try {
+      process.kill(-server.pid, "SIGTERM");
+    } catch {
+      return;
+    }
+
+    await waitForExit();
+
+    if (server.exitCode === null) {
+      try {
+        process.kill(-server.pid, "SIGKILL");
+      } catch (error) {
+        if (!isMissingProcessError(error)) {
+          throw error;
+        }
+      }
+      await waitForExit();
     }
   };
 
@@ -129,6 +146,43 @@ const startLocalServer = () => {
     server,
     wasShutdownRequested: () => shutdownRequested
   };
+};
+
+const deriveDynamicShowRoute = async (browser) => {
+  const page = await browser.newPage({ viewport });
+
+  try {
+    const response = await page.goto(new URL("/shows", baseUrl).href, {
+      timeout: pageTimeoutMs,
+      waitUntil: "domcontentloaded"
+    });
+
+    if (!response || !response.ok()) {
+      throw new Error("Unable to load /shows to derive a dynamic show route");
+    }
+
+    await waitForPageReady(page);
+    await page.waitForSelector('a[href^="/shows/"]', {
+      state: "attached",
+      timeout: pageTimeoutMs
+    });
+
+    const route = await page.$$eval('a[href^="/shows/"]', (links) => {
+      const detailHref = links
+        .map((link) => link.getAttribute("href"))
+        .find((href) => href && href !== "/shows" && /^\/shows\/[^/]+\/?$/.test(href));
+
+      return detailHref || null;
+    });
+
+    if (!route) {
+      throw new Error("Could not derive a dynamic show detail route from /shows");
+    }
+
+    return route;
+  } finally {
+    await page.close();
+  }
 };
 
 const checkPage = async ({ browser, route, requireEventJsonLd }) => {
@@ -161,12 +215,14 @@ const checkPage = async ({ browser, route, requireEventJsonLd }) => {
   try {
     const response = await page.goto(url, {
       timeout: pageTimeoutMs,
-      waitUntil: "networkidle"
+      waitUntil: "domcontentloaded"
     });
 
     if (!response || !response.ok()) {
       failures.push(`document request did not complete successfully for ${route}`);
     }
+
+    await waitForPageReady(page);
 
     const seoChecks = await Promise.all(
       requiredSeoSelectors.map((selector) =>
@@ -217,13 +273,7 @@ const checkPage = async ({ browser, route, requireEventJsonLd }) => {
 };
 
 const main = async () => {
-  const dynamicShowRoute = await readDynamicShowRoute();
-  const routes = [
-    { route: "/", requireEventJsonLd: false },
-    { route: "/shows", requireEventJsonLd: false },
-    { route: dynamicShowRoute, requireEventJsonLd: true }
-  ];
-
+  await rm(outputDir, { force: true, recursive: true });
   await mkdir(outputDir, { recursive: true });
 
   const { cleanup, recentLogs, server, wasShutdownRequested } = startLocalServer();
@@ -248,6 +298,12 @@ const main = async () => {
     const browser = await chromium.launch({ headless: true });
 
     try {
+      const dynamicShowRoute = await deriveDynamicShowRoute(browser);
+      const routes = [
+        { route: "/", requireEventJsonLd: false },
+        { route: "/shows", requireEventJsonLd: false },
+        { route: dynamicShowRoute, requireEventJsonLd: true }
+      ];
       const results = [];
       for (const route of routes) {
         results.push(await checkPage({ browser, ...route }));
