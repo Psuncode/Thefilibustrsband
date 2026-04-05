@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/site/Header.astro";
 import Footer from "../components/site/Footer.astro";
-import { iconPaths, listenPage, siteEntityIds, siteMeta } from "../data/site";
+import { iconPaths, listenPage, siteEntityIds } from "../data/site";
 
 const listenStructuredData = {
   "@type": "CollectionPage",
@@ -20,7 +20,7 @@ const listenStructuredData = {
 ---
 
 <BaseLayout
-  title={`Listen | ${siteMeta.title}`}
+  title={`Listen | ${listenPage.title}`}
   description={listenPage.description}
   structuredData={listenStructuredData}
 >
