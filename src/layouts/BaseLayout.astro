@@ -3,19 +3,29 @@ import Analytics from "@vercel/analytics/astro";
 import SubscribeModal from "../components/site/SubscribeModal.astro";
 import heroBand from "../assets/images/hero-band.jpg";
 import { buildMusicGroupSchema, siteMeta } from "../data/site";
-import { getUpcomingShows } from "../lib/shows/data";
 import "../styles/global.css";
+
+type StructuredDataValue = Record<string, unknown>;
 
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
+  ogType?: "website" | "article" | "event";
+  structuredData?: StructuredDataValue | StructuredDataValue[];
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  ogType = "website",
+  structuredData = []
+} = Astro.props;
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(heroBand.src, Astro.site);
-const musicGroupStructuredData = buildMusicGroupSchema({ image: ogImage.href });
-const upcomingShows = await getUpcomingShows();
+const defaultOgImage = new URL(heroBand.src, Astro.site);
+const resolvedOgImage = ogImage ? new URL(ogImage, Astro.site).href : defaultOgImage.href;
+const musicGroupStructuredData = buildMusicGroupSchema({ image: resolvedOgImage });
 const websiteStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -24,46 +34,8 @@ const websiteStructuredData = {
   description: siteMeta.description
 };
 
-const getEventStatus = (status: string) => {
-  switch (status) {
-    case "canceled":
-      return "https://schema.org/EventCancelled";
-    case "sold-out":
-    case "announced":
-    default:
-      return "https://schema.org/EventScheduled";
-  }
-};
-
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    websiteStructuredData,
-    musicGroupStructuredData,
-    ...upcomingShows.map((show) => ({
-      "@type": "Event",
-      name: `${siteMeta.title} at ${show.venue}`,
-      startDate: show.startsAt,
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      eventStatus: getEventStatus(show.status),
-      image: [show.flyerUrl || ogImage.href],
-      performer: {
-        "@type": "MusicGroup",
-        name: siteMeta.title,
-        url: siteMeta.url
-      },
-      location: {
-        "@type": "Place",
-        name: show.venue,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: show.city,
-          addressRegion: show.state
-        }
-      }
-    }))
-  ]
-};
+const pageStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
+const structuredDataGraph = [websiteStructuredData, musicGroupStructuredData, ...pageStructuredData];
 ---
 
 <!doctype html>
@@ -84,18 +56,21 @@ const structuredData = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={siteMeta.title} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={pageUrl.href} />
-    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="1500" />
     <meta property="og:image:alt" content={`${siteMeta.title} band photo`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage.href} />
+    <meta name="twitter:image" content={resolvedOgImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": structuredDataGraph })}
+    ></script>
   </head>
   <body>
     <a class="focus-ring sr-only focus:not-sr-only" href="#main-content">Skip to content</a>
