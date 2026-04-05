@@ -2,7 +2,8 @@ export const homepageContent = {
   hero: {
     eyebrow: "The Filibusters",
     headline: "Feel loud. Feel seen. Feel something.",
-    subheadline: "Alt rock for the ones still figuring it out. New music, live shows, and the kind of songs that stick when life feels loud.",
+    subheadline:
+      "The Filibusters are a Provo, Utah alt rock band making original music for loud rooms, late nights, and live shows that actually hit.",
     primaryCta: { label: "Listen now", href: "#latest-release" },
     secondaryCta: { label: "See shows", href: "/shows" }
   },
@@ -71,11 +72,12 @@ export const homepageContent = {
   },
   community: {
     title: "Stay close",
-    description: "New music. New shows. Exclusive drops. Be the first to hear what is next.",
+    description: "Get updates on new Filibusters music, upcoming live shows in Utah, and the band news worth checking back for.",
     updatesCtaLabel: "View updates",
     updatesHref: "/community",
     subscribeCtaLabel: "Subscribe",
-    fallbackDescription: "Drop us an email and we will add you to the list for new music, show dates, and the updates worth checking back for.",
+    fallbackDescription:
+      "Drop your email to hear about new music, upcoming Filibusters shows, and band updates from Provo, Utah and beyond.",
     fallbackCtaLabel: "Get on the list"
   },
   closing: {
