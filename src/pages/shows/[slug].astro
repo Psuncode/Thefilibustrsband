@@ -28,6 +28,78 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   minute: "2-digit"
 });
 
+const metadataDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
+
+const showUrl = new URL(`/shows/${show.slug}`, Astro.site).href;
+const metadataDate = metadataDateFormatter.format(new Date(show.startsAt));
+const pageTitle = `${show.title} in ${show.city}, ${show.state} | ${siteMeta.title}`;
+const pageDescription =
+  show.seoDescription ||
+  show.summary ||
+  `${show.title} takes place on ${metadataDate} at ${show.venue} in ${show.city}, ${show.state}.`;
+const pageOgImage = show.flyerUrl ? new URL(show.flyerUrl, Astro.site).href : undefined;
+
+const eventStatusByShowStatus = {
+  announced: "https://schema.org/EventScheduled",
+  "sold-out": "https://schema.org/EventScheduled",
+  canceled: "https://schema.org/EventCancelled"
+} as const;
+
+const eventOffers =
+  show.offers &&
+  (show.offers.url ||
+    typeof show.offers.price === "number" ||
+    show.offers.availability ||
+    show.offers.validFrom)
+    ? {
+        "@type": "Offer",
+        url: show.offers.url,
+        price: show.offers.price,
+        priceCurrency: show.offers.priceCurrency,
+        availability: show.offers.availability,
+        validFrom: show.offers.validFrom
+      }
+    : undefined;
+
+const eventStructuredData = {
+  "@type": "Event",
+  name: show.title,
+  description: pageDescription,
+  startDate: show.startsAt,
+  endDate: show.endsAt,
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: eventStatusByShowStatus[show.status],
+  image: pageOgImage ? [pageOgImage] : undefined,
+  url: showUrl,
+  performer: {
+    "@type": "MusicGroup",
+    name: siteMeta.title,
+    url: siteMeta.url
+  },
+  location: {
+    "@type": "Place",
+    name: show.venue,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: show.city,
+      addressRegion: show.state,
+      addressCountry: show.country || "US"
+    }
+  },
+  organizer: show.organizerName
+    ? {
+        "@type": "Organization",
+        name: show.organizerName,
+        url: show.organizerUrl
+      }
+    : undefined,
+  offers: eventOffers
+};
+
 const escapeHtml = (value: string) =>
   value
     .replaceAll("&", "&amp;")
@@ -45,14 +117,24 @@ const linkifyParagraph = (paragraph: string) =>
 ---
 
 <BaseLayout
-  title={`${show.title} | ${siteMeta.title}`}
-  description={show.summary || `Show details for ${show.title}.`}
+  title={pageTitle}
+  description={pageDescription}
+  ogImage={pageOgImage}
+  ogType="event"
+  structuredData={eventStructuredData}
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-white">
     <section class="border-b border-black/10">
       <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <article class="max-w-3xl">
+          <a
+            class="focus-ring mb-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-ink)]/72 transition hover:text-[var(--color-pink)]"
+            href="/shows"
+          >
+            <span aria-hidden="true">←</span>
+            <span>Back to all shows</span>
+          </a>
           <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Show details</p>
           <h1 class="display-face mt-3 text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
             {show.title}
