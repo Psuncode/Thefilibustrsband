@@ -35,6 +35,27 @@ Unused source assets stay local and out of version control.
 - Reduced-motion users do not get forced animation
 - No section creates horizontal scroll at 375px width
 
+## SEO Verification
+
+Run `npm run verify:seo` after SEO-facing changes such as:
+- metadata updates
+- structured data changes
+- homepage or shows-page copy changes
+- layout changes on search-facing pages
+- image changes that affect public pages
+
+The command checks:
+- `/`
+- `/shows`
+- one current show detail page
+
+It fails on:
+- horizontal overflow at `375px`
+- failed critical document/image/stylesheet requests
+- missing critical SEO tags
+
+Screenshots are written to `tmp/verify-seo/`.
+
 ## Deployment
 
 1. Connect the local directory to the existing GitHub repo
