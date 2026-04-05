@@ -42,6 +42,7 @@ const pageDescription =
   show.summary ||
   `${show.title} takes place on ${metadataDate} at ${show.venue} in ${show.city}, ${show.state}.`;
 const pageOgImage = show.flyerUrl ? new URL(show.flyerUrl, Astro.site).href : undefined;
+const eventEndDate = show.endsAt || show.startsAt;
 
 const eventStatusByShowStatus = {
   announced: "https://schema.org/EventScheduled",
@@ -71,10 +72,10 @@ const eventStructuredData = {
   name: show.title,
   description: pageDescription,
   startDate: show.startsAt,
-  endDate: show.endsAt,
+  endDate: eventEndDate,
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: eventStatusByShowStatus[show.status],
-  image: pageOgImage ? [pageOgImage] : undefined,
+  image: pageOgImage ? [encodeURI(pageOgImage)] : undefined,
   url: canonicalShowUrl,
   performer: {
     "@type": "MusicGroup",

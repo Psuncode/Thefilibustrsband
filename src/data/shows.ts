@@ -1,6 +1,6 @@
-import battleWinnerImage from "../assets/images/Battle of the band winner.jpg";
-import utahArtFestivalImage from "../assets/images/Utah Art Festival 2026.png";
-import devotionalUnforumImage from "../assets/Devotional Unforum.png";
+import battleWinnerImage from "../assets/images/battle-of-the-band-winner.jpg";
+import devotionalUnforumImage from "../assets/images/devotional-unforum.png";
+import utahArtFestivalImage from "../assets/images/utah-art-festival-2026.png";
 
 export const upcomingShows = [
   {
@@ -8,11 +8,19 @@ export const upcomingShows = [
     slug: "byu-battle-of-the-bands-2026",
     status: "announced",
     startsAt: "2026-03-28T19:00:00-06:00",
+    endsAt: "2026-03-28T22:00:00-06:00",
     venue: "BYU Marriott Center",
     city: "Provo",
     state: "Utah",
     ticketUrl: "https://sclcenter.byu.edu/battle-of-the-bands",
     flyerUrl: battleWinnerImage.src,
+    organizerName: "BYUSA",
+    organizerUrl: "https://sclcenter.byu.edu/",
+    offers: {
+      url: "https://sclcenter.byu.edu/battle-of-the-bands",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock"
+    },
     summary: "The Filibusters take the stage at BYU Battle of the Bands 2026.",
     country: "US",
     body: [
@@ -35,6 +43,13 @@ export const upcomingShows = [
     state: "Utah",
     ticketUrl: "https://calendar.byu.edu/devotionals-forums/devotional-unforum-2026-04-14",
     flyerUrl: devotionalUnforumImage.src,
+    organizerName: "Brigham Young University",
+    organizerUrl: "https://www.byu.edu/",
+    offers: {
+      url: "https://calendar.byu.edu/devotionals-forums/devotional-unforum-2026-04-14",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock"
+    },
     summary: "The Filibusters appear at BYU's Devotional: Unforum on Tuesday, April 14.",
     country: "US",
     body: [
@@ -56,6 +71,13 @@ export const upcomingShows = [
     state: "Utah",
     ticketUrl: "https://www.uaf.org/tix",
     flyerUrl: utahArtFestivalImage.src,
+    organizerName: "Utah Arts Festival",
+    organizerUrl: "https://www.uaf.org/",
+    offers: {
+      url: "https://www.uaf.org/tix",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock"
+    },
     summary: "The Filibusters appear at the Utah Arts Festival on Saturday, June 20, ahead of headliner Shakey Graves.",
     country: "US",
     body: [

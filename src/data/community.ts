@@ -1,6 +1,6 @@
 import type { ImageMetadata } from "astro";
 
-import battleWinnerImage from "../assets/images/Battle of the band winner.jpg";
+import battleWinnerImage from "../assets/images/battle-of-the-band-winner.jpg";
 import breakUpWithYourBoyfriendCover from "../assets/images/break-up-with-your-boyfriend-cover.jpg";
 import followPromptSinger from "../assets/images/follow-prompt-singer.jpg";
 import heroBand from "../assets/images/hero-band.jpg";
