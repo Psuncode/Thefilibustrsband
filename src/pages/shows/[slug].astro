@@ -34,7 +34,7 @@ const metadataDateFormatter = new Intl.DateTimeFormat("en-US", {
   year: "numeric"
 });
 
-const showUrl = new URL(`/shows/${show.slug}`, Astro.site).href;
+const canonicalShowUrl = new URL(Astro.url.pathname, Astro.site).href;
 const metadataDate = metadataDateFormatter.format(new Date(show.startsAt));
 const pageTitle = `${show.title} in ${show.city}, ${show.state} | ${siteMeta.title}`;
 const pageDescription =
@@ -53,12 +53,13 @@ const eventOffers =
   show.offers &&
   (show.offers.url ||
     typeof show.offers.price === "number" ||
+    show.offers.isFree === true ||
     show.offers.availability ||
     show.offers.validFrom)
     ? {
         "@type": "Offer",
         url: show.offers.url,
-        price: show.offers.price,
+        price: show.offers.isFree ? 0 : show.offers.price,
         priceCurrency: show.offers.priceCurrency,
         availability: show.offers.availability,
         validFrom: show.offers.validFrom
@@ -74,7 +75,7 @@ const eventStructuredData = {
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: eventStatusByShowStatus[show.status],
   image: pageOgImage ? [pageOgImage] : undefined,
-  url: showUrl,
+  url: canonicalShowUrl,
   performer: {
     "@type": "MusicGroup",
     name: siteMeta.title,
