@@ -128,6 +128,7 @@ type WebSiteSchema = {
 };
 
 type WebPageSchema = {
+  "@context"?: "https://schema.org";
   "@type": "WebPage";
   "@id": string;
   name: string;
@@ -203,6 +204,7 @@ export const siteMeta = {
 
 export const siteEntityIds = {
   website: `${siteMeta.url}#website`,
+  homepagePage: `${siteMeta.url}/#homepage`,
   musicGroup: `${siteMeta.url}#music-group`,
   aboutPage: `${siteMeta.url}/about/#webpage`,
   listenPage: `${siteMeta.url}/listen/#webpage`,
@@ -293,6 +295,20 @@ const coreSubjectPages = [
   }
 ] as const satisfies readonly WebPageSchema[];
 
+const homepagePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": siteEntityIds.homepagePage,
+  name: siteMeta.title,
+  url: new URL("/", siteMeta.url).href,
+  isPartOf: {
+    "@id": siteEntityIds.website
+  },
+  about: {
+    "@id": siteEntityIds.musicGroup
+  }
+} satisfies WebPageSchema;
+
 export const contactPoints = [
   {
     kind: "booking",
@@ -315,15 +331,15 @@ export const contactPoints = [
 ] as const satisfies readonly ContactPoint[];
 
 export const organizationContactPoints = contactPoints.map(
-  ({ kind, label, email, schemaContactType }) =>
+  ({ kind, label, email, schemaContactType }): OrganizationContactPointSchema =>
     ({
       "@type": "ContactPoint",
       contactType: schemaContactType,
       email,
       name: label,
       description: `${siteMeta.title} ${kind} contact`
-    }) as const
-) as readonly OrganizationContactPointSchema[];
+    })
+) satisfies readonly OrganizationContactPointSchema[];
 
 export const buildWebSiteSchema = (): WebSiteSchema => ({
   "@context": "https://schema.org",
@@ -336,6 +352,8 @@ export const buildWebSiteSchema = (): WebSiteSchema => ({
     "@id": siteEntityIds.musicGroup
   }
 });
+
+export const buildHomepageWebPageSchema = (): WebPageSchema => homepagePageSchema;
 
 export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGroupSchema => ({
   "@context": "https://schema.org",
@@ -356,7 +374,7 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   contactPoint: organizationContactPoints,
   sameAs: socialLinks.map(({ href }) => href),
   mainEntityOfPage: {
-    "@id": siteEntityIds.website
+    "@id": siteEntityIds.homepagePage
   },
   subjectOf: coreSubjectPages
 });

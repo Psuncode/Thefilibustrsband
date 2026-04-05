@@ -9,6 +9,7 @@ const baselineSourcePath = "src/data/site.ts";
 const absentNeedles = [
   "export const siteEntityIds =",
   "export const buildWebSiteSchema =",
+  "export const buildHomepageWebPageSchema =",
   '"@id": string;',
   "genre: bandFacts.geoIdentity.genre,",
   "addressCountry: string;",
@@ -36,6 +37,7 @@ if (missingNeedles.length > 0) {
   fail(`Baseline source unexpectedly contains: ${missingNeedles.join(", ")}`);
 }
 
+await run("npm", ["run", "build"]);
 await run("node", ["scripts/verify-homepage-entity-schema.mjs"]);
 
 console.log(`Baseline source omits the homepage schema fields, and current build passes verification.`);
