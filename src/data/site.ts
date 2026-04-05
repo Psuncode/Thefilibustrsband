@@ -248,7 +248,7 @@ const coreSubjectPages = [
   {
     "@type": "WebPage",
     "@id": siteEntityIds.aboutPage,
-    name: "About",
+    name: "About The Filibusters",
     url: new URL("/about/", siteMeta.url).href,
     isPartOf: {
       "@id": siteEntityIds.website
@@ -260,7 +260,7 @@ const coreSubjectPages = [
   {
     "@type": "WebPage",
     "@id": siteEntityIds.listenPage,
-    name: "Listen",
+    name: "Listen to The Filibusters",
     url: new URL("/listen/", siteMeta.url).href,
     isPartOf: {
       "@id": siteEntityIds.website
@@ -272,7 +272,7 @@ const coreSubjectPages = [
   {
     "@type": "WebPage",
     "@id": siteEntityIds.contactPage,
-    name: "Contact",
+    name: "Contact The Filibusters",
     url: new URL("/contact/", siteMeta.url).href,
     isPartOf: {
       "@id": siteEntityIds.website
