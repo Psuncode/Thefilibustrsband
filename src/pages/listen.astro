@@ -2,10 +2,28 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/site/Header.astro";
 import Footer from "../components/site/Footer.astro";
-import { iconPaths, listenPage } from "../data/site";
+import { iconPaths, listenPage, siteEntityIds, siteMeta } from "../data/site";
+
+const listenStructuredData = {
+  "@type": "CollectionPage",
+  "@id": siteEntityIds.listenPage,
+  name: "Listen to The Filibusters",
+  url: Astro.url.href,
+  description: listenPage.description,
+  about: {
+    "@id": siteEntityIds.musicGroup
+  },
+  isPartOf: {
+    "@id": siteEntityIds.website
+  }
+} as const;
 ---
 
-<BaseLayout title={`Listen | ${listenPage.title}`} description={listenPage.description}>
+<BaseLayout
+  title={`Listen | ${siteMeta.title}`}
+  description={listenPage.description}
+  structuredData={listenStructuredData}
+>
   <Header />
   <main id="main-content" class="listen-page mobile-nav-offset">
     <div class="listen-page-inner mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-16 pt-8 md:px-6 md:pb-24 md:pt-12">

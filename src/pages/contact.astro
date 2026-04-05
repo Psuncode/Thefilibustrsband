@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
 import { contactPage } from "../data/contact";
-import { iconPaths, siteMeta, socialLinks } from "../data/site";
+import { iconPaths, siteEntityIds, siteMeta, socialLinks } from "../data/site";
 
 const createMailtoHref = (email: string, subject: string) => {
   const params = new URLSearchParams({ subject });
@@ -19,11 +19,26 @@ const primaryMailtoHref = createMailtoHref(
   contactPage.primary.email,
   `${siteMeta.title} Contact`
 );
+
+const contactStructuredData = {
+  "@type": "ContactPage",
+  "@id": siteEntityIds.contactPage,
+  name: "Contact The Filibusters",
+  url: Astro.url.href,
+  description: contactPage.meta.description,
+  about: {
+    "@id": siteEntityIds.musicGroup
+  },
+  isPartOf: {
+    "@id": siteEntityIds.website
+  }
+} as const;
 ---
 
 <BaseLayout
   title={contactPage.meta.title}
   description={contactPage.meta.description}
+  structuredData={contactStructuredData}
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip">
