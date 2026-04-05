@@ -2,7 +2,7 @@
 import Analytics from "@vercel/analytics/astro";
 import SubscribeModal from "../components/site/SubscribeModal.astro";
 import heroBand from "../assets/images/hero-band.jpg";
-import { buildMusicGroupSchema, siteMeta } from "../data/site";
+import { buildMusicGroupSchema, buildWebSiteSchema, siteMeta } from "../data/site";
 import "../styles/global.css";
 
 type StructuredDataValue = Record<string, unknown>;
@@ -26,13 +26,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site);
 const defaultOgImage = new URL(heroBand.src, Astro.site);
 const resolvedOgImage = ogImage ? new URL(ogImage, Astro.site).href : defaultOgImage.href;
 const musicGroupStructuredData = buildMusicGroupSchema({ image: defaultOgImage.href });
-const websiteStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: siteMeta.title,
-  url: siteMeta.url,
-  description: siteMeta.description
-};
+const websiteStructuredData = buildWebSiteSchema();
 
 const pageStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
 const structuredDataGraph = [websiteStructuredData, musicGroupStructuredData, ...pageStructuredData];

@@ -115,21 +115,53 @@ type MusicGroupSchemaInput = {
   image: string;
 };
 
-type MusicGroupSchema = {
+type WebSiteSchema = {
   "@context": "https://schema.org";
-  "@type": "MusicGroup";
+  "@type": "WebSite";
+  "@id": string;
   name: string;
   description: string;
   url: string;
+  about: {
+    "@id": string;
+  };
+};
+
+type WebPageSchema = {
+  "@type": "WebPage";
+  "@id": string;
+  name: string;
+  url: string;
+  isPartOf: {
+    "@id": string;
+  };
+  about: {
+    "@id": string;
+  };
+};
+
+type MusicGroupSchema = {
+  "@context": "https://schema.org";
+  "@type": "MusicGroup";
+  "@id": string;
+  name: string;
+  description: string;
+  url: string;
+  genre: string;
   email: string;
   image: string;
   address: {
     "@type": "PostalAddress";
     addressLocality: string;
     addressRegion: string;
+    addressCountry: string;
   };
   contactPoint: readonly OrganizationContactPointSchema[];
   sameAs: readonly string[];
+  mainEntityOfPage: {
+    "@id": string;
+  };
+  subjectOf: readonly WebPageSchema[];
 };
 
 export const socialLinks = [
@@ -169,6 +201,15 @@ export const siteMeta = {
   socials: socialLinks.map(({ label, href }) => ({ label, href }))
 } as const;
 
+export const siteEntityIds = {
+  website: `${siteMeta.url}#website`,
+  musicGroup: `${siteMeta.url}#music-group`,
+  aboutPage: `${siteMeta.url}/about/#webpage`,
+  listenPage: `${siteMeta.url}/listen/#webpage`,
+  contactPage: `${siteMeta.url}/contact/#webpage`,
+  showsPage: `${siteMeta.url}/shows/#webpage`
+} as const;
+
 const bandLocation = {
   city: "Provo",
   region: "Utah",
@@ -200,6 +241,57 @@ export const footerContent = {
   geoDescription:
     "Based in Provo, Utah, the band blends high-energy live shows with emotionally direct songs built to feel immediate, personal, and worth coming back to."
 } as const satisfies FooterContent;
+
+const coreSubjectPages = [
+  {
+    "@type": "WebPage",
+    "@id": siteEntityIds.aboutPage,
+    name: "About",
+    url: new URL("/about/", siteMeta.url).href,
+    isPartOf: {
+      "@id": siteEntityIds.website
+    },
+    about: {
+      "@id": siteEntityIds.musicGroup
+    }
+  },
+  {
+    "@type": "WebPage",
+    "@id": siteEntityIds.listenPage,
+    name: "Listen",
+    url: new URL("/listen/", siteMeta.url).href,
+    isPartOf: {
+      "@id": siteEntityIds.website
+    },
+    about: {
+      "@id": siteEntityIds.musicGroup
+    }
+  },
+  {
+    "@type": "WebPage",
+    "@id": siteEntityIds.contactPage,
+    name: "Contact",
+    url: new URL("/contact/", siteMeta.url).href,
+    isPartOf: {
+      "@id": siteEntityIds.website
+    },
+    about: {
+      "@id": siteEntityIds.musicGroup
+    }
+  },
+  {
+    "@type": "WebPage",
+    "@id": siteEntityIds.showsPage,
+    name: "Shows",
+    url: new URL("/shows/", siteMeta.url).href,
+    isPartOf: {
+      "@id": siteEntityIds.website
+    },
+    about: {
+      "@id": siteEntityIds.musicGroup
+    }
+  }
+] as const satisfies readonly WebPageSchema[];
 
 export const contactPoints = [
   {
@@ -233,21 +325,40 @@ export const organizationContactPoints = contactPoints.map(
     }) as const
 ) as readonly OrganizationContactPointSchema[];
 
-export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGroupSchema => ({
+export const buildWebSiteSchema = (): WebSiteSchema => ({
   "@context": "https://schema.org",
-  "@type": "MusicGroup",
+  "@type": "WebSite",
+  "@id": siteEntityIds.website,
   name: siteMeta.title,
   description: siteMeta.description,
   url: siteMeta.url,
+  about: {
+    "@id": siteEntityIds.musicGroup
+  }
+});
+
+export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGroupSchema => ({
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "@id": siteEntityIds.musicGroup,
+  name: siteMeta.title,
+  description: siteMeta.description,
+  url: siteMeta.url,
+  genre: bandFacts.geoIdentity.genre,
   email: siteMeta.contactEmail,
   image,
   address: {
     "@type": "PostalAddress",
     addressLocality: bandFacts.location.city,
-    addressRegion: bandFacts.location.region
+    addressRegion: bandFacts.location.region,
+    addressCountry: "US"
   },
   contactPoint: organizationContactPoints,
-  sameAs: socialLinks.map(({ href }) => href)
+  sameAs: socialLinks.map(({ href }) => href),
+  mainEntityOfPage: {
+    "@id": siteEntityIds.website
+  },
+  subjectOf: coreSubjectPages
 });
 
 export const followPrompt = {
