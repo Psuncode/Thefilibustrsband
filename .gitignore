@@ -3,5 +3,6 @@ dist
 .astro
 .DS_Store
 .env
+tmp/verify-seo/
 Band Assest
 Brand Guide and logos

@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "verify:seo": "node scripts/verify-seo-mobile.mjs",
     "sanity:dev": "sanity dev",
     "sanity:build": "sanity build"
   },
@@ -19,6 +20,7 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
+    "playwright": "^1.53.0",
     "typescript": "^5.8.0"
   }
 }
