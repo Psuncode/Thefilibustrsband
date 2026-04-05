@@ -8,13 +8,32 @@ import {
 } from "./queries";
 import type { ShowEntry } from "./types";
 
+const DEFAULT_COUNTRY = "US";
+const DEFAULT_ORGANIZER_NAME = "The Filibusters";
+const DEFAULT_ORGANIZER_URL = "https://www.thefilibustersband.com";
+
 const fallbackEntries: ShowEntry[] = fallbackShows.map((show) => ({
   ...show,
+  endsAt: show.endsAt || undefined,
+  country: show.country || DEFAULT_COUNTRY,
   ticketUrl: show.ticketUrl || undefined,
   summary: show.summary || "",
   body: [...show.body],
   lineup: [...show.lineup],
-  notes: show.notes || undefined
+  notes: show.notes || undefined,
+  organizerName: show.organizerName || DEFAULT_ORGANIZER_NAME,
+  organizerUrl: show.organizerUrl || DEFAULT_ORGANIZER_URL,
+  seoDescription: show.seoDescription || show.summary || "",
+  offers: show.offers
+    ? {
+        url: show.offers.url || undefined,
+        price: typeof show.offers.price === "number" ? show.offers.price : undefined,
+        priceCurrency: show.offers.priceCurrency || undefined,
+        availability: show.offers.availability || undefined,
+        validFrom: show.offers.validFrom || undefined,
+        isFree: typeof show.offers.isFree === "boolean" ? show.offers.isFree : undefined
+      }
+    : undefined
 }));
 
 export const getUpcomingShows = async (): Promise<ShowEntry[]> => {
