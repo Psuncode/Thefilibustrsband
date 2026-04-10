@@ -39,6 +39,15 @@ type SecondaryRoute = {
   kind?: "link" | "modal";
 };
 
+type SiteRoute = {
+  path: string;
+};
+
+type SpecialRoute = {
+  label: string;
+  href: string;
+};
+
 type FollowPromptLink = {
   label: string;
   href: string;
@@ -202,14 +211,39 @@ export const siteMeta = {
   socials: socialLinks.map(({ label, href }) => ({ label, href }))
 } as const;
 
+export const siteRoutes = {
+  home: { path: "/" },
+  about: { path: "/about" },
+  listen: { path: "/listen" },
+  contact: { path: "/contact" },
+  shows: { path: "/shows" },
+  community: { path: "/community" },
+  press: { path: "/press" },
+  localDiscovery: { path: "/provo-alt-rock-band" },
+  aiPressKit: { path: "/press/ai" }
+} as const satisfies Record<string, SiteRoute>;
+
+export const buildSiteUrl = (path: string): string => new URL(path, siteMeta.url).href;
+
+const normalizePagePath = (path: string): string =>
+  path === "/" ? "/" : path.replace(/\/+$/, "");
+
+export const buildPageUrl = (path: string): string =>
+  buildSiteUrl(normalizePagePath(path) === "/" ? "/" : `${normalizePagePath(path)}/`);
+
+export const buildPageId = (path: string, fragment: "homepage" | "webpage" = "webpage"): string =>
+  `${buildPageUrl(path)}#${fragment}`;
+
 export const siteEntityIds = {
   website: `${siteMeta.url}#website`,
-  homepagePage: `${siteMeta.url}/#homepage`,
+  homepagePage: buildPageId(siteRoutes.home.path, "homepage"),
   musicGroup: `${siteMeta.url}#music-group`,
-  aboutPage: `${siteMeta.url}/about/#webpage`,
-  listenPage: `${siteMeta.url}/listen/#webpage`,
-  contactPage: `${siteMeta.url}/contact/#webpage`,
-  showsPage: `${siteMeta.url}/shows/#webpage`
+  aboutPage: buildPageId(siteRoutes.about.path),
+  listenPage: buildPageId(siteRoutes.listen.path),
+  contactPage: buildPageId(siteRoutes.contact.path),
+  showsPage: buildPageId(siteRoutes.shows.path),
+  localDiscoveryPage: buildPageId(siteRoutes.localDiscovery.path),
+  aiPressKitPage: buildPageId(siteRoutes.aiPressKit.path)
 } as const;
 
 const bandLocation = {
@@ -249,7 +283,7 @@ const coreSubjectPages = [
     "@type": "WebPage",
     "@id": siteEntityIds.aboutPage,
     name: "About The Filibusters",
-    url: new URL("/about/", siteMeta.url).href,
+    url: buildPageUrl(siteRoutes.about.path),
     isPartOf: {
       "@id": siteEntityIds.website
     },
@@ -261,7 +295,7 @@ const coreSubjectPages = [
     "@type": "WebPage",
     "@id": siteEntityIds.listenPage,
     name: "Listen to The Filibusters",
-    url: new URL("/listen/", siteMeta.url).href,
+    url: buildPageUrl(siteRoutes.listen.path),
     isPartOf: {
       "@id": siteEntityIds.website
     },
@@ -273,7 +307,7 @@ const coreSubjectPages = [
     "@type": "WebPage",
     "@id": siteEntityIds.contactPage,
     name: "Contact The Filibusters",
-    url: new URL("/contact/", siteMeta.url).href,
+    url: buildPageUrl(siteRoutes.contact.path),
     isPartOf: {
       "@id": siteEntityIds.website
     },
@@ -285,7 +319,7 @@ const coreSubjectPages = [
     "@type": "WebPage",
     "@id": siteEntityIds.showsPage,
     name: "Shows",
-    url: new URL("/shows/", siteMeta.url).href,
+    url: buildPageUrl(siteRoutes.shows.path),
     isPartOf: {
       "@id": siteEntityIds.website
     },
@@ -300,7 +334,7 @@ const homepagePageSchema = {
   "@type": "WebPage",
   "@id": siteEntityIds.homepagePage,
   name: siteMeta.title,
-  url: new URL("/", siteMeta.url).href,
+  url: buildPageUrl(siteRoutes.home.path),
   isPartOf: {
     "@id": siteEntityIds.website
   },
@@ -387,11 +421,11 @@ export const followPrompt = {
   links: [
     {
       label: "LISTEN NOW",
-      href: "/listen"
+      href: siteRoutes.listen.path
     },
     {
       label: "FOLLOW THE BAND",
-      href: "/listen#follow"
+      href: `${siteRoutes.listen.path}#follow`
     }
   ]
 } as const satisfies FollowPromptContent;
@@ -442,13 +476,24 @@ export const listenPage = {
 
 export const primaryNav = [
   { label: "Music", href: "/#latest-release", icon: "music" },
-  { label: "Shows", href: "/shows", icon: "ticket" },
-  { label: "Contact", href: "/contact", icon: "mail" },
-  { label: "About", href: "/about", icon: "info" }
+  { label: "Shows", href: siteRoutes.shows.path, icon: "ticket" },
+  { label: "Contact", href: siteRoutes.contact.path, icon: "mail" },
+  { label: "About", href: siteRoutes.about.path, icon: "info" }
 ] as const satisfies readonly PrimaryNavItem[];
 
 export const secondaryRoutes = [
-  { label: "Community", href: "/community", kind: "link" },
-  { label: "Press Room", href: "/press", kind: "link" },
+  { label: "Community", href: siteRoutes.community.path, kind: "link" },
+  { label: "Press Room", href: siteRoutes.press.path, kind: "link" },
   { label: "Subscribe", kind: "modal" }
 ] as const satisfies readonly SecondaryRoute[];
+
+export const specialRoutes = {
+  localDiscovery: {
+    label: "Provo alt rock band",
+    href: siteRoutes.localDiscovery.path
+  },
+  aiPressKit: {
+    label: "AI press kit",
+    href: siteRoutes.aiPressKit.path
+  }
+} as const satisfies Record<"localDiscovery" | "aiPressKit", SpecialRoute>;

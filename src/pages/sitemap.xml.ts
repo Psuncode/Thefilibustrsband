@@ -14,6 +14,8 @@ export const GET: APIRoute = async () => {
     "/contact",
     "/listen",
     "/press",
+    "/press/ai",
+    "/provo-alt-rock-band",
     "/privacy",
     "/shows",
     ...communityRoutes,

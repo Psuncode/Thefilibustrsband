@@ -41,6 +41,8 @@ Run `npm run verify:seo` after SEO-facing changes such as:
 - metadata updates
 - structured data changes
 - homepage or shows-page copy changes
+- local discovery page updates
+- AI press kit page or text-asset updates
 - layout changes on search-facing pages
 - image changes that affect public pages
 
@@ -48,6 +50,8 @@ The command checks:
 - `/`
 - `/shows`
 - one current show detail route derived from the live shows listing
+- `/provo-alt-rock-band`
+- `/press/ai`
 
 It fails on:
 - horizontal overflow at `375px`
@@ -56,6 +60,8 @@ It fails on:
 - missing `Event` JSON-LD on the dynamic show detail page
 
 Screenshots are written to `tmp/verify-seo/`.
+
+The AI press kit ships as low-visibility public assets under `public/ai/` and is linked from `/press/ai` and `llms.txt`. Keep those files factual, stable, and aligned with the main site pages because they exist to help AI-assisted promoter, venue, and press research.
 
 ## Deployment
 

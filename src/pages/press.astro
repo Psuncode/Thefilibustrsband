@@ -2,7 +2,7 @@
 import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
 import { pressPage } from "../data/press";
-import { siteMeta } from "../data/site";
+import { siteMeta, specialRoutes } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
@@ -75,9 +75,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <a
             class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
             href={`mailto:${pressPage.contactEmail}`}
+            data-track-event="booking_email_click"
+            data-track-label="press-contact"
+            data-track-source="press-page"
           >
             {pressPage.contactLabel}: {pressPage.contactEmail}
           </a>
+          <p class="mt-4 text-xs leading-5 text-[var(--color-ink)]/58">
+            For structured factual lookup, see the{" "}
+            <a
+              class="underline decoration-black/20 underline-offset-4 transition hover:text-[var(--color-pink)]"
+              href={specialRoutes.aiPressKit.href}
+              data-track-event="ai_press_kit_click"
+              data-track-label="press-copy-link"
+              data-track-source="press-page"
+            >
+              {specialRoutes.aiPressKit.label}
+            </a>
+            .
+          </p>
         </article>
       </div>
     </section>

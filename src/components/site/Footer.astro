@@ -20,6 +20,9 @@ import { footerContent, iconPaths, secondaryRoutes, siteMeta, socialLinks } from
       <a
         class="focus-ring inline-flex min-h-11 w-fit items-center justify-center rounded-full bg-[var(--color-yellow)] px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:bg-white"
         href={`mailto:${siteMeta.contactEmail}`}
+        data-track-event="booking_email_click"
+        data-track-label="footer-email"
+        data-track-source="footer"
       >
         {siteMeta.contactEmail}
       </a>
@@ -62,6 +65,9 @@ import { footerContent, iconPaths, secondaryRoutes, siteMeta, socialLinks } from
               <button
                 class="focus-ring text-sm font-semibold text-white/82 transition hover:text-[var(--color-yellow)]"
                 data-subscribe-open
+                data-track-event="subscribe_open"
+                data-track-label={`footer-link-${route.label.toLowerCase().replace(/\s+/g, "-")}`}
+                data-track-source="footer"
                 type="button"
               >
                 {route.label}
@@ -81,6 +87,9 @@ import { footerContent, iconPaths, secondaryRoutes, siteMeta, socialLinks } from
         <button
           class="focus-ring inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[var(--color-pink)] hover:text-[var(--color-yellow)] sm:w-auto"
           data-subscribe-open
+          data-track-event="subscribe_open"
+          data-track-label="footer-cta"
+          data-track-source="footer"
           type="button"
         >
           Join the email list

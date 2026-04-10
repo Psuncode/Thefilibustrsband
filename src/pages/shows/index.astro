@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
 import { getUpcomingShows } from "../../lib/shows/data";
-import { siteMeta } from "../../data/site";
+import { siteMeta, siteRoutes, specialRoutes } from "../../data/site";
 
 const shows = await getUpcomingShows();
 
@@ -15,8 +15,8 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 ---
 
 <BaseLayout
-  title={`Upcoming Shows | ${siteMeta.title}`}
-  description="Find upcoming The Filibusters shows, live music dates, venues, and ticket links across Provo, Utah, and beyond."
+  title={`Shows | ${siteMeta.title}`}
+  description="See upcoming The Filibusters live dates, venue details, and ticket links for Provo, Utah and nearby shows."
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[var(--color-paper-soft)]">
@@ -76,6 +76,9 @@ const formatter = new Intl.DateTimeFormat("en-US", {
                         href={show.ticketUrl}
                         rel="noreferrer"
                         target="_blank"
+                        data-track-event="ticket_click"
+                        data-track-label={show.slug}
+                        data-track-source="shows-index"
                       >
                         Tickets
                       </a>
@@ -95,6 +98,33 @@ const formatter = new Intl.DateTimeFormat("en-US", {
             </p>
           </article>
         )}
+
+        <article class="poster-frame mt-4 rounded-[1.75rem] p-5 md:mt-6 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Keep moving</p>
+          <p class="mt-3 max-w-2xl text-base leading-7 text-[var(--color-ink)]/78">
+            If you want the backstory before the next show, head to About. If you want the other side of the route, keep listening.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a
+              class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+              href={siteRoutes.about.path}
+            >
+              About
+            </a>
+            <a
+              class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+              href={siteRoutes.listen.path}
+            >
+              Listen
+            </a>
+            <a
+              class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+              href={specialRoutes.localDiscovery.href}
+            >
+              {specialRoutes.localDiscovery.label}
+            </a>
+          </div>
+        </article>
       </div>
     </section>
   </main>

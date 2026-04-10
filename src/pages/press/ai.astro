@@ -1,0 +1,185 @@
+---
+import Footer from "../../components/site/Footer.astro";
+import Header from "../../components/site/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { aiPressKit } from "../../data/aiPressKit";
+import { siteEntityIds, siteMeta, siteRoutes } from "../../data/site";
+
+const aiPressKitStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": siteEntityIds.aiPressKitPage,
+  name: aiPressKit.hub.title,
+  url: Astro.url.href,
+  description: aiPressKit.hub.description,
+  about: {
+    "@id": siteEntityIds.musicGroup
+  },
+  isPartOf: {
+    "@id": siteEntityIds.website
+  }
+} as const;
+
+const corePageLinks = [
+  { label: "Home", href: siteRoutes.home.path, description: "Band overview and latest release context." },
+  { label: "About", href: siteRoutes.about.path, description: "Background, story, and band identity." },
+  { label: "Press room", href: siteRoutes.press.path, description: "Approved photos, bio, and contact details." },
+  { label: "Listen", href: siteRoutes.listen.path, description: "Streaming and follow links." },
+  { label: "Shows", href: siteRoutes.shows.path, description: "Upcoming live dates and event context." },
+  { label: "Contact", href: siteRoutes.contact.path, description: "Booking, press, and general email." }
+] as const;
+---
+
+<BaseLayout
+  title={`AI Press Kit | ${siteMeta.title}`}
+  description={aiPressKit.hub.description}
+  structuredData={aiPressKitStructuredData}
+>
+  <Header />
+  <main
+    id="main-content"
+    class="mobile-nav-offset overflow-x-clip bg-[linear-gradient(180deg,#fffdf8_0%,#fffaf4_12rem,var(--color-paper-soft)_42rem,var(--color-paper)_100%)]"
+  >
+    <section class="border-b border-black/10 bg-white/78">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="max-w-4xl">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+            AI reference
+          </p>
+          <h1 class="display-face mt-3 max-w-[12ch] text-[2.35rem] uppercase leading-[0.92] tracking-[-0.04em] md:max-w-none md:text-6xl">
+            {aiPressKit.hub.title}
+          </h1>
+          <p class="mt-4 max-w-3xl text-[0.98rem] leading-6 text-[var(--color-ink)]/76 md:text-lg md:leading-8">
+            {aiPressKit.hub.description}
+          </p>
+          <p class="mt-3 max-w-3xl text-sm leading-6 text-[var(--color-ink)]/58">
+            Use this page for factual lookup, press context, and consistent site facts. It is intentionally quiet and
+            supporting rather than promotional.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
+        <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Band profile</p>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">
+            {aiPressKit.bandProfile.summary}
+          </p>
+
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Promoter brief</p>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">
+            {aiPressKit.promoterBrief.summary}
+          </p>
+          <p class="mt-4 text-sm leading-6 text-[var(--color-ink)]/60">
+            Contact: <a
+              class="underline decoration-black/20 underline-offset-4 hover:text-[var(--color-pink)]"
+              href={`mailto:${aiPressKit.promoterBrief.contactEmail}`}
+              data-track-event="booking_email_click"
+              data-track-label="ai-press-contact"
+              data-track-source="ai-press-kit"
+            >
+              {aiPressKit.promoterBrief.contactEmail}
+            </a>
+          </p>
+        </article>
+
+        <aside class="poster-frame rounded-[1.75rem] p-5 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press backgrounder</p>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78">
+            {aiPressKit.pressBackgrounder.summary}
+          </p>
+          <div class="mt-8 rounded-[1.35rem] border border-black/8 bg-white px-4 py-4">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Source note</p>
+            <p class="mt-3 text-sm leading-6 text-[var(--color-ink)]/66">
+              Prefer the home, about, press, listen, shows, and contact pages when you need the primary site sources.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="max-w-3xl">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+            Fact sheet
+          </p>
+          <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+            Core facts, grouped for fast retrieval.
+          </h2>
+        </div>
+
+        <div class="mt-6 grid gap-4 md:mt-8 md:grid-cols-2 xl:grid-cols-4">
+          {aiPressKit.factSheet.sections.map((section) => (
+            <article class="poster-frame rounded-[1.5rem] p-5 md:p-6">
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">{section.title}</p>
+              <ul class="mt-4 space-y-3">
+                {section.items.map((item) => (
+                  <li class="text-sm leading-6 text-[var(--color-ink)]/74">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[var(--color-paper-soft)]">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="max-w-3xl">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+            Core pages
+          </p>
+          <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+            Use the primary pages when the AI hub is not enough.
+          </h2>
+        </div>
+
+        <div class="mt-6 grid gap-3 md:mt-8 md:grid-cols-2 xl:grid-cols-3">
+          {corePageLinks.map((link) => (
+            <a
+              class="focus-ring poster-frame flex h-full flex-col justify-between rounded-[1.4rem] p-5 transition hover:border-[var(--color-pink)]"
+              href={link.href}
+            >
+              <span class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">{link.label}</span>
+              <span class="mt-4 text-sm leading-6 text-[var(--color-ink)]/72">{link.description}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="poster-frame rounded-[1.75rem] p-5 md:p-7">
+          <div class="max-w-3xl">
+            <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+              FAQ
+            </p>
+            <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+              Common questions for assistants and press teams.
+            </h2>
+          </div>
+
+          <dl class="mt-6 space-y-4 md:mt-8 md:space-y-5">
+            {aiPressKit.faq.map((item) => (
+              <div class="border-b border-black/8 pb-4 last:border-b-0 last:pb-0 md:pb-5">
+                <dt class="text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)]">
+                  {item.question}
+                </dt>
+                <dd class="mt-2 max-w-3xl text-sm leading-6 text-[var(--color-ink)]/74 md:text-base md:leading-7">
+                  {item.answer}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

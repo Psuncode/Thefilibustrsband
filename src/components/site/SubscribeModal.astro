@@ -41,7 +41,14 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
       </ul>
 
       {hasFormAction ? (
-        <form class="subscribe-modal-form" action={formAction} method="POST">
+        <form
+          class="subscribe-modal-form"
+          action={formAction}
+          method="POST"
+          data-track-event="subscribe_submit"
+          data-track-label="email-form"
+          data-track-source="subscribe-modal"
+        >
           <label class="subscribe-modal-label" for="subscribe-modal-email">
             {subscribePage.form.emailLabel}
           </label>
@@ -60,7 +67,13 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
       ) : (
         <div class="subscribe-modal-fallback">
           <p>{subscribePage.note}</p>
-          <a class="focus-ring subscribe-modal-submit" href={fallbackHref}>
+          <a
+            class="focus-ring subscribe-modal-submit"
+            href={fallbackHref}
+            data-track-event="booking_email_click"
+            data-track-label="subscribe-fallback"
+            data-track-source="subscribe-modal"
+          >
             {subscribePage.form.fallbackLabel}
           </a>
         </div>

@@ -9,12 +9,12 @@ import ShowsPreviewSection from "../components/home/ShowsPreviewSection.astro";
 import PersonalityStripSection from "../components/home/PersonalityStripSection.astro";
 import CommunitySignupSection from "../components/home/CommunitySignupSection.astro";
 import FollowPrompt from "../components/home/FollowPrompt.astro";
-import { siteMeta } from "../data/site";
+import { siteMeta, siteRoutes, specialRoutes } from "../data/site";
 ---
 
 <BaseLayout
   title={`${siteMeta.title} | Provo, Utah Alt Rock Band`}
-  description="The Filibusters are a Provo, Utah alt rock band sharing original music, upcoming live shows, and band updates."
+  description="The Filibusters are a Provo, Utah alt rock band making original music with a live-show edge. Find songs, upcoming shows, and band updates from a local group built for loud rooms."
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip">
@@ -25,6 +25,72 @@ import { siteMeta } from "../data/site";
     <PersonalityStripSection />
     <CommunitySignupSection />
     <FollowPrompt />
+
+    <section class="border-t border-black/10 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+        <div class="max-w-3xl">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+            Explore the band
+          </p>
+          <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+            Start anywhere, then move to the next thing.
+          </h2>
+          <p class="mt-4 text-[0.98rem] leading-6 text-[var(--color-ink)]/74 md:text-base md:leading-7">
+            Pick the route that matches what you need right now: band context, the music, the next live date, or the local scene entry point.
+          </p>
+        </div>
+        <div class="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <a
+            class="focus-ring poster-frame rounded-[1.5rem] p-4 transition hover:border-[var(--color-pink)]"
+            href={siteRoutes.about.path}
+          >
+            <span class="block text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">About</span>
+            <span class="mt-3 block text-lg font-black uppercase leading-tight text-[var(--color-ink)]">
+              Meet the band.
+            </span>
+            <span class="mt-2 block text-sm leading-6 text-[var(--color-ink)]/72">
+              Backstory, members, and the identity behind the songs.
+            </span>
+          </a>
+          <a
+            class="focus-ring rounded-[1.5rem] bg-[var(--color-ink)] p-4 text-white transition hover:bg-[var(--color-pink)]"
+            href={siteRoutes.listen.path}
+          >
+            <span class="block text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-yellow)]">Listen</span>
+            <span class="mt-3 block text-lg font-black uppercase leading-tight">
+              Start with the music.
+            </span>
+            <span class="mt-2 block text-sm leading-6 text-white/76">
+              Go straight to Spotify, Apple Music, YouTube, and follow links.
+            </span>
+          </a>
+          <a
+            class="focus-ring poster-frame rounded-[1.5rem] p-4 transition hover:border-[var(--color-pink)]"
+            href={siteRoutes.shows.path}
+          >
+            <span class="block text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Shows</span>
+            <span class="mt-3 block text-lg font-black uppercase leading-tight text-[var(--color-ink)]">
+              Find the next date.
+            </span>
+            <span class="mt-2 block text-sm leading-6 text-[var(--color-ink)]/72">
+              Upcoming live dates, venue details, and ticket paths.
+            </span>
+          </a>
+          <a
+            class="focus-ring poster-frame rounded-[1.5rem] p-4 transition hover:border-[var(--color-pink)]"
+            href={specialRoutes.localDiscovery.href}
+          >
+            <span class="block text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Local discovery</span>
+            <span class="mt-3 block text-lg font-black uppercase leading-tight text-[var(--color-ink)]">
+              See the Provo angle.
+            </span>
+            <span class="mt-2 block text-sm leading-6 text-[var(--color-ink)]/72">
+              A local entry page for people looking for a Provo alt rock band.
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
   <Footer />
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import SubscribeModal from "../components/site/SubscribeModal.astro";
 import heroBand from "../assets/images/hero-band.jpg";
 import {
@@ -82,8 +83,10 @@ const structuredDataGraph = [
     <slot />
     <SubscribeModal />
     <Analytics />
+    <SpeedInsights />
     <script>
       import { track } from "@vercel/analytics";
+      import { getTrackedClickEvent, getTrackedFormEvent, getTrackedLinkEvent } from "../lib/analytics.js";
 
       document.addEventListener("click", (event) => {
         const target = event.target;
@@ -92,23 +95,42 @@ const structuredDataGraph = [
           return;
         }
 
-        const link = target.closest("a[data-track-music-platform]");
+        const link = target.closest("a");
 
-        if (!(link instanceof HTMLAnchorElement)) {
+        if (link instanceof HTMLAnchorElement) {
+          const linkEvent = getTrackedLinkEvent(link.dataset);
+
+          if (linkEvent) {
+            track(linkEvent.eventName, linkEvent.properties);
+            return;
+          }
+        }
+
+        const clickTarget = target.closest("[data-track-event]");
+
+        if (!(clickTarget instanceof HTMLElement)) {
           return;
         }
 
-        const platform = link.dataset.trackMusicPlatform;
-        const location = link.dataset.trackMusicLocation;
+        const clickEvent = getTrackedClickEvent(clickTarget.dataset);
 
-        if (!platform || !location) {
+        if (clickEvent) {
+          track(clickEvent.eventName, clickEvent.properties);
+        }
+      });
+
+      document.addEventListener("submit", (event) => {
+        const target = event.target;
+
+        if (!(target instanceof HTMLFormElement)) {
           return;
         }
 
-        track("outbound_music_click", {
-          platform,
-          location
-        });
+        const formEvent = getTrackedFormEvent(target.dataset);
+
+        if (formEvent) {
+          track(formEvent.eventName, formEvent.properties);
+        }
       });
     </script>
   </body>

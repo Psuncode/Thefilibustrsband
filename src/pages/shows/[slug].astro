@@ -201,6 +201,9 @@ const linkifyParagraph = (paragraph: string) =>
               href={show.ticketUrl}
               rel="noreferrer"
               target="_blank"
+              data-track-event="ticket_click"
+              data-track-label={show.slug}
+              data-track-source="show-detail"
             >
               Get tickets
             </a>

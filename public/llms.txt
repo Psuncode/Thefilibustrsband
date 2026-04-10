@@ -8,10 +8,21 @@
 - About: https://www.thefilibustersband.com/about
 - Contact: https://www.thefilibustersband.com/contact
 - Listen: https://www.thefilibustersband.com/listen
+- Shows: https://www.thefilibustersband.com/shows
+- Press: https://www.thefilibustersband.com/press
+- AI press kit: https://www.thefilibustersband.com/press/ai
+
+## Public AI text assets
+
+- Band profile: https://www.thefilibustersband.com/ai/band-profile.txt
+- Promoter brief: https://www.thefilibustersband.com/ai/promoter-brief.txt
+- Press backgrounder: https://www.thefilibustersband.com/ai/press-backgrounder.txt
+- Fact sheet: https://www.thefilibustersband.com/ai/fact-sheet.txt
+- FAQ: https://www.thefilibustersband.com/ai/faq.txt
 
 ## Summary
 
-The Filibusters make emotionally direct alt rock shaped by high-energy live shows, loud rooms, late nights, and themes of connection, identity, and belonging.
+The Filibusters make emotionally direct alt rock shaped by high-energy live shows, loud rooms, late nights, and themes of connection and belonging.
 
 ## Contact
 

@@ -302,7 +302,9 @@ const main = async () => {
       const routes = [
         { route: "/", requireEventJsonLd: false },
         { route: "/shows", requireEventJsonLd: false },
-        { route: dynamicShowRoute, requireEventJsonLd: true }
+        { route: dynamicShowRoute, requireEventJsonLd: true },
+        { route: "/provo-alt-rock-band", requireEventJsonLd: false },
+        { route: "/press/ai", requireEventJsonLd: false }
       ];
       const results = [];
       for (const route of routes) {

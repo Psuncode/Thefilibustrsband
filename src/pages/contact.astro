@@ -85,6 +85,9 @@ const contactStructuredData = {
                 <a
                   class="focus-ring inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
                   href={path.href}
+                  data-track-event="booking_email_click"
+                  data-track-label={path.title.toLowerCase().replace(/\s+/g, "-")}
+                  data-track-source="contact-path"
                 >
                   {path.ctaLabel}
                 </a>
@@ -120,6 +123,9 @@ const contactStructuredData = {
             <a
               class="focus-ring mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-yellow)] px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:bg-white"
               href={primaryMailtoHref}
+              data-track-event="booking_email_click"
+              data-track-label="primary-contact"
+              data-track-source="contact-page"
             >
               {contactPage.primary.email}
             </a>

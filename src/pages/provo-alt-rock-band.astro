@@ -1,0 +1,141 @@
+---
+import Footer from "../components/site/Footer.astro";
+import Header from "../components/site/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localDiscoveryPage } from "../data/localDiscovery";
+import { siteEntityIds, siteRoutes } from "../data/site";
+
+const localDiscoveryStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": siteEntityIds.localDiscoveryPage,
+  name: localDiscoveryPage.meta.title,
+  url: Astro.url.href,
+  description: localDiscoveryPage.meta.description,
+  about: {
+    "@id": siteEntityIds.musicGroup
+  },
+  isPartOf: {
+    "@id": siteEntityIds.website
+  }
+} as const;
+
+const focusLinkCandidates = [
+  ...localDiscoveryPage.ctaLinks,
+  { label: "About", href: siteRoutes.about.path }
+] as const;
+
+const focusLinks = focusLinkCandidates.filter(
+  (link, index, links) => links.findIndex(({ href }) => href === link.href) === index
+);
+---
+
+<BaseLayout
+  title={localDiscoveryPage.meta.title}
+  description={localDiscoveryPage.meta.description}
+  structuredData={localDiscoveryStructuredData}
+>
+  <Header />
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[linear-gradient(180deg,#fffdf8_0%,#fff8f1_18rem,var(--color-paper-soft)_48rem,var(--color-paper)_100%)]">
+    <section class="border-b border-black/10 bg-white/76">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="max-w-4xl">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+            {localDiscoveryPage.hero.eyebrow}
+          </p>
+          <h1 class="display-face mt-3 max-w-[13ch] text-[2.45rem] uppercase leading-[0.92] tracking-[-0.045em] md:max-w-none md:text-6xl">
+            {localDiscoveryPage.hero.title}
+          </h1>
+          <p class="mt-4 max-w-3xl text-[0.98rem] leading-6 text-[var(--color-ink)]/78 md:mt-5 md:text-lg md:leading-8">
+            {localDiscoveryPage.hero.description}
+          </p>
+
+          <div class="mt-7 flex flex-wrap gap-3">
+            {focusLinks.map((link, index) => (
+              <a
+                class:list={[
+                  "focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] transition",
+                  index === 0
+                    ? "bg-[var(--color-pink)] text-white hover:bg-[var(--color-ink)]"
+                    : "border border-black/12 bg-white text-[var(--color-ink)] hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                ]}
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="max-w-3xl">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+            Why they stand out
+          </p>
+          <h2 class="display-face mt-3 max-w-[12ch] text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+            Short answer: direct songs, live energy, and a clear local identity.
+          </h2>
+        </div>
+
+        <div class="mt-6 grid gap-3 md:mt-8 md:gap-4 sm:grid-cols-2">
+          {localDiscoveryPage.differentiators.map((item, index) => (
+            <article class="poster-frame rounded-[1.5rem] p-5 md:rounded-[1.75rem] md:p-6">
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <p class="mt-3 text-[1rem] font-semibold leading-7 text-[var(--color-ink)] md:text-lg md:leading-8">
+                {item}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[var(--color-paper-soft)]">
+      <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.88fr)]">
+        <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Proof points</p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {localDiscoveryPage.proofPoints.map((point) => (
+              <div class="rounded-[1.25rem] border border-black/8 bg-white px-4 py-4">
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">{point.label}</p>
+                <p class="mt-3 text-sm font-semibold leading-6 text-[var(--color-ink)]/84 md:text-base">
+                  {point.value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <aside class="poster-frame rounded-[1.75rem] p-5 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Fast paths</p>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78">
+            If you found the band through local search, the next step is simple: hear the songs, check the next show,
+            and move straight to the page that fits what you need.
+          </p>
+          <div class="mt-6 grid gap-3">
+            {focusLinks.map((link, index) => (
+              <a
+                class:list={[
+                  "focus-ring flex min-h-12 items-center justify-between rounded-[1.25rem] border px-4 py-3 text-sm font-bold uppercase tracking-[0.12em] transition",
+                  index === 0
+                    ? "border-[var(--color-pink)] bg-[var(--color-pink)] text-white hover:bg-[var(--color-ink)] hover:border-[var(--color-ink)]"
+                    : "border-black/8 bg-white text-[var(--color-ink)] hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                ]}
+                href={link.href}
+              >
+                <span>{link.label}</span>
+                <span aria-hidden="true">-&gt;</span>
+              </a>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
