@@ -1,5 +1,6 @@
 import { upcomingShows as fallbackShows } from "../../data/shows";
 import { sanityClient } from "../sanity/client";
+import { partitionShowsByDate } from "./schedule.js";
 import {
   allShowSlugsQuery,
   mapShowEntry,
@@ -40,21 +41,27 @@ const fallbackEntries: ShowEntry[] = fallbackShows.map((show) => ({
   offers: normalizeOffer(show.offers)
 }));
 
+const getFallbackShowBuckets = () => partitionShowsByDate(fallbackEntries);
+
 export const getUpcomingShows = async (): Promise<ShowEntry[]> => {
-  if (!sanityClient) return fallbackEntries;
+  if (!sanityClient) return getFallbackShowBuckets().upcoming;
 
   try {
     const shows = await sanityClient.fetch(upcomingShowsQuery);
-    if (!Array.isArray(shows) || shows.length === 0) return fallbackEntries;
+    if (!Array.isArray(shows) || shows.length === 0) return getFallbackShowBuckets().upcoming;
 
     const normalized = shows
       .map(mapShowEntry)
       .filter((show): show is ShowEntry => Boolean(show));
 
-    return normalized.length > 0 ? normalized : fallbackEntries;
+    return normalized.length > 0 ? normalized : getFallbackShowBuckets().upcoming;
   } catch {
-    return fallbackEntries;
+    return getFallbackShowBuckets().upcoming;
   }
+};
+
+export const getPastShows = async (): Promise<ShowEntry[]> => {
+  return getFallbackShowBuckets().past;
 };
 
 export const getAllShowSlugs = async (): Promise<string[]> => {

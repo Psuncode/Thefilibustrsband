@@ -2,10 +2,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
-import { getUpcomingShows } from "../../lib/shows/data";
+import { getPastShows, getUpcomingShows } from "../../lib/shows/data";
 import { siteMeta, siteRoutes, specialRoutes } from "../../data/site";
 
 const shows = await getUpcomingShows();
+const pastShows = await getPastShows();
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -127,6 +128,64 @@ const formatter = new Intl.DateTimeFormat("en-US", {
         </article>
       </div>
     </section>
+
+    {pastShows.length > 0 ? (
+      <section class="border-t border-black/10 bg-white">
+        <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+            Past shows
+          </p>
+          <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+            Recent dates that already happened.
+          </h2>
+          <div class="mt-8 grid gap-4 md:grid-cols-2 md:gap-5 xl:grid-cols-3">
+            {pastShows.map((show) => (
+              <article class="poster-frame overflow-hidden rounded-[1.75rem] opacity-95">
+                {show.flyerUrl ? (
+                  <a class="block" href={`/shows/${show.slug}`}>
+                    <img
+                      alt={`${show.title} event image`}
+                      class="aspect-[4/3] w-full object-cover object-center saturate-[0.82]"
+                      loading="lazy"
+                      src={show.flyerUrl}
+                    />
+                  </a>
+                ) : null}
+                <div class="p-4 md:p-5">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+                      {formatter.format(new Date(show.startsAt))}
+                    </p>
+                    <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                      Past show
+                    </p>
+                  </div>
+                  <h2 class="mt-4 text-2xl font-black uppercase leading-tight text-[var(--color-ink)]">
+                    <a class="focus-ring rounded-sm" href={`/shows/${show.slug}`}>
+                      {show.title}
+                    </a>
+                  </h2>
+                  <p class="mt-3 text-sm uppercase tracking-[0.12em] text-[var(--color-muted)]">
+                    {show.venue} · {show.city}, {show.state}
+                  </p>
+                  {show.summary ? (
+                    <p class="mt-4 text-sm leading-6 text-[var(--color-ink)]/74">{show.summary}</p>
+                  ) : null}
+                  <div class="mt-5">
+                    <a
+                      class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                      href={`/shows/${show.slug}`}
+                    >
+                      View recap
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ) : null}
   </main>
   <Footer />
 </BaseLayout>

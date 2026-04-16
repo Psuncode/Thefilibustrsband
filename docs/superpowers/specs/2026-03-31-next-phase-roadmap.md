@@ -1,6 +1,7 @@
 # Next-Phase Roadmap
 
 Date: 2026-03-31
+Updated: 2026-04-15
 
 ## Goal
 
@@ -102,13 +103,17 @@ Potential next-phase SEO expansions:
 
 ## Recommended Build Order
 
-1. Set up `Sanity`
-2. Build `/shows`
-3. Build `/shows/[slug]`
-4. Build `/community`
-5. Replace homepage signup fallback with real email-only signup using `Kit`
-6. Add Spotify / Apple Music popup
-7. Explore merch
+Current shipped status:
+- `Sanity` foundation for shows is in repo, but community is still hardcoded
+- `/shows` and `/shows/[slug]` are shipped
+- `/community` and `/community/[slug]` are shipped from repo data
+- the streaming popup / `/listen` flow is shipped
+
+Next steps:
+1. Set up `Sanity` for community content and migrate `/community` off hardcoded repo data
+2. Replace homepage/signup modal fallback with real email-only signup using `Kit`
+3. Expand real Sanity content operations for ongoing publishing workflow
+4. Explore merch
 
 ## Implementation Notes
 

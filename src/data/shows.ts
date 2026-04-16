@@ -50,14 +50,14 @@ export const upcomingShows = [
       priceCurrency: "USD",
       availability: "https://schema.org/InStock"
     },
-    summary: "The Filibusters appear at BYU's Devotional: Unforum on Tuesday, April 14.",
+    summary: "The Filibusters played BYU's Devotional: Unforum on Tuesday, April 14.",
     country: "US",
     body: [
-      "The Filibusters are part of BYU's Devotional: Unforum at the Marriott Center on Tuesday, April 14 from 11:05 AM to 12:00 PM.",
+      "The Filibusters played as part of BYU's Devotional: Unforum at the Marriott Center on Tuesday, April 14 from 11:05 AM to 12:00 PM.",
       "Unforum is described by BYU as a student-centered year in review celebrating student successes, performances, service, and achievements."
     ],
     lineup: ["The Filibusters"],
-    notes: "Event details are based on the BYU Events Calendar listing and should be confirmed with BYU before attending.",
+    notes: "Event details are based on the BYU Events Calendar listing.",
     seoDescription:
       "The Filibusters appear during BYU's Devotional: Unforum on April 14, 2026 at the Marriott Center in Provo, Utah."
   },
