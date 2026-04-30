@@ -74,7 +74,11 @@ export const initMotion = (root = globalThis.document) => {
 
   if (reducedMotion || typeof IntersectionObserver === "undefined") {
     nodes.forEach(activateMotionNode);
-    return () => {};
+    return () => {
+      nodes.forEach((node) => {
+        delete node.dataset.motionReady;
+      });
+    };
   }
 
   const observer = new IntersectionObserver((entries) => {
@@ -90,5 +94,11 @@ export const initMotion = (root = globalThis.document) => {
 
   nodes.forEach((node) => observer.observe(node));
 
-  return () => observer.disconnect();
+  return () => {
+    observer.disconnect();
+
+    nodes.forEach((node) => {
+      delete node.dataset.motionReady;
+    });
+  };
 };
