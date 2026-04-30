@@ -706,38 +706,48 @@ body.follow-prompt-open {
 
 /* Motion and Reveal Utilities */
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.motion-ready .reveal-on-scroll {
+  transition:
+    opacity var(--motion-duration-slow) var(--motion-ease-emphasis),
+    transform var(--motion-duration-slow) var(--motion-ease-emphasis);
   will-change: opacity, transform;
+}
+
+.motion-ready .reveal-on-scroll:not(.is-revealed) {
+  opacity: 0;
+  transform: translate3d(0, var(--motion-distance-base), 0);
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
-.delay-100 {
+.animate-fade-in-up.delay-100 {
   transition-delay: 100ms;
   animation-delay: 100ms;
 }
 
-.delay-200 {
+.animate-fade-in-up.delay-200 {
   transition-delay: 200ms;
   animation-delay: 200ms;
 }
 
-.delay-300 {
+.animate-fade-in-up.delay-300 {
   transition-delay: 300ms;
   animation-delay: 300ms;
 }
 
-.delay-400 {
+.animate-fade-in-up.delay-400 {
   transition-delay: 400ms;
   animation-delay: 400ms;
 }
 
-.delay-500 {
+.animate-fade-in-up.delay-500 {
   transition-delay: 500ms;
   animation-delay: 500ms;
 }
