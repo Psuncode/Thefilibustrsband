@@ -46,7 +46,7 @@ const activateMotionNode = (node) => {
   }
 };
 
-export const initMotion = (root = document) => {
+export const initMotion = (root = globalThis.document) => {
   if (typeof window === "undefined" || !root?.querySelectorAll) {
     return () => {};
   }
