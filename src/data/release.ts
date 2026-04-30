@@ -18,7 +18,7 @@ export const latestRelease = {
     },
     {
       label: "YouTube",
-      href: "https://www.youtube.com/@TheFilibusters",
+      href: "https://www.youtube.com/@TheFilibustersband",
       icon: "play"
     }
   ]
