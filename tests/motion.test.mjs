@@ -6,6 +6,7 @@ import {
   MOTION_STAGGER_STEP_MS,
   createRevealObserverOptions,
   getMotionItemDelay,
+  initMotion,
   shouldReduceMotion
 } from "../src/lib/motion.js";
 
@@ -40,4 +41,90 @@ test("returns immediate observer options for reduced motion fallback", () => {
     threshold: 0,
     rootMargin: "0px 0px 0px 0px"
   });
+});
+
+const createFakeMotionNode = () => {
+  const styleValues = new Map();
+
+  return {
+    dataset: {},
+    style: {
+      getPropertyValue(name) {
+        return styleValues.get(name) ?? "";
+      },
+      setProperty(name, value) {
+        styleValues.set(name, value);
+      }
+    },
+    hasAttribute(name) {
+      return name === "data-motion";
+    }
+  };
+};
+
+test("returns a no-op when initialized without browser globals", () => {
+  const originalWindow = globalThis.window;
+  const originalDocument = globalThis.document;
+
+  try {
+    delete globalThis.window;
+    delete globalThis.document;
+
+    const cleanup = initMotion();
+
+    assert.equal(typeof cleanup, "function");
+    assert.doesNotThrow(() => cleanup());
+  } finally {
+    globalThis.window = originalWindow;
+    globalThis.document = originalDocument;
+  }
+});
+
+test("does not re-observe nodes that were already initialized on the same root", () => {
+  const originalWindow = globalThis.window;
+  const originalIntersectionObserver = globalThis.IntersectionObserver;
+  const nodes = [createFakeMotionNode(), createFakeMotionNode()];
+  const observed = [];
+
+  globalThis.window = {
+    matchMedia() {
+      return { matches: false };
+    }
+  };
+  globalThis.IntersectionObserver = class {
+    constructor(callback, options) {
+      this.callback = callback;
+      this.options = options;
+    }
+
+    observe(node) {
+      observed.push(node);
+    }
+
+    unobserve() {}
+
+    disconnect() {}
+  };
+
+  const root = {
+    querySelectorAll(selector) {
+      if (selector === "[data-motion]") {
+        return nodes;
+      }
+
+      return [];
+    }
+  };
+
+  try {
+    initMotion(root);
+    initMotion(root);
+
+    assert.equal(observed.length, 2);
+    assert.equal(nodes[0].dataset.motionReady, "true");
+    assert.equal(nodes[1].dataset.motionReady, "true");
+  } finally {
+    globalThis.window = originalWindow;
+    globalThis.IntersectionObserver = originalIntersectionObserver;
+  }
 });

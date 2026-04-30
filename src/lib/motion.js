@@ -56,7 +56,9 @@ export const initMotion = (root = globalThis.document) => {
       ? window.matchMedia(MOTION_MEDIA_QUERY)
       : undefined;
   const reducedMotion = shouldReduceMotion(mediaQueryList);
-  const nodes = Array.from(root.querySelectorAll("[data-motion]"));
+  const nodes = Array.from(root.querySelectorAll("[data-motion]")).filter(
+    (node) => node.dataset.motionReady !== "true"
+  );
 
   if (nodes.length === 0) {
     return () => {};
