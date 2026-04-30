@@ -128,3 +128,55 @@ test("does not re-observe nodes that were already initialized on the same root",
     globalThis.IntersectionObserver = originalIntersectionObserver;
   }
 });
+
+test("cleanup allows the same root to be initialized again", () => {
+  const originalWindow = globalThis.window;
+  const originalIntersectionObserver = globalThis.IntersectionObserver;
+  const nodes = [createFakeMotionNode(), createFakeMotionNode()];
+  const observed = [];
+  let disconnectCount = 0;
+
+  globalThis.window = {
+    matchMedia() {
+      return { matches: false };
+    }
+  };
+  globalThis.IntersectionObserver = class {
+    constructor() {}
+
+    observe(node) {
+      observed.push(node);
+    }
+
+    unobserve() {}
+
+    disconnect() {
+      disconnectCount += 1;
+    }
+  };
+
+  const root = {
+    querySelectorAll(selector) {
+      if (selector === "[data-motion]") {
+        return nodes;
+      }
+
+      return [];
+    }
+  };
+
+  try {
+    const cleanup = initMotion(root);
+
+    cleanup();
+    initMotion(root);
+
+    assert.equal(disconnectCount, 1);
+    assert.equal(observed.length, 4);
+    assert.equal(nodes[0].dataset.motionReady, "true");
+    assert.equal(nodes[1].dataset.motionReady, "true");
+  } finally {
+    globalThis.window = originalWindow;
+    globalThis.IntersectionObserver = originalIntersectionObserver;
+  }
+});
