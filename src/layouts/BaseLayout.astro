@@ -87,6 +87,7 @@ const structuredDataGraph = [
     <script>
       import { track } from "@vercel/analytics";
       import { getTrackedClickEvent, getTrackedFormEvent, getTrackedLinkEvent } from "../lib/analytics.js";
+      import { initMotion } from "../lib/motion.js";
 
       document.addEventListener("click", (event) => {
         const target = event.target;
@@ -132,6 +133,54 @@ const structuredDataGraph = [
           track(formEvent.eventName, formEvent.properties);
         }
       });
+
+      function shouldRunMotion() {
+        return (
+          typeof window !== "undefined" &&
+          typeof window.matchMedia === "function" &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        );
+      }
+
+      // Preserve legacy reveal behavior until all components move to [data-motion].
+      function initScrollReveal() {
+        const shouldAnimate = shouldRunMotion();
+        const root = document.documentElement;
+        const nodes = document.querySelectorAll(".reveal-on-scroll");
+
+        root.classList.toggle("motion-ready", shouldAnimate);
+
+        if (!shouldAnimate || typeof IntersectionObserver === "undefined") {
+          nodes.forEach((node) => node.classList.add("is-revealed"));
+          return;
+        }
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-revealed");
+            }
+          });
+        }, observerOptions);
+
+        nodes.forEach((node) => {
+          observer.observe(node);
+        });
+      }
+
+      function initPageMotion() {
+        initMotion();
+        initScrollReveal();
+      }
+
+      initPageMotion();
+      document.addEventListener("astro:page-load", initPageMotion);
     </script>
   </body>
 </html>
