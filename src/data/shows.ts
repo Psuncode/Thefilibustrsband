@@ -85,12 +85,13 @@ export const upcomingShows = [
     body: [
       "The Filibusters take the stage at Les Femmes de Velour 2026, Velour's annual celebration of femme artists shaping the local music scene.",
       "This Friday, May 8 bill is part of an 11-night festival featuring 40+ artists and built around connection, collaboration, and support for emerging voices in the local scene.",
-      "The Filibusters play at 7:30 PM at Velour Live Music Gallery, 135 N University Ave, Provo, UT 84601, alongside Gralley, Shrink The Giant, and Orcamind.",
+      "Les Femmes de Velour 2026 happens on Friday, May 8 at Velour Live Music Gallery, 135 N University Ave, Provo, UT 84601, with doors expected at 7:30 PM.",
+      "The Filibusters share the bill with Gralley, Shrink The Giant, and Orcamind.",
       "For tickets, go to https://www.24tix.com/. For festival updates, lineup info, and last-minute changes, follow Velour at https://www.facebook.com/VelourLive/ and learn more at https://www.velourlive.com/."
     ],
     lineup: ["The Filibusters", "Gralley", "Shrink The Giant", "Orcamind"],
     notes:
-      "Ticketing runs through 24Tix. Venue updates and any lineup or timing changes should be confirmed directly with Velour.",
+      "Ticketing runs through 24Tix. Doors are expected at 7:30 PM, and final set times, lineup changes, or venue updates should be confirmed directly with Velour.",
     seoDescription:
       "The Filibusters play Les Femmes de Velour 2026 on Friday, May 8, 2026 at Velour Live Music Gallery in Provo, Utah."
   },
