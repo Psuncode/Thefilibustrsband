@@ -176,6 +176,14 @@ body.follow-prompt-open {
     animation-duration: 0.01ms;
     animation-iteration-count: 1;
   }
+
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-zoom-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .feedback-marquee-mask {
