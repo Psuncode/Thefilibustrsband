@@ -2,18 +2,20 @@
 import { Image } from "astro:assets";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
-import { communityPosts } from "../../data/community";
+import { getAllCommunitySlugs, getCommunityPostBySlug } from "../../lib/community/data";
 import { siteMeta } from "../../data/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-export function getStaticPaths() {
-  return communityPosts.map((post) => ({
-    params: { slug: post.slug }
+export async function getStaticPaths() {
+  const slugs = await getAllCommunitySlugs();
+
+  return slugs.map((slug) => ({
+    params: { slug }
   }));
 }
 
 const { slug } = Astro.params;
-const post = communityPosts.find((entry) => entry.slug === slug);
+const post = slug ? await getCommunityPostBySlug(slug) : null;
 
 if (!post) {
   throw new Error(`Unknown community slug: ${slug}`);
@@ -72,12 +74,11 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
         </article>
 
         <aside class="poster-frame overflow-hidden rounded-[2rem]">
-          <Image
-            src={post.heroImage}
+          <img
+            src={post.heroImageUrl}
             alt={post.heroAlt}
             class="aspect-[4/5] w-full object-cover object-center"
-            widths={[720, 1080]}
-            sizes="(max-width: 1023px) 100vw, 40vw"
+            loading="lazy"
           />
         </aside>
       </div>

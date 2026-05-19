@@ -2,7 +2,8 @@
 import { Image } from "astro:assets";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
-import { communityPage, communityPosts } from "../../data/community";
+import { communityPage } from "../../data/community";
+import { getCommunityPosts } from "../../lib/community/data";
 import { homepageContent } from "../../data/homepage";
 import { siteMeta } from "../../data/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -12,6 +13,8 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   year: "numeric"
 });
+
+const communityPosts = await getCommunityPosts();
 ---
 
 <BaseLayout
@@ -63,12 +66,11 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
           {communityPosts.map((post) => (
             <article class="poster-frame overflow-hidden rounded-[1.75rem]">
               <a class="block" href={`/community/${post.slug}`}>
-                <Image
-                  src={post.heroImage}
+                <img
+                  src={post.heroImageUrl}
                   alt={post.heroAlt}
                   class="aspect-[16/10] w-full object-cover object-center"
-                  widths={[720, 1080]}
-                  sizes="(max-width: 767px) 100vw, 50vw"
+                  loading="lazy"
                 />
               </a>
               <div class="p-4 md:p-5">
