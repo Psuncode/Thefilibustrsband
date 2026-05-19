@@ -75,6 +75,9 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
           <Image
             src={post.heroImage}
             alt={post.heroAlt}
+            width="1600"
+            height="900"
+            decoding="async"
             class="aspect-[4/5] w-full object-cover object-center"
             widths={[720, 1080]}
             sizes="(max-width: 1023px) 100vw, 40vw"
