@@ -6,3 +6,17 @@ dist
 /tmp/verify-seo/
 Band Assest
 Brand Guide and logos
+.vercel
+.env*.local
+
+# Multi-agent skill install directories (npx autoskills)
+.agents/
+.claude/
+.cline/
+.codebuddy/
+.codex/vendor/
+.continue/
+.junie/
+.kiro/
+memory/
+skills-lock.json
