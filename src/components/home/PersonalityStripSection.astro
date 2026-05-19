@@ -7,18 +7,18 @@ const feedbackRows = [
 ];
 ---
 
-<section class="bg-[var(--color-ink)] text-white">
+<section aria-labelledby="personality-strip-heading" class="bg-[var(--color-ink)] text-white">
   <div class="mx-auto max-w-6xl px-4 py-8 reveal-on-scroll md:px-6 md:py-16">
     <div class="flex flex-col gap-2.5">
       <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">Proof of life</p>
-      <h2 class="display-face max-w-4xl text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+      <h2 id="personality-strip-heading" class="display-face max-w-4xl text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
         {homepageContent.personality.feedbackTitle}
       </h2>
       <p class="max-w-2xl text-[0.96rem] leading-6 text-white/80 md:text-base md:leading-7">
         We could try to explain it, but this says it better.
       </p>
     </div>
-    <div role="region" aria-label="Listener feedback" class="mt-5 flex flex-col gap-2.5 overflow-hidden md:mt-10 md:gap-5">
+    <div class="mt-5 flex flex-col gap-2.5 overflow-hidden md:mt-10 md:gap-5">
       {feedbackRows.map((row, rowIndex) => (
         <div class="feedback-marquee-mask">
           <div class:list={["feedback-track", rowIndex % 2 === 1 && "feedback-track-reverse"]}>
