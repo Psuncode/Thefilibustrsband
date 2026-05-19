@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import SubscribeModal from "../components/site/SubscribeModal.astro";
@@ -55,6 +56,7 @@ const structuredDataGraph = [
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap"
     />
+    <ClientRouter />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={pageUrl.href} />

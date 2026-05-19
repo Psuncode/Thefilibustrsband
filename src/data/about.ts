@@ -3,7 +3,7 @@ import type { ImageMetadata } from "astro";
 import atticusPhoto from "../assets/images/atticus-wintch-bassist.jpg";
 import curtisPhoto from "../assets/images/curtis-schnitzer-drummer.jpg";
 import hannaPhoto from "../assets/images/hanna-eyre-vocalist.jpg";
-import thomasPhoto from "../assets/images/thomas-wintch.jpg";
+import thomasPhoto from "../assets/images/thomas-wintch-guitarist.jpg";
 
 const aboutCore = {
   bandName: "The Filibusters",
