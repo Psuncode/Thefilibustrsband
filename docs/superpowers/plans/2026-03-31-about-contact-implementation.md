@@ -631,3 +631,4 @@ No `TODO`, `TBD`, or “implement later” language remains in the executable ta
 - member objects consistently use `name`, `role`, `photo`, and `alt`
 - CTA objects consistently use `label` and `href`
 
+1

@@ -18,72 +18,7 @@ This plan remains useful as the original implementation checklist, but it is no 
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add the first CMS-backed product surface by integrating Sanity and shipping a visual upcoming-shows grid at `/shows` plus event detail pages at `/shows/[slug]`.
-
-**Architecture:** Keep the Astro site as the primary front end and add a repo-local Sanity Studio plus a small shared data layer in `src/lib/`. Route generation should prefer Sanity content when environment variables are present, but keep a repo-local fallback wired to the existing `src/data/shows.ts` so the site still builds cleanly without project credentials during setup.
-
-**Tech Stack:** Astro 5, TypeScript, Tailwind CSS, Sanity Studio, `@sanity/client`, GROQ
-
----
-
-## File Structure
-
-- Create: `sanity.config.ts`
-  - Sanity Studio configuration and schema registration.
-- Create: `sanity.cli.ts`
-  - CLI config for local Studio commands.
-- Create: `sanity/schemaTypes/index.ts`
-  - Export Sanity schema types.
-- Create: `sanity/schemaTypes/showType.ts`
-  - `show` document schema.
-- Modify: `package.json`
-  - Add Sanity dependencies and Studio scripts.
-- Modify: `.env.example`
-  - Add Sanity environment variable placeholders if the file exists, otherwise create it.
-- Create: `src/lib/sanity/env.ts`
-  - Reads and validates public Sanity env values.
-- Create: `src/lib/sanity/client.ts`
-  - Shared Sanity client factory.
-- Create: `src/lib/shows/types.ts`
-  - Normalized front-end show type.
-- Create: `src/lib/shows/queries.ts`
-  - GROQ queries and mapping utilities.
-- Create: `src/lib/shows/data.ts`
-  - Fetch Sanity data with repo-local fallback.
-- Modify: `src/data/shows.ts`
-  - Expand fallback data to support list and detail pages.
-- Create: `src/pages/shows/index.astro`
-  - Upcoming-shows grid page.
-- Create: `src/pages/shows/[slug].astro`
-  - Event detail route using `getStaticPaths`.
-- Modify: `src/components/home/ShowsPreviewSection.astro`
-  - Link homepage show preview to the new route and normalize card CTA behavior.
-- Modify: `src/data/site.ts`
-  - Add `Shows` primary nav route and any route constants needed.
-- Modify: `src/pages/sitemap.xml.ts`
-  - Include `/shows` and generated show detail URLs.
-
-## Constraints And Verification Notes
-
-- There is no test runner configured in `package.json`.
-- Verification for this slice must rely on:
-  - `npm run build`
-  - focused file review
-- The site must still build without active Sanity credentials by falling back to `src/data/shows.ts`.
-- `/shows` should list upcoming events only.
-- `/shows/[slug]` should be article-style event pages with flyer/media as supporting content.
-
-### Task 1: Add Sanity Dependencies And Studio Scaffolding
-
-**Files:**
-- Modify: `package.json`
-- Create: `sanity.config.ts`
-- Create: `sanity.cli.ts`
-- Create: `sanity/schemaTypes/index.ts`
-- Create: `sanity/schemaTypes/showType.ts`
-- Modify or create: `.env.example`
-
-- [ ] **Step 1: Add Sanity packages and scripts**
+**Goal:** Add the first CMS-backed product surface by integrating Sanity and shipping a visual upcoming-shows grid at `/shows` plus event detail pages at `/shows/[slug]`.\
 
 Add dependencies for a local Studio and query client:
 
