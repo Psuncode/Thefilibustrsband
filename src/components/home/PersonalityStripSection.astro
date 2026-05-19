@@ -18,7 +18,7 @@ const feedbackRows = [
         We could try to explain it, but this says it better.
       </p>
     </div>
-    <div class="mt-5 flex flex-col gap-2.5 overflow-hidden md:mt-10 md:gap-5">
+    <div role="region" aria-label="Listener feedback" class="mt-5 flex flex-col gap-2.5 overflow-hidden md:mt-10 md:gap-5">
       {feedbackRows.map((row, rowIndex) => (
         <div class="feedback-marquee-mask">
           <div class:list={["feedback-track", rowIndex % 2 === 1 && "feedback-track-reverse"]}>
