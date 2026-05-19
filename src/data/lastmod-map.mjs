@@ -1,7 +1,8 @@
-// Config-friendly lastmod data for the sitemap integration.
-// Kept separate from shows.ts / community.ts so astro.config.mjs can import it
-// without pulling in image assets (which only resolve inside the Astro build).
-// If you add a show or community post, mirror its slug + date here.
+// SOURCE-OF-TRUTH MIRROR — slug + date pairs duplicated from src/data/{shows,community}.ts.
+// Kept separate so astro.config.mjs can import it without pulling in image assets
+// (which only resolve inside the Astro build).
+// tests/lastmod-map.test.mjs guards against drift. If you add/remove an entry here,
+// ensure the matching .ts file is updated, and vice versa.
 
 export const showLastmod = [
   { slug: "byu-battle-of-the-bands-2026", startsAt: "2026-03-28T19:00:00-06:00" },
