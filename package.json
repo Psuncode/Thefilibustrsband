@@ -12,6 +12,7 @@
     "sanity:build": "sanity build"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^9.0.5",
     "@sanity/client": "^7.20.0",
