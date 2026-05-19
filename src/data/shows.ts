@@ -1,6 +1,7 @@
 import battleWinnerImage from "../assets/images/battle-of-the-band-winner.jpg";
 import devotionalUnforumImage from "../assets/images/devotional-unforum.png";
 import utahArtFestivalImage from "../assets/images/utah-art-festival-2026.png";
+import velourShowImage from "../assets/images/the-filibusters-velour-live.jpg";
 
 export const upcomingShows = [
   {
@@ -60,6 +61,39 @@ export const upcomingShows = [
     notes: "Event details are based on the BYU Events Calendar listing.",
     seoDescription:
       "The Filibusters appear during BYU's Devotional: Unforum on April 14, 2026 at the Marriott Center in Provo, Utah."
+  },
+  {
+    title: "Les Femmes de Velour 2026",
+    slug: "les-femmes-de-velour-2026-05-08",
+    status: "announced",
+    startsAt: "2026-05-08T19:30:00-06:00",
+    venue: "Velour Live Music Gallery",
+    city: "Provo",
+    state: "Utah",
+    ticketUrl: "https://www.24tix.com/",
+    flyerUrl: velourShowImage.src,
+    organizerName: "Velour Live Music Gallery",
+    organizerUrl: "https://www.velourlive.com/",
+    offers: {
+      url: "https://www.24tix.com/",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock"
+    },
+    summary:
+      "The Filibusters play Les Femmes de Velour 2026 on Friday, May 8 at Velour Live Music Gallery in Provo.",
+    country: "US",
+    body: [
+      "The Filibusters take the stage at Les Femmes de Velour 2026, Velour's annual celebration of femme artists shaping the local music scene.",
+      "This Friday, May 8 bill is part of an 11-night festival featuring 40+ artists and built around connection, collaboration, and support for emerging voices in the local scene.",
+      "Les Femmes de Velour 2026 happens on Friday, May 8 at Velour Live Music Gallery, 135 N University Ave, Provo, UT 84601, with doors expected at 7:30 PM.",
+      "The Filibusters share the bill with Gralley, Shrink The Giant, and Orcamind.",
+      "For tickets, go to https://www.24tix.com/. For festival updates, lineup info, and last-minute changes, follow Velour at https://www.facebook.com/VelourLive/ and learn more at https://www.velourlive.com/."
+    ],
+    lineup: ["The Filibusters", "Gralley", "Shrink The Giant", "Orcamind"],
+    notes:
+      "Ticketing runs through 24Tix. Doors are expected at 7:30 PM, and final set times, lineup changes, or venue updates should be confirmed directly with Velour.",
+    seoDescription:
+      "The Filibusters play Les Femmes de Velour 2026 on Friday, May 8, 2026 at Velour Live Music Gallery in Provo, Utah."
   },
   {
     title: "Utah Arts Festival 2026",
