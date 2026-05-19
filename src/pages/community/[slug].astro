@@ -44,12 +44,12 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
           <p class="mt-5 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
             {dateFormatter.format(new Date(post.publishedAt))}
           </p>
-          <p class="mt-5 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">
+          <p class="mt-5 text-base leading-7 text-[var(--color-ink)]/85 md:text-lg">
             {post.summary}
           </p>
           <div class="mt-8 space-y-4">
             {post.body.map((paragraph) => (
-              <p class="text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{paragraph}</p>
+              <p class="text-base leading-7 text-[var(--color-ink)]/85 md:text-lg">{paragraph}</p>
             ))}
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
