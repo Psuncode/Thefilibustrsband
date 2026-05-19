@@ -74,11 +74,14 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
         </article>
 
         <aside class="poster-frame overflow-hidden rounded-[2rem]">
-          <img
+          <Image
             src={post.heroImageUrl}
             alt={post.heroAlt}
+            width={post.heroImageWidth ?? 1280}
+            height={post.heroImageHeight ?? 1600}
             class="aspect-[4/5] w-full object-cover object-center"
             loading="lazy"
+            decoding="async"
           />
         </aside>
       </div>

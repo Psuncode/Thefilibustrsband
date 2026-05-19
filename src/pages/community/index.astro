@@ -66,11 +66,14 @@ const communityPosts = await getCommunityPosts();
           {communityPosts.map((post) => (
             <article class="poster-frame overflow-hidden rounded-[1.75rem]">
               <a class="block" href={`/community/${post.slug}`}>
-                <img
+                <Image
                   src={post.heroImageUrl}
                   alt={post.heroAlt}
+                  width={post.heroImageWidth ?? 1280}
+                  height={post.heroImageHeight ?? 800}
                   class="aspect-[16/10] w-full object-cover object-center"
                   loading="lazy"
+                  decoding="async"
                 />
               </a>
               <div class="p-4 md:p-5">
