@@ -179,8 +179,11 @@ const linkifyParagraph = (paragraph: string) =>
             <img
               alt={`${show.title} flyer or event image`}
               class="aspect-[4/5] w-full object-cover object-center"
-              loading="lazy"
+              decoding="async"
+              height="1500"
+              loading="eager"
               src={show.flyerUrl}
+              width="1200"
             />
           ) : null}
           <div class="p-5">
