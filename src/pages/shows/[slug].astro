@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
 import { getAllShowSlugs, getShowBySlug } from "../../lib/shows/data";
+import { formatShowStatus } from "../../lib/shows/status";
 import { siteMeta } from "../../data/site";
 
 export async function getStaticPaths() {
@@ -161,7 +162,7 @@ const linkifyParagraph = (paragraph: string) =>
             </div>
             <div class="poster-frame rounded-[1.5rem] p-5">
               <dt class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Status</dt>
-              <dd class="mt-3 text-lg font-semibold">{show.status}</dd>
+              <dd class="mt-3 text-lg font-semibold">{formatShowStatus(show.status)}</dd>
             </div>
           </dl>
           {show.body.length > 0 ? (
