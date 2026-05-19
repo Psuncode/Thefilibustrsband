@@ -62,10 +62,10 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
         <div class="grid gap-4 md:grid-cols-2 md:gap-5">
           {communityPosts.map((post) => (
             <article class="poster-frame overflow-hidden rounded-[1.75rem]">
-              <a class="block" href={`/community/${post.slug}`}>
+              <a class="block" href={`/community/${post.slug}`} tabindex="-1" aria-hidden="true">
                 <Image
                   src={post.heroImage}
-                  alt={post.heroAlt}
+                  alt=""
                   class="aspect-[16/10] w-full object-cover object-center"
                   widths={[720, 1080]}
                   sizes="(max-width: 767px) 100vw, 50vw"
@@ -80,11 +80,11 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
                     {dateFormatter.format(new Date(post.publishedAt))}
                   </p>
                 </div>
-                <h2 class="mt-4 text-2xl font-black uppercase leading-tight text-[var(--color-ink)]">
+                <h3 class="mt-4 text-2xl font-black uppercase leading-tight text-[var(--color-ink)]">
                   <a class="focus-ring rounded-sm" href={`/community/${post.slug}`}>
                     {post.title}
                   </a>
-                </h2>
+                </h3>
                 <p class="mt-4 text-sm leading-6 text-[var(--color-ink)]/85">{post.summary}</p>
                 <div class="mt-5 grid gap-2.5 sm:flex sm:flex-wrap sm:gap-3 md:mt-6">
                   <a
