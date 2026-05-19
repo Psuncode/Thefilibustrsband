@@ -31,7 +31,7 @@ export const pressPage = {
     "High-energy live shows with emotionally direct writing at the center.",
     "Alt rock from Provo, Utah built for connection, not background noise."
   ],
-  videoLink: "https://www.youtube.com/@TheFilibusters",
+  videoLink: "https://www.youtube.com/@TheFilibustersband",
   contactLabel: "Press contact",
   contactEmail: siteMeta.contactEmail
 } as const;

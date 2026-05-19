@@ -197,7 +197,7 @@ export const socialLinks = [
   },
   {
     label: "YouTube",
-    href: "https://www.youtube.com/@TheFilibusters",
+    href: "https://www.youtube.com/@TheFilibustersband",
     icon: "youtube"
   }
 ] as const satisfies readonly SocialLink[];
@@ -448,7 +448,7 @@ export const listenPage = {
     },
     {
       label: "YouTube",
-      href: "https://www.youtube.com/@TheFilibusters",
+      href: "https://www.youtube.com/@TheFilibustersband",
       icon: "youtube"
     }
   ],
@@ -468,7 +468,7 @@ export const listenPage = {
     },
     {
       label: "YouTube",
-      href: "https://www.youtube.com/@TheFilibusters",
+      href: "https://www.youtube.com/@TheFilibustersband",
       icon: "youtube"
     }
   ]
