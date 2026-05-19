@@ -5,7 +5,6 @@ import { followPrompt } from "../../data/site";
 
 const storageKey = "filibusters-follow-prompt-until";
 const cooldownMs = followPrompt.cooldownDays * 24 * 60 * 60 * 1000;
-const delayMs = followPrompt.delayMs;
 ---
 
 <div aria-hidden="true" class="follow-prompt-shell" data-follow-prompt>
@@ -59,7 +58,7 @@ const delayMs = followPrompt.delayMs;
   </section>
 </div>
 
-<script define:vars={{ cooldownMs, delayMs, storageKey }}>
+<script define:vars={{ cooldownMs, storageKey }}>
   const focusableSelector = [
     "a[href]",
     "button:not([disabled])",
@@ -77,18 +76,6 @@ const delayMs = followPrompt.delayMs;
     const ctas = root.querySelectorAll("[data-follow-prompt-cta]");
 
     let opener = null;
-    let openTimer = 0;
-
-    const readCooldown = () => {
-      try {
-        const raw = window.localStorage.getItem(storageKey);
-        const expiresAt = raw ? Number(raw) : 0;
-
-        return Number.isFinite(expiresAt) ? expiresAt : 0;
-      } catch {
-        return 0;
-      }
-    };
 
     const writeCooldown = () => {
       try {
@@ -102,7 +89,6 @@ const delayMs = followPrompt.delayMs;
       root.classList.remove("is-visible");
       root.setAttribute("aria-hidden", "true");
       document.body.classList.remove("follow-prompt-open");
-      window.clearTimeout(openTimer);
 
       if (opener instanceof HTMLElement && opener.isConnected) {
         opener.focus();
@@ -161,11 +147,9 @@ const delayMs = followPrompt.delayMs;
       }
     };
 
-    const expiresAt = readCooldown();
-
-    if (expiresAt <= Date.now()) {
-      openTimer = window.setTimeout(openPrompt, delayMs);
-    }
+    // Auto-open removed for a11y (WCAG 2.2.2 — no unexpected focus changes).
+    // The prompt now opens only via explicit triggers (existing CTAs / footer link).
+    document.addEventListener("filibusters:follow-prompt-open", openPrompt);
 
     closeControls.forEach((node) => {
       node.addEventListener("click", () => {
