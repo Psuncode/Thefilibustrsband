@@ -7,6 +7,8 @@ export type CommunityPostEntry = {
   publishedAt: string;
   summary: string;
   heroImageUrl: string;
+  heroImageWidth?: number;
+  heroImageHeight?: number;
   heroAlt: string;
   body: string[];
   relatedShowSlug?: string;

@@ -8,6 +8,8 @@ export const upcomingCommunityPostsQuery = `*[_type == "communityPost" && publis
   publishedAt,
   summary,
   "heroImageUrl": heroImage.asset->url,
+  "heroImageWidth": heroImage.asset->metadata.dimensions.width,
+  "heroImageHeight": heroImage.asset->metadata.dimensions.height,
   heroAlt,
   body,
   "relatedShowSlug": relatedShow->slug.current
@@ -24,6 +26,8 @@ export const communityPostBySlugQuery = `*[_type == "communityPost" && slug.curr
   publishedAt,
   summary,
   "heroImageUrl": heroImage.asset->url,
+  "heroImageWidth": heroImage.asset->metadata.dimensions.width,
+  "heroImageHeight": heroImage.asset->metadata.dimensions.height,
   heroAlt,
   body,
   "relatedShowSlug": relatedShow->slug.current
@@ -75,6 +79,10 @@ export const mapCommunityEntry = (post: SanityCommunityRecord): CommunityPostEnt
     publishedAt: post.publishedAt,
     summary: post.summary,
     heroImageUrl: post.heroImageUrl,
+    heroImageWidth:
+      typeof post.heroImageWidth === "number" ? post.heroImageWidth : undefined,
+    heroImageHeight:
+      typeof post.heroImageHeight === "number" ? post.heroImageHeight : undefined,
     heroAlt: post.heroAlt,
     body: blocksToParagraphs(post.body),
     relatedShowSlug: post.relatedShowSlug || undefined
