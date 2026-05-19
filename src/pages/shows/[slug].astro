@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
 import { getAllShowSlugs, getShowBySlug } from "../../lib/shows/data";
+import { buildBreadcrumbList } from "../../lib/seo/breadcrumb";
 import { siteMeta } from "../../data/site";
 
 export async function getStaticPaths() {
@@ -102,6 +103,12 @@ const eventStructuredData = {
   offers: eventOffers
 };
 
+const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
+  { name: "Home", path: "/" },
+  { name: "Shows", path: "/shows" },
+  { name: show.title, path: `/shows/${show.slug}` }
+]);
+
 const escapeHtml = (value: string) =>
   value
     .replaceAll("&", "&amp;")
@@ -122,8 +129,10 @@ const linkifyParagraph = (paragraph: string) =>
   title={pageTitle}
   description={pageDescription}
   ogImage={pageOgImage}
-  ogType="event"
-  structuredData={eventStructuredData}
+  ogImageWidth={1200}
+  ogImageHeight={1500}
+  ogType="music.event"
+  structuredData={[eventStructuredData, breadcrumbStructuredData]}
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-white">
