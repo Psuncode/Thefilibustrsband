@@ -34,7 +34,7 @@ const articleStructuredData = {
   headline: post.title,
   description: post.summary,
   datePublished: post.publishedAt,
-  image: post.heroImageUrl,
+  image: new URL(post.heroImageUrl, Astro.site).href,
   url: new URL(`/community/${post.slug}`, Astro.site).href,
   author: {
     "@type": "MusicGroup",
