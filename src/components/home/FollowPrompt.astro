@@ -77,6 +77,14 @@ const cooldownMs = followPrompt.cooldownDays * 24 * 60 * 60 * 1000;
 
     let opener = null;
 
+    const readCooldown = () => {
+      try {
+        return Number(window.localStorage.getItem(storageKey)) || 0;
+      } catch {
+        return 0;
+      }
+    };
+
     const writeCooldown = () => {
       try {
         window.localStorage.setItem(storageKey, String(Date.now() + cooldownMs));
@@ -93,6 +101,7 @@ const cooldownMs = followPrompt.cooldownDays * 24 * 60 * 60 * 1000;
       if (opener instanceof HTMLElement && opener.isConnected) {
         opener.focus();
       }
+      opener = null;
     };
 
     const trapFocus = (event) => {
@@ -149,7 +158,13 @@ const cooldownMs = followPrompt.cooldownDays * 24 * 60 * 60 * 1000;
 
     // Auto-open removed for a11y (WCAG 2.2.2 — no unexpected focus changes).
     // The prompt now opens only via explicit triggers (existing CTAs / footer link).
-    document.addEventListener("filibusters:follow-prompt-open", openPrompt);
+    // Explicit footer trigger dispatches { force: true } to bypass the cooldown;
+    // all other dispatches respect the cooldown window set on close.
+    document.addEventListener("filibusters:follow-prompt-open", (event) => {
+      const force = event instanceof CustomEvent && event.detail?.force === true;
+      if (!force && Date.now() < readCooldown()) return;
+      openPrompt();
+    });
 
     closeControls.forEach((node) => {
       node.addEventListener("click", () => {
