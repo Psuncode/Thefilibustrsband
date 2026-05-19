@@ -18,7 +18,10 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
-  ogType?: "website" | "article" | "event";
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogType?: "website" | "article" | "music.event";
+  themeColor?: string;
   structuredData?: StructuredDataValue | StructuredDataValue[];
 }
 
@@ -26,7 +29,10 @@ const {
   title,
   description,
   ogImage,
+  ogImageWidth = 1200,
+  ogImageHeight = 1500,
   ogType = "website",
+  themeColor = "#ce2067",
   structuredData = []
 } = Astro.props;
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
@@ -50,6 +56,8 @@ const structuredDataGraph = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content={themeColor} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link
@@ -67,14 +75,15 @@ const structuredDataGraph = [
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={pageUrl.href} />
     <meta property="og:image" content={resolvedOgImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="1500" />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta property="og:image:alt" content={`${siteMeta.title} band photo`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOgImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <script
       type="application/ld+json"
       set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": structuredDataGraph })}
