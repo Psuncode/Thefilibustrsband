@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
 import { getAllCommunitySlugs, getCommunityPostBySlug } from "../../lib/community/data";
+import { buildBreadcrumbList } from "../../lib/seo/breadcrumb";
 import { siteMeta } from "../../data/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
@@ -26,11 +27,40 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   year: "numeric"
 });
+
+const articleStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.title,
+  description: post.summary,
+  datePublished: post.publishedAt,
+  image: post.heroImageUrl,
+  url: new URL(`/community/${post.slug}`, Astro.site).href,
+  author: {
+    "@type": "MusicGroup",
+    name: siteMeta.title,
+    url: siteMeta.url
+  },
+  publisher: {
+    "@type": "MusicGroup",
+    name: siteMeta.title,
+    url: siteMeta.url
+  }
+};
+
+const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
+  { name: "Home", path: "/" },
+  { name: "Community", path: "/community" },
+  { name: post.title, path: `/community/${post.slug}` }
+]);
 ---
 
 <BaseLayout
   title={`${post.title} | ${siteMeta.title}`}
   description={post.summary}
+  ogImage={post.heroImageUrl}
+  ogType="article"
+  structuredData={[articleStructuredData, breadcrumbStructuredData]}
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-white">
