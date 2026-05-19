@@ -15,6 +15,11 @@ export default defineConfig({
   site: "https://www.thefilibustersband.com",
   output: "static",
   adapter: vercel(),
+  image: {
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.sanity.io" }
+    ]
+  },
   integrations: [
     tailwind(),
     sitemap({
