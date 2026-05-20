@@ -11,6 +11,8 @@
     "check": "astro check",
     "preview": "astro preview",
     "test": "node --test",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "verify:seo": "node scripts/verify-seo-mobile.mjs",
     "sanity:dev": "sanity dev",
     "sanity:build": "sanity build"
@@ -29,6 +31,7 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "playwright": "^1.53.0",
     "typescript": "^5.9.3"
   }
