@@ -50,14 +50,28 @@ const pressMailto = (() => {
       <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Short bio</p>
-          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{pressPage.shortBio}</p>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/85 md:text-lg" data-copy-target="short-bio">{pressPage.shortBio}</p>
+          <button
+            type="button"
+            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            data-copy-button="short-bio"
+          >
+            <span data-copy-label>Copy short bio</span>
+          </button>
 
           <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Long bio</p>
-          <div class="mt-4 space-y-4">
+          <div class="mt-4 space-y-4" data-copy-target="long-bio">
             {pressPage.longBio.map((paragraph) => (
-              <p class="text-base leading-7 text-[var(--color-ink)]/78">{paragraph}</p>
+              <p class="text-base leading-7 text-[var(--color-ink)]/85">{paragraph}</p>
             ))}
           </div>
+          <button
+            type="button"
+            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            data-copy-button="long-bio"
+          >
+            <span data-copy-label>Copy long bio</span>
+          </button>
         </article>
 
         <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
@@ -162,4 +176,60 @@ const pressMailto = (() => {
     </section>
   </main>
   <Footer />
+<script>
+  const FEEDBACK_DURATION_MS = 1600;
+
+  const fallbackCopy = (text: string): boolean => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch {
+      ok = false;
+    }
+    textarea.remove();
+    return ok;
+  };
+
+  const copyText = async (text: string): Promise<boolean> => {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // fall through to fallback
+      }
+    }
+    return fallbackCopy(text);
+  };
+
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-button]").forEach((button) => {
+    const targetKey = button.getAttribute("data-copy-button");
+    if (!targetKey) return;
+    const target = document.querySelector<HTMLElement>(`[data-copy-target="${targetKey}"]`);
+    if (!target) return;
+    const label = button.querySelector<HTMLElement>("[data-copy-label]");
+    if (!label) return;
+    const originalLabel = label.textContent;
+
+    button.addEventListener("click", async () => {
+      const text = (target.innerText || "").trim();
+      if (!text) return;
+
+      const ok = await copyText(text);
+      label.textContent = ok ? "Copied!" : "Press Cmd/Ctrl + C";
+
+      window.setTimeout(() => {
+        label.textContent = originalLabel;
+      }, FEEDBACK_DURATION_MS);
+    });
+  });
+</script>
 </BaseLayout>
