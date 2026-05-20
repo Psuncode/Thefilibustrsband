@@ -1,3 +1,5 @@
+import { aboutPage } from "./about";
+
 export type HeaderIconName =
   | "music"
   | "ticket"
@@ -124,6 +126,12 @@ type MusicGroupSchemaInput = {
   image: string;
 };
 
+type MemberPerson = {
+  "@type": "Person";
+  name: string;
+  jobTitle: string;
+};
+
 type WebSiteSchema = {
   "@context": "https://schema.org";
   "@type": "WebSite";
@@ -168,6 +176,7 @@ type MusicGroupSchema = {
   };
   contactPoint: readonly OrganizationContactPointSchema[];
   sameAs: readonly string[];
+  member: readonly MemberPerson[];
   mainEntityOfPage: {
     "@id": string;
   };
@@ -389,6 +398,13 @@ export const buildWebSiteSchema = (): WebSiteSchema => ({
 
 export const buildHomepageWebPageSchema = (): WebPageSchema => homepagePageSchema;
 
+const buildMemberPersons = (): readonly MemberPerson[] =>
+  aboutPage.members.map((member) => ({
+    "@type": "Person",
+    name: member.name,
+    jobTitle: member.role
+  }));
+
 export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGroupSchema => ({
   "@context": "https://schema.org",
   "@type": "MusicGroup",
@@ -407,6 +423,7 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   },
   contactPoint: organizationContactPoints,
   sameAs: socialLinks.map(({ href }) => href),
+  member: buildMemberPersons(),
   mainEntityOfPage: {
     "@id": siteEntityIds.homepagePage
   },
