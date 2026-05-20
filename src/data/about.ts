@@ -143,7 +143,7 @@ export const aboutPage = {
   faq: [
     {
       question: "What genre is The Filibusters?",
-      answer: `${aboutCore.bandName} are an ${aboutCore.genre} band with a focus on emotionally direct songwriting and high-energy performance. Fans of artists like Paramore, The 1975, and other modern alt rock acts often connect with their sound.`
+      answer: `${aboutCore.bandName} are an ${aboutCore.genre} band with a focus on emotionally direct songwriting and high-energy performance. Fans of artists like Paramore, The 1975, and other modern alternative rock acts often connect with their sound.`
     },
     {
       question: "Where is The Filibusters based?",
