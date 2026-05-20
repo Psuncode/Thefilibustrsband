@@ -20,3 +20,8 @@ Brand Guide and logos
 .kiro/
 memory/
 skills-lock.json
+
+# Playwright
+playwright-report
+test-results
+tests/e2e/.cache
