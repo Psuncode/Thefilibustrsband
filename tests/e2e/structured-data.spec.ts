@@ -1,0 +1,44 @@
+import { test, expect, type Page } from "@playwright/test";
+
+const extractJsonLd = async (page: Page): Promise<unknown[]> => {
+  return page.$$eval('script[type="application/ld+json"]', (nodes) => {
+    const extractItems = (value: unknown): unknown[] => {
+      if (!value || typeof value !== "object") return [];
+      if (Array.isArray(value)) return value.flatMap(extractItems);
+      const obj = value as Record<string, unknown>;
+      if (Array.isArray(obj["@graph"])) return obj["@graph"].flatMap(extractItems);
+      return [value];
+    };
+
+    return nodes.flatMap((node) => {
+      try {
+        return extractItems(JSON.parse(node.textContent || ""));
+      } catch {
+        return [];
+      }
+    });
+  });
+};
+
+const isItem = (value: unknown): value is Record<string, unknown> =>
+  Boolean(value) && typeof value === "object";
+
+test("show detail page emits an Event JSON-LD node", async ({ page }) => {
+  await page.goto("/shows");
+  await page.waitForSelector('a[href^="/shows/"]');
+  const slugRoute = await page
+    .locator('a[href^="/shows/"]')
+    .evaluateAll((nodes) =>
+      Array.from(nodes)
+        .map((node) => node.getAttribute("href"))
+        .find((href) => href && href !== "/shows" && /^\/shows\/[^/]+\/?$/.test(href))
+    );
+  expect(slugRoute).toBeTruthy();
+
+  await page.goto(slugRoute!);
+  await page.waitForSelector("main");
+
+  const items = await extractJsonLd(page);
+  const eventNode = items.find((item) => isItem(item) && item["@type"] === "Event");
+  expect(eventNode, `No Event JSON-LD on ${slugRoute}`).toBeTruthy();
+});
