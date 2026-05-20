@@ -14,17 +14,17 @@ export const localDiscoveryPage = {
   meta: {
     title: `${bandFacts.location.display} alt rock band | The Filibusters`,
     description:
-      "The Filibusters are a Provo alternative rock band making loud, emotionally direct songs for Provo live music rooms, late nights, and regional Utah alt rock shows."
+      "Provo alternative rock band making loud, emotionally direct songs for live rooms, late nights, and regional alt rock shows across Utah."
   },
   hero: {
     eyebrow: "Provo alt rock band",
     title: "Provo alternative rock that actually wants something to land.",
     description:
-      `${bandFacts.geoLine} As an alternative band from Utah, the Filibusters keep the writing direct, the live energy high, and the focus on connection instead of polish for its own sake.`
+      `${bandFacts.geoLine} A Utah alternative rock band, the Filibusters keep the writing direct, the live energy high, and the focus on connection instead of polish for its own sake.`
   },
   differentiators: [
-    "Emotionally direct Provo alternative rock rooted in the existing Utah identity of the band",
-    "High-energy Provo live music shows built for loud rooms and real audience connection",
+    "Emotionally direct Provo alternative rock from an alternative band from Utah with a clear regional identity",
+    "High-energy Provo live music shows and Utah alt rock touring built for loud rooms and real audience connection",
     "A clear booking, press, and listen path already wired into the site",
     "Copy and metadata that stay consistent with the about, press, and homepage pages"
   ],
