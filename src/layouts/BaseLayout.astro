@@ -104,7 +104,7 @@ const structuredDataGraph = [
           const linkEvent = getTrackedLinkEvent(link.dataset);
 
           if (linkEvent) {
-            track(linkEvent.eventName, linkEvent.properties);
+            track(linkEvent.eventName, linkEvent.properties as unknown as Record<string, string | number | boolean | null>);
             return;
           }
         }
@@ -118,7 +118,7 @@ const structuredDataGraph = [
         const clickEvent = getTrackedClickEvent(clickTarget.dataset);
 
         if (clickEvent) {
-          track(clickEvent.eventName, clickEvent.properties);
+          track(clickEvent.eventName, clickEvent.properties as unknown as Record<string, string | number | boolean | null>);
         }
       });
 
@@ -132,7 +132,7 @@ const structuredDataGraph = [
         const formEvent = getTrackedFormEvent(target.dataset);
 
         if (formEvent) {
-          track(formEvent.eventName, formEvent.properties);
+          track(formEvent.eventName, formEvent.properties as unknown as Record<string, string | number | boolean | null>);
         }
       });
 
