@@ -39,7 +39,7 @@ body {
   background:
     radial-gradient(circle at top left, rgba(236, 219, 93, 0.18), transparent 24rem),
     linear-gradient(180deg, #fffaf4 0%, var(--color-paper) 22rem);
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
   overflow-x: clip;
 }
 
@@ -70,7 +70,7 @@ body.follow-prompt-open {
 }
 
 .display-face {
-  font-family: "Archivo Black", "Inter", system-ui, sans-serif;
+  font-family: "Archivo Black", "Space Grotesk", system-ui, sans-serif;
 }
 
 .focus-ring {
@@ -312,7 +312,7 @@ body.follow-prompt-open {
 .subscribe-modal-eyebrow {
   margin: 0;
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-pink);
@@ -384,7 +384,7 @@ body.follow-prompt-open {
   background: var(--color-ink);
   padding: 0.75rem 1rem;
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: white;
@@ -492,7 +492,7 @@ body.follow-prompt-open {
   background: var(--color-ink);
   padding: 0.72rem 1rem;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: white;
