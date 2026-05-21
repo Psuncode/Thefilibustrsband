@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/site/Footer.astro";
+import Header from "../components/site/Header.astro";
+import { forFansOfEntries } from "../data/forFansOf";
+import { siteMeta } from "../data/site";
+import { buildBreadcrumbList } from "../lib/seo/breadcrumb";
+
+const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
+  { name: "Home", path: "/" },
+  { name: "For fans of", path: "/for-fans-of" }
+]);
+---
+
+<BaseLayout
+  title={`For fans of Paramore, Arctic Monkeys, and The 1975 | ${siteMeta.title}`}
+  description="The Filibusters compared honestly to Paramore, Arctic Monkeys, and The 1975 — what's similar, what's different, and which tracks to start with."
+  structuredData={[breadcrumbStructuredData]}
+>
+  <Header />
+  <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip bg-white">
+    <section class="border-b border-black/10 bg-paper-soft">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">If you like</p>
+        <h1 class="display-face mt-3 max-w-4xl text-[2.35rem] uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+          For fans of Paramore, Arctic Monkeys, and The 1975.
+        </h1>
+        <aside class="citable-passage mt-6" aria-label="How The Filibusters compare">
+          <span class="citable-passage-label">How we compare</span>
+          {siteMeta.canonicalParagraph}
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-16">
+        <div class="space-y-10">
+          {forFansOfEntries.map((entry) => (
+            <article>
+              <h2 class="display-face text-3xl uppercase leading-[0.95] tracking-[-0.03em] text-ink md:text-4xl">
+                Like {entry.artist}?
+              </h2>
+              <p class="mt-4 text-base leading-7 text-ink/85 md:text-lg">{entry.contrastParagraph}</p>
+              <p class="mt-4 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+                Start with:
+                {entry.recommendedTracks.map((track, idx) => (
+                  <>
+                    {idx > 0 ? ", " : " "}
+                    <a class="underline" href={`/music/${track.toLowerCase().replace(/\s+/g, "-")}`}>{track}</a>
+                  </>
+                ))}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
