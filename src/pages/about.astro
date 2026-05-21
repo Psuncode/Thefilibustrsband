@@ -5,6 +5,7 @@ import Header from "../components/site/Header.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { aboutPage } from "../data/about";
 import { siteEntityIds, siteMeta, specialRoutes } from "../data/site";
+import { buildFaqSchema } from "../lib/seo/faq";
 import heroBand from "../assets/images/hero-band.jpg";
 
 const listenCta = aboutPage.ctas.find(({ href, label }) =>
@@ -38,12 +39,14 @@ const aboutStructuredData = {
     "@id": siteEntityIds.website
   }
 } as const;
+
+const faqStructuredData = buildFaqSchema(aboutPage.faq);
 ---
 
 <BaseLayout
   title={`About | ${siteMeta.title}`}
   description="Meet The Filibusters, a Provo, Utah alt rock band with a direct sound, original songs, and a local identity shaped by live shows, shared roots, and a clear point of view."
-  structuredData={aboutStructuredData}
+  structuredData={[aboutStructuredData, faqStructuredData]}
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[linear-gradient(180deg,#fffdf8_0%,#fff7ef_18rem,var(--color-paper-soft)_44rem,var(--color-paper)_100%)]">
