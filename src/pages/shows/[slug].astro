@@ -49,7 +49,9 @@ const eventEndDate = show.endsAt || show.startsAt;
 const eventStatusByShowStatus = {
   announced: "https://schema.org/EventScheduled",
   "sold-out": "https://schema.org/EventScheduled",
-  canceled: "https://schema.org/EventCancelled"
+  cancelled: "https://schema.org/EventCancelled",
+  canceled: "https://schema.org/EventCancelled",
+  postponed: "https://schema.org/EventPostponed"
 } as const;
 
 const eventOffers =
@@ -76,7 +78,9 @@ const eventStructuredData = {
   startDate: show.startsAt,
   endDate: eventEndDate,
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-  eventStatus: eventStatusByShowStatus[show.status],
+  eventStatus:
+    eventStatusByShowStatus[show.status as keyof typeof eventStatusByShowStatus] ??
+    "https://schema.org/EventScheduled",
   image: pageOgImage ? [encodeURI(pageOgImage)] : undefined,
   url: canonicalShowUrl,
   performer: {

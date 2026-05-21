@@ -21,10 +21,13 @@ export const iconPaths: Record<HeaderIconName, string> = {
   youtube: "M21.6 8.2a2.9 2.9 0 0 0-2-2.1C17.8 5.5 12 5.5 12 5.5s-5.8 0-7.6.6a2.9 2.9 0 0 0-2 2.1A30 30 0 0 0 2 12a30 30 0 0 0 .4 3.8 2.9 2.9 0 0 0 2 2.1c1.8.6 7.6.6 7.6.6s5.8 0 7.6-.6a2.9 2.9 0 0 0 2-2.1A30 30 0 0 0 22 12a30 30 0 0 0-.4-3.8ZM10 15.5v-7l6 3.5-6 3.5Z"
 };
 
+export type SocialPlatformCategory = "streaming" | "social" | "video";
+
 type SocialLink = {
   label: string;
   href: string;
   icon: HeaderIconName;
+  category: SocialPlatformCategory;
 };
 
 type PrimaryNavItem = {
@@ -178,27 +181,32 @@ export const socialLinks = [
   {
     label: "Instagram",
     href: "https://www.instagram.com/thefilibustersband",
-    icon: "instagram"
+    icon: "instagram",
+    category: "social"
   },
   {
     label: "Spotify",
     href: "https://open.spotify.com/artist/4Mf8AkUvGERBfOkG8ozuDl?si=sVvFzSJ-Qd-zMQ-ao6ry9g",
-    icon: "spotify"
+    icon: "spotify",
+    category: "streaming"
   },
   {
     label: "TikTok",
     href: "https://www.tiktok.com/@thefilibustersband",
-    icon: "tiktok"
+    icon: "tiktok",
+    category: "social"
   },
   {
     label: "Apple Music",
     href: "https://music.apple.com/us/artist/the-filibusters/1550597371",
-    icon: "apple"
+    icon: "apple",
+    category: "streaming"
   },
   {
     label: "YouTube",
     href: "https://www.youtube.com/@TheFilibustersband",
-    icon: "youtube"
+    icon: "youtube",
+    category: "video"
   }
 ] as const satisfies readonly SocialLink[];
 
@@ -406,6 +414,9 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
     addressCountry: "US"
   },
   contactPoint: organizationContactPoints,
+  // MusicGroup.sameAs consumes EVERY entry in socialLinks regardless of category.
+  // To extend the discovery graph (Bandcamp, Last.fm, Songkick, Genius, YouTube Music),
+  // add a new entry to socialLinks with the appropriate category — schema picks it up automatically.
   sameAs: socialLinks.map(({ href }) => href),
   mainEntityOfPage: {
     "@id": siteEntityIds.homepagePage
