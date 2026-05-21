@@ -1,3 +1,17 @@
+/**
+ * @deprecated since 2026-05-20.
+ *
+ * This script's checks have been ported to @playwright/test in:
+ *   - tests/e2e/seo.spec.ts (SEO meta-tag assertions per route)
+ *   - tests/e2e/structured-data.spec.ts (Event JSON-LD on show detail)
+ *
+ * The script is preserved for one cycle to verify parity. Once the
+ * Playwright suite has run cleanly in CI for at least one PR cycle,
+ * this file can be removed along with the `verify:seo` npm script.
+ *
+ * For now: prefer `npm run test:e2e` over `npm run verify:seo`.
+ */
+
 import { mkdir, rm } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
