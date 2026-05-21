@@ -2,9 +2,13 @@
   "name": "thefilibustersband-site",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check": "astro check",
     "preview": "astro preview",
     "test": "node --test",
     "verify:seo": "node scripts/verify-seo-mobile.mjs",
@@ -12,7 +16,10 @@
     "sanity:build": "sanity build"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/vercel": "^9.0.5",
     "@sanity/client": "^7.20.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
@@ -23,6 +30,6 @@
   },
   "devDependencies": {
     "playwright": "^1.53.0",
-    "typescript": "^5.8.0"
+    "typescript": "^5.9.3"
   }
 }
