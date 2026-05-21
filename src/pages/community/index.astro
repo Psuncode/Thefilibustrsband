@@ -19,16 +19,16 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   description="Band news, release updates, behind-the-scenes posts, and milestone moments from The Filibusters."
 >
   <Header />
-  <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip bg-[var(--color-paper-soft)]">
+  <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip bg-paper-soft">
     <section class="border-b border-black/10 bg-white">
       <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
-        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">
           {communityPage.eyebrow}
         </p>
         <h1 class="display-face mt-3 max-w-4xl text-[2.35rem] uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
           {communityPage.title}
         </h1>
-        <p class="mt-3 max-w-3xl text-[0.98rem] leading-6 text-[var(--color-ink)]/85 md:mt-4 md:text-lg md:leading-7">
+        <p class="mt-3 max-w-3xl text-[0.98rem] leading-6 text-ink/85 md:mt-4 md:text-lg md:leading-7">
           {communityPage.description}
         </p>
       </div>
@@ -37,18 +37,18 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
     <section>
       <div class="mx-auto max-w-6xl px-4 pt-10 md:px-6 md:pt-16">
         <div class="poster-frame rounded-[2rem] bg-white p-5 md:p-8">
-          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+          <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">
             Why people stick around
           </p>
           <h2 class="display-face mt-3 max-w-3xl text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
             Music for the ones still figuring it out.
           </h2>
-          <p class="mt-4 max-w-2xl text-[0.98rem] leading-6 text-[var(--color-ink)]/85 md:text-base md:leading-7">
+          <p class="mt-4 max-w-2xl text-[0.98rem] leading-6 text-ink/85 md:text-base md:leading-7">
             Community is where the band side of the story stays visible: the updates, the live moments, and the reasons people keep coming back.
           </p>
           <div class="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {homepageContent.reasons.map((reason) => (
-              <div class="rounded-[1.4rem] border border-black/8 bg-[var(--color-paper-soft)] px-4 py-4 text-sm font-semibold leading-6 text-[var(--color-ink)]/90">
+              <div class="rounded-[1.4rem] border border-black/8 bg-paper-soft px-4 py-4 text-sm font-semibold leading-6 text-ink/90">
                 {reason}
               </div>
             ))}
@@ -73,29 +73,29 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
               </a>
               <div class="p-4 md:p-5">
                 <div class="flex flex-wrap items-center gap-3">
-                  <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+                  <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">
                     {post.category}
                   </p>
-                  <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+                  <p class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
                     {dateFormatter.format(new Date(post.publishedAt))}
                   </p>
                 </div>
-                <h3 class="mt-4 text-2xl font-black uppercase leading-tight text-[var(--color-ink)]">
+                <h3 class="mt-4 text-2xl font-black uppercase leading-tight text-ink">
                   <a class="focus-ring rounded-sm" href={`/community/${post.slug}`}>
                     {post.title}
                   </a>
                 </h3>
-                <p class="mt-4 text-sm leading-6 text-[var(--color-ink)]/85">{post.summary}</p>
+                <p class="mt-4 text-sm leading-6 text-ink/85">{post.summary}</p>
                 <div class="mt-5 grid gap-2.5 sm:flex sm:flex-wrap sm:gap-3 md:mt-6">
                   <a
-                    class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+                    class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
                     href={`/community/${post.slug}`}
                   >
                     Read update
                   </a>
                   {post.relatedShowSlug ? (
                     <a
-                      class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                      class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink"
                       href={`/shows/${post.relatedShowSlug}`}
                     >
                       Related show

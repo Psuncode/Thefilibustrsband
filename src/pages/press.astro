@@ -31,16 +31,16 @@ const pressMailto = (() => {
   description="Press-ready bio, approved assets, quotes, and contact information for The Filibusters."
 >
   <Header />
-  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[var(--color-paper-soft)]">
+  <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-paper-soft">
     <section class="border-b border-black/10 bg-white">
       <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
-        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">
+        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">
           {pressPage.eyebrow}
         </p>
         <h1 class="display-face mt-3 max-w-4xl text-[2.35rem] uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
           {pressPage.title}
         </h1>
-        <p class="mt-3 max-w-3xl text-[0.98rem] leading-6 text-[var(--color-ink)]/76 md:mt-4 md:text-lg md:leading-7">
+        <p class="mt-3 max-w-3xl text-[0.98rem] leading-6 text-ink/76 md:mt-4 md:text-lg md:leading-7">
           {pressPage.description}
         </p>
       </div>
@@ -49,25 +49,25 @@ const pressMailto = (() => {
     <section>
       <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Short bio</p>
-          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/85 md:text-lg" data-copy-target="short-bio">{pressPage.shortBio}</p>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Short bio</p>
+          <p class="mt-4 text-base leading-7 text-ink/85 md:text-lg" data-copy-target="short-bio">{pressPage.shortBio}</p>
           <button
             type="button"
-            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-ink transition hover:border-pink hover:text-pink"
             data-copy-button="short-bio"
           >
             <span data-copy-label>Copy short bio</span>
           </button>
 
-          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Long bio</p>
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-pink">Long bio</p>
           <div class="mt-4 space-y-4" data-copy-target="long-bio">
             {pressPage.longBio.map((paragraph) => (
-              <p class="text-base leading-7 text-[var(--color-ink)]/85">{paragraph}</p>
+              <p class="text-base leading-7 text-ink/85">{paragraph}</p>
             ))}
           </div>
           <button
             type="button"
-            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-ink transition hover:border-pink hover:text-pink"
             data-copy-button="long-bio"
           >
             <span data-copy-label>Copy long bio</span>
@@ -75,18 +75,18 @@ const pressMailto = (() => {
         </article>
 
         <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press assets</p>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Press assets</p>
           <div class="mt-5 grid gap-3">
             {pressPage.approvedAssets.map((asset) => (
               <a
-                class="focus-ring flex items-center justify-between gap-4 rounded-[1.25rem] border border-black/8 bg-white px-4 py-4 text-sm font-semibold text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                class="focus-ring flex items-center justify-between gap-4 rounded-[1.25rem] border border-black/8 bg-white px-4 py-4 text-sm font-semibold text-ink transition hover:border-pink hover:text-pink"
                 href={asset.href}
                 target="_blank"
                 rel="noreferrer"
               >
                 <span>
                   <span class="block uppercase tracking-[0.12em]">{asset.label}</span>
-                  <span class="mt-1 block text-xs font-medium normal-case leading-5 text-[var(--color-muted)]">
+                  <span class="mt-1 block text-xs font-medium normal-case leading-5 text-muted">
                     {asset.description}
                   </span>
                 </span>
@@ -95,9 +95,9 @@ const pressMailto = (() => {
             ))}
           </div>
 
-          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Video</p>
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-pink">Video</p>
           <a
-            class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+            class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
             href={pressPage.videoLink}
             rel="noreferrer"
             target="_blank"
@@ -105,9 +105,9 @@ const pressMailto = (() => {
             Watch on YouTube
           </a>
 
-          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press contact</p>
+          <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-pink">Press contact</p>
           <a
-            class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            class="focus-ring mt-4 inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink"
             href={`mailto:${pressPage.contactEmail}`}
             data-track-event="booking_email_click"
             data-track-label="press-contact"
@@ -115,10 +115,10 @@ const pressMailto = (() => {
           >
             {pressPage.contactLabel}: {pressPage.contactEmail}
           </a>
-          <p class="mt-4 text-xs leading-5 text-[var(--color-ink)]/58">
+          <p class="mt-4 text-xs leading-5 text-ink/58">
             For structured factual lookup, see the{" "}
             <a
-              class="underline decoration-black/20 underline-offset-4 transition hover:text-[var(--color-pink)]"
+              class="underline decoration-black/20 underline-offset-4 transition hover:text-pink"
               href={specialRoutes.aiPressKit.href}
               data-track-event="ai_press_kit_click"
               data-track-label="press-copy-link"
@@ -135,10 +135,10 @@ const pressMailto = (() => {
     <section class="bg-white">
       <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
         <div class="poster-frame rounded-[1.75rem] p-5 md:p-7">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Approved pull quotes</p>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Approved pull quotes</p>
           <div class="mt-5 grid gap-3 md:grid-cols-3 md:gap-4">
             {pressPage.quotes.map((quote) => (
-              <blockquote class="rounded-[1.25rem] border border-black/8 bg-[var(--color-paper-soft)] px-4 py-5 text-sm font-semibold leading-6 text-[var(--color-ink)]/82">
+              <blockquote class="rounded-[1.25rem] border border-black/8 bg-paper-soft px-4 py-5 text-sm font-semibold leading-6 text-ink/82">
                 “{quote}”
               </blockquote>
             ))}
@@ -147,25 +147,25 @@ const pressMailto = (() => {
       </div>
     </section>
 
-    <section class="border-t border-black/10 bg-[var(--color-paper-soft)]">
+    <section class="border-t border-black/10 bg-paper-soft">
       <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
         <div class="poster-frame rounded-[1.75rem] bg-white p-5 md:p-7">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press contact</p>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Press contact</p>
           <h2 class="display-face mt-3 text-[1.75rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-4xl">
             Need anything else? Email lands directly with the band.
           </h2>
-          <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--color-ink)]/85 md:text-lg">
+          <p class="mt-4 max-w-2xl text-base leading-7 text-ink/85 md:text-lg">
             Drop a line with your outlet, deadline, and what you're after. We aim to reply within 48 hours.
           </p>
           <div class="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
             <a
-              class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+              class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
               href={pressMailto}
             >
               Email {pressPage.contactEmail}
             </a>
             <a
-              class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-black/12 bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+              class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-black/12 bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink"
               href={`mailto:${pressPage.contactEmail}`}
             >
               Plain email (no template)

@@ -6,7 +6,7 @@ import { homepageContent } from "../../data/homepage";
 
 <section class="border-b border-black/10">
   <div class="px-4 py-3 md:px-6 md:py-6">
-    <div class="relative overflow-hidden rounded-[2rem] border border-black/10 bg-[var(--color-ink)] shadow-[var(--shadow-poster)] md:min-h-[42rem] md:rounded-[2.5rem]">
+    <div class="relative overflow-hidden rounded-[2rem] border border-black/10 bg-ink shadow-[var(--shadow-poster)] md:min-h-[42rem] md:rounded-[2.5rem]">
       <Image
         alt="Atticus Wintch performing live for The Filibusters, with crowd energy and another band member visible in the background."
         class="absolute inset-0 h-full w-full object-cover object-[62%_center] md:object-[center_30%]"
@@ -31,10 +31,10 @@ import { homepageContent } from "../../data/homepage";
           {homepageContent.hero.subheadline}
         </p>
         <div class="mt-6 flex flex-col gap-2.5 sm:flex-row md:mt-7 md:gap-3">
-          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-pink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_12px_30px_rgba(206,32,103,0.35)] transition hover:brightness-110" href={homepageContent.hero.primaryCta.href}>
+          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-pink px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_12px_30px_rgba(206,32,103,0.35)] transition hover:brightness-110" href={homepageContent.hero.primaryCta.href}>
             {homepageContent.hero.primaryCta.label}
           </a>
-          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-[#fffdf7] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] shadow-[0_12px_30px_rgba(0,0,0,0.18)] transition hover:bg-[var(--color-yellow)]" href={homepageContent.hero.secondaryCta.href}>
+          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-[#fffdf7] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink shadow-[0_12px_30px_rgba(0,0,0,0.18)] transition hover:bg-yellow" href={homepageContent.hero.secondaryCta.href}>
             {homepageContent.hero.secondaryCta.label}
           </a>
         </div>
