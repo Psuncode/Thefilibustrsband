@@ -4,6 +4,26 @@ import Header from "../components/site/Header.astro";
 import { pressPage } from "../data/press";
 import { siteMeta, specialRoutes } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pressMailto = (() => {
+  const subject = encodeURIComponent("Filibusters press inquiry");
+  const body = encodeURIComponent(
+    [
+      "Hi Filibusters,",
+      "",
+      "I'm [your name] from [outlet]. I'm working on [story angle] and would love to:",
+      "  - request press assets / photos",
+      "  - confirm a quote / fact",
+      "  - schedule a quick interview by [date]",
+      "",
+      "Anything else useful: [link to outlet, deadline, etc.]",
+      "",
+      "Thanks,",
+      "[name]"
+    ].join("\n")
+  );
+  return `mailto:${pressPage.contactEmail}?subject=${subject}&body=${body}`;
+})();
 ---
 
 <BaseLayout
@@ -30,14 +50,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="mx-auto grid max-w-6xl gap-4 px-4 py-10 md:gap-6 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Short bio</p>
-          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/78 md:text-lg">{pressPage.shortBio}</p>
+          <p class="mt-4 text-base leading-7 text-[var(--color-ink)]/85 md:text-lg" data-copy-target="short-bio">{pressPage.shortBio}</p>
+          <button
+            type="button"
+            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            data-copy-button="short-bio"
+          >
+            <span data-copy-label>Copy short bio</span>
+          </button>
 
           <p class="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Long bio</p>
-          <div class="mt-4 space-y-4">
+          <div class="mt-4 space-y-4" data-copy-target="long-bio">
             {pressPage.longBio.map((paragraph) => (
-              <p class="text-base leading-7 text-[var(--color-ink)]/78">{paragraph}</p>
+              <p class="text-base leading-7 text-[var(--color-ink)]/85">{paragraph}</p>
             ))}
           </div>
+          <button
+            type="button"
+            class="focus-ring mt-4 inline-flex items-center gap-2 rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+            data-copy-button="long-bio"
+          >
+            <span data-copy-label>Copy long bio</span>
+          </button>
         </article>
 
         <article class="poster-frame rounded-[1.75rem] p-5 md:p-7">
@@ -112,6 +146,90 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
     </section>
+
+    <section class="border-t border-black/10 bg-[var(--color-paper-soft)]">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <div class="poster-frame rounded-[1.75rem] bg-white p-5 md:p-7">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">Press contact</p>
+          <h2 class="display-face mt-3 text-[1.75rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-4xl">
+            Need anything else? Email lands directly with the band.
+          </h2>
+          <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--color-ink)]/85 md:text-lg">
+            Drop a line with your outlet, deadline, and what you're after. We aim to reply within 48 hours.
+          </p>
+          <div class="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+            <a
+              class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-ink)] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+              href={pressMailto}
+            >
+              Email {pressPage.contactEmail}
+            </a>
+            <a
+              class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-black/12 bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+              href={`mailto:${pressPage.contactEmail}`}
+            >
+              Plain email (no template)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
   <Footer />
+<script>
+  const FEEDBACK_DURATION_MS = 1600;
+
+  const fallbackCopy = (text: string): boolean => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch {
+      ok = false;
+    }
+    textarea.remove();
+    return ok;
+  };
+
+  const copyText = async (text: string): Promise<boolean> => {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // fall through to fallback
+      }
+    }
+    return fallbackCopy(text);
+  };
+
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-button]").forEach((button) => {
+    const targetKey = button.getAttribute("data-copy-button");
+    if (!targetKey) return;
+    const target = document.querySelector<HTMLElement>(`[data-copy-target="${targetKey}"]`);
+    if (!target) return;
+    const label = button.querySelector<HTMLElement>("[data-copy-label]");
+    if (!label) return;
+    const originalLabel = label.textContent;
+
+    button.addEventListener("click", async () => {
+      const text = (target.innerText || "").trim();
+      if (!text) return;
+
+      const ok = await copyText(text);
+      label.textContent = ok ? "Copied!" : "Press Cmd/Ctrl + C";
+
+      window.setTimeout(() => {
+        label.textContent = originalLabel;
+      }, FEEDBACK_DURATION_MS);
+    });
+  });
+</script>
 </BaseLayout>
