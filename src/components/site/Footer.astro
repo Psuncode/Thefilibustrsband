@@ -95,6 +95,13 @@ import { footerContent, iconPaths, secondaryRoutes, siteMeta, socialLinks } from
           Join the email list
         </button>
         <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-white/55">
+          <button
+            class="focus-ring min-h-11 text-left transition hover:text-[var(--color-yellow)]"
+            data-follow-prompt-open
+            type="button"
+          >
+            Follow the band
+          </button>
           <a class="focus-ring transition hover:text-[var(--color-yellow)]" href="/privacy">
             Privacy
           </a>
@@ -106,3 +113,11 @@ import { footerContent, iconPaths, secondaryRoutes, siteMeta, socialLinks } from
     </div>
   </div>
 </footer>
+
+<script>
+  document.querySelectorAll("[data-follow-prompt-open]").forEach((node) => {
+    node.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("filibusters:follow-prompt-open", { detail: { force: true } }));
+    });
+  });
+</script>
