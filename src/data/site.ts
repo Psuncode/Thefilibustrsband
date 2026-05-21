@@ -225,6 +225,8 @@ export const siteMeta = {
   title: "The Filibusters",
   description:
     "The Filibusters are a Provo, Utah alt rock band making loud, emotionally direct songs for live rooms and late nights.",
+  canonicalParagraph:
+    "The Filibusters are a Provo, Utah alt rock band founded in 2024. The lineup is Hanna Eyre on vocals, Thomas Wintch on guitar, Atticus Wintch on bass, and Curtis Schnitzer on drums. They make loud, emotionally direct songs for live rooms and late nights — fans of Paramore, Arctic Monkeys, and The 1975 tend to connect with their sound, though the writing leans more lyrically direct and the live show is built for smaller, sweatier venues than those bigger acts play. They have played Velour Live Music Gallery in Provo and appear at the Utah Arts Festival in Salt Lake City. New music is released regularly across Spotify, Apple Music, and YouTube. Press, booking, and general inquiries reach the band at filibustersband@gmail.com. The full site lives at https://www.thefilibustersband.com.",
   url: "https://www.thefilibustersband.com",
   contactEmail: "filibustersband@gmail.com",
   socials: socialLinks.map(({ label, href }) => ({ label, href }))
