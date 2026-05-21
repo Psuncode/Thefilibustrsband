@@ -20,7 +20,7 @@ import { primaryNav } from "../../data/site";
     <nav aria-label="Primary" class="flex min-w-0 flex-1 items-center gap-1 rounded-[1rem] border border-black/8 bg-white/70 p-1 md:w-auto md:flex-none md:gap-2 md:rounded-full md:p-1.5">
       {primaryNav.map((item) => (
         <a
-          class="focus-ring min-w-0 flex-1 rounded-full px-1.5 py-2 text-center text-[0.63rem] font-semibold uppercase tracking-[0.01em] text-[var(--color-ink)]/72 transition hover:bg-[var(--color-ink)] hover:text-white md:flex-none md:px-4 md:text-sm md:tracking-[0.08em] md:normal-case"
+          class="focus-ring min-w-0 flex-1 rounded-full px-1.5 py-2 text-center text-[0.63rem] font-semibold uppercase tracking-[0.01em] text-ink/72 transition hover:bg-ink hover:text-white md:flex-none md:px-4 md:text-sm md:tracking-[0.08em] md:normal-case"
           href={item.href}
         >
           {item.label}

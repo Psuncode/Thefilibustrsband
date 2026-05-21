@@ -7,10 +7,10 @@ const feedbackRows = [
 ];
 ---
 
-<section aria-labelledby="personality-strip-heading" class="bg-[var(--color-ink)] text-white">
+<section aria-labelledby="personality-strip-heading" class="bg-ink text-white">
   <div class="mx-auto max-w-6xl px-4 py-8 reveal-on-scroll md:px-6 md:py-16">
     <div class="flex flex-col gap-2.5">
-      <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-[var(--color-pink)] md:text-sm">Proof of life</p>
+      <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">Proof of life</p>
       <h2 id="personality-strip-heading" class="display-face max-w-4xl text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
         {homepageContent.personality.feedbackTitle}
       </h2>
@@ -27,12 +27,12 @@ const feedbackRows = [
                 class:list={[
                   "feedback-card",
                   index % 3 === 1
-                    ? "border-[var(--color-yellow)]/45 bg-[var(--color-yellow)]/10"
+                    ? "border-yellow/45 bg-yellow/10"
                     : "border-white/15 bg-white/5"
                 ]}
               >
                 <p class="feedback-card-quote text-[0.88rem] leading-5 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
-                <footer class="feedback-card-footer mt-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)] md:mt-5 md:text-xs">
+                <footer class="feedback-card-footer mt-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-yellow md:mt-5 md:text-xs">
                   {item.attribution}
                 </footer>
               </blockquote>
@@ -43,12 +43,12 @@ const feedbackRows = [
                 class:list={[
                   "feedback-card feedback-card-duplicate",
                   index % 3 === 1
-                    ? "border-[var(--color-yellow)]/45 bg-[var(--color-yellow)]/10"
+                    ? "border-yellow/45 bg-yellow/10"
                     : "border-white/15 bg-white/5"
                 ]}
               >
                 <p class="feedback-card-quote text-[0.88rem] leading-5 text-white/90 md:text-[1.0625rem] md:leading-8">"{item.quote}"</p>
-                <footer class="feedback-card-footer mt-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--color-yellow)] md:mt-5 md:text-xs">
+                <footer class="feedback-card-footer mt-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-yellow md:mt-5 md:text-xs">
                   {item.attribution}
                 </footer>
               </blockquote>

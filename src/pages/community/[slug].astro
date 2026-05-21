@@ -65,26 +65,26 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
     <section class="border-b border-black/10">
       <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
         <article class="max-w-3xl">
-          <p class="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-pink)]">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-pink">
             {post.category}
           </p>
           <h1 class="display-face mt-3 text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
             {post.title}
           </h1>
-          <p class="mt-5 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
+          <p class="mt-5 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
             {dateFormatter.format(new Date(post.publishedAt))}
           </p>
-          <p class="mt-5 text-base leading-7 text-[var(--color-ink)]/85 md:text-lg">
+          <p class="mt-5 text-base leading-7 text-ink/85 md:text-lg">
             {post.summary}
           </p>
           <div class="mt-8 space-y-4">
             {post.body.map((paragraph) => (
-              <p class="text-base leading-7 text-[var(--color-ink)]/85 md:text-lg">{paragraph}</p>
+              <p class="text-base leading-7 text-ink/85 md:text-lg">{paragraph}</p>
             ))}
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
             <button
-              class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--color-ink)] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[var(--color-pink)]"
+              class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
               data-subscribe-open
               type="button"
             >
@@ -92,7 +92,7 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
             </button>
             {post.relatedShowSlug ? (
               <a
-                class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[var(--color-ink)] transition hover:border-[var(--color-pink)] hover:text-[var(--color-pink)]"
+                class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink"
                 href={`/shows/${post.relatedShowSlug}`}
               >
                 View related show
