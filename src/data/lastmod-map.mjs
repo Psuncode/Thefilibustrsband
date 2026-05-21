@@ -8,6 +8,7 @@ export const showLastmod = [
   { slug: "byu-battle-of-the-bands-2026", startsAt: "2026-03-28T19:00:00-06:00" },
   { slug: "devotional-unforum-2026-04-14", startsAt: "2026-04-14T11:05:00-06:00" },
   { slug: "les-femmes-de-velour-2026-05-08", startsAt: "2026-05-08T19:30:00-06:00" },
+  { slug: "free-outdoor-new-music-preview-2026-06-13", startsAt: "2026-06-13T19:00:00-06:00" },
   { slug: "velour-with-always-her-2026-06-19", startsAt: "2026-06-19T19:30:00-06:00" },
   { slug: "utah-arts-festival-2026", startsAt: "2026-06-20T21:30:00-06:00" }
 ];
