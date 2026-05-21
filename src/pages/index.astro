@@ -18,6 +18,14 @@ import { siteMeta, siteRoutes, specialRoutes } from "../data/site";
 >
   <Header />
   <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip">
+    <section class="border-b border-black/10 bg-white/72">
+      <div class="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-8">
+        <aside class="citable-passage" aria-label="Band summary">
+          <span class="citable-passage-label">Band summary</span>
+          {siteMeta.canonicalParagraph}
+        </aside>
+      </div>
+    </section>
     <HeroSection />
     <LatestReleaseSection />
     <AboutBandSection />

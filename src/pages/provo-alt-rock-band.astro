@@ -3,7 +3,7 @@ import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { localDiscoveryPage } from "../data/localDiscovery";
-import { siteEntityIds, siteRoutes } from "../data/site";
+import { siteEntityIds, siteMeta, siteRoutes } from "../data/site";
 
 const localDiscoveryStructuredData = {
   "@context": "https://schema.org",
@@ -39,6 +39,10 @@ const focusLinks = focusLinkCandidates.filter(
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[linear-gradient(180deg,#fffdf8_0%,#fff8f1_18rem,var(--color-paper-soft)_48rem,var(--color-paper)_100%)]">
     <section class="border-b border-black/10 bg-white/76">
       <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <aside class="citable-passage" aria-label="Band summary">
+          <span class="citable-passage-label">Band summary</span>
+          {siteMeta.canonicalParagraph}
+        </aside>
         <div class="max-w-4xl">
           <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">
             {localDiscoveryPage.hero.eyebrow}

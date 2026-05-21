@@ -37,7 +37,8 @@ const aboutStructuredData = {
   },
   isPartOf: {
     "@id": siteEntityIds.website
-  }
+  },
+  dateModified: "2026-05-21"
 } as const;
 
 const faqStructuredData = buildFaqSchema(aboutPage.faq);
@@ -52,6 +53,10 @@ const faqStructuredData = buildFaqSchema(aboutPage.faq);
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-[linear-gradient(180deg,#fffdf8_0%,#fff7ef_18rem,var(--color-paper-soft)_44rem,var(--color-paper)_100%)]">
     <section class="border-b border-black/10 bg-white/72">
       <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <aside class="citable-passage" aria-label="Band summary">
+          <span class="citable-passage-label">Band summary</span>
+          {siteMeta.canonicalParagraph}
+        </aside>
         <div class="max-w-4xl">
           <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">
             {aboutPage.hero.eyebrow}
@@ -260,6 +265,9 @@ const faqStructuredData = buildFaqSchema(aboutPage.faq);
             </a>
           ))}
         </div>
+        <p class="mt-10 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+          Page last updated May 2026
+        </p>
       </div>
     </section>
   </main>
