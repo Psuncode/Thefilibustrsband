@@ -8,7 +8,7 @@ export const pressPage = {
   description:
     "A clean place for bios, approved visuals, and the core context media, venues, and bookers need without digging through social posts.",
   shortBio:
-    "The Filibusters are an alt rock band from Provo, Utah making loud, emotionally direct songs built for live rooms, late nights, and real connection.",
+    "The Filibusters are a Provo, Utah alt rock band making loud, emotionally direct songs for live rooms and late nights. The live show leans into connection over polish — energetic, present, built for the room.",
   longBio: [
     "The Filibusters write and perform with one priority above everything else: make people feel seen without sanding the emotion down into something polite.",
     "The band blends high-energy instrumentation with lyrics that stay direct and personal, creating songs that feel just as natural in headphones as they do in a packed room.",

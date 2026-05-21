@@ -168,7 +168,9 @@ type MusicGroupSchema = {
   name: string;
   description: string;
   url: string;
-  genre: string;
+  genre: readonly string[];
+  foundingDate: string;
+  keywords: readonly string[];
   email: string;
   image: string;
   address: {
@@ -420,7 +422,15 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   name: siteMeta.title,
   description: siteMeta.description,
   url: siteMeta.url,
-  genre: bandFacts.geoIdentity.genre,
+  genre: [bandFacts.geoIdentity.genre, "Indie rock"],
+  foundingDate: "2024",
+  keywords: [
+    "Provo alt rock",
+    "Utah alt rock",
+    "alternative rock band",
+    "Provo live music",
+    "indie rock Utah"
+  ],
   email: siteMeta.contactEmail,
   image,
   address: {
