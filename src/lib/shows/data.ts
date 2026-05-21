@@ -9,6 +9,30 @@ import {
 } from "./queries";
 import type { ShowEntry } from "./types";
 
+type FallbackShowSource = {
+  readonly title: string;
+  readonly slug: string;
+  readonly status: ShowEntry["status"];
+  readonly startsAt: string;
+  readonly endsAt?: string;
+  readonly venue: string;
+  readonly city: string;
+  readonly state: string;
+  readonly country?: string;
+  readonly ticketUrl?: string;
+  readonly flyerUrl?: string;
+  readonly organizerName?: string;
+  readonly organizerUrl?: string;
+  readonly offers?: ShowEntry["offers"];
+  readonly summary: string;
+  readonly body: readonly string[];
+  readonly lineup: readonly string[];
+  readonly notes?: string;
+  readonly seoDescription?: string;
+};
+
+const fallbackSource = fallbackShows as readonly FallbackShowSource[];
+
 const DEFAULT_COUNTRY = "US";
 
 const normalizeOffer = (offer: ShowEntry["offers"]): ShowEntry["offers"] => {
@@ -26,7 +50,7 @@ const normalizeOffer = (offer: ShowEntry["offers"]): ShowEntry["offers"] => {
   return Object.values(normalized).some((value) => value !== undefined) ? normalized : undefined;
 };
 
-const fallbackEntries: ShowEntry[] = fallbackShows.map((show) => ({
+const fallbackEntries: ShowEntry[] = fallbackSource.map((show) => ({
   ...show,
   endsAt: show.endsAt || undefined,
   country: show.country || DEFAULT_COUNTRY,

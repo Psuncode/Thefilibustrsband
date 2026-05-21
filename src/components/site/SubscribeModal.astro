@@ -99,7 +99,7 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
     const openers = document.querySelectorAll("[data-subscribe-open]");
     const closeControls = root.querySelectorAll("[data-subscribe-close]");
 
-    let opener = null;
+    let opener: HTMLElement | null = null;
 
     const closeModal = () => {
       root.classList.remove("is-visible");
@@ -112,13 +112,13 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
       }
     };
 
-    const trapFocus = (event) => {
+    const trapFocus = (event: KeyboardEvent) => {
       if (event.key !== "Tab" || !root.classList.contains("is-visible") || !(dialog instanceof HTMLElement)) {
         return;
       }
 
       const focusable = Array.from(dialog.querySelectorAll(focusableSelector)).filter(
-        (node) =>
+        (node): node is HTMLElement =>
           node instanceof HTMLElement &&
           !node.hasAttribute("disabled") &&
           node.getAttribute("aria-hidden") !== "true"
@@ -146,8 +146,9 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
       }
     };
 
-    const openModal = (trigger) => {
-      opener = trigger instanceof HTMLElement ? trigger : document.activeElement;
+    const openModal = (trigger: Element | null) => {
+      const active = document.activeElement;
+      opener = trigger instanceof HTMLElement ? trigger : active instanceof HTMLElement ? active : null;
       root.hidden = false;
       root.classList.add("is-visible");
       root.setAttribute("aria-hidden", "false");
