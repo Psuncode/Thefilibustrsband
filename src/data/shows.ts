@@ -96,6 +96,35 @@ export const upcomingShows = [
       "The Filibusters play Les Femmes de Velour 2026 on Friday, May 8, 2026 at Velour Live Music Gallery in Provo, Utah."
   },
   {
+    title: "Velour Live with Always Her",
+    slug: "velour-with-always-her-2026-06-19",
+    status: "announced",
+    startsAt: "2026-06-19T19:30:00-06:00",
+    venue: "Velour Live Music Gallery",
+    city: "Provo",
+    state: "Utah",
+    ticketUrl: "https://www.velourlive.com/",
+    flyerUrl: velourShowImage.src,
+    organizerName: "Velour Live Music Gallery",
+    organizerUrl: "https://www.velourlive.com/",
+    offers: {
+      url: "https://www.velourlive.com/",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock"
+    },
+    summary: "The Filibusters play Velour Live Music Gallery on Friday, June 19 with Always Her.",
+    country: "US",
+    body: [
+      "The Filibusters return to Velour Live Music Gallery on Friday, June 19 for a co-bill with Always Her.",
+      "Velour Live Music Gallery is at 135 N University Ave, Provo, UT 84601. Doors are expected at 7:30 PM, in line with Velour's usual evening slot.",
+      "Ticketing details will be announced through Velour's site and socials. For updates, follow Velour at https://www.facebook.com/VelourLive/ and learn more at https://www.velourlive.com/."
+    ],
+    lineup: ["The Filibusters", "Always Her"],
+    notes: "Set times, ticketing details, and final lineup should be confirmed directly with Velour.",
+    seoDescription:
+      "The Filibusters play Velour Live Music Gallery on Friday, June 19, 2026 in Provo, Utah with Always Her."
+  },
+  {
     title: "Utah Arts Festival 2026",
     slug: "utah-arts-festival-2026",
     status: "announced",
