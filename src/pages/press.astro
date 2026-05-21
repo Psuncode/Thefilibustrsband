@@ -2,8 +2,24 @@
 import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
 import { pressPage } from "../data/press";
-import { siteMeta, specialRoutes } from "../data/site";
+import { buildPageId, buildPageUrl, siteEntityIds, siteMeta, siteRoutes, specialRoutes } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pressStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": buildPageId(siteRoutes.press.path),
+  name: `Press Room | ${siteMeta.title}`,
+  url: buildPageUrl(siteRoutes.press.path),
+  description: "Press-ready bio, approved assets, quotes, and contact information for The Filibusters.",
+  isPartOf: {
+    "@id": siteEntityIds.website
+  },
+  about: {
+    "@id": siteEntityIds.musicGroup
+  },
+  dateModified: "2026-05-21"
+} as const;
 
 const pressMailto = (() => {
   const subject = encodeURIComponent("Filibusters press inquiry");
@@ -29,6 +45,7 @@ const pressMailto = (() => {
 <BaseLayout
   title={`Press Room | ${siteMeta.title}`}
   description="Press-ready bio, approved assets, quotes, and contact information for The Filibusters."
+  structuredData={pressStructuredData}
 >
   <Header />
   <main id="main-content" class="mobile-nav-offset overflow-x-clip bg-paper-soft">
@@ -175,6 +192,9 @@ const pressMailto = (() => {
               Plain email (no template)
             </a>
           </div>
+          <p class="mt-10 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+            Page last updated May 2026
+          </p>
         </div>
       </div>
     </section>

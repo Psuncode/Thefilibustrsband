@@ -37,7 +37,8 @@ const aboutStructuredData = {
   },
   isPartOf: {
     "@id": siteEntityIds.website
-  }
+  },
+  dateModified: "2026-05-21"
 } as const;
 
 const faqStructuredData = buildFaqSchema(aboutPage.faq);
@@ -264,6 +265,9 @@ const faqStructuredData = buildFaqSchema(aboutPage.faq);
             </a>
           ))}
         </div>
+        <p class="mt-10 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+          Page last updated May 2026
+        </p>
       </div>
     </section>
   </main>
