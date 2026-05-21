@@ -5,10 +5,11 @@ import Header from "../../components/site/Header.astro";
 import { upcomingShows } from "../../data/shows";
 import { siteMeta } from "../../data/site";
 import { buildBreadcrumbList } from "../../lib/seo/breadcrumb";
+import type { ShowEntry } from "../../lib/shows/types";
 
 // Note: Utah Arts Festival is Salt Lake City, NOT Provo. We include it because the band is on the bill
 // and Provo-based audiences will look for it. But the page heading and citable paragraph clarify.
-const provoJuneShows = upcomingShows
+const provoJuneShows = (upcomingShows as unknown as readonly ShowEntry[])
   .filter((show) => show.startsAt.startsWith("2026-06"))
   .sort((left, right) => left.startsAt.localeCompare(right.startsAt));
 
