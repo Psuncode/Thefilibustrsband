@@ -167,6 +167,7 @@ type MusicGroupSchema = {
   "@id": string;
   name: string;
   description: string;
+  disambiguatingDescription: string;
   url: string;
   genre: readonly string[];
   foundingDate: string;
@@ -425,6 +426,8 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   "@id": siteEntityIds.musicGroup,
   name: siteMeta.title,
   description: siteMeta.description,
+  disambiguatingDescription:
+    "Indie alternative rock band based in Provo, Utah, founded in 2024 — not to be confused with the U.S. Senate filibuster procedure or the Seattle punk band of the same name.",
   url: siteMeta.url,
   genre: [bandFacts.geoIdentity.genre, "Indie rock"],
   foundingDate: "2024",
