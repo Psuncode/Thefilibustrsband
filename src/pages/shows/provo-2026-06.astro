@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/site/Footer.astro";
+import Header from "../../components/site/Header.astro";
+import { upcomingShows } from "../../data/shows";
+import { siteMeta } from "../../data/site";
+import { buildBreadcrumbList } from "../../lib/seo/breadcrumb";
+import type { ShowEntry } from "../../lib/shows/types";
+
+// Note: Utah Arts Festival is Salt Lake City, NOT Provo. We include it because the band is on the bill
+// and Provo-based audiences will look for it. But the page heading and citable paragraph clarify.
+const provoJuneShows = (upcomingShows as unknown as readonly ShowEntry[])
+  .filter((show) => show.startsAt.startsWith("2026-06"))
+  .sort((left, right) => left.startsAt.localeCompare(right.startsAt));
+
+const canonicalUrl = new URL("/shows/provo-2026-06", Astro.site).href;
+
+const itemListStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "The Filibusters — June 2026 Live Dates",
+  description: "Live shows by The Filibusters in June 2026, primarily in Provo, Utah.",
+  url: canonicalUrl,
+  numberOfItems: provoJuneShows.length,
+  itemListElement: provoJuneShows.map((show, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: new URL(`/shows/${show.slug}`, Astro.site).href,
+    name: show.title
+  }))
+};
+
+const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
+  { name: "Home", path: "/" },
+  { name: "Shows", path: "/shows" },
+  { name: "Provo June 2026", path: "/shows/provo-2026-06" }
+]);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "long",
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+});
+---
+
+<BaseLayout
+  title={`Live music in Provo — June 2026 | ${siteMeta.title}`}
+  description="Where to see The Filibusters live in June 2026: Velour Live Music Gallery, a free outdoor show, and Utah Arts Festival."
+  structuredData={[itemListStructuredData, breadcrumbStructuredData]}
+>
+  <Header />
+  <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip bg-paper-soft">
+    <section class="border-b border-black/10 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">June 2026</p>
+        <h1 class="display-face mt-3 max-w-4xl text-[2.35rem] uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+          Live music in Provo, June 2026.
+        </h1>
+        <aside class="citable-passage mt-6" aria-label="June 2026 summary">
+          <span class="citable-passage-label">June 2026 summary</span>
+          The Filibusters play three shows in June 2026: a free outdoor new-music preview in Provo on Saturday, June 13 (date and venue being finalized); Velour Live Music Gallery in Provo on Friday, June 19 with Always Her on the bill; and the Utah Arts Festival on the Festival Stage in Salt Lake City on Saturday, June 20 ahead of headliner Shakey Graves. Tickets, set times, and venue confirmations for each date are linked below.
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-16">
+        <div class="space-y-10">
+          {provoJuneShows.map((show) => (
+            <article class="poster-frame rounded-[1.75rem] bg-white p-5 md:p-7">
+              <h2 class="display-face text-2xl uppercase leading-[0.95] tracking-[-0.03em] text-ink md:text-3xl">
+                {dateFormatter.format(new Date(show.startsAt))} — {show.title}
+              </h2>
+              <p class="mt-3 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+                {show.venue} · {show.city}, {show.state}
+              </p>
+              {show.summary ? (
+                <p class="mt-4 text-base leading-7 text-ink/85">{show.summary}</p>
+              ) : null}
+              <div class="mt-5 flex flex-wrap gap-3">
+                <a
+                  class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
+                  href={`/shows/${show.slug}`}
+                >
+                  Show details
+                </a>
+                {show.ticketUrl ? (
+                  <a
+                    class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink"
+                    href={show.ticketUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Tickets
+                  </a>
+                ) : null}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

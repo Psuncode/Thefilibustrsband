@@ -29,4 +29,5 @@ export type ShowEntry = {
   organizerUrl?: string;
   seoDescription?: string;
   offers?: ShowOffer;
+  award?: string;
 };

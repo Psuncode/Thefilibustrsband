@@ -105,7 +105,8 @@ const eventStructuredData = {
         url: show.organizerUrl
       }
     : undefined,
-  offers: eventOffers
+  offers: eventOffers,
+  ...(show.award ? { award: show.award } : {})
 };
 
 const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
@@ -155,6 +156,11 @@ const linkifyParagraph = (paragraph: string) =>
           <h1 class="display-face mt-3 text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
             {show.title}
           </h1>
+          {show.award ? (
+            <p class="mt-5 inline-flex items-center gap-2 rounded-full bg-pink px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white">
+              <span aria-hidden="true">🏆</span> {show.award}
+            </p>
+          ) : null}
           {show.summary ? (
             <p class="mt-5 text-base leading-7 text-ink/85 md:text-lg">
               {show.summary}

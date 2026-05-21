@@ -240,6 +240,8 @@ export const siteRoutes = {
   shows: { path: "/shows" },
   community: { path: "/community" },
   press: { path: "/press" },
+  music: { path: "/music" },
+  forFansOf: { path: "/for-fans-of" },
   localDiscovery: { path: "/provo-alt-rock-band" },
   aiPressKit: { path: "/press/ai" }
 } as const satisfies Record<string, SiteRoute>;

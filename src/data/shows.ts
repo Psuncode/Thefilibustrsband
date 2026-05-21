@@ -5,7 +5,7 @@ import velourShowImage from "../assets/images/vlour show.jpg";
 
 export const upcomingShows = [
   {
-    title: "BYU Battle of the Bands 2026",
+    title: "BYU Battle of the Bands 2026 — Winner",
     slug: "byu-battle-of-the-bands-2026",
     status: "announced",
     startsAt: "2026-03-28T19:00:00-06:00",
@@ -22,16 +22,19 @@ export const upcomingShows = [
       priceCurrency: "USD",
       availability: "https://schema.org/InStock"
     },
-    summary: "The Filibusters take the stage at BYU Battle of the Bands 2026.",
+    summary:
+      "The Filibusters won BYU Battle of the Bands 2026 — a full room, a confident set, and a result that confirmed the live show works.",
     country: "US",
     body: [
-      "The Filibusters bring a loud, emotionally direct live set to the BYU Marriott Center for Battle of the Bands 2026.",
-      "Expect a high-energy room, crowd-sing moments, and a set built to feel immediate in person."
+      "The Filibusters won BYU Battle of the Bands 2026 on March 28 at the BYU Marriott Center in Provo, Utah. The set was loud, direct, and built for the room — and the room responded.",
+      "Winning mattered, but the more important takeaway was confirmation: these songs hit live. The crowd never dropped, the band held the energy through every cut, and the result of the night reflected what the live show is actually capable of.",
+      "Full recap and post-show notes live on the community update at https://www.thefilibustersband.com/community/byu-battle-of-the-bands-2026-win."
     ],
     lineup: ["The Filibusters"],
     notes: "Doors and event timing should be confirmed with the venue.",
+    award: "Winner — BYU Battle of the Bands 2026",
     seoDescription:
-      "The Filibusters perform at BYU Battle of the Bands 2026 at the BYU Marriott Center in Provo, Utah."
+      "The Filibusters won BYU Battle of the Bands 2026 at the BYU Marriott Center in Provo, Utah on March 28, 2026."
   },
   {
     title: "Devotional: Unforum",
