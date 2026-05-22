@@ -3,6 +3,7 @@ import devotionalUnforumImage from "../assets/images/devotional-unforum.png";
 import utahArtFestivalImage from "../assets/images/utah-art-festival-2026.png";
 import velourShowImage from "../assets/images/vlour show.jpg";
 import velourAlwaysHerImage from "../assets/images/velour-2026-06-19.png";
+import punkFestImage from "../assets/images/punk-fest-2026-05-30.jpg";
 
 export const upcomingShows = [
   {
@@ -108,6 +109,7 @@ export const upcomingShows = [
     venue: "Punko Vintage",
     city: "Provo",
     state: "Utah",
+    flyerUrl: punkFestImage.src,
     organizerName: "Punko Vintage",
     organizerUrl: "https://www.instagram.com/punkovintage",
     summary:
