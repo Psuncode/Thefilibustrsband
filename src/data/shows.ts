@@ -109,9 +109,14 @@ export const upcomingShows = [
     venue: "Punko Vintage",
     city: "Provo",
     state: "Utah",
+    ticketUrl: "https://www.instagram.com/punkovintage",
     flyerUrl: punkFestImage.src,
     organizerName: "Punko Vintage",
     organizerUrl: "https://www.instagram.com/punkovintage",
+    offers: {
+      url: "https://www.instagram.com/punkovintage",
+      availability: "https://schema.org/InStock"
+    },
     summary:
       "The Filibusters play Punk Fest Summer Kickoff at Punko Vintage in Provo on Saturday, May 30 — live music plus vintage clothing.",
     country: "US",
