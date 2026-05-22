@@ -2,8 +2,12 @@
 import { subscribePage } from "../../data/subscribe";
 import { siteMeta } from "../../data/site";
 
-const formAction = import.meta.env.PUBLIC_COMMUNITY_FORM_ACTION;
-const hasFormAction = Boolean(formAction);
+// The signup posts to /api/subscribe (server route → Kit). The legacy
+// PUBLIC_COMMUNITY_FORM_ACTION env var is no longer required, but if it is
+// set we keep using it as the form's `action` (graceful fallback if JS is
+// disabled). When JS is on, the script intercepts submit and uses fetch().
+const legacyFormAction = import.meta.env.PUBLIC_COMMUNITY_FORM_ACTION;
+const formAction = legacyFormAction || "/api/subscribe";
 const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20The%20Filibusters`;
 ---
 
@@ -40,44 +44,34 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
         ))}
       </ul>
 
-      {hasFormAction ? (
-        <form
-          class="subscribe-modal-form"
-          action={formAction}
-          method="POST"
-          data-track-event="subscribe_submit"
-          data-track-label="email-form"
-          data-track-source="subscribe-modal"
-        >
-          <label class="subscribe-modal-label" for="subscribe-modal-email">
-            {subscribePage.form.emailLabel}
-          </label>
-          <input
-            class="subscribe-modal-input"
-            id="subscribe-modal-email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-          />
-          <button class="focus-ring subscribe-modal-submit" type="submit">
-            {subscribePage.form.submitLabel}
-          </button>
-        </form>
-      ) : (
-        <div class="subscribe-modal-fallback">
-          <p>{subscribePage.note}</p>
-          <a
-            class="focus-ring subscribe-modal-submit"
-            href={fallbackHref}
-            data-track-event="booking_email_click"
-            data-track-label="subscribe-fallback"
-            data-track-source="subscribe-modal"
-          >
-            {subscribePage.form.fallbackLabel}
-          </a>
-        </div>
-      )}
+      <form
+        class="subscribe-modal-form"
+        action={formAction}
+        method="POST"
+        data-subscribe-form
+        data-track-event="subscribe_submit"
+        data-track-label="email-form"
+        data-track-source="subscribe-modal"
+      >
+        <label class="subscribe-modal-label" for="subscribe-modal-email">
+          {subscribePage.form.emailLabel}
+        </label>
+        <input
+          class="subscribe-modal-input"
+          id="subscribe-modal-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+        />
+        <button class="focus-ring subscribe-modal-submit" type="submit" data-subscribe-submit>
+          {subscribePage.form.submitLabel}
+        </button>
+        <p class="subscribe-modal-status" data-subscribe-status hidden role="status" aria-live="polite"></p>
+        <p class="subscribe-modal-fallback-note">
+          Trouble subscribing? <a href={fallbackHref}>Email the band</a> and we will add you manually.
+        </p>
+      </form>
     </div>
   </section>
 </div>
@@ -184,6 +178,86 @@ const fallbackHref = `mailto:${siteMeta.contactEmail}?subject=Subscribe%20to%20T
       }
 
       trapFocus(event);
+    });
+  });
+</script>
+
+<script>
+  // Progressive enhancement: intercept signup form submits, POST to
+  // /api/subscribe via fetch, and show inline success/error. Falls back to
+  // the form's native action if JS fails (the form still has action="...").
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-subscribe-form]");
+
+  forms.forEach((form) => {
+    // Status element may live inside the form (modal) or as a sibling
+    // (homepage section). Prefer same-parent sibling, fall back to descendant.
+    const status =
+      form.parentElement?.querySelector<HTMLElement>(":scope > [data-subscribe-status]") ||
+      form.querySelector<HTMLElement>("[data-subscribe-status]");
+    const submit = form.querySelector<HTMLButtonElement>("[data-subscribe-submit]");
+    const emailInput = form.querySelector<HTMLInputElement>('input[name="email"]');
+
+    const setStatus = (message: string, tone: "success" | "error" | "info") => {
+      if (!status) return;
+      status.hidden = false;
+      status.textContent = message;
+      status.dataset.tone = tone;
+    };
+
+    form.addEventListener("submit", async (event) => {
+      // Only intercept when the form is wired to our API route. If a legacy
+      // external action (Mailchimp/Buttondown/etc.) is still set, let the
+      // browser handle it natively.
+      const action = form.getAttribute("action") || "";
+      if (!action.startsWith("/api/subscribe")) return;
+
+      event.preventDefault();
+
+      const email = (emailInput?.value || "").trim();
+      if (!email) {
+        setStatus("Please enter your email address.", "error");
+        emailInput?.focus();
+        return;
+      }
+
+      if (submit) {
+        submit.disabled = true;
+        submit.dataset.originalLabel = submit.dataset.originalLabel || submit.textContent || "";
+        submit.textContent = "Subscribing...";
+      }
+      setStatus("Subscribing...", "info");
+
+      try {
+        const res = await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "content-type": "application/json", accept: "application/json" },
+          body: JSON.stringify({ email })
+        });
+
+        let body: { ok?: boolean; error?: string } = {};
+        try {
+          body = await res.json();
+        } catch {
+          // non-JSON response
+        }
+
+        if (res.ok && body.ok) {
+          setStatus("You're in. Check your inbox to confirm.", "success");
+          form.reset();
+        } else {
+          setStatus(
+            body.error || "Something went wrong. Please try again shortly.",
+            "error"
+          );
+        }
+      } catch {
+        setStatus("Network error. Please try again shortly.", "error");
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+          submit.textContent = submit.dataset.originalLabel || "Subscribe";
+        }
+      }
     });
   });
 </script>

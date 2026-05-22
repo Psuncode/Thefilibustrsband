@@ -108,6 +108,33 @@ above — go mirror the slug.
 | Quarterly | Refresh Share-of-Model tracker (docs/share-of-model-*), audit MusicGroup schema |
 | After any deploy | Hard-refresh `/`, `/shows`, latest community post |
 
+## Environment variables
+
+Set these in **Vercel → Project Settings → Environment Variables**
+(Production + Preview). For local `astro dev`, mirror them in a `.env` file
+at the repo root (gitignored).
+
+| Variable | Required | Where used | What it is |
+|---|---|---|---|
+| `KIT_API_KEY` | Yes (for signup) | `src/pages/api/subscribe.ts` | Kit (formerly ConvertKit) account API key. Server-only secret — do **not** prefix with `PUBLIC_`. Find it in Kit → Settings → Advanced → API. |
+| `KIT_FORM_ID` | Yes (for signup) | `src/pages/api/subscribe.ts` | Numeric ID of the Kit form that backs email signups. Open the form in Kit; the ID is in the URL (e.g. `/forms/1234567`). |
+| `PUBLIC_COMMUNITY_FORM_ACTION` | No (legacy) | `SubscribeModal.astro`, `CommunitySignupSection.astro` | Optional legacy override. If set, the form's HTML `action` points here as a no-JS fallback. With Kit wired via the API route, leave this unset. |
+| `PUBLIC_SANITY_PROJECT_ID` / `PUBLIC_SANITY_DATASET` / `PUBLIC_SANITY_API_VERSION` | If using Sanity | Sanity client | Only required when pulling content from Sanity Studio. |
+
+If `KIT_API_KEY` or `KIT_FORM_ID` is missing in production, the signup
+endpoint returns a 500 with a clear "service unavailable" message — the
+site still builds and serves; only the email signup is degraded.
+
+One-time setup for the signup:
+
+1. Create a Kit account and a single form (email-only — no interests/tags).
+2. Copy `KIT_API_KEY` from Kit → Settings → Advanced → API.
+3. Copy `KIT_FORM_ID` from the form's URL in Kit.
+4. Paste both into Vercel → Project Settings → Environment Variables
+   (Production **and** Preview), then redeploy.
+5. Spot-check: load the site, open the Subscribe modal, submit a real email,
+   confirm it appears in Kit's subscriber list.
+
 ## Off-site SEO playbook
 
 The on-site SEO is already strong (MusicGroup schema, sitemap, OG tags). The
