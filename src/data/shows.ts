@@ -2,6 +2,7 @@ import battleWinnerImage from "../assets/images/battle-of-the-band-winner.jpg";
 import devotionalUnforumImage from "../assets/images/devotional-unforum.png";
 import utahArtFestivalImage from "../assets/images/utah-art-festival-2026.png";
 import velourShowImage from "../assets/images/vlour show.jpg";
+import velourAlwaysHerImage from "../assets/images/velour-2026-06-19.png";
 
 export const upcomingShows = [
   {
@@ -134,21 +135,21 @@ export const upcomingShows = [
     venue: "Velour Live Music Gallery",
     city: "Provo",
     state: "Utah",
-    ticketUrl: "https://www.velourlive.com/",
-    flyerUrl: velourShowImage.src,
+    ticketUrl: "https://www.24tix.com/events/75909999006",
+    flyerUrl: velourAlwaysHerImage.src,
     organizerName: "Velour Live Music Gallery",
     organizerUrl: "https://www.velourlive.com/",
     offers: {
-      url: "https://www.velourlive.com/",
+      url: "https://www.24tix.com/events/75909999006",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock"
     },
-    summary: "The Filibusters play Velour Live Music Gallery on Friday, June 19 with Always Her.",
+    summary: "The Filibusters play Always Her's album release show at Velour Live Music Gallery on Friday, June 19.",
     country: "US",
     body: [
-      "The Filibusters return to Velour Live Music Gallery on Friday, June 19 for a co-bill with Always Her.",
+      "The Filibusters support Always Her at their album release show at Velour Live Music Gallery on Friday, June 19.",
       "Velour Live Music Gallery is at 135 N University Ave, Provo, UT 84601. Doors are expected at 7:30 PM, in line with Velour's usual evening slot.",
-      "Ticketing details will be announced through Velour's site and socials. For updates, follow Velour at https://www.facebook.com/VelourLive/ and learn more at https://www.velourlive.com/."
+      "Tickets are on sale at https://www.24tix.com/events/75909999006. For updates, follow Velour at https://www.facebook.com/VelourLive/."
     ],
     lineup: ["The Filibusters", "Always Her"],
     notes: "Set times, ticketing details, and final lineup should be confirmed directly with Velour.",
