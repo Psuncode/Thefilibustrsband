@@ -128,7 +128,7 @@ export const upcomingShows = [
       "The Filibusters play a free outdoor show on Saturday, June 13, 2026 in Provo, Utah, previewing new music with audience voting."
   },
   {
-    title: "Velour Live with Always Her",
+    title: "Always Her Album Release",
     slug: "velour-with-always-her-2026-06-19",
     status: "announced",
     startsAt: "2026-06-19T19:30:00-06:00",
