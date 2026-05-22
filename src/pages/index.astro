@@ -9,7 +9,7 @@ import ShowsPreviewSection from "../components/home/ShowsPreviewSection.astro";
 import PersonalityStripSection from "../components/home/PersonalityStripSection.astro";
 import CommunitySignupSection from "../components/home/CommunitySignupSection.astro";
 import FollowPrompt from "../components/home/FollowPrompt.astro";
-import { siteMeta, siteRoutes, specialRoutes } from "../data/site";
+import { siteMeta, siteRoutes } from "../data/site";
 ---
 
 <BaseLayout
@@ -36,7 +36,7 @@ import { siteMeta, siteRoutes, specialRoutes } from "../data/site";
             Start anywhere, then move to the next thing.
           </h2>
           <p class="mt-4 text-[0.98rem] leading-6 text-ink/74 md:text-base md:leading-7">
-            Pick the route that matches what you need right now: band context, the music, the next live date, or the local scene entry point.
+            Pick the route that matches what you need right now: band context, the music, the next live date, or updates straight from the band.
           </p>
         </div>
         <div class="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -78,14 +78,14 @@ import { siteMeta, siteRoutes, specialRoutes } from "../data/site";
           </a>
           <a
             class="focus-ring poster-frame rounded-[1.5rem] p-4 transition hover:border-pink"
-            href={specialRoutes.localDiscovery.href}
+            href={siteRoutes.community.path}
           >
-            <span class="block text-xs font-bold uppercase tracking-[0.2em] text-pink">Local discovery</span>
+            <span class="block text-xs font-bold uppercase tracking-[0.2em] text-pink">Community</span>
             <span class="mt-3 block text-lg font-black uppercase leading-tight text-ink">
-              See the Provo angle.
+              Hear from the band.
             </span>
             <span class="mt-2 block text-sm leading-6 text-ink/72">
-              A local entry page for people looking for a Provo alt rock band.
+              Release notes, behind-the-scenes posts, and updates straight from the band.
             </span>
           </a>
         </div>

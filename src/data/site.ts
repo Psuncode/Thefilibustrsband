@@ -61,8 +61,6 @@ type FollowPromptLink = {
 type FooterContent = {
   eyebrow: string;
   title: string;
-  description: string;
-  geoDescription: string;
 };
 
 type FollowPromptContent = {
@@ -296,11 +294,7 @@ export const bandFacts = {
 
 export const footerContent = {
   eyebrow: "Stay in the noise",
-  title: "Music for the ones still figuring it out.",
-  description:
-    "The Filibusters make alt rock for late nights, loud rooms, and the moments that feel unfinished. Find new music, upcoming shows, and the band updates that matter enough to keep up with.",
-  geoDescription:
-    "Based in Provo, Utah, the band blends high-energy live shows with emotionally direct songs built to feel immediate, personal, and worth coming back to."
+  title: "Music for the ones still figuring it out."
 } as const satisfies FooterContent;
 
 const coreSubjectPages = [

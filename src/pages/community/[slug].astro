@@ -90,14 +90,17 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
             >
               Subscribe
             </button>
-            {post.relatedShowSlug ? (
-              <a
-                class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink"
-                href={`/shows/${post.relatedShowSlug}`}
-              >
-                View related show
-              </a>
-            ) : null}
+            {(() => {
+              const relatedShowSlug = "relatedShowSlug" in post ? post.relatedShowSlug : undefined;
+              return relatedShowSlug ? (
+                <a
+                  class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink"
+                  href={`/shows/${relatedShowSlug}`}
+                >
+                  View related show
+                </a>
+              ) : null;
+            })()}
           </div>
         </article>
 
