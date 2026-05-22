@@ -4,6 +4,8 @@ import battleWinnerImage from "../assets/images/battle-of-the-band-winner.jpg";
 import breakUpWithYourBoyfriendCover from "../assets/images/break-up-with-your-boyfriend-cover.jpg";
 import followPromptSinger from "../assets/images/follow-prompt-singer.jpg";
 import heroBand from "../assets/images/hero-band.jpg";
+import devotionalUnforumImage from "../assets/images/devotional-unforum.png";
+import velourShowImage from "../assets/images/vlour show.jpg";
 
 export type CommunityCategory =
   | "Band News"
@@ -38,6 +40,38 @@ export const communityCategories = [
 ] as const satisfies readonly CommunityCategory[];
 
 export const communityPosts = [
+  {
+    title: "Les Femmes de Velour 2026 recap: a sweaty, full-room set",
+    slug: "les-femmes-de-velour-2026-recap",
+    category: "Show Updates",
+    publishedAt: "2026-05-09T11:00:00-06:00",
+    summary:
+      "Velour was packed for Les Femmes de Velour 2026 and the room moved with the set from the first chorus on.",
+    heroImage: velourShowImage,
+    heroAlt: "The Filibusters live at Velour Live Music Gallery during Les Femmes de Velour 2026.",
+    relatedShowSlug: "les-femmes-de-velour-2026-05-08",
+    body: [
+      "Les Femmes de Velour 2026 lined up exactly the way a Velour show should: a real crowd, a tight bill, and a room that actually moves. The Filibusters played Friday, May 8 at Velour Live Music Gallery in Provo on a co-bill with Gralley, Shrink The Giant, and Orcamind.",
+      "The festival itself is built around femme artists shaping the local Provo and Utah music scene — 40+ artists across 11 nights, organized around connection more than spectacle. The Filibusters' set leaned into that energy: emotionally direct songwriting, a live show that hits more than it polishes, and a crowd that stayed close through every song.",
+      "If this was your first Filibusters show, the live energy is going to keep showing up. The next dates are on the shows page, and new music keeps moving on Spotify, Apple Music, and YouTube."
+    ]
+  },
+  {
+    title: "Playing BYU's Devotional: Unforum at the Marriott Center",
+    slug: "devotional-unforum-2026-recap",
+    category: "Show Updates",
+    publishedAt: "2026-04-15T10:00:00-06:00",
+    summary:
+      "The Filibusters performed as part of BYU's year-in-review devotional at the Marriott Center on April 14, 2026.",
+    heroImage: devotionalUnforumImage,
+    heroAlt: "BYU Devotional: Unforum at the Marriott Center where The Filibusters performed.",
+    relatedShowSlug: "devotional-unforum-2026-04-14",
+    body: [
+      "The Filibusters played BYU's Devotional: Unforum at the Marriott Center on Tuesday, April 14, 2026. The Unforum is BYU's student-centered year in review — performances, service moments, and the kinds of achievements that hit different on a stage that big.",
+      "Playing the Marriott Center is a different scale than a Velour Friday night. The Filibusters brought the same direct sound to a much bigger room: loud, emotionally honest, and built for the audience to feel something in real time.",
+      "Updates from the band keep landing here. Live dates are on the shows page, new music is on Spotify, Apple Music, and YouTube, and the band's email goes to filibustersband@gmail.com."
+    ]
+  },
   {
     title: "The Filibusters win BYU Battle of the Bands 2026",
     slug: "byu-battle-of-the-bands-2026-win",

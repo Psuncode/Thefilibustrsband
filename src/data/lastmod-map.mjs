@@ -15,6 +15,8 @@ export const showLastmod = [
 ];
 
 export const communityLastmod = [
+  { slug: "les-femmes-de-velour-2026-recap", publishedAt: "2026-05-09T11:00:00-06:00" },
+  { slug: "devotional-unforum-2026-recap", publishedAt: "2026-04-15T10:00:00-06:00" },
   { slug: "byu-battle-of-the-bands-2026-win", publishedAt: "2026-03-29T10:00:00-06:00" },
   { slug: "break-up-with-your-boyfriend-out-now", publishedAt: "2026-03-26T09:00:00-06:00" },
   { slug: "before-the-set-starts", publishedAt: "2026-03-20T18:30:00-06:00" },

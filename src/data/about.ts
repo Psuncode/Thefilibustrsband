@@ -150,12 +150,36 @@ export const aboutPage = {
       answer: `${aboutCore.bandName} are based in ${aboutCore.baseLocation} and regularly perform live shows across the local and regional music scene.`
     },
     {
+      question: "When did The Filibusters form?",
+      answer: `${aboutCore.bandName} formed in 2024 and have been releasing original music and playing live shows around Provo and the wider Utah scene since.`
+    },
+    {
+      question: "Who are the members of The Filibusters?",
+      answer: `${aboutCore.bandName} are Hanna Eyre on vocals, Thomas Wintch on guitar, Atticus Wintch on bass, and Curtis Schnitzer on drums.`
+    },
+    {
       question: "What are The Filibusters known for?",
       answer: `They are known for ${aboutCore.knownFor.toLowerCase()}, emotionally direct writing, and songs built around connection.`
     },
     {
       question: "Are The Filibusters playing shows?",
-      answer: "Yes. Check the shows page for live dates and venue details."
+      answer: "Yes. Check the shows page for live dates, venues, and ticket links."
+    },
+    {
+      question: "Where can I listen to The Filibusters?",
+      answer: `${aboutCore.bandName} are on Spotify, Apple Music, and YouTube. All streaming and follow links live on the Listen page.`
+    },
+    {
+      question: "What is The Filibusters' latest release?",
+      answer: `The latest release is "Break Up With Your Boyfriend" — available on Spotify, Apple Music, and YouTube. Follow the band to catch new music as it drops.`
+    },
+    {
+      question: "Does The Filibusters play original music or covers?",
+      answer: `${aboutCore.bandName} write and play original songs. Live sets are built around the band's own catalog.`
+    },
+    {
+      question: "How can I book or contact The Filibusters?",
+      answer: `For booking, press, or general inquiries, email filibustersband@gmail.com. The full contact page is at /contact.`
     },
     {
       question: "What bands are similar to The Filibusters?",
