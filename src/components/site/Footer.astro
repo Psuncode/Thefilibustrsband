@@ -3,14 +3,14 @@ import { footerContent, iconPaths, secondaryRoutes, siteMeta, socialLinks } from
 ---
 
 <footer class="mobile-nav-offset border-t border-black/10 bg-ink text-white">
-  <div class="mx-auto grid max-w-6xl gap-6 px-4 py-9 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8 md:px-6 md:py-12">
+  <div class="mx-auto max-w-6xl px-4 pt-9 md:px-6 md:pt-12">
+    <p class="text-sm font-bold uppercase tracking-[0.2em] text-yellow">{footerContent.eyebrow}</p>
+    <p class="display-face mt-3 text-[2.2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+      {footerContent.title}
+    </p>
+  </div>
+  <div class="mx-auto grid max-w-6xl gap-6 px-4 pb-9 pt-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-8 md:px-6 md:pb-12 md:pt-8">
     <div class="space-y-5">
-      <div>
-        <p class="text-sm font-bold uppercase tracking-[0.2em] text-yellow">{footerContent.eyebrow}</p>
-        <p class="display-face mt-3 text-[2.2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
-          {footerContent.title}
-        </p>
-      </div>
       <aside
         aria-label="Band summary"
         class="max-w-[60ch] rounded-lg border-l-4 border-pink bg-white/5 px-5 py-4 text-[0.95rem] leading-6 text-white/82"
