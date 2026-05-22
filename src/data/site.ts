@@ -166,6 +166,7 @@ type MusicGroupSchema = {
   "@type": "MusicGroup";
   "@id": string;
   name: string;
+  alternateName: readonly string[];
   description: string;
   disambiguatingDescription: string;
   url: string;
@@ -425,6 +426,7 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   "@type": "MusicGroup",
   "@id": siteEntityIds.musicGroup,
   name: siteMeta.title,
+  alternateName: ["The Filibusters Band", "Filibusters", "Filibusters band"],
   description: siteMeta.description,
   disambiguatingDescription:
     "Indie alternative rock band based in Provo, Utah, founded in 2024 — not to be confused with the U.S. Senate filibuster procedure or the Seattle punk band of the same name.",
@@ -432,6 +434,9 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   genre: [bandFacts.geoIdentity.genre, "Indie rock"],
   foundingDate: "2024",
   keywords: [
+    "The Filibusters",
+    "The Filibusters band",
+    "Filibusters band",
     "Provo alt rock",
     "Utah alt rock",
     "alternative rock band",
