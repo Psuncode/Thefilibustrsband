@@ -100,6 +100,31 @@ export const upcomingShows = [
       "The Filibusters play Les Femmes de Velour 2026 on Friday, May 8, 2026 at Velour Live Music Gallery in Provo, Utah."
   },
   {
+    title: "Punk Fest Summer Kickoff",
+    slug: "punk-fest-summer-kickoff-2026-05-30",
+    status: "announced",
+    startsAt: "2026-05-30T18:00:00-06:00",
+    endsAt: "2026-05-30T22:00:00-06:00",
+    venue: "Punko Vintage",
+    city: "Provo",
+    state: "Utah",
+    organizerName: "Punko Vintage",
+    organizerUrl: "https://www.instagram.com/punkovintage",
+    summary:
+      "The Filibusters play Punk Fest Summer Kickoff at Punko Vintage in Provo on Saturday, May 30 — live music plus vintage clothing.",
+    country: "US",
+    body: [
+      "The Filibusters join the Punk Fest Summer Kickoff at Punko Vintage on Saturday, May 30, 2026 from 6–10 PM.",
+      "Punko Vintage is at 283 N University Ave, Provo, Utah. The event combines a live music bill with vintage clothing — a summer kickoff for the Provo scene.",
+      "The lineup is Misdemeanor, The Filibusters, Hatchback, Hurry Up & Wait, and T Street.",
+      "Tickets are at the door only. For updates, follow Punko Vintage at https://www.instagram.com/punkovintage."
+    ],
+    lineup: ["Misdemeanor", "The Filibusters", "Hatchback", "Hurry Up & Wait", "T Street"],
+    notes: "Tickets at the door only. Set times to be confirmed by Punko Vintage closer to the show.",
+    seoDescription:
+      "The Filibusters play Punk Fest Summer Kickoff at Punko Vintage in Provo, Utah on Saturday, May 30, 2026 — live music plus vintage clothing."
+  },
+  {
     title: "Free Outdoor Show: New Music Preview",
     slug: "free-outdoor-new-music-preview-2026-06-13",
     status: "announced",
