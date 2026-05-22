@@ -37,6 +37,11 @@
       ],
       "destination": "https://www.thefilibustersband.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/shows/velour-with-always-her-2026-06-19",
+      "destination": "/shows/always-her-album-release-2026-06-19",
+      "permanent": true
     }
   ]
 }

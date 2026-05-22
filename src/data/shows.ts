@@ -129,7 +129,7 @@ export const upcomingShows = [
   },
   {
     title: "Always Her Album Release",
-    slug: "velour-with-always-her-2026-06-19",
+    slug: "always-her-album-release-2026-06-19",
     status: "announced",
     startsAt: "2026-06-19T19:30:00-06:00",
     venue: "Velour Live Music Gallery",
