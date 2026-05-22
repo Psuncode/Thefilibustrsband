@@ -27,13 +27,15 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   year: "numeric",
   hour: "numeric",
-  minute: "2-digit"
+  minute: "2-digit",
+  timeZone: "America/Denver"
 });
 
 const metadataDateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "long",
   day: "numeric",
-  year: "numeric"
+  year: "numeric",
+  timeZone: "America/Denver"
 });
 
 const canonicalShowUrl = new URL(Astro.url.pathname, Astro.site).href;
