@@ -16,6 +16,7 @@ type FallbackShowSource = {
   readonly startsAt: string;
   readonly endsAt?: string;
   readonly venue: string;
+  readonly venueMapUrl?: string;
   readonly city: string;
   readonly state: string;
   readonly country?: string;
@@ -53,6 +54,7 @@ const normalizeOffer = (offer: ShowEntry["offers"]): ShowEntry["offers"] => {
 const fallbackEntries: ShowEntry[] = fallbackSource.map((show) => ({
   ...show,
   endsAt: show.endsAt || undefined,
+  venueMapUrl: show.venueMapUrl || undefined,
   country: show.country || DEFAULT_COUNTRY,
   ticketUrl: show.ticketUrl || undefined,
   summary: show.summary || "",

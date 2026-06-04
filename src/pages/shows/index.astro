@@ -62,6 +62,20 @@ const formatter = new Intl.DateTimeFormat("en-US", {
                   <p class="mt-3 text-sm uppercase tracking-[0.12em] text-muted">
                     {show.venue} · {show.city}, {show.state}
                   </p>
+                  {show.venueMapUrl ? (
+                    <a
+                      class="focus-ring mt-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-pink underline underline-offset-4 transition hover:text-ink"
+                      href={show.venueMapUrl}
+                      rel="noreferrer"
+                      target="_blank"
+                      data-track-event="venue_map_click"
+                      data-track-label={show.slug}
+                      data-track-source="shows-index"
+                    >
+                      <span aria-hidden="true">📍</span>
+                      <span>View on Google Maps</span>
+                    </a>
+                  ) : null}
                   {show.summary ? (
                     <p class="mt-4 text-sm leading-6 text-ink/85">{show.summary}</p>
                   ) : null}

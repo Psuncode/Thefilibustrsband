@@ -4,6 +4,8 @@ import utahArtFestivalImage from "../assets/images/utah-art-festival-2026.png";
 import velourShowImage from "../assets/images/vlour show.jpg";
 import velourAlwaysHerImage from "../assets/images/velour-2026-06-19.png";
 import punkFestImage from "../assets/images/punk-fest-2026-05-30.jpg";
+import newSongShowcaseImage from "../assets/images/filibusters-new-song-showcase-2026-06-12.png";
+import rusticParadiseImage from "../assets/images/rustic-paradise-2026-06-25.png";
 
 export const upcomingShows = [
   {
@@ -13,6 +15,7 @@ export const upcomingShows = [
     startsAt: "2026-03-28T19:00:00-06:00",
     endsAt: "2026-03-28T22:00:00-06:00",
     venue: "BYU Marriott Center",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=BYU+Marriott+Center+Provo+UT",
     city: "Provo",
     state: "Utah",
     ticketUrl: "https://sclcenter.byu.edu/battle-of-the-bands",
@@ -45,6 +48,7 @@ export const upcomingShows = [
     startsAt: "2026-04-14T11:05:00-06:00",
     endsAt: "2026-04-14T12:00:00-06:00",
     venue: "Marriott Center",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=BYU+Marriott+Center+Provo+UT",
     city: "Provo",
     state: "Utah",
     ticketUrl: "https://calendar.byu.edu/devotionals-forums/devotional-unforum-2026-04-14",
@@ -73,6 +77,7 @@ export const upcomingShows = [
     status: "announced",
     startsAt: "2026-05-08T19:30:00-06:00",
     venue: "Velour Live Music Gallery",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Velour+Live+Music+Gallery+135+N+University+Ave+Provo+UT+84601",
     city: "Provo",
     state: "Utah",
     ticketUrl: "https://www.24tix.com/",
@@ -107,6 +112,7 @@ export const upcomingShows = [
     startsAt: "2026-05-30T18:00:00-06:00",
     endsAt: "2026-05-30T22:00:00-06:00",
     venue: "Punko Vintage",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Punko+Vintage+283+N+University+Ave+Provo+UT",
     city: "Provo",
     state: "Utah",
     ticketUrl: "https://www.instagram.com/punkovintage",
@@ -132,13 +138,15 @@ export const upcomingShows = [
       "The Filibusters play Punk Fest Summer Kickoff at Punko Vintage in Provo, Utah on Saturday, May 30, 2026 — live music plus vintage clothing."
   },
   {
-    title: "Free Outdoor Show: New Music Preview",
-    slug: "free-outdoor-new-music-preview-2026-06-13",
+    title: "Filibusters New Song Showcase",
+    slug: "filibusters-new-song-showcase-2026-06-12",
     status: "announced",
-    startsAt: "2026-06-13T19:00:00-06:00",
-    venue: "Outdoor venue — TBA",
+    startsAt: "2026-06-12T19:00:00-06:00",
+    venue: "The Green House",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=653+N+200+E+Provo+UT",
     city: "Provo",
     state: "Utah",
+    flyerUrl: newSongShowcaseImage.src,
     organizerName: "The Filibusters",
     organizerUrl: "https://www.thefilibustersband.com/",
     offers: {
@@ -146,18 +154,18 @@ export const upcomingShows = [
       availability: "https://schema.org/InStock"
     },
     summary:
-      "Free outdoor show in Provo — the band previews new music and the audience votes on their favorites.",
+      "Free acoustic showcase at The Green House in Provo — The Filibusters play unreleased songs and the audience picks which ones get recorded next.",
     country: "US",
     body: [
-      "The Filibusters are throwing a free outdoor show in Provo to preview a batch of new, unreleased songs and let the audience weigh in on their favorites.",
-      "No tickets, no cover. Bring friends, bring a blanket, and help the band decide which new tracks make the cut for what's next.",
-      "The outdoor venue is being finalized closer to the date. Check this page or the band's social channels for the location, set time, and any last-minute updates."
+      "The Filibusters are playing a free acoustic showcase at The Green House (653 N 200 E, Provo, UT) on Friday, June 12 — an acoustic set of all of their unreleased music, including unreleased fan favorites and never-before-heard original songs.",
+      "This is built as an interactive concert experience: the band wants audience feedback on every new track. Crowd favorites from this night become the next songs The Filibusters record and release.",
+      "Admission is free. Set time is TBA — check this page or the band's social channels for the final time and any last-minute updates."
     ],
     lineup: ["The Filibusters"],
     notes:
-      "Date and venue are being finalized — the show may move from June 13 to June 12 depending on venue availability. Check this page or the band's social channels for updates.",
+      "Set time is TBA. Final timing and any updates will be confirmed closer to the show on the band's social channels.",
     seoDescription:
-      "The Filibusters play a free outdoor show on Saturday, June 13, 2026 in Provo, Utah, previewing new music with audience voting."
+      "The Filibusters play a free acoustic new-music showcase at The Green House in Provo, Utah on Friday, June 12, 2026 — audience feedback decides what gets recorded next."
   },
   {
     title: "Always Her Album Release",
@@ -165,6 +173,7 @@ export const upcomingShows = [
     status: "announced",
     startsAt: "2026-06-19T19:30:00-06:00",
     venue: "Velour Live Music Gallery",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Velour+Live+Music+Gallery+135+N+University+Ave+Provo+UT+84601",
     city: "Provo",
     state: "Utah",
     ticketUrl: "https://www.24tix.com/events/75909999006",
@@ -192,8 +201,9 @@ export const upcomingShows = [
     title: "Utah Arts Festival 2026",
     slug: "utah-arts-festival-2026",
     status: "announced",
-    startsAt: "2026-06-20T21:30:00-06:00",
-    venue: "Festival Stage",
+    startsAt: "2026-06-20T20:30:00-06:00",
+    venue: "Garden Stage — Utah Arts Festival",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Library+Square+210+E+400+S+Salt+Lake+City+UT",
     city: "Salt Lake City",
     state: "Utah",
     ticketUrl: "https://www.uaf.org/tix",
@@ -205,16 +215,48 @@ export const upcomingShows = [
       priceCurrency: "USD",
       availability: "https://schema.org/InStock"
     },
-    summary: "The Filibusters appear at the Utah Arts Festival on Saturday, June 20, ahead of headliner Shakey Graves.",
+    summary: "The Filibusters appear at the Utah Arts Festival on Saturday, June 20 at 8:30 PM on the Garden Stage.",
     country: "US",
     body: [
-      "The Filibusters play the Utah Arts Festival on Saturday, June 20 at 9:30 PM on the Festival Stage.",
-      "That night features Shakey Graves as the headliner, bringing his Americana, rock and roll, folk, and blues-driven live show to the festival.",
+      "The Filibusters play the Utah Arts Festival on Saturday, June 20 at 8:30 PM on the Garden Stage.",
+      "The festival is held at Library Square in downtown Salt Lake City (210 E 400 S). Shakey Graves headlines the night, bringing his Americana, rock and roll, folk, and blues-driven live show to the festival.",
       "For full festival details, schedule updates, and planning info, learn more at https://www.uaf.org/."
     ],
     lineup: ["The Filibusters", "Shakey Graves"],
-    notes: "Set timing, festival access, and ticket details should be confirmed directly with the Utah Arts Festival.",
+    notes: "Set time confirmed: 8:30 PM on the Garden Stage. Festival access and ticket details should be confirmed directly with the Utah Arts Festival.",
     seoDescription:
-      "The Filibusters play the Utah Arts Festival on June 20, 2026 at the Festival Stage in Salt Lake City, Utah, ahead of Shakey Graves."
+      "The Filibusters play the Utah Arts Festival on Saturday, June 20, 2026 at 8:30 PM on the Garden Stage in Salt Lake City, Utah, ahead of Shakey Graves."
+  },
+  {
+    title: "Rustic Paradise — Country Night with The Filibusters",
+    slug: "rustic-paradise-2026-06-25",
+    status: "announced",
+    startsAt: "2026-06-25T22:00:00-06:00",
+    endsAt: "2026-06-25T23:00:00-06:00",
+    venue: "TATEV Events — Rustic Paradise",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=TATEV+Events+Rustic+Paradise+765+Orem+Blvd+Orem+UT+84058",
+    city: "Orem",
+    state: "Utah",
+    flyerUrl: rusticParadiseImage.src,
+    organizerName: "Marnell's Rustic Paradise",
+    offers: {
+      price: 6,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock"
+    },
+    summary:
+      "The Filibusters play Marnell's Rustic Paradise in Orem on Thursday, June 25 — a country/swing/line-dance night with a live band set from 10–11 PM.",
+    country: "US",
+    body: [
+      "Put on your boots and come dancing at Marnell's Rustic Paradise on Thursday, June 25, featuring music from The Filibusters.",
+      "Dancing runs 9 PM–1 AM with country swing, west coast swing, and line dancing all night. The Filibusters take the stage live from 10–11 PM with rock, pop, and country covers.",
+      "Refreshments will be served. All dancing skill levels are welcome — instructors are on-site all night and can provide one-on-one dance instruction for anyone who wants to learn.",
+      "The venue is TATEV Events — Rustic Paradise, 765 Orem Blvd Suite C, Orem, UT 84058. Tickets are $6 at the door only."
+    ],
+    lineup: ["The Filibusters"],
+    notes:
+      "Tickets are $6 at the door only — no advance sales. Dancing 9 PM–1 AM; The Filibusters live 10 PM–11 PM.",
+    seoDescription:
+      "The Filibusters play Marnell's Rustic Paradise in Orem, Utah on Thursday, June 25, 2026 — country and swing dancing all night with a live set from 10–11 PM."
   }
 ] as const;

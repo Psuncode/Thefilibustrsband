@@ -16,6 +16,7 @@ export type ShowEntry = {
   startsAt: string;
   endsAt?: string;
   venue: string;
+  venueMapUrl?: string;
   city: string;
   state: string;
   country?: string;

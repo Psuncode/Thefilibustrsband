@@ -176,6 +176,20 @@ const linkifyParagraph = (paragraph: string) =>
             <div class="poster-frame rounded-[1.5rem] p-5">
               <dt class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Venue</dt>
               <dd class="mt-3 text-lg font-semibold">{show.venue}</dd>
+              {show.venueMapUrl ? (
+                <a
+                  class="focus-ring mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-pink underline underline-offset-4 transition hover:text-ink"
+                  href={show.venueMapUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                  data-track-event="venue_map_click"
+                  data-track-label={show.slug}
+                  data-track-source="show-detail"
+                >
+                  <span aria-hidden="true">📍</span>
+                  <span>View on Google Maps</span>
+                </a>
+              ) : null}
             </div>
             <div class="poster-frame rounded-[1.5rem] p-5">
               <dt class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Location</dt>
