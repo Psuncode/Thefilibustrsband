@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
+import InstagramGallery from "../components/site/InstagramGallery.astro";
 import { forFansOfEntries } from "../data/forFansOf";
 import { siteMeta } from "../data/site";
 import { buildBreadcrumbList } from "../lib/seo/breadcrumb";
@@ -55,6 +56,8 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
         </div>
       </div>
     </section>
+
+    <InstagramGallery />
   </main>
   <Footer />
 </BaseLayout>
