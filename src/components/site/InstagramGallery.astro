@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import { instagramGallery, instagramProfileUrl } from "../../data/instagram";
+import { iconPaths } from "../../data/site";
+---
+
+<section class="border-t border-black/10 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div class="max-w-2xl">
+        <p class="text-[0.82rem] font-bold uppercase tracking-[0.2em] text-pink md:text-sm">
+          {instagramGallery.eyebrow}
+        </p>
+        <h2 class="display-face mt-3 text-[2rem] uppercase leading-[0.95] tracking-[-0.03em] md:text-4xl">
+          {instagramGallery.title}
+        </h2>
+        <p class="mt-4 text-[0.98rem] leading-6 text-ink/85 md:text-base md:leading-7">
+          {instagramGallery.description}
+        </p>
+      </div>
+      <a
+        class="focus-ring inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
+        href={instagramProfileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d={iconPaths.instagram} stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        {instagramGallery.ctaLabel}
+      </a>
+    </div>
+
+    <ul class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
+      {instagramGallery.posts.map((post) => (
+        <li>
+          <a
+            class="focus-ring poster-frame group block overflow-hidden rounded-[1.25rem] md:rounded-[1.5rem]"
+            href={post.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={post.image}
+              alt={post.alt}
+              class="aspect-square w-full object-cover object-center transition duration-300 group-hover:scale-[1.03]"
+              widths={[320, 480]}
+              sizes="(max-width: 639px) 50vw, 33vw"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
