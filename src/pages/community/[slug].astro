@@ -82,6 +82,22 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
               <p class="text-base leading-7 text-ink/85 md:text-lg">{paragraph}</p>
             ))}
           </div>
+          {(() => {
+            const setlist = "setlist" in post ? post.setlist : undefined;
+            return setlist && setlist.length ? (
+              <div class="mt-10 rounded-[1.5rem] border border-black/10 bg-paper-soft p-5 md:p-6">
+                <p class="text-sm font-bold uppercase tracking-[0.2em] text-pink">Setlist</p>
+                <ol class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+                  {setlist.map((song, index) => (
+                    <li class="flex gap-3 text-base leading-7 text-ink/85">
+                      <span class="font-bold text-pink tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+                      <span>{song}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : null;
+          })()}
           <div class="mt-8 flex flex-wrap gap-3">
             <button
               class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
