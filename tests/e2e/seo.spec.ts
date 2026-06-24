@@ -23,7 +23,17 @@ const assertSeoTags = async (page: Page) => {
   }
 };
 
-const staticRoutes = ["/", "/shows", "/provo-alt-rock-band", "/press/ai"] as const;
+const staticRoutes = [
+  "/",
+  "/shows",
+  "/provo-alt-rock-band",
+  "/press/ai",
+  "/for-fans-of",
+  "/listen",
+  "/music",
+  "/merch",
+  "/band/hanna-eyre"
+] as const;
 
 for (const route of staticRoutes) {
   test(`SEO tags present on ${route}`, async ({ page }) => {

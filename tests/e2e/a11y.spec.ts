@@ -1,7 +1,19 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-const routes = ["/", "/shows", "/community", "/about", "/press"] as const;
+const routes = [
+  "/",
+  "/shows",
+  "/community",
+  "/about",
+  "/press",
+  "/for-fans-of",
+  "/listen",
+  "/music",
+  "/contact",
+  "/merch",
+  "/band/hanna-eyre"
+] as const;
 
 for (const route of routes) {
   test(`a11y: ${route} has no serious or critical axe violations`, async ({ page }) => {
