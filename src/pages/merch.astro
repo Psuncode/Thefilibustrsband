@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/site/Footer.astro";
+import Header from "../components/site/Header.astro";
+import { merchPage } from "../data/merch";
+import { buildPageUrl, siteEntityIds } from "../data/site";
+
+const merchPageUrl = buildPageUrl("/merch");
+
+const merchStructuredData = {
+  "@type": "WebPage",
+  "@id": `${merchPageUrl}#webpage`,
+  name: "Merch | The Filibusters",
+  url: merchPageUrl,
+  description: merchPage.meta.description,
+  isPartOf: {
+    "@id": siteEntityIds.website
+  },
+  about: {
+    "@id": siteEntityIds.musicGroup
+  }
+} as const;
+---
+
+<BaseLayout
+  title={merchPage.meta.title}
+  description={merchPage.meta.description}
+  structuredData={merchStructuredData}
+>
+  <Header />
+  <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip bg-paper-soft">
+    <section class="border-b border-black/10 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-pink">
+            {merchPage.hero.eyebrow}
+          </p>
+          <h1 class="display-face mt-3 text-[clamp(2.1rem,8vw,3.75rem)] uppercase leading-[1.02] tracking-[-0.04em]">
+            {merchPage.hero.title}
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-ink/78 md:text-lg md:leading-8">
+            {merchPage.hero.description}
+          </p>
+
+          <div class="mt-7 flex flex-wrap gap-3">
+            <button
+              class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-ink px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink"
+              data-subscribe-open
+              type="button"
+            >
+              {merchPage.cta.notifyLabel}
+            </button>
+          </div>
+          <p class="mt-3 text-xs leading-5 text-ink/58">
+            {merchPage.cta.notifyNote}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="grid gap-4 md:grid-cols-2">
+          {merchPage.hero.body.map((paragraph) => (
+            <article class="poster-frame rounded-[1.6rem] p-5 md:rounded-[2rem] md:p-7">
+              <p class="text-[0.98rem] leading-6 text-ink/78 md:text-base md:leading-7">
+                {paragraph}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-black/10 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+        <div class="max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[0.2em] text-pink">
+            {merchPage.links.eyebrow}
+          </p>
+          <h2 class="display-face mt-3 text-3xl uppercase leading-[0.95] tracking-[-0.03em] md:text-5xl">
+            {merchPage.links.title}
+          </h2>
+        </div>
+
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          {merchPage.links.items.map((link) => (
+            <a
+              class="focus-ring poster-frame flex h-full flex-col rounded-[1.75rem] p-6 transition hover:border-pink"
+              href={link.href}
+            >
+              <span class="text-xs font-bold uppercase tracking-[0.2em] text-pink">
+                {link.label}
+              </span>
+              <span class="mt-4 text-base leading-7 text-ink/76">
+                {link.description}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

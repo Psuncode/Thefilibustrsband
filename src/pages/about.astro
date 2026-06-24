@@ -4,6 +4,7 @@ import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { aboutPage } from "../data/about";
+import { bandMembers } from "../data/bandMembers";
 import { siteEntityIds, siteMeta, specialRoutes } from "../data/site";
 import { buildFaqSchema } from "../lib/seo/faq";
 import heroBand from "../assets/images/hero-band.jpg";
@@ -152,25 +153,31 @@ const faqStructuredData = buildFaqSchema(aboutPage.faq);
           </h2>
         </div>
         <div class="mt-6 grid gap-3 md:mt-8 md:gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {aboutPage.members.map((member) => (
-            <article class="poster-frame overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] sm:block">
-              <Image
-                src={member.photo}
-                alt={member.alt}
-                class="aspect-[5/4] w-full object-cover object-center sm:aspect-[4/5]"
-                widths={[480, 720]}
-                sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
-              />
-              <div class="p-4 md:p-5">
-                <h3 class="text-lg font-black uppercase leading-tight text-ink md:text-xl">
-                  {member.name}
-                </h3>
-                <p class="mt-2 text-sm uppercase tracking-[0.12em] text-muted">
-                  {member.role}
-                </p>
-              </div>
-            </article>
-          ))}
+          {aboutPage.members.map((member) => {
+            const memberSlug = bandMembers.find((entry) => entry.name === member.name)?.slug;
+            return (
+              <a
+                class="focus-ring poster-frame block overflow-hidden rounded-[1.5rem] transition hover:-translate-y-0.5 sm:rounded-[1.75rem]"
+                href={memberSlug ? `/band/${memberSlug}` : "/about"}
+              >
+                <Image
+                  src={member.photo}
+                  alt={member.alt}
+                  class="aspect-[5/4] w-full object-cover object-center sm:aspect-[4/5]"
+                  widths={[480, 720]}
+                  sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
+                />
+                <div class="p-4 md:p-5">
+                  <h3 class="text-lg font-black uppercase leading-tight text-ink md:text-xl">
+                    {member.name}
+                  </h3>
+                  <p class="mt-2 text-sm uppercase tracking-[0.12em] text-muted">
+                    {member.role}
+                  </p>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
