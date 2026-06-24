@@ -1,6 +1,12 @@
 # Share-of-Model Tracker — The Filibusters
 
-A manual weekly baseline of how AI engines describe and cite the band. Track lift over time as GEO/SEO changes ship.
+A manual baseline of how AI engines describe and cite the band. Track lift over time as GEO/SEO changes ship.
+
+**Cadence: quarterly, plus an ad-hoc re-baseline after any major SEO/content push.**
+(This supersedes the earlier "weekly" cadence — weekly was unrealistic for a band
+in maintenance mode and drifted from `MAINTENANCE.md`, which schedules this
+quarterly. Re-baseline sooner when a batch of GEO work ships so you can attribute
+lift to it.)
 
 ## How to baseline
 
@@ -60,13 +66,33 @@ Category: 2 CITED + 1 PARTIAL out of 5. Comparison: 0 CITED out of 5. Branded: 0
 
 ### 1. INCORRECT MEMBER NAME on AI engines
 
-Google AI Overviews repeatedly named **"Trevor Jacobson on percussion"** as a band member. This is wrong — the band's drummer is **Curtis Schnitzer**. The misinformation is coming from somewhere AI is scraping. Hunt and correct:
+Google AI Overviews repeatedly named **"Trevor Jacobson on percussion"** as a band member. This is wrong — the band's drummer is **Curtis Schnitzer**.
 
-- [ ] Check old versions of the band's social profiles (Facebook, Instagram, TikTok, Bandcamp) for outdated lineup
-- [ ] Check SoundCloud, Last.fm, AllMusic, SonicHits, the UK Filibusters site (`thefilibusters.co.uk`) — any cached profile listing
-- [ ] Run a fresh Google "Trevor Jacobson Filibusters" search to locate the source
-- [ ] File correction requests on any third-party page surfacing the wrong info
-- [ ] Make sure the homepage and `/about` clearly list current members so AI re-crawls catch up
+**Source hunt result (2026-06-24): there is no correctable page.** A thorough
+web sweep found "Trevor Jacobson" on **zero** live third-party pages about our
+band. Every real source — the official site, the BYU Daily Universe Battle of
+the Bands article, Spotify — correctly names **Curtis Schnitzer**. The wrong
+name appears only inside AI-generated answer boxes, which are even
+self-contradictory (naming both Jacobson *and* Schnitzer in the same summary).
+Diagnosis: this is an **AI-layer hallucination / entity-blend**, not scraped
+misinformation — fueled by the name colliding with the Seattle punk "The
+Filibusters," an AllMusic "Filibuster," and the U.S. Senate term, plus the fact
+that our band had **no off-site structured profile** for the model to ground on.
+
+Mitigation (re-ground the model rather than chase a page):
+- [x] Ship machine-readable lineup: `MusicGroup.member[]` schema with each member
+      as a `Person` (jobTitle incl. "Drummer" → Curtis Schnitzer), now linked to
+      `/band/[slug]` Person pages. Plain-text members live on `/about` + `/band`.
+- [ ] Create the off-site structured profiles the model can trust — **MusicBrainz**
+      (with members), **Bandsintown**, **Songkick** — per
+      `docs/off-site-seo-submission-packet.md`. This is the real fix: give the
+      model a competing, correct, structured source.
+- [ ] Report the wrong drummer directly via each engine's AI-overview feedback /
+      "report a problem" control, citing thefilibustersband.com + the BYU article.
+- [ ] (Band) Confirm the Facebook page "Members" field lists Curtis Schnitzer and
+      not Trevor Jacobson (login-walled; couldn't verify externally).
+- [ ] Standardize the genre string ("alt rock") across every profile — AI
+      summaries currently drift between "pop rock" and "alt rock".
 
 ### 2. NAME COLLISION with U.S. Senate filibusters
 
@@ -97,4 +123,5 @@ Total cells (across all 5 engines): 75. When you finish the chat-engine columns:
 ## Change log
 
 - **2026-05-21** — **Baseline (Google AI Overviews only).** 15 PRs shipped that day across a11y, SEO, Astro modernization, press kit, GEO entity + FAQ, citable passages + llms.txt v2, /music + /for-fans-of + BYU winner + /shows/provo-2026-06. **Critical finding: AI engines have wrong drummer name** (Trevor Jacobson instead of Curtis Schnitzer); needs source-hunt + correction. Comparison prompts entirely missed — the new /for-fans-of page hasn't been crawled yet. Branded "next show" prompts collide with Senate filibuster.
-- _(Add weekly rows below. Re-baseline target: 2026-05-28 to catch first-week crawl uptake on /music, /for-fans-of, /shows/provo-2026-06.)_
+- **2026-06-24** — **Wrong-drummer source hunt completed.** No correctable third-party page exists; "Trevor Jacobson" is an AI-overview hallucination/entity-blend (see §1, rewritten). Mitigation reframed from "find the page" to "give the model authoritative structured data": MusicGroup `member[]` now links to new `/band/[slug]` Person pages; off-site MusicBrainz/Bandsintown/Songkick entries are the remaining real fix. Also shipped this cycle: Provo geo/keyword schema, 4 show recaps w/ setlists, band member pages, merch placeholder, Instagram gallery. **Chat-engine columns (ChatGPT/Claude/Perplexity/Gemini) still TBD — fill them in the next baseline.** Cadence reconciled to quarterly.
+- _(Add quarterly rows below. Next re-baseline target: 2026-09 — and an ad-hoc one ~2-3 weeks after the June batch merges to catch crawl uptake on /band/*, the expanded recaps, and the geo keywords.)_
