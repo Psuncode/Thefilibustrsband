@@ -74,7 +74,10 @@ Use this file as the repo-specific working memory for any coding agent operating
 - The site currently uses Google Fonts via `BaseLayout.astro` and Vercel Analytics via `@vercel/analytics`.
 - The homepage is still the primary shipped experience, but future content is expected to move toward an editable CMS workflow instead of repo-only data files.
 - The agreed CMS direction is `Sanity`.
-- The agreed starter email platform direction is `Kit`, with a simple email-only signup flow first.
+- Email signup is a `mailto:` link to `filibustersband@gmail.com`. `Kit` was
+  built then deliberately reverted (commit 59b3c09) — do NOT re-attempt a
+  third-party email platform without a new explicit decision. See
+  `docs/memory/decisions.md`.
 - Planned next-phase roadmap lives in `docs/superpowers/specs/2026-03-31-next-phase-roadmap.md`.
 
 ## Change Scope

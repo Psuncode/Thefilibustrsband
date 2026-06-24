@@ -25,3 +25,15 @@ This file stores durable project decisions that future agents and contributors a
 
 - The tab icon is a megaphone-style SVG stored at `public/favicon.svg`.
 - The layout continues to reference `/favicon.svg` directly.
+
+## 2026-06-24
+
+### Email signup: Kit reverted, mailto is the steady state
+
+- `Kit` email signup was wired up (commit b415a21) and then deliberately
+  reverted (commit 59b3c09) — the signup CTA is a `mailto:` link to
+  `filibustersband@gmail.com`.
+- Treat `mailto:` as the intended mechanism. Do not re-introduce Kit (or any
+  third-party email platform) as a "next-phase" item without a fresh decision.
+- This supersedes the `Kit` direction noted in the 2026-03-31 next-phase
+  roadmap and earlier `AGENTS.md` guidance.
