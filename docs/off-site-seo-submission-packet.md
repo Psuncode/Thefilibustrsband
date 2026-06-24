@@ -151,18 +151,72 @@ enough confirming signals.
 
 ---
 
-## 4. Bonus channels (low effort, more `sameAs` signal)
+## 4. Bandsintown + Songkick (live-show discovery — wins "provo events")
 
-After the core three are done, add the band to:
+These two are the highest-value off-site adds **after** MusicBrainz/Wikidata,
+because they are what actually surfaces the band for live-music search:
+Search Console already shows impressions for `provo events` and
+`bands from provo utah`, and Bandsintown/Songkick listings feed Google's event
+results, Spotify's "On Tour" module, Apple Music, and AI answers to
+"where can I see The Filibusters live."
+
+### Bandsintown for Artists (do this one first — biggest reach)
+
+1. Go to https://artists.bandsintown.com and **Sign up / Claim your artist**.
+   Search "The Filibusters" — if a stub exists from a past show, claim it;
+   otherwise create it. Verify via the band's Spotify (artist id
+   `4Mf8AkUvGERBfOkG8ozuDl`) so Bandsintown links the right entity.
+2. Profile fields to paste:
+
+   | Field | Value |
+   |---|---|
+   | Artist name | `The Filibusters` |
+   | Hometown | `Provo, Utah` |
+   | Genre | `Alternative Rock` (keep it consistent everywhere — do NOT use "pop rock") |
+   | Bio | Use `siteMeta.canonicalParagraph` from `src/data/site.ts` (lineup + Provo + sound). |
+   | Website | `https://www.thefilibustersband.com` |
+   | Spotify | `https://open.spotify.com/artist/4Mf8AkUvGERBfOkG8ozuDl` |
+   | Apple Music | `https://music.apple.com/us/artist/the-filibusters/1550597371` |
+   | Instagram | `https://www.instagram.com/thefilibustersband` |
+
+3. **Add the shows** (this is the part that wins the geo queries). For each show
+   in `src/data/shows.ts`, add a Bandsintown event with: date/time, venue, city,
+   and ticket URL. Upcoming first; past shows can be added too for history.
+   Current/recent venues for reference: Velour Live Music Gallery (Provo),
+   The Green House (Provo), Punko Vintage (Provo), Utah Arts Festival (SLC),
+   Marnell's Rustic Paradise (Orem).
+4. Once a show is posted, Bandsintown auto-syndicates it to Spotify's "On Tour",
+   Google, and fan alerts. Keep it updated whenever `shows.ts` changes.
+
+### Songkick (second; feeds a different event graph)
+
+1. Claim/create at https://www.songkick.com/new_artists (or "Suggest a missing
+   artist"). Verify and add the same upcoming shows.
+2. Songkick listings are used by Google's event panel and some AI engines —
+   redundancy with Bandsintown is intentional; different engines trust different
+   sources.
+
+### Then wire the profiles back into the site
+
+When the Bandsintown / Songkick artist URLs exist, add them to
+`src/data/site.ts` → `socialLinks` (e.g. `category: "social"` or a new value) so
+they flow into the MusicGroup `sameAs` graph automatically — the comment near
+`socialLinks` documents this. That closes the loop: the site points at the
+listings, and the listings point back at the site.
+
+## 5. Bonus channels (low effort, more `sameAs` signal)
+
+After the above, add the band to:
 
 - **Bandcamp** (free) → adds another `sameAs` link
-- **Songkick** (free, for shows) → live performance verification + listing in their event API
-- **Last.fm** → genre community / scrobble surfacing
+- **Last.fm** → genre community / scrobble surfacing (note: the existing Last.fm
+  "The Filibusters" is the *Seattle punk band* — create a distinct entry for our
+  Provo band, don't claim theirs)
 - **Genius** (lyrics) → adds a lyrics surface and another `sameAs` for AI search
 
 When you create any of these, add the profile URL to `src/data/site.ts` →
 `socialLinks` array (with appropriate `category`) and the schema picks it up
-automatically — comment at `src/data/site.ts:450` already documents this.
+automatically — the comment near `socialLinks` already documents this.
 
 ---
 
