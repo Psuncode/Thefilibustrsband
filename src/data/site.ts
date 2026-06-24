@@ -1,4 +1,5 @@
 import { aboutPage } from "./about";
+import { bandMembers } from "./bandMembers";
 
 export type HeaderIconName =
   | "music"
@@ -131,6 +132,8 @@ type MemberPerson = {
   "@type": "Person";
   name: string;
   jobTitle: string;
+  url?: string;
+  image?: string;
 };
 
 type WebSiteSchema = {
@@ -243,7 +246,9 @@ export const siteRoutes = {
   music: { path: "/music" },
   forFansOf: { path: "/for-fans-of" },
   localDiscovery: { path: "/provo-alt-rock-band" },
-  aiPressKit: { path: "/press/ai" }
+  aiPressKit: { path: "/press/ai" },
+  band: { path: "/band" },
+  merch: { path: "/merch" }
 } as const satisfies Record<string, SiteRoute>;
 
 export const buildSiteUrl = (path: string): string => new URL(path, siteMeta.url).href;
@@ -409,10 +414,12 @@ export const buildWebSiteSchema = (): WebSiteSchema => ({
 export const buildHomepageWebPageSchema = (): WebPageSchema => homepagePageSchema;
 
 const buildMemberPersons = (): readonly MemberPerson[] =>
-  aboutPage.members.map((member) => ({
+  bandMembers.map((member) => ({
     "@type": "Person",
     name: member.name,
-    jobTitle: member.role
+    jobTitle: member.role,
+    url: buildPageUrl(`${siteRoutes.band.path}/${member.slug}`),
+    image: buildSiteUrl(member.image.src)
   }));
 
 export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGroupSchema => ({
@@ -541,6 +548,7 @@ export const primaryNav = [
 export const secondaryRoutes = [
   { label: "Community", href: siteRoutes.community.path, kind: "link" },
   { label: "Press Room", href: siteRoutes.press.path, kind: "link" },
+  { label: "Merch", href: siteRoutes.merch.path, kind: "link" },
   { label: "Subscribe", kind: "modal" }
 ] as const satisfies readonly SecondaryRoute[];
 
