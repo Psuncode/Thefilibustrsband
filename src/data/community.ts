@@ -27,6 +27,7 @@ export type CommunityPost = {
   heroAlt: string;
   body: string[];
   relatedShowSlug?: string;
+  setlist?: string[];
 };
 
 export const communityPage = {
@@ -45,71 +46,110 @@ export const communityCategories = [
 
 export const communityPosts = [
   {
-    title: "Recap: we played the Utah Arts Festival in Salt Lake City",
+    title: "Utah Arts Festival 2026: our Garden Stage setlist + recap",
     slug: "utah-arts-festival-2026-recap",
     category: "Show Updates",
     publishedAt: "2026-06-21T11:00:00-06:00",
     summary:
-      "Our biggest stage yet — 8:30 PM on the Garden Stage at the Utah Arts Festival in downtown Salt Lake City, right before Shakey Graves.",
+      "The Filibusters at the Utah Arts Festival 2026 — our full Garden Stage setlist plus a recap of an 8:30 PM slot in downtown Salt Lake City, right before Shakey Graves.",
     heroImage: utahArtsFestivalImage,
-    heroAlt: "The Filibusters on the Garden Stage at the Utah Arts Festival 2026 in Salt Lake City.",
+    heroAlt: "The Filibusters on the Garden Stage at the Utah Arts Festival 2026 in Salt Lake City, Utah.",
     relatedShowSlug: "utah-arts-festival-2026",
+    setlist: [
+      "Steal My Girl",
+      "Jori",
+      "Fall to Fly",
+      "Just a Girl",
+      "BUWYBF (Break Up With Your Boyfriend)",
+      "Oranges",
+      "I Want to Break Free",
+      "Just Might",
+      "Scissorhands",
+      "Love at Eleven",
+      "Nervous Breakdown",
+      "Still Into You"
+    ],
     body: [
-      "Saturday, June 20 we took the Garden Stage at the Utah Arts Festival, down at Library Square in downtown Salt Lake City. An 8:30 PM slot, an outdoor stage, and a festival crowd that wasn't necessarily there for us yet — exactly the kind of room we love to win over.",
-      "Playing SLC instead of a Provo Friday night changes the math. The faces are new, the sound carries differently outside, and you have a set's length to make a stranger care. We leaned into what we always lean into: loud, direct songs that don't wait around to land.",
-      "Going on right before Shakey Graves headlined the night was not lost on us. Sharing a bill like that, at a festival this size, is the kind of thing we'll be chasing more of.",
-      "If you caught us for the first time in Salt Lake, this is where we keep the thread going. Next dates are on the shows page, and the music lives on Spotify, Apple Music, and YouTube."
+      "Saturday, June 20 we played the Utah Arts Festival, up on the Garden Stage at Library Square in downtown Salt Lake City. An 8:30 PM slot, an outdoor stage, and one of the biggest events on Utah's summer calendar. For a Provo alt rock band used to sweaty Friday nights at Velour, walking onto a festival stage in SLC in front of a crowd that hadn't necessarily come for us was a different kind of nerve — and exactly the kind of room we love to win over.",
+      "Playing Salt Lake City instead of a Provo club changes the whole math. The faces are new, the sound carries differently outside, and you get one set to make a stranger care. So we built the arc to grab the room fast: we opened on 'Steal My Girl,' pulled it straight into our own songs with 'Jori' and 'Fall to Fly,' and let a couple of big covers — 'Just a Girl' and 'I Want to Break Free' — do the heavy lifting in the middle. A festival crowd will sing those back to you whether they know your band or not, and that buy-in carried us into the back half.",
+      "The originals are where we actually live, though. 'Just Might,' 'Scissorhands,' and 'Love at Eleven' are the songs we're building this next stretch of the band around — and a couple of them still aren't released. If you heard one at the festival and can't find it on Spotify yet, that's on purpose. We're getting them right before they go out, and we put a whole night into testing the new material at our New Song Showcase (recap on this page too).",
+      "'BUWYBF' — 'Break Up With Your Boyfriend' — is the one from that run you can actually stream right now, and hearing a downtown SLC crowd lock into it mid-set was a small full-circle moment for a song that started as a late-night overthinking spiral.",
+      "Going on right before Shakey Graves headlined the Garden Stage wasn't lost on us. Sharing a festival bill at that scale is exactly the kind of room we want more of, and a reminder that Provo alt rock travels just fine up I-15. We closed on 'Nervous Breakdown' and 'Still Into You' and walked off with the festival already feeling too short.",
+      "If the Utah Arts Festival was your first Filibusters set, this is where it keeps going. Our next live dates are on the shows page, and the music lives on Spotify, Apple Music, and YouTube — go find the songs you heard in Salt Lake City."
     ]
   },
   {
-    title: "Recap: supporting Always Her's album release at Velour",
+    title: "Always Her album release at Velour: our setlist + recap",
     slug: "always-her-album-release-2026-recap",
     category: "Show Updates",
     publishedAt: "2026-06-20T11:00:00-06:00",
     summary:
-      "A Friday night at Velour helping Always Her celebrate their album release — a hometown room that always shows up.",
+      "The Filibusters at Velour Live Music Gallery in Provo — our full setlist and a recap of supporting Always Her's Friday-night album release show.",
     heroImage: alwaysHerImage,
-    heroAlt: "The Filibusters live at Velour Live Music Gallery supporting Always Her's album release.",
+    heroAlt: "The Filibusters live at Velour Live Music Gallery in Provo supporting Always Her's album release.",
     relatedShowSlug: "always-her-album-release-2026-06-19",
+    setlist: [
+      "Fall to Fly",
+      "Give Me Some Heartbreak",
+      "End of Beginning",
+      "Oranges",
+      "Jori",
+      "Love at Eleven",
+      "Nervous Breakdown",
+      "Still Into You"
+    ],
     body: [
-      "Friday, June 19 we were back at Velour Live Music Gallery, this time supporting Always Her on their album release night. Album release shows have a specific kind of energy — the room is there to celebrate someone, and your job as support is to hand the night momentum, not steal it.",
-      "Velour is home turf for us, and a release-night crowd is a generous one. We kept our set tight and loud, set the table, and tried to leave the room warmer than we found it before Always Her took over.",
-      "Nights like this are the whole point of a local scene: bands showing up for each other's biggest moments. Congrats to Always Her — go find the record.",
-      "More from us is always on the shows page, and the songs are on Spotify, Apple Music, and YouTube."
+      "Friday, June 19 we were back at Velour Live Music Gallery in Provo, this time supporting Always Her on their album release night. Album release shows have a specific kind of energy: the room came to celebrate someone, and the job of a support band is to hand the night momentum, not steal it. We took that seriously.",
+      "Velour is home turf for us — 135 N University Ave, the room where a lot of the Provo music scene actually happens — and a release-night crowd is a generous one. We opened on 'Fall to Fly' and 'Give Me Some Heartbreak,' dropped 'End of Beginning' into the middle, and kept the back half ours with 'Oranges,' 'Jori,' and 'Love at Eleven' before closing on 'Nervous Breakdown' and 'Still Into You.' Tight, loud, and built to set the table.",
+      "A quick note for anyone scanning the setlist: 'Give Me Some Heartbreak' is one of our unreleased originals. It's been showing up in our sets and at our New Song Showcase, and it's high on the list of new songs we're getting ready to record — so if it caught you Friday night, you heard it early.",
+      "Nights like this are the whole point of a local scene: bands showing up for each other's biggest moments. Huge congrats to Always Her on the record — go find it. And if you came to Velour for them and left curious about us, that's the best-case scenario.",
+      "More Filibusters dates are always on the shows page, and our music is on Spotify, Apple Music, and YouTube. Follow along — the new songs are coming."
     ]
   },
   {
-    title: "Recap: the free acoustic New Song Showcase at The Green House",
+    title: "New Song Showcase: every unreleased Filibusters song we played",
     slug: "filibusters-new-song-showcase-2026-recap",
     category: "Show Updates",
     publishedAt: "2026-06-13T10:00:00-06:00",
     summary:
-      "We played a room full of unreleased songs and let the crowd vote on what we record next. The feedback was the whole show.",
+      "Inside The Filibusters' free acoustic New Song Showcase at The Green House in Provo — the full setlist of unreleased originals, and how the crowd helped pick which new songs we record next.",
     heroImage: newSongShowcaseImage,
-    heroAlt: "The Filibusters playing an acoustic new-song showcase at The Green House in Provo.",
+    heroAlt: "The Filibusters playing an acoustic new-song showcase at The Green House in Provo, Utah.",
     relatedShowSlug: "filibusters-new-song-showcase-2026-06-12",
+    setlist: [
+      "Give Me Some Heartbreak",
+      "My Fish Just Died (and I didn't even cry)",
+      "Still Mine (The More You Know)",
+      "Two Souls",
+      "Runaway",
+      "Can We Go Dancing?",
+      "Love at Eleven",
+      "Nervous Breakdown"
+    ],
     body: [
-      "Friday, June 12 we did something a little different: a free, all-acoustic showcase at The Green House in Provo, built entirely around music nobody had heard yet. Unreleased favorites, never-before-played originals, and a stripped-back setup that left the songs nowhere to hide.",
-      "The point wasn't to perform at the room — it was to ask it. We wanted real reactions to every new track, because the crowd favorites from this night are the ones we take into the studio next. If a song landed, you helped decide its future.",
-      "Stripping everything down to acoustic is the most honest test a song can get. A few of these are going to surprise you when they come back fully produced — and you'll know you were in the room when we figured that out.",
-      "Thank you to everyone who came and actually told us what they thought. Watch the music pages on Spotify, Apple Music, and YouTube to hear which ones make it."
+      "Friday, June 12 we did something a little different: a free, all-acoustic showcase at The Green House in Provo (653 N 200 E), built entirely around music nobody had heard yet. Every song on the setlist below is an unreleased Filibusters original — never-before-played writing, stripped back to just the bones, with nowhere for a weak song to hide.",
+      "The point wasn't to perform at the room — it was to ask it. We wanted honest reactions to every new track, because the crowd favorites from this night are the ones we take into the studio first. If a song landed Friday, you genuinely helped decide its future.",
+      "So here's the tease, straight up: 'Give Me Some Heartbreak,' 'My Fish Just Died (and I didn't even cry),' 'Still Mine (The More You Know),' 'Two Souls,' 'Runaway,' and 'Can We Go Dancing?' are all new, all unreleased, and all in the running to be the next thing we put out. A few of them are going to surprise you when they come back fully produced and turned all the way up — acoustic is the most honest test a song can get, and these passed.",
+      "It says something that 'Love at Eleven' and 'Nervous Breakdown' have started to feel like the familiar ones in a set of brand-new material. That's the whole arc we're chasing right now: write fast, play it live, let the room tell us the truth, then record the ones that earned it.",
+      "Thank you to everyone who came out to The Green House and actually told us what they thought — that feedback is already shaping the recording list. To hear which of these new songs make it to release first, follow along on Spotify, Apple Music, and YouTube, and keep an eye on the shows page for the next time we test new material live."
     ]
   },
   {
-    title: "Recap: Punk Fest Summer Kickoff at Punko Vintage",
+    title: "Punk Fest Summer Kickoff: The Filibusters at Punko Vintage, Provo",
     slug: "punk-fest-summer-kickoff-2026-recap",
     category: "Show Updates",
     publishedAt: "2026-05-31T10:00:00-06:00",
     summary:
-      "Live music and vintage racks under one roof — we kicked off summer in Provo on a stacked five-band punk bill.",
+      "The Filibusters recap the Punk Fest Summer Kickoff at Punko Vintage in Provo, Utah — a stacked five-band DIY bill and the start of our summer of live shows.",
     heroImage: punkFestImage,
-    heroAlt: "The Filibusters at the Punk Fest Summer Kickoff at Punko Vintage in Provo.",
+    heroAlt: "The Filibusters at the Punk Fest Summer Kickoff at Punko Vintage in Provo, Utah.",
     relatedShowSlug: "punk-fest-summer-kickoff-2026-05-30",
     body: [
-      "Saturday, May 30 we played the Punk Fest Summer Kickoff at Punko Vintage in Provo — a five-band bill packed into a vintage clothing shop, which is exactly as fun as it sounds. We shared the night with Misdemeanor, Hatchback, Hurry Up & Wait, and T Street.",
-      "DIY rooms like Punko bring out a different side of our set. There's no barrier between the band and the crowd, the volume fills the space fast, and everybody's there because they actually want loud music on a Saturday. That's our natural habitat.",
-      "Kicking off summer with a room full of the Provo punk scene was the right way to start the season. Thanks to Punko Vintage for putting it together and to everyone who came to dig through the racks and stay for the sets.",
-      "We've got more dates coming on the shows page, and our music is on Spotify, Apple Music, and YouTube."
+      "Saturday, May 30 we played the Punk Fest Summer Kickoff at Punko Vintage in Provo (283 N University Ave) — a five-band bill packed into a vintage clothing shop, which is exactly as fun as it sounds. We shared the night with Misdemeanor, Hatchback, Hurry Up & Wait, and T Street, with the racks pushed back and the room turned into a stage.",
+      "DIY rooms like Punko bring out a different side of our set. There's no barrier between the band and the crowd, the volume fills the space fast, and everybody there actually wants loud music on a Saturday night. For an alt rock band that writes for exactly that kind of room, it's home — closer and sweatier than a club, and all the better for it.",
+      "Kicking off summer with a room full of the Provo punk scene was the right way to start the season. It was the first show in a run that carried us through June — The Green House, Velour, and all the way up to the Utah Arts Festival in Salt Lake City — so if Punko was where you first caught us, you got in early.",
+      "We leaned on the loud, direct end of our catalog for this one, and worked in a couple of the newer originals we've been roadtesting before taking them into the studio. Tracking how a new song lands in a room like Punko is half the reason we play bills like this.",
+      "Thanks to Punko Vintage for putting it together and to everyone who came to dig through the racks and stay for the sets. More dates are on the shows page, and our music is on Spotify, Apple Music, and YouTube — the new songs we've been testing live are on the way."
     ]
   },
   {
