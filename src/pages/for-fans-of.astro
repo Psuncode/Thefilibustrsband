@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
 import InstagramGallery from "../components/site/InstagramGallery.astro";
+import { discography } from "../data/discography";
 import { forFansOfEntries } from "../data/forFansOf";
 import { siteMeta } from "../data/site";
 import { buildBreadcrumbList } from "../lib/seo/breadcrumb";
@@ -11,6 +12,12 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
   { name: "Home", path: "/" },
   { name: "For fans of", path: "/for-fans-of" }
 ]);
+
+// Resolve recommended-track links against the discography source of truth so a
+// title that doesn't slugify cleanly (apostrophes, parens, "&") can't 404.
+const slugByTrackTitle = new Map(
+  discography.map((track) => [track.title.toLowerCase(), track.slug])
+);
 ---
 
 <BaseLayout
@@ -44,12 +51,19 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
               <p class="mt-4 text-base leading-7 text-ink/85 md:text-lg">{entry.contrastParagraph}</p>
               <p class="mt-4 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
                 Start with:
-                {entry.recommendedTracks.map((track, idx) => (
-                  <>
-                    {idx > 0 ? ", " : " "}
-                    <a class="underline" href={`/music/${track.toLowerCase().replace(/\s+/g, "-")}`}>{track}</a>
-                  </>
-                ))}
+                {entry.recommendedTracks.map((track, idx) => {
+                  const slug = slugByTrackTitle.get(track.toLowerCase());
+                  return (
+                    <>
+                      {idx > 0 ? ", " : " "}
+                      {slug ? (
+                        <a class="underline" href={`/music/${slug}`}>{track}</a>
+                      ) : (
+                        <span>{track}</span>
+                      )}
+                    </>
+                  );
+                })}
               </p>
             </article>
           ))}
