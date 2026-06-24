@@ -420,7 +420,13 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   "@type": "MusicGroup",
   "@id": siteEntityIds.musicGroup,
   name: siteMeta.title,
-  alternateName: ["The Filibusters Band", "Filibusters", "Filibusters band"],
+  alternateName: [
+    "The Filibusters Band",
+    "Filibusters",
+    "Filibusters band",
+    "The Filibuster Band",
+    "Filibuster band"
+  ],
   description: siteMeta.description,
   disambiguatingDescription:
     "Indie alternative rock band based in Provo, Utah, founded in 2024 — not to be confused with the U.S. Senate filibuster procedure or the Seattle punk band of the same name.",
@@ -431,11 +437,18 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
     "The Filibusters",
     "The Filibusters band",
     "Filibusters band",
+    "Filibuster band",
     "Provo alt rock",
     "Utah alt rock",
     "alternative rock band",
     "Provo live music",
-    "indie rock Utah"
+    "indie rock Utah",
+    "bands from Provo Utah",
+    "bands in Provo",
+    "Provo Utah bands",
+    "Utah bands",
+    "live music in Provo",
+    "Provo events"
   ],
   email: siteMeta.contactEmail,
   image,
