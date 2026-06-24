@@ -14,13 +14,13 @@ export const localDiscoveryPage = {
   meta: {
     title: `${bandFacts.location.display} alt rock band | The Filibusters`,
     description:
-      "Provo alternative rock band making loud, emotionally direct songs for live rooms, late nights, and regional alt rock shows across Utah."
+      "Looking for bands from Provo, Utah? The Filibusters are an alt rock band making loud, emotionally direct songs for live rooms, late nights, and live music shows across Provo, Salt Lake City, and the rest of Utah."
   },
   hero: {
     eyebrow: "Provo alt rock band",
     title: "Provo alternative rock that actually wants something to land.",
     description:
-      `${bandFacts.geoLine} A Utah alternative rock band, the Filibusters keep the writing direct, the live energy high, and the focus on connection instead of polish for its own sake.`
+      `${bandFacts.geoLine} One of the bands from Provo, Utah built for live music, the Filibusters keep the writing direct, the live energy high, and the focus on connection instead of polish for its own sake — playing Provo rooms and Utah events across the state.`
   },
   differentiators: [
     "Emotionally direct Provo alternative rock from an alternative band from Utah with a clear regional identity",
@@ -40,6 +40,10 @@ export const localDiscoveryPage = {
     {
       label: "Positioning",
       value: "Loud, emotionally direct songs for live rooms and late nights."
+    },
+    {
+      label: "Where to catch them",
+      value: "Velour Live Music Gallery in Provo and the Utah Arts Festival in Salt Lake City."
     },
     {
       label: "Contact",
