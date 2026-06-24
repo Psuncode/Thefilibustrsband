@@ -16,6 +16,10 @@ export const showLastmod = [
 ];
 
 export const communityLastmod = [
+  { slug: "utah-arts-festival-2026-recap", publishedAt: "2026-06-21T11:00:00-06:00" },
+  { slug: "always-her-album-release-2026-recap", publishedAt: "2026-06-20T11:00:00-06:00" },
+  { slug: "filibusters-new-song-showcase-2026-recap", publishedAt: "2026-06-13T10:00:00-06:00" },
+  { slug: "punk-fest-summer-kickoff-2026-recap", publishedAt: "2026-05-31T10:00:00-06:00" },
   { slug: "les-femmes-de-velour-2026-recap", publishedAt: "2026-05-09T11:00:00-06:00" },
   { slug: "devotional-unforum-2026-recap", publishedAt: "2026-04-15T10:00:00-06:00" },
   { slug: "byu-battle-of-the-bands-2026-win", publishedAt: "2026-03-29T10:00:00-06:00" },

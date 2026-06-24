@@ -6,6 +6,10 @@ import followPromptSinger from "../assets/images/follow-prompt-singer.jpg";
 import heroBand from "../assets/images/hero-band.jpg";
 import devotionalUnforumImage from "../assets/images/devotional-unforum.png";
 import velourShowImage from "../assets/images/vlour show.jpg";
+import punkFestImage from "../assets/images/punk-fest-2026-05-30.jpg";
+import newSongShowcaseImage from "../assets/images/filibusters-new-song-showcase-2026-06-12.png";
+import alwaysHerImage from "../assets/images/velour-2026-06-19.png";
+import utahArtsFestivalImage from "../assets/images/utah-art-festival-2026.png";
 
 export type CommunityCategory =
   | "Band News"
@@ -40,6 +44,74 @@ export const communityCategories = [
 ] as const satisfies readonly CommunityCategory[];
 
 export const communityPosts = [
+  {
+    title: "Recap: we played the Utah Arts Festival in Salt Lake City",
+    slug: "utah-arts-festival-2026-recap",
+    category: "Show Updates",
+    publishedAt: "2026-06-21T11:00:00-06:00",
+    summary:
+      "Our biggest stage yet — 8:30 PM on the Garden Stage at the Utah Arts Festival in downtown Salt Lake City, right before Shakey Graves.",
+    heroImage: utahArtsFestivalImage,
+    heroAlt: "The Filibusters on the Garden Stage at the Utah Arts Festival 2026 in Salt Lake City.",
+    relatedShowSlug: "utah-arts-festival-2026",
+    body: [
+      "Saturday, June 20 we took the Garden Stage at the Utah Arts Festival, down at Library Square in downtown Salt Lake City. An 8:30 PM slot, an outdoor stage, and a festival crowd that wasn't necessarily there for us yet — exactly the kind of room we love to win over.",
+      "Playing SLC instead of a Provo Friday night changes the math. The faces are new, the sound carries differently outside, and you have a set's length to make a stranger care. We leaned into what we always lean into: loud, direct songs that don't wait around to land.",
+      "Going on right before Shakey Graves headlined the night was not lost on us. Sharing a bill like that, at a festival this size, is the kind of thing we'll be chasing more of.",
+      "If you caught us for the first time in Salt Lake, this is where we keep the thread going. Next dates are on the shows page, and the music lives on Spotify, Apple Music, and YouTube."
+    ]
+  },
+  {
+    title: "Recap: supporting Always Her's album release at Velour",
+    slug: "always-her-album-release-2026-recap",
+    category: "Show Updates",
+    publishedAt: "2026-06-20T11:00:00-06:00",
+    summary:
+      "A Friday night at Velour helping Always Her celebrate their album release — a hometown room that always shows up.",
+    heroImage: alwaysHerImage,
+    heroAlt: "The Filibusters live at Velour Live Music Gallery supporting Always Her's album release.",
+    relatedShowSlug: "always-her-album-release-2026-06-19",
+    body: [
+      "Friday, June 19 we were back at Velour Live Music Gallery, this time supporting Always Her on their album release night. Album release shows have a specific kind of energy — the room is there to celebrate someone, and your job as support is to hand the night momentum, not steal it.",
+      "Velour is home turf for us, and a release-night crowd is a generous one. We kept our set tight and loud, set the table, and tried to leave the room warmer than we found it before Always Her took over.",
+      "Nights like this are the whole point of a local scene: bands showing up for each other's biggest moments. Congrats to Always Her — go find the record.",
+      "More from us is always on the shows page, and the songs are on Spotify, Apple Music, and YouTube."
+    ]
+  },
+  {
+    title: "Recap: the free acoustic New Song Showcase at The Green House",
+    slug: "filibusters-new-song-showcase-2026-recap",
+    category: "Show Updates",
+    publishedAt: "2026-06-13T10:00:00-06:00",
+    summary:
+      "We played a room full of unreleased songs and let the crowd vote on what we record next. The feedback was the whole show.",
+    heroImage: newSongShowcaseImage,
+    heroAlt: "The Filibusters playing an acoustic new-song showcase at The Green House in Provo.",
+    relatedShowSlug: "filibusters-new-song-showcase-2026-06-12",
+    body: [
+      "Friday, June 12 we did something a little different: a free, all-acoustic showcase at The Green House in Provo, built entirely around music nobody had heard yet. Unreleased favorites, never-before-played originals, and a stripped-back setup that left the songs nowhere to hide.",
+      "The point wasn't to perform at the room — it was to ask it. We wanted real reactions to every new track, because the crowd favorites from this night are the ones we take into the studio next. If a song landed, you helped decide its future.",
+      "Stripping everything down to acoustic is the most honest test a song can get. A few of these are going to surprise you when they come back fully produced — and you'll know you were in the room when we figured that out.",
+      "Thank you to everyone who came and actually told us what they thought. Watch the music pages on Spotify, Apple Music, and YouTube to hear which ones make it."
+    ]
+  },
+  {
+    title: "Recap: Punk Fest Summer Kickoff at Punko Vintage",
+    slug: "punk-fest-summer-kickoff-2026-recap",
+    category: "Show Updates",
+    publishedAt: "2026-05-31T10:00:00-06:00",
+    summary:
+      "Live music and vintage racks under one roof — we kicked off summer in Provo on a stacked five-band punk bill.",
+    heroImage: punkFestImage,
+    heroAlt: "The Filibusters at the Punk Fest Summer Kickoff at Punko Vintage in Provo.",
+    relatedShowSlug: "punk-fest-summer-kickoff-2026-05-30",
+    body: [
+      "Saturday, May 30 we played the Punk Fest Summer Kickoff at Punko Vintage in Provo — a five-band bill packed into a vintage clothing shop, which is exactly as fun as it sounds. We shared the night with Misdemeanor, Hatchback, Hurry Up & Wait, and T Street.",
+      "DIY rooms like Punko bring out a different side of our set. There's no barrier between the band and the crowd, the volume fills the space fast, and everybody's there because they actually want loud music on a Saturday. That's our natural habitat.",
+      "Kicking off summer with a room full of the Provo punk scene was the right way to start the season. Thanks to Punko Vintage for putting it together and to everyone who came to dig through the racks and stay for the sets.",
+      "We've got more dates coming on the shows page, and our music is on Spotify, Apple Music, and YouTube."
+    ]
+  },
   {
     title: "Les Femmes de Velour 2026 recap: a sweaty, full-room set",
     slug: "les-femmes-de-velour-2026-recap",
