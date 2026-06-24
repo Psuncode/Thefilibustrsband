@@ -1,7 +1,13 @@
 import { test, expect, type Page } from "@playwright/test";
 
-import { communityPosts } from "../../src/data/community";
-import { siteMeta } from "../../src/data/site";
+// NOTE: do NOT import from src/data/community.ts or src/data/site.ts here — both
+// transitively import images via `astro:assets`, which Playwright's loader can't
+// parse (it tries to read a .jpg as TS). Source community slugs from the
+// image-free lastmod-map mirror instead, and hardcode the two stable constants.
+import { communityLastmod } from "../../src/data/lastmod-map.mjs";
+
+const SITE_URL = "https://www.thefilibustersband.com";
+const SITE_TITLE = "The Filibusters";
 
 const requiredSeoSelectors = [
   'link[rel="canonical"][href]',
@@ -50,16 +56,22 @@ test("SEO tags present on a dynamic /shows/<slug> route", async ({ page }) => {
 });
 
 test.describe("SEO tags on /community/<slug> detail pages", () => {
-  for (const post of communityPosts) {
-    test(`SEO tags present on /community/${post.slug}`, async ({ page }) => {
-      const route = `/community/${post.slug}`;
+  for (const { slug } of communityLastmod) {
+    test(`SEO tags present on /community/${slug}`, async ({ page }) => {
+      const route = `/community/${slug}`;
       const response = await page.goto(route);
       expect(response?.ok(), `Failed to load ${route}`).toBe(true);
       await page.waitForSelector("main");
       await assertSeoTags(page);
 
-      // Title should contain the post title.
-      await expect(page).toHaveTitle(new RegExp(post.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+      // Title should be present, branded, and specific (post title + site name).
+      const title = await page.title();
+      expect(title.trim().length, `Empty <title> on ${route}`).toBeGreaterThan(0);
+      expect(title, `Title should be branded on ${route}`).toContain(SITE_TITLE);
+      expect(
+        title.replace(`| ${SITE_TITLE}`, "").trim().length,
+        `Title has no post-specific portion on ${route}`
+      ).toBeGreaterThan(0);
 
       // Meta description should be present and non-empty.
       const description = await page
@@ -69,15 +81,14 @@ test.describe("SEO tags on /community/<slug> detail pages", () => {
       expect((description ?? "").trim().length, `Empty meta description on ${route}`).toBeGreaterThan(0);
 
       // Canonical URL should match the production URL for this route.
-      const expectedCanonical = new URL(route, siteMeta.url).href;
+      const expectedCanonical = new URL(route, SITE_URL).href;
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", expectedCanonical);
 
-      // og:title should contain the post title.
+      // og:title should match the document <title> (BaseLayout sets them together).
       const ogTitle = await page
         .locator('meta[property="og:title"]')
         .getAttribute("content");
-      expect(ogTitle, `Missing og:title on ${route}`).toBeTruthy();
-      expect(ogTitle).toContain(post.title);
+      expect(ogTitle, `Missing og:title on ${route}`).toBe(title);
 
       // og:description should be present and non-empty.
       const ogDescription = await page

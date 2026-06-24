@@ -1,6 +1,6 @@
 # Project State
 
-Last updated: 2026-04-15
+Last updated: 2026-06-24
 
 ## Current Site
 
@@ -24,8 +24,23 @@ Last updated: 2026-04-15
 
 ## Current Roadmap Position
 
-- The next product step is setting up `Sanity` for community content so `/community` can move off hardcoded repo data.
-- After that, the next step is replacing the current signup fallback with a real `Kit` email flow.
+- The site is in maintenance mode. The original next-phase roadmap is largely
+  superseded by what actually shipped:
+  - **Email signup:** `Kit` was built then deliberately reverted (commit
+    59b3c09). Signup is a `mailto:` link — this is the steady state, not a
+    fallback. Do not re-attempt Kit. See `docs/memory/decisions.md` (2026-06-24).
+  - **Sanity community migration:** a full spec exists
+    (`docs/superpowers/specs/2026-05-21-sanity-community-migration.md`) but was
+    never executed. `/community` still reads `src/data/community.ts`. This is a
+    deferred backlog item, not an active step — TS data files are the accepted
+    steady state for the routine flow (see `MAINTENANCE.md`).
+  - **SEO/GEO cluster (May–June 2026):** citable passages, geo-entity FAQ,
+    discovery-entity SEO, Provo geo/keyword coverage, and the June lineup
+    refresh all shipped.
+- True current next steps live off-site, not in code: the off-site identity
+  packet (MusicBrainz → Wikidata → Google Knowledge Panel) in
+  `docs/off-site-seo-submission-packet.md`, and keeping the band journal +
+  Share-of-Model tracker current.
 
 ## Current Verification Standard
 

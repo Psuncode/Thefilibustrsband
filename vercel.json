@@ -42,6 +42,11 @@
       "source": "/shows/velour-with-always-her-2026-06-19",
       "destination": "/shows/always-her-album-release-2026-06-19",
       "permanent": true
+    },
+    {
+      "source": "/shows/free-outdoor-new-music-preview-2026-06-13",
+      "destination": "/shows/filibusters-new-song-showcase-2026-06-12",
+      "permanent": true
     }
   ]
 }
