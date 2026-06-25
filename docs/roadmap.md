@@ -27,17 +27,25 @@ how-to-submit detail on the off-site items see
 - `/merch` "coming soon" placeholder.
 - Curated Instagram gallery on `/for-fans-of` and `/community` (no third-party JS).
 
-## 🟡 Next — needs band-side action (highest leverage)
+## ✅ Off-site identity — DONE (2026-06-25)
+
+- **MusicBrainz** artist `7a328949-233a-496b-baf4-9dcd9b3dfd5f` — band + 4 members (Curtis on drums) + the single. Also merged a duplicate Hanna Eyre and kept her 2017 *Voice* single.
+- **Wikidata** item **Q140356485** — full statements (instance of, Provo, genres, inception, MBID, Spotify, Apple, Instagram).
+- **Bandsintown** artist `bandsintown.com/a/15654159` — profile live.
+- All three wired into the site's MusicGroup `sameAs` via `identitySameAs` in `src/data/site.ts`.
+- **Result:** Google's AI Overview now lists the correct lineup (Curtis Schnitzer on drums) — the "Trevor Jacobson" hallucination is resolved.
+
+## 🟡 Next — needs band-side action
 
 | Item | Why | Who |
 |---|---|---|
-| **MusicBrainz** artist + members + release | #1 "get discovered" lever; durable fix for the Senate-"filibuster" name collision; feeds Wikidata. | You submit (packet is paste-ready) |
-| **Wikidata** item (links MusicBrainz MBID) | Structured-data layer behind Google Knowledge Panels and AI answers. | You paste the QuickStatements batch |
-| **Bandsintown / Songkick** listing | What actually wins the `provo events` / `live music in Provo` Search Console queries; live-show verification. | You claim; copy in the packet |
-| **Google Knowledge Panel** claim | Anchors branded SERPs once MusicBrainz + Wikidata index (~2–6 wks). | You verify via the band's Google account |
+| **⏰ Add shows to Bandsintown** (REMINDER) | Profile is live but **events were NOT added yet** — events are what win the `provo events` / `live music in Provo` queries. Add each show from `src/data/shows.ts`, and every future date when booked. | You |
+| **Google Knowledge Panel** claim | Anchors branded SERPs once MusicBrainz + Wikidata index (~2–6 wks). | Band Google account |
+| **Songkick** (optional) | Redundant event graph; lower priority than Bandsintown. | You |
+| **Facebook About cleanup** | Google cites the (now-unused) FB page — keep its lineup/genre/founding accurate so it reinforces the correct entity. | You |
 
-When any new profile goes live, add its URL to `src/data/site.ts` →
-`socialLinks` and the `sameAs` graph picks it up automatically.
+When any new profile goes live, add its URL to `src/data/site.ts` → `socialLinks`
+("follow us" profiles) or `identitySameAs` (identity/disambiguation records).
 
 ## 🟢 Soon (compounding, mostly content)
 

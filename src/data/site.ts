@@ -224,6 +224,17 @@ export const socialLinks = [
   }
 ] as const satisfies readonly SocialLink[];
 
+// Off-site identity profiles that strengthen the MusicGroup entity graph but are
+// NOT "follow us" social buttons, so they live here (sameAs only) rather than in
+// socialLinks. These are the records that disambiguate the band from the U.S.
+// Senate term and the Seattle punk band. Add new identity profiles (Bandcamp,
+// Last.fm, Genius, Songkick) here as they go live.
+export const identitySameAs = [
+  "https://www.bandsintown.com/a/15654159",
+  "https://musicbrainz.org/artist/7a328949-233a-496b-baf4-9dcd9b3dfd5f",
+  "https://www.wikidata.org/wiki/Q140356485"
+] as const satisfies readonly string[];
+
 export const siteMeta = {
   title: "The Filibusters",
   description:
@@ -466,10 +477,10 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
     addressCountry: "US"
   },
   contactPoint: organizationContactPoints,
-  // MusicGroup.sameAs consumes EVERY entry in socialLinks regardless of category.
-  // To extend the discovery graph (Bandcamp, Last.fm, Songkick, Genius, YouTube Music),
-  // add a new entry to socialLinks with the appropriate category — schema picks it up automatically.
-  sameAs: socialLinks.map(({ href }) => href),
+  // MusicGroup.sameAs = the band's social profiles PLUS off-site identity records
+  // (MusicBrainz, Wikidata, Bandsintown) from identitySameAs. Add "follow us"
+  // profiles to socialLinks; add identity/disambiguation records to identitySameAs.
+  sameAs: [...socialLinks.map(({ href }) => href), ...identitySameAs],
   member: buildMemberPersons(),
   mainEntityOfPage: {
     "@id": siteEntityIds.homepagePage
