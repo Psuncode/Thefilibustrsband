@@ -24,38 +24,38 @@ export const instagramGallery = {
   description:
     "A few moments from the feed — shows, studio, and the parts that never make it onto the posters. Tap any photo to open it on Instagram.",
   ctaLabel: "Follow on Instagram",
-  // PLACEHOLDER posts using existing band photos. Each `href` currently points at
-  // the profile; swap in specific post permalinks (and matching images) when ready.
+  // Tiles use existing band photos; each links to a specific @thefilibustersband
+  // post. To refresh, swap the `href` (and optionally the image) for newer posts.
   posts: [
     {
       image: heroBand,
       alt: "The Filibusters band photo",
-      href: instagramProfileUrl
+      href: "https://www.instagram.com/p/DWpPqtbEmYR/"
     },
     {
       image: punkFestImage,
       alt: "The Filibusters at Punk Fest Summer Kickoff in Provo",
-      href: instagramProfileUrl
+      href: "https://www.instagram.com/p/DVrMDTuDxuj/"
     },
     {
       image: velourShowImage,
       alt: "The Filibusters live at Velour Live Music Gallery in Provo",
-      href: instagramProfileUrl
+      href: "https://www.instagram.com/p/DWZQol6AJ3f/"
     },
     {
       image: utahArtFestivalImage,
       alt: "The Filibusters at the Utah Arts Festival in Salt Lake City",
-      href: instagramProfileUrl
+      href: "https://www.instagram.com/p/DX181oBA3ov/"
     },
     {
       image: battleWinnerImage,
       alt: "The Filibusters after winning BYU Battle of the Bands 2026",
-      href: instagramProfileUrl
+      href: "https://www.instagram.com/p/DXPHLYQAJ0L/"
     },
     {
       image: followPromptSinger,
       alt: "The Filibusters vocalist during a live performance",
-      href: instagramProfileUrl
+      href: "https://www.instagram.com/p/DWhHP9PiXJM/"
     }
   ] as const satisfies readonly InstagramPost[]
 } as const;
