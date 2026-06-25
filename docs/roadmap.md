@@ -1,6 +1,6 @@
 # The Filibusters — Growth Roadmap
 
-Last updated: 2026-06-24
+Last updated: 2026-06-25
 
 Post-maintenance roadmap, ranked by impact on the band's real goal: **get
 discovered → hear the music → find shows.** Three tracks: Discovery (off-site
@@ -25,7 +25,9 @@ how-to-submit detail on the off-site items see
 - Band-member Person pages (`/band/[slug]`) linked into the MusicGroup schema.
 - Real 180×180 PNG apple-touch-icon.
 - `/merch` "coming soon" placeholder.
-- Curated Instagram gallery on `/for-fans-of` and `/community` (no third-party JS).
+- Curated Instagram gallery on `/for-fans-of` and `/community` (no third-party JS) — now linked to 6 real posts.
+- Genres set to Alternative rock / Indie rock / Pop punk; `/for-fans-of` expanded to 8 comparison artists.
+- Richer Hanna Eyre bio (The Voice S12, songwriter history) on `/band/hanna-eyre`.
 
 ## ✅ Off-site identity — DONE (2026-06-25)
 
@@ -35,29 +37,32 @@ how-to-submit detail on the off-site items see
 - All three wired into the site's MusicGroup `sameAs` via `identitySameAs` in `src/data/site.ts`.
 - **Result:** Google's AI Overview now lists the correct lineup (Curtis Schnitzer on drums) — the "Trevor Jacobson" hallucination is resolved.
 
-## 🟡 Next — needs band-side action
+## ⏸️ Blocked / on a timer (revisit later)
 
-| Item | Why | Who |
-|---|---|---|
-| **⏰ Add shows to Bandsintown** (REMINDER) | Profile is live but **events were NOT added yet** — events are what win the `provo events` / `live music in Provo` queries. Add each show from `src/data/shows.ts`, and every future date when booked. | You |
-| **Google Knowledge Panel** claim | Anchors branded SERPs once MusicBrainz + Wikidata index (~2–6 wks). | Band Google account |
-| **Songkick** (optional) | Redundant event graph; lower priority than Bandsintown. | You |
-| **Facebook About cleanup** | Google cites the (now-unused) FB page — keep its lineup/genre/founding accurate so it reinforces the correct entity. | You |
+| Item | Status |
+|---|---|
+| **Add shows to Bandsintown** | No future dates booked right now. Add each new show (to Bandsintown *and* `src/data/shows.ts`) the moment it's confirmed. |
+| **Facebook About cleanup** | Band has **no account access** — skip. (Page still ranks/cited; revisit only if access is regained.) |
+| **Google Knowledge Panel** claim | Wait ~2–6 wks for MusicBrainz/Wikidata to index, then claim via the band's Google account. |
 
-When any new profile goes live, add its URL to `src/data/site.ts` → `socialLinks`
-("follow us" profiles) or `identitySameAs` (identity/disambiguation records).
+## 🎯 What you can do now (no FB, no events needed)
+
+Ranked by leverage — all doable solo today:
+
+1. **Spotify for Artists** (highest leverage) — claim the artist profile (id `4Mf8AkUvGERBfOkG8ozuDl`). It lets you fix the **bio + genre at the source** (kills the "pop rock" label leaking into AI answers), add photos/canvas, and it's the **verification key for Bandsintown**.
+2. **Re-baseline the Share-of-Model tracker** (`docs/geo/share-of-model-tracker.md`) — re-run the prompts on ChatGPT/Claude/Perplexity/Gemini now that the fixes are live; record CITED/MISSED/PARTIAL. Measures the win and shows what's still weak.
+3. **Apple Music for Artists** — same as Spotify: claim, set consistent bio/genre/photos.
+4. **Genius** — add lyrics for "Break Up With Your Boyfriend" → a lyric surface + another `sameAs` for AI search.
+5. **Bandcamp / Last.fm** — more `sameAs`. (Last.fm: create a *new* entry — the existing "The Filibusters" there is the Seattle punk band.)
+6. **Wikidata enrichment** — add the 4 members as items linked to the band (`P463` member of); enrich Hanna's item with her Voice history.
+7. **YouTube channel UC id** — grab the `UC…` id and backfill the `P2397` statement on Wikidata + the YouTube link on MusicBrainz/Bandsintown (we skipped it earlier).
+
+When any new profile goes live, send me the URL and I'll add it to `src/data/site.ts` → `socialLinks` ("follow us") or `identitySameAs` (identity record).
 
 ## 🟢 Soon (compounding, mostly content)
 
-- **Wrong-drummer correction** — AI engines say "Trevor Jacobson"; actual drummer
-  is Curtis Schnitzer. Find + correct the off-domain source (see Share-of-Model
-  tracker §1).
-- **Share-of-Model re-baseline** — fill the chat-engine columns; re-measure after
-  the June crawl uptake.
-- **Recap cadence** — one journal post per show going forward (pattern + page
-  system are proven).
-- **Real Instagram posts** — swap the gallery placeholders for specific post
-  permalinks + screenshots in `src/data/instagram.ts`.
+- **Recap cadence** — one journal post per show going forward (pattern + page system are proven).
+- **Swap Instagram tiles for the actual post images** — currently band photos linked to real posts; send the post images for exact-match tiles.
 
 ## ⚪ Backlog (only if needed)
 
