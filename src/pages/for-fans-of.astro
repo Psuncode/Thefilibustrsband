@@ -48,7 +48,7 @@ const slugByTrackTitle = new Map(
               <h2 class="display-face text-3xl uppercase leading-[0.95] tracking-[-0.03em] text-ink md:text-4xl">
                 Like {entry.artist}?
               </h2>
-              <p class="mt-4 text-base leading-7 text-ink/85 md:text-lg">{entry.contrastParagraph}</p>
+              <p class="mt-4 text-base leading-7 text-ink/85 md:text-lg">{entry.body[0]}</p>
               <p class="mt-4 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
                 Start with:
                 {entry.recommendedTracks.map((track, idx) => {
