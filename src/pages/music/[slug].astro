@@ -225,6 +225,7 @@ const platformLinks = [
         iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
         iframe.title = "YouTube video player";
         iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
         iframe.setAttribute("allowfullscreen", "");
         iframe.className = "absolute inset-0 h-full w-full";
         el.replaceChildren(iframe);
