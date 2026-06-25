@@ -65,11 +65,17 @@ const eventOffers =
     show.offers.validFrom)
     ? {
         "@type": "Offer",
-        url: show.offers.url,
+        // Google flags Offers missing url/validFrom. Fall back so every emitted
+        // Offer is complete: ticket link, else the show page itself; on-sale date
+        // defaults to ~30 days before the show when not explicitly set (override
+        // via offers.validFrom in the show data).
+        url: show.offers.url || show.ticketUrl || canonicalShowUrl,
         price: show.offers.isFree ? 0 : show.offers.price,
         priceCurrency: show.offers.priceCurrency,
-        availability: show.offers.availability,
-        validFrom: show.offers.validFrom
+        availability: show.offers.availability || "https://schema.org/InStock",
+        validFrom:
+          show.offers.validFrom ||
+          new Date(new Date(show.startsAt).getTime() - 30 * 24 * 60 * 60 * 1000).toISOString()
       }
     : undefined;
 
@@ -104,7 +110,9 @@ const eventStructuredData = {
     ? {
         "@type": "Organization",
         name: show.organizerName,
-        url: show.organizerUrl
+        // Google flags organizer missing url; fall back to the ticket link, else
+        // the show page, so the field is always present.
+        url: show.organizerUrl || show.ticketUrl || canonicalShowUrl
       }
     : undefined,
   offers: eventOffers,
