@@ -449,7 +449,7 @@ export const buildMusicGroupSchema = ({ image }: MusicGroupSchemaInput): MusicGr
   disambiguatingDescription:
     "Indie alternative rock band based in Provo, Utah, founded in 2024 — not to be confused with the U.S. Senate filibuster procedure or the Seattle punk band of the same name.",
   url: siteMeta.url,
-  genre: [bandFacts.geoIdentity.genre, "Indie rock"],
+  genre: ["Alternative rock", "Indie rock", "Pop punk"],
   foundingDate: "2024",
   keywords: [
     "The Filibusters",
