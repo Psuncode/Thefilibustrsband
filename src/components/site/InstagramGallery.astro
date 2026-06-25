@@ -34,11 +34,15 @@ import { iconPaths } from "../../data/site";
     <ul class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
       {instagramGallery.posts.map((post) => (
         <li>
+          {/* Facade: no-JS = opens the post on Instagram; with JS = loads the
+              real embed in a modal (see the script below). */}
           <a
-            class="focus-ring poster-frame group block overflow-hidden rounded-[1.25rem] md:rounded-[1.5rem]"
+            class="ig-facade focus-ring poster-frame group relative block overflow-hidden rounded-[1.25rem] md:rounded-[1.5rem]"
             href={post.href}
             target="_blank"
             rel="noopener noreferrer"
+            data-ig-permalink={post.href}
+            aria-label={`Open Instagram post: ${post.alt}`}
           >
             <Image
               src={post.image}
@@ -47,9 +51,96 @@ import { iconPaths } from "../../data/site";
               widths={[320, 480]}
               sizes="(max-width: 639px) 50vw, 33vw"
             />
+            <span class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 transition group-hover:opacity-100"></span>
+            <span class="pointer-events-none absolute right-2.5 top-2.5 rounded-full bg-black/55 p-1.5 text-white backdrop-blur-sm">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d={iconPaths.instagram} stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
           </a>
         </li>
       ))}
     </ul>
   </div>
+
+  <dialog
+    id="ig-modal"
+    class="ig-modal w-[min(540px,92vw)] rounded-[1.5rem] border border-black/10 bg-white p-0 shadow-2xl backdrop:bg-black/70"
+    aria-label="Instagram post"
+  >
+    <div class="flex items-center justify-between border-b border-black/10 px-4 py-3">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Instagram</span>
+      <button
+        type="button"
+        data-ig-close
+        class="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full text-ink transition hover:bg-black/5"
+        aria-label="Close"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <div id="ig-modal-body" class="max-h-[80vh] overflow-y-auto p-3"></div>
+  </dialog>
 </section>
+
+<script>
+  const IG_EMBED_SRC = "https://www.instagram.com/embed.js";
+
+  function ensureEmbedScript(): Promise<void> {
+    return new Promise((resolve) => {
+      const w = window as unknown as { instgrm?: { Embeds: { process: () => void } } };
+      if (w.instgrm) {
+        resolve();
+        return;
+      }
+      const existing = document.querySelector(`script[src="${IG_EMBED_SRC}"]`);
+      if (existing) {
+        existing.addEventListener("load", () => resolve(), { once: true });
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = IG_EMBED_SRC;
+      script.async = true;
+      script.addEventListener("load", () => resolve(), { once: true });
+      document.body.appendChild(script);
+    });
+  }
+
+  function initInstagramGallery() {
+    const modal = document.getElementById("ig-modal") as HTMLDialogElement | null;
+    const body = document.getElementById("ig-modal-body");
+    if (!modal || !body) return;
+
+    document.querySelectorAll<HTMLAnchorElement>(".ig-facade").forEach((facade) => {
+      if (facade.dataset.igBound === "true") return;
+      facade.dataset.igBound = "true";
+      facade.addEventListener("click", async (event) => {
+        const permalink = facade.getAttribute("data-ig-permalink");
+        if (!permalink) return; // let the link work normally
+        event.preventDefault();
+        body.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${permalink}" data-instgrm-version="14" style="margin:0 auto;max-width:100%;width:100%;min-width:0;"></blockquote>`;
+        if (typeof modal.showModal === "function") modal.showModal();
+        else modal.setAttribute("open", "");
+        await ensureEmbedScript();
+        const w = window as unknown as { instgrm?: { Embeds: { process: () => void } } };
+        w.instgrm?.Embeds.process();
+      });
+    });
+
+    if (modal.dataset.igBound !== "true") {
+      modal.dataset.igBound = "true";
+      modal.querySelector("[data-ig-close]")?.addEventListener("click", () => modal.close());
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) modal.close(); // backdrop click
+      });
+      modal.addEventListener("close", () => {
+        body.innerHTML = "";
+      });
+    }
+  }
+
+  initInstagramGallery();
+  document.addEventListener("astro:page-load", initInstagramGallery);
+</script>
