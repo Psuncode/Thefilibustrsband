@@ -88,10 +88,10 @@ LAST	Aen	"Filibusters"
 LAST	Aen	"The Filibusters band"
 LAST	P31	Q215380
 LAST	P495	Q30
-LAST	P740	Q49255
-LAST	P571	+2024-00-00T00:00:00Z/9
-LAST	P136	Q484641
-LAST	P136	Q484690
+LAST	P740	Q23443
+LAST	P571	+2024-08-30T00:00:00Z/11
+LAST	P136	Q11366
+LAST	P136	Q183504
 LAST	P856	"https://www.thefilibustersband.com"
 LAST	P434	"<YOUR_MBID>"
 LAST	P1902	"4Mf8AkUvGERBfOkG8ozuDl"
@@ -107,9 +107,9 @@ What each line means (for reference, you don't paste these):
 - `Aen "..."` — English alias (alternate name)
 - `P31 Q215380` — instance of: musical group
 - `P495 Q30` — country of origin: United States
-- `P740 Q49255` — location of formation: Provo
-- `P571 +2024-...` — inception: 2024 (the `/9` means year-precision)
-- `P136 Q484641 / Q484690` — genre: alternative rock + indie rock
+- `P740 Q23443` — location of formation: Provo, Utah
+- `P571 +2024-08-30...` — inception: 2024-08-30 (the `/11` means day-precision)
+- `P136 Q11366 / Q183504` — genre: alternative rock + indie rock
 - `P856` — official website
 - `P434` — MusicBrainz artist ID
 - `P1902` — Spotify artist ID
