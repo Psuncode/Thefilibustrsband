@@ -45,6 +45,27 @@ test("for-fans-of detail page emits a FAQPage JSON-LD node", async ({ page }) =>
   expect(hasFaqPage, "No FAQPage JSON-LD on /for-fans-of/paramore").toBe(true);
 });
 
+test("song page emits MusicComposition lyrics schema when lyrics are present", async ({ page }) => {
+  await page.goto("/music/break-up-with-your-boyfriend");
+  await page.waitForSelector("main");
+  const result = await page.$$eval('script[type="application/ld+json"]', (nodes) => {
+    const flatten = (v: unknown): unknown[] => {
+      if (!v || typeof v !== "object") return [];
+      if (Array.isArray(v)) return v.flatMap(flatten);
+      const g = (v as { "@graph"?: unknown })["@graph"];
+      if (Array.isArray(g)) return g.flatMap(flatten);
+      return [v];
+    };
+    const items = nodes.flatMap((n) => {
+      try { return flatten(JSON.parse(n.textContent || "")); } catch { return []; }
+    }) as Array<Record<string, unknown>>;
+    return { lyricsBlockVisible: !!document.querySelector('[data-lyrics]'), hasComposition: items.some((i) => i["@type"] === "MusicComposition") };
+  });
+  if (result.lyricsBlockVisible) {
+    expect(result.hasComposition, "Lyrics rendered but no MusicComposition schema").toBe(true);
+  }
+});
+
 test("show detail page emits an Event JSON-LD node", async ({ page }) => {
   await page.goto("/shows");
   await page.waitForSelector('a[href^="/shows/"]');
