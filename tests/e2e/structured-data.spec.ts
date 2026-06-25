@@ -23,6 +23,28 @@ const extractJsonLd = async (page: Page): Promise<unknown[]> => {
 const isItem = (value: unknown): value is Record<string, unknown> =>
   Boolean(value) && typeof value === "object";
 
+test("for-fans-of detail page emits a FAQPage JSON-LD node", async ({ page }) => {
+  const response = await page.goto("/for-fans-of/paramore");
+  expect(response?.ok(), "Failed to load /for-fans-of/paramore").toBe(true);
+  await page.waitForSelector("main");
+
+  const hasFaqPage = await page.$$eval('script[type="application/ld+json"]', (nodes) => {
+    const flatten = (v: unknown): unknown[] => {
+      if (!v || typeof v !== "object") return [];
+      if (Array.isArray(v)) return v.flatMap(flatten);
+      const g = (v as { "@graph"?: unknown })["@graph"];
+      if (Array.isArray(g)) return g.flatMap(flatten);
+      return [v];
+    };
+    return nodes
+      .flatMap((n) => {
+        try { return flatten(JSON.parse(n.textContent || "")); } catch { return []; }
+      })
+      .some((item) => (item as { "@type"?: string })?.["@type"] === "FAQPage");
+  });
+  expect(hasFaqPage, "No FAQPage JSON-LD on /for-fans-of/paramore").toBe(true);
+});
+
 test("show detail page emits an Event JSON-LD node", async ({ page }) => {
   await page.goto("/shows");
   await page.waitForSelector('a[href^="/shows/"]');

@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/site/Footer.astro";
+import Header from "../../components/site/Header.astro";
+import { forFansOfEntries, entryBySlug } from "../../data/forFansOf";
+import { discography } from "../../data/discography";
+import { siteEntityIds, siteMeta, siteRoutes } from "../../data/site";
+import { buildBreadcrumbList } from "../../lib/seo/breadcrumb";
+
+export function getStaticPaths() {
+  return forFansOfEntries.map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+const { slug } = Astro.params;
+const entry = entryBySlug(slug!);
+if (!entry) {
+  throw new Error(`Unknown for-fans-of slug: ${slug}`);
+}
+
+const slugByTrackTitle = new Map(discography.map((t) => [t.title.toLowerCase(), t.slug]));
+const pageUrl = new URL(`/for-fans-of/${entry.slug}`, Astro.site).href;
+const seoTitle = `For fans of ${entry.artist} | ${siteMeta.title}`;
+const seoDescription = entry.hook;
+
+const webPageStructuredData = {
+  "@type": "WebPage",
+  "@id": `${pageUrl}#webpage`,
+  name: seoTitle,
+  url: pageUrl,
+  description: seoDescription,
+  isPartOf: { "@id": siteEntityIds.website },
+  about: { "@id": siteEntityIds.musicGroup }
+};
+
+const faqStructuredData = {
+  "@type": "FAQPage",
+  "@id": `${pageUrl}#faq`,
+  mainEntity: entry.faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer }
+  }))
+};
+
+const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
+  { name: "Home", path: "/" },
+  { name: "For fans of", path: siteRoutes.forFansOf.path },
+  { name: entry.artist, path: `/for-fans-of/${entry.slug}` }
+]);
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  structuredData={[webPageStructuredData, faqStructuredData, breadcrumbStructuredData]}
+>
+  <Header />
+  <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip bg-white">
+    <section class="border-b border-black/10">
+      <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-pink">If you like</p>
+        <h1 class="display-face mt-3 text-4xl uppercase leading-[0.92] tracking-[-0.04em] md:text-6xl">
+          For fans of {entry.artist}
+        </h1>
+
+        <div class="mt-8 space-y-4">
+          {entry.body.map((paragraph) => (
+            <p class="text-base leading-7 text-ink/85 md:text-lg">{paragraph}</p>
+          ))}
+        </div>
+
+        <p class="mt-8 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+          Start with:
+          {entry.recommendedTracks.map((track, idx) => {
+            const trackSlug = slugByTrackTitle.get(track.toLowerCase());
+            return (
+              <>
+                {idx > 0 ? ", " : " "}
+                {trackSlug ? (
+                  <a class="underline" href={`/music/${trackSlug}`}>{track}</a>
+                ) : (
+                  <span>{track}</span>
+                )}
+              </>
+            );
+          })}
+        </p>
+
+        <section class="mt-10 border-t border-black/10 pt-8">
+          <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-pink">FAQ</h2>
+          <dl class="mt-5 space-y-6">
+            {entry.faq.map((item) => (
+              <div>
+                <dt class="text-lg font-black uppercase leading-tight text-ink">{item.question}</dt>
+                <dd class="mt-2 text-base leading-7 text-ink/85">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-black/12 bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink" href={siteRoutes.forFansOf.path}>
+            All comparisons
+          </a>
+          <a class="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-pink" href={siteRoutes.shows.path}>
+            See shows
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
