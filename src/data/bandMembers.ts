@@ -22,9 +22,10 @@ export const bandMembers = [
     image: hannaPhoto,
     imageAlt: "Hanna Eyre, vocalist of The Filibusters.",
     bio: [
-      "Hanna is the voice out front for The Filibusters — the one carrying the lines that say the things people usually leave unsaid.",
-      "Her singing leans into the same instinct the band was built on: stay direct, stay honest, and let the loud rooms do the rest.",
-      "Catch it live and the emotional directness the band is known for lands hardest through her delivery."
+      "Before The Filibusters, Hanna Eyre was already a national TV voice. At 15 she earned a three-chair turn on Season 12 of NBC's The Voice with a blind audition of Taylor Swift's \"Blank Space,\" joined Team Adam Levine, and sang her way to the live playoffs.",
+      "She came up as a songwriter first — writing her own songs from age 11 and performing piano-led pop and R&B long before she fronted a rock band. Hayley Williams of Paramore sits high on her list of influences, which tells you most of what you need to know about where the band's sound points.",
+      "In The Filibusters she aims all of it — the range, the training, the instinct for a hook — straight at Provo alt rock: louder, rawer, and more direct than a television stage ever allowed.",
+      "Live, the emotional directness the band is built on lands hardest through her delivery — the one carrying the lines most people leave unsaid."
     ]
   },
   {
