@@ -107,7 +107,7 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
               </li>
             ))}
           </ul>
-          {epk.drawStats ? (
+          {epk.drawStats && epk.drawStats.length > 0 ? (
             <dl class="mt-6 grid gap-3 sm:grid-cols-2">
               {epk.drawStats.map((stat) => (
                 <div class="rounded-[1.25rem] border border-black/10 bg-white px-4 py-3">

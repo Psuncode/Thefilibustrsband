@@ -34,6 +34,9 @@ export const buildEventStructuredData = ({
       show.offers.validFrom)
       ? {
           "@type": "Offer",
+          // Google flags Offers missing url/validFrom. Fall back so every emitted
+          // Offer is complete: ticket link, else the show page; on-sale date
+          // defaults to ~30 days before the show when unset (override via offers.validFrom).
           url: show.offers.url || show.ticketUrl || url,
           price: show.offers.isFree ? 0 : show.offers.price,
           priceCurrency: show.offers.priceCurrency,
@@ -75,6 +78,7 @@ export const buildEventStructuredData = ({
       ? {
           "@type": "Organization",
           name: show.organizerName,
+          // Google flags organizer missing url; fall back to ticket link, else show page.
           url: show.organizerUrl || show.ticketUrl || url
         }
       : undefined,
