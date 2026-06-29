@@ -43,7 +43,12 @@ export const discography: readonly Track[] = [
       "A driving alt rock track built around urgent vocals, a hooky chorus, and instrumentation that leans loud and direct. The mix is intentionally a little messy — guitars carry the emotional weight while the rhythm section keeps the tension wound.",
     forFansOf: ["Paramore", "The 1975", "Arctic Monkeys"],
     themesAndContext:
-      "Break Up With Your Boyfriend is The Filibusters' single released March 26, 2026 — written in the spiral of late-night overthinking and the conversations you keep rehearsing but never have. The song doesn't ask the listener to be okay; it asks them to turn the volume up and stay in the discomfort until something underneath clears. Recorded in Provo with the live-room feel the band is known for, the track is structured to land hard on first listen and hit differently on the third. Lyrically, it sits squarely in The Filibusters' lane: emotional directness over polish, hooks that stay, and a refusal to dress up the feeling underneath."
+      "Break Up With Your Boyfriend is The Filibusters' single released March 26, 2026 — written in the spiral of late-night overthinking and the conversations you keep rehearsing but never have. The song doesn't ask the listener to be okay; it asks them to turn the volume up and stay in the discomfort until something underneath clears. Recorded in Provo with the live-room feel the band is known for, the track is structured to land hard on first listen and hit differently on the third. Lyrically, it sits squarely in The Filibusters' lane: emotional directness over polish, hooks that stay, and a refusal to dress up the feeling underneath.",
+    video: {
+      youTubeId: "ndVjQlD_yww",
+      name: "Break Up with Your Boyfriend",
+      uploadDate: "2026-03-26"
+    }
   }
 ] as const;
 
