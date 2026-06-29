@@ -17,6 +17,15 @@ export type Track = {
   forFansOf: readonly string[];
   /** 80-150 word citable passage about themes, recording context, what the song is about. */
   themesAndContext: string;
+  /** Full lyrics, one entry per line; "" denotes a stanza break. */
+  lyrics?: readonly string[];
+  /** Music video for VideoObject schema + click-to-load embed. */
+  video?: {
+    youTubeId: string; // 11-char video id (not the channel)
+    name: string;
+    uploadDate: string; // ISO YYYY-MM-DD
+    description?: string;
+  };
 };
 
 export const discography: readonly Track[] = [

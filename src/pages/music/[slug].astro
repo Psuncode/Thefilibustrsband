@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
 import { discography, trackBySlug } from "../../data/discography";
+import { forFansOfEntries } from "../../data/forFansOf";
 import { siteEntityIds, siteMeta } from "../../data/site";
 import { buildBreadcrumbList } from "../../lib/seo/breadcrumb";
 
@@ -38,11 +39,49 @@ const musicRecordingStructuredData = {
   }
 };
 
+const lyricsText = track.lyrics?.join("\n");
+
+const musicCompositionStructuredData = lyricsText
+  ? {
+      "@type": "MusicComposition",
+      "@id": `${canonicalUrl}#composition`,
+      name: track.title,
+      lyrics: { "@type": "CreativeWork", text: lyricsText }
+    }
+  : undefined;
+
+if (musicCompositionStructuredData) {
+  (musicRecordingStructuredData as Record<string, unknown>).recordingOf = {
+    "@id": `${canonicalUrl}#composition`
+  };
+}
+
+const videoStructuredData = track.video
+  ? {
+      "@type": "VideoObject",
+      name: track.video.name,
+      description: track.video.description || track.soundProfile,
+      thumbnailUrl: `https://i.ytimg.com/vi/${track.video.youTubeId}/hqdefault.jpg`,
+      uploadDate: track.video.uploadDate,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${track.video.youTubeId}`,
+      contentUrl: `https://www.youtube.com/watch?v=${track.video.youTubeId}`
+    }
+  : undefined;
+
 const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
   { name: "Home", path: "/" },
   { name: "Music", path: "/music" },
   { name: track.title, path: `/music/${track.slug}` }
 ]);
+
+const forFansOfSlugByArtist = new Map(forFansOfEntries.map((e) => [e.artist.toLowerCase(), e.slug]));
+
+const songStructuredData = [
+  musicRecordingStructuredData,
+  ...(musicCompositionStructuredData ? [musicCompositionStructuredData] : []),
+  ...(videoStructuredData ? [videoStructuredData] : []),
+  breadcrumbStructuredData
+];
 
 const platformLinks = [
   track.spotifyUrl ? { label: "Spotify", href: track.spotifyUrl } : null,
@@ -58,7 +97,7 @@ const platformLinks = [
   ogImageWidth={1200}
   ogImageHeight={1200}
   ogType="article"
-  structuredData={[musicRecordingStructuredData, breadcrumbStructuredData]}
+  structuredData={songStructuredData}
 >
   <Header />
   <main id="main-content" tabindex="-1" class="mobile-nav-offset overflow-x-clip bg-white">
@@ -81,7 +120,16 @@ const platformLinks = [
           <p class="mt-6 text-base leading-7 text-ink/85 md:text-lg">{track.soundProfile}</p>
 
           <p class="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
-            For fans of {track.forFansOf.join(", ")} — see <a class="underline" href="/for-fans-of">for-fans-of</a>.
+            For fans of
+            {track.forFansOf.map((artist, idx) => {
+              const s = forFansOfSlugByArtist.get(artist.toLowerCase());
+              return (
+                <>
+                  {idx > 0 ? ", " : " "}
+                  {s ? <a class="underline" href={`/for-fans-of/${s}`}>{artist}</a> : <span>{artist}</span>}
+                </>
+              );
+            })}
           </p>
 
           {platformLinks.length > 0 ? (
@@ -100,11 +148,53 @@ const platformLinks = [
           ) : null}
 
           <section class="mt-10 border-t border-black/10 pt-6">
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Lyrics excerpt</p>
-            <p class="mt-3 text-base leading-7 text-ink/85 md:text-lg">
-              Lyrics excerpt coming soon — contact <a class="underline" href={`mailto:${siteMeta.contactEmail}`}>{siteMeta.contactEmail}</a> to license excerpts for press use.
-            </p>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Lyrics</p>
+            {track.lyrics ? (
+              <div data-lyrics class="mt-3 space-y-4 text-base leading-7 text-ink/85 md:text-lg">
+                {(() => {
+                  const stanzas: string[][] = [];
+                  let current: string[] = [];
+                  for (const line of track.lyrics) {
+                    if (line === "") {
+                      if (current.length) { stanzas.push(current); current = []; }
+                    } else {
+                      current.push(line);
+                    }
+                  }
+                  if (current.length) stanzas.push(current);
+                  return stanzas;
+                })().map((stanza) => (
+                  <p>{stanza.map((l, i) => (<>{i > 0 ? <br /> : null}{l}</>))}</p>
+                ))}
+              </div>
+            ) : (
+              <p class="mt-3 text-base leading-7 text-ink/85 md:text-lg">
+                Lyrics coming soon — contact <a class="underline" href={`mailto:${siteMeta.contactEmail}`}>{siteMeta.contactEmail}</a> to license excerpts for press use.
+              </p>
+            )}
           </section>
+
+          {track.video ? (
+            <section class="mt-10 border-t border-black/10 pt-6">
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Video</p>
+              <button
+                type="button"
+                class="yt-facade focus-ring poster-frame group relative mt-3 block aspect-video w-full overflow-hidden rounded-[1.5rem]"
+                data-yt-id={track.video.youTubeId}
+                aria-label={`Play video: ${track.video.name}`}
+              >
+                <img
+                  src={`https://i.ytimg.com/vi/${track.video.youTubeId}/hqdefault.jpg`}
+                  alt={track.video.name}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition group-hover:scale-[1.02]"
+                />
+                <span class="absolute inset-0 grid place-items-center">
+                  <span class="rounded-full bg-black/60 px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm">Play &#9654;</span>
+                </span>
+              </button>
+            </section>
+          ) : null}
         </article>
 
         <aside class="poster-frame overflow-hidden rounded-[2rem]">
@@ -122,3 +212,26 @@ const platformLinks = [
   </main>
   <Footer />
 </BaseLayout>
+
+<script>
+  function initYtFacades() {
+    document.querySelectorAll<HTMLButtonElement>(".yt-facade").forEach((el) => {
+      if (el.dataset.ytBound === "true") return;
+      el.dataset.ytBound = "true";
+      el.addEventListener("click", () => {
+        const id = el.getAttribute("data-yt-id");
+        if (!id) return;
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+        iframe.title = "YouTube video player";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.className = "absolute inset-0 h-full w-full";
+        el.replaceChildren(iframe);
+      });
+    });
+  }
+  initYtFacades();
+  document.addEventListener("astro:page-load", initYtFacades);
+</script>
