@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Footer from "../../components/site/Footer.astro";
 import Header from "../../components/site/Header.astro";
-import { epk, type Epk, type EpkPhoto } from "../../data/epk";
+import { epk } from "../../data/epk";
 import { pressPage } from "../../data/press";
 import { bandMembers } from "../../data/bandMembers";
 import { discography } from "../../data/discography";
@@ -14,11 +14,6 @@ import { buildPageId, buildPageUrl, siteEntityIds, siteMeta, siteRoutes } from "
 
 const pastShows = await getPastShows();
 const featuredTrack = discography[0];
-
-// Cast to Epk so TypeScript sees the optional fields (drawStats, techRider, photo.credit)
-// that are absent from the as-const literal but valid per the type contract.
-const epkData: Epk = epk as Epk;
-const epkPhotos: readonly EpkPhoto[] = epk.photoPack as readonly EpkPhoto[];
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -112,9 +107,9 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
               </li>
             ))}
           </ul>
-          {epkData.drawStats ? (
+          {epk.drawStats ? (
             <dl class="mt-6 grid gap-3 sm:grid-cols-2">
-              {epkData.drawStats.map((stat) => (
+              {epk.drawStats.map((stat) => (
                 <div class="rounded-[1.25rem] border border-black/10 bg-white px-4 py-3">
                   <dt class="text-xs font-bold uppercase tracking-[0.2em] text-pink">{stat.label}</dt>
                   <dd class="mt-1 text-base font-semibold text-ink">{stat.value}</dd>
@@ -153,13 +148,13 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
       </div>
     </section>
 
-    {epkPhotos.length > 0 ? (
+    {epk.photoPack.length > 0 ? (
       <section class="bg-white">
         <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Press photos</p>
           <p class="mt-2 text-sm text-ink/70">Open and save. Cleared for promo use.</p>
           <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {epkPhotos.map((photo) => (
+            {epk.photoPack.map((photo) => (
               <figure class="poster-frame overflow-hidden rounded-[1.5rem]">
                 <a href={photo.downloadHref} target="_blank" rel="noopener noreferrer" download>
                   <Image src={photo.image} alt={photo.label} widths={[480, 720]} sizes="(max-width: 639px) 100vw, 33vw" class="aspect-[4/5] w-full object-cover" />
@@ -174,27 +169,27 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
       </section>
     ) : null}
 
-    {epkData.techRider ? (
+    {epk.techRider ? (
       <section>
         <div class="mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-pink">Tech rider</p>
-          {epkData.techRider.inputList ? (
+          {epk.techRider.inputList ? (
             <>
               <h3 class="mt-4 text-sm font-bold uppercase tracking-[0.14em] text-ink">Input list</h3>
-              <ul class="mt-2 list-disc pl-5 text-base leading-7 text-ink/85">{epkData.techRider.inputList.map((i: string) => (<li>{i}</li>))}</ul>
+              <ul class="mt-2 list-disc pl-5 text-base leading-7 text-ink/85">{epk.techRider.inputList.map((i: string) => (<li>{i}</li>))}</ul>
             </>
           ) : null}
-          {epkData.techRider.backline ? (
+          {epk.techRider.backline ? (
             <>
               <h3 class="mt-4 text-sm font-bold uppercase tracking-[0.14em] text-ink">Backline</h3>
-              <ul class="mt-2 list-disc pl-5 text-base leading-7 text-ink/85">{epkData.techRider.backline.map((i: string) => (<li>{i}</li>))}</ul>
+              <ul class="mt-2 list-disc pl-5 text-base leading-7 text-ink/85">{epk.techRider.backline.map((i: string) => (<li>{i}</li>))}</ul>
             </>
           ) : null}
-          {epkData.techRider.stagePlotImage ? (
-            <Image src={epkData.techRider.stagePlotImage} alt="Stage plot" widths={[480, 960]} sizes="100vw" class="mt-5 w-full rounded-[1.5rem]" />
+          {epk.techRider.stagePlotImage ? (
+            <Image src={epk.techRider.stagePlotImage} alt="Stage plot" widths={[480, 960]} sizes="100vw" class="mt-5 w-full rounded-[1.5rem]" />
           ) : null}
-          {epkData.techRider.notes ? (
-            <ul class="mt-4 list-disc pl-5 text-base leading-7 text-ink/85">{epkData.techRider.notes.map((n: string) => (<li>{n}</li>))}</ul>
+          {epk.techRider.notes ? (
+            <ul class="mt-4 list-disc pl-5 text-base leading-7 text-ink/85">{epk.techRider.notes.map((n: string) => (<li>{n}</li>))}</ul>
           ) : null}
         </div>
       </section>

@@ -34,7 +34,7 @@ export type Epk = {
   };
 };
 
-export const epk = {
+export const epk: Epk = {
   heroOneLiner:
     "Provo, Utah alt rock built for loud rooms — fronted by a Voice alum, playing for the crowd, not the recording.",
   pitch: [
@@ -76,4 +76,4 @@ export const epk = {
       "Thanks!"
     ]
   }
-} as const satisfies Epk;
+};
