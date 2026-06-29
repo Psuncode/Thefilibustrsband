@@ -259,7 +259,8 @@ export const siteRoutes = {
   localDiscovery: { path: "/provo-alt-rock-band" },
   aiPressKit: { path: "/press/ai" },
   band: { path: "/band" },
-  merch: { path: "/merch" }
+  merch: { path: "/merch" },
+  epk: { path: "/press/epk" }
 } as const satisfies Record<string, SiteRoute>;
 
 export const buildSiteUrl = (path: string): string => new URL(path, siteMeta.url).href;
