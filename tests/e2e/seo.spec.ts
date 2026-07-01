@@ -28,6 +28,7 @@ const staticRoutes = [
   "/shows",
   "/provo-alt-rock-band",
   "/press/ai",
+  "/press/epk",
   "/for-fans-of",
   "/for-fans-of/paramore",
   "/listen",
