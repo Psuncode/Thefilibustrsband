@@ -4,6 +4,7 @@ import { partitionShowsByDate } from "./schedule.js";
 import {
   allShowSlugsQuery,
   mapShowEntry,
+  pastShowsQuery,
   showBySlugQuery,
   upcomingShowsQuery
 } from "./queries";
@@ -87,7 +88,20 @@ export const getUpcomingShows = async (): Promise<ShowEntry[]> => {
 };
 
 export const getPastShows = async (): Promise<ShowEntry[]> => {
-  return getFallbackShowBuckets().past;
+  if (!sanityClient) return getFallbackShowBuckets().past;
+
+  try {
+    const shows = await sanityClient.fetch(pastShowsQuery);
+    if (!Array.isArray(shows) || shows.length === 0) return getFallbackShowBuckets().past;
+
+    const normalized = shows
+      .map(mapShowEntry)
+      .filter((show): show is ShowEntry => Boolean(show));
+
+    return normalized.length > 0 ? normalized : getFallbackShowBuckets().past;
+  } catch {
+    return getFallbackShowBuckets().past;
+  }
 };
 
 export const getAllShowSlugs = async (): Promise<string[]> => {

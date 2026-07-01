@@ -1,5 +1,6 @@
 import type { ShowEntry } from "./types";
 import { siteMeta } from "../../data/site";
+import { isPastShow } from "./schedule.js";
 
 type EventSchemaInput = {
   show: ShowEntry;
@@ -25,7 +26,11 @@ export const buildEventStructuredData = ({
   description,
   image
 }: EventSchemaInput): Record<string, unknown> => {
+  // A show that has already happened shouldn't advertise an on-sale, in-stock Offer.
+  const hasEnded = isPastShow(show);
+  const hasPrice = show.offers?.isFree === true || typeof show.offers?.price === "number";
   const offers =
+    !hasEnded &&
     show.offers &&
     (show.offers.url ||
       typeof show.offers.price === "number" ||
@@ -39,7 +44,9 @@ export const buildEventStructuredData = ({
           // defaults to ~30 days before the show when unset (override via offers.validFrom).
           url: show.offers.url || show.ticketUrl || url,
           price: show.offers.isFree ? 0 : show.offers.price,
-          priceCurrency: show.offers.priceCurrency,
+          // priceCurrency is required whenever a price is present (free shows emit
+          // price:0). Default to USD so a free-show Offer isn't flagged as incomplete.
+          priceCurrency: show.offers.priceCurrency || (hasPrice ? "USD" : undefined),
           availability: show.offers.availability || "https://schema.org/InStock",
           validFrom:
             show.offers.validFrom ||

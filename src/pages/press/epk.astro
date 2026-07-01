@@ -28,6 +28,9 @@ const epkMailto = (() => {
   return `mailto:${epk.booking.email}?subject=${subject}&body=${body}`;
 })();
 
+const bookCtaClass =
+  "focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-pink px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-ink";
+
 const webPageStructuredData = {
   "@type": "WebPage",
   "@id": buildPageId(siteRoutes.epk.path),
@@ -69,7 +72,7 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
         </h1>
         <p class="mt-4 max-w-3xl text-[0.98rem] leading-6 text-ink/80 md:text-lg md:leading-7">{epk.heroOneLiner}</p>
         <div class="mt-7">
-          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-pink px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-ink" href={epkMailto}>
+          <a class={bookCtaClass} href={epkMailto}>
             Book us
           </a>
         </div>
@@ -199,7 +202,7 @@ const breadcrumbStructuredData = buildBreadcrumbList(Astro.site!.toString(), [
       <div class="mx-auto max-w-3xl px-4 py-10 text-center md:px-6 md:py-14">
         <h2 class="display-face text-2xl uppercase leading-[0.95] tracking-[-0.03em] md:text-4xl">Let's get a date on the calendar.</h2>
         <div class="mt-6 flex flex-wrap justify-center gap-3">
-          <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full bg-pink px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-ink" href={epkMailto}>Book us</a>
+          <a class={bookCtaClass} href={epkMailto}>Book us</a>
           <a class="focus-ring inline-flex min-h-12 items-center justify-center rounded-full border border-black/12 bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-ink transition hover:border-pink hover:text-pink" href={siteRoutes.press.path}>Press / media room</a>
         </div>
       </div>
