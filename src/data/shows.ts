@@ -315,5 +315,35 @@ export const upcomingShows = [
       "Free event, 5–7 PM at Brigham Square. Part of BYU Fall 2026 New Student Orientation — schedule is subject to change.",
     seoDescription:
       "The Filibusters play the free Back to School Bash at Brigham Square on BYU campus in Provo, Utah on Tuesday, September 1, 2026, from 5–7 PM."
+  },
+  {
+    title: "Provo Farmers Market",
+    slug: "provo-farmers-market-2026-10-17",
+    status: "announced",
+    startsAt: "2026-10-17T12:30:00-06:00",
+    endsAt: "2026-10-17T14:00:00-06:00",
+    venue: "Pioneer Park",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Pioneer+Park+500+West+Center+Provo+UT",
+    city: "Provo",
+    state: "Utah",
+    organizerName: "Provo Farmers Market",
+    organizerUrl: "https://www.provofarmersmarket.com/",
+    offers: {
+      isFree: true,
+      availability: "https://schema.org/InStock"
+    },
+    summary:
+      "The Filibusters play a free set at the Provo Farmers Market at Pioneer Park on Saturday, October 17 — a 90-minute outdoor show from 12:30–2 PM.",
+    country: "US",
+    body: [
+      "The Filibusters play a live set at the Provo Farmers Market on Saturday, October 17, 2026 — a free outdoor show from 12:30–2 PM at Pioneer Park (500 West Center, Provo).",
+      "Come by for a loud, upbeat set while you shop the market. Admission is free and open to everyone.",
+      "The Provo Farmers Market runs Saturdays at Pioneer Park through the end of October; fall hours are 10 AM–2 PM."
+    ],
+    lineup: ["The Filibusters"],
+    notes:
+      "Free outdoor show, 12:30–2 PM at Pioneer Park. The Provo Farmers Market runs Saturdays 10 AM–2 PM through October.",
+    seoDescription:
+      "The Filibusters play a free outdoor set at the Provo Farmers Market, Pioneer Park in Provo, Utah on Saturday, October 17, 2026 from 12:30–2 PM."
   }
 ] as const;
