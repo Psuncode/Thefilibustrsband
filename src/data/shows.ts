@@ -258,5 +258,62 @@ export const upcomingShows = [
       "Tickets are $6 at the door only — no advance sales. Dancing 9 PM–1 AM; The Filibusters live 10 PM–11 PM.",
     seoDescription:
       "The Filibusters play Marnell's Rustic Paradise in Orem, Utah on Thursday, June 25, 2026 — country and swing dancing all night with a live set from 10–11 PM."
+  },
+  {
+    title: "2026 Utah YSA Conference",
+    slug: "utah-ysa-conference-2026",
+    status: "announced",
+    startsAt: "2026-08-14T09:00:00-06:00",
+    endsAt: "2026-08-15T22:00:00-06:00",
+    venue: "Salt Palace Convention Center",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Salt+Palace+Convention+Center+Salt+Lake+City+UT",
+    city: "Salt Lake City",
+    state: "Utah",
+    ticketUrl: "https://2026utahysaconference.eventsairsite.com/",
+    organizerName: "Utah YSA Conference",
+    organizerUrl: "https://2026utahysaconference.eventsairsite.com/",
+    summary:
+      "The Filibusters appear at the 2026 Utah YSA Conference at the Salt Palace Convention Center in Salt Lake City on August 14–15 — set day and time to be confirmed.",
+    country: "US",
+    body: [
+      "The Filibusters are slated to perform at the 2026 Utah YSA Conference, held August 14–15, 2026 at the Salt Palace Convention Center in Salt Lake City, Utah.",
+      "The conference features live musical performances across the weekend alongside speakers and activities for young single adults. The Filibusters' exact set day and time are still being confirmed — check back for updates.",
+      "Registration and full conference details are on the official conference site."
+    ],
+    lineup: ["The Filibusters"],
+    notes:
+      "Set day and time to be confirmed. Registration required via the official 2026 Utah YSA Conference site.",
+    seoDescription:
+      "The Filibusters appear at the 2026 Utah YSA Conference at the Salt Palace Convention Center in Salt Lake City, Utah on August 14–15, 2026 — set day and time to be confirmed."
+  },
+  {
+    title: "Back to School Bash — BYU New Student Orientation",
+    slug: "byu-back-to-school-bash-2026",
+    status: "announced",
+    startsAt: "2026-09-01T17:00:00-06:00",
+    endsAt: "2026-09-01T19:00:00-06:00",
+    venue: "Brigham Square",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Brigham+Square+BYU+Provo+UT",
+    city: "Provo",
+    state: "Utah",
+    organizerName: "BYU Office of First-Year Experience",
+    organizerUrl: "https://fye.byu.edu/",
+    offers: {
+      isFree: true,
+      availability: "https://schema.org/InStock"
+    },
+    summary:
+      "The Filibusters play the free Back to School Bash at Brigham Square on BYU campus in Provo on Tuesday, September 1 — an outdoor set from 5–7 PM to kick off the new school year.",
+    country: "US",
+    body: [
+      "The Filibusters play the Back to School Bash at Brigham Square on BYU campus in Provo on Tuesday, September 1, 2026 — a free outdoor set from 5–7 PM as part of New Student Orientation.",
+      "Bring your friends and catch a loud, high-energy set to kick off the new school year. Admission is free.",
+      "The Back to School Bash is part of BYU's Fall 2026 New Student Orientation schedule; final timing is subject to change."
+    ],
+    lineup: ["The Filibusters"],
+    notes:
+      "Free event, 5–7 PM at Brigham Square. Part of BYU Fall 2026 New Student Orientation — schedule is subject to change.",
+    seoDescription:
+      "The Filibusters play the free Back to School Bash at Brigham Square on BYU campus in Provo, Utah on Tuesday, September 1, 2026, from 5–7 PM."
   }
 ] as const;
