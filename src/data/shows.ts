@@ -263,8 +263,8 @@ export const upcomingShows = [
     title: "2026 Utah Area YSA Conference",
     slug: "utah-ysa-conference-2026",
     status: "announced",
-    startsAt: "2026-08-15T10:00:00-06:00",
-    endsAt: "2026-08-15T11:00:00-06:00",
+    startsAt: "2026-08-15T11:15:00-06:00",
+    endsAt: "2026-08-15T12:00:00-06:00",
     venue: "Festival Stage — Salt Palace Convention Center",
     venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Salt+Palace+Convention+Center+Salt+Lake+City+UT",
     city: "Salt Lake City",
@@ -273,18 +273,18 @@ export const upcomingShows = [
     organizerName: "Utah YSA Conference",
     organizerUrl: "https://2026utahysaconference.eventsairsite.com/",
     summary:
-      "The Filibusters play the Festival Stage at the 2026 Utah Area YSA Conference at the Salt Palace Convention Center in Salt Lake City on Saturday, August 15 — the two-day conference drew 20,000+ young single adults last year.",
+      "The Filibusters play the Festival Stage at the 2026 Utah Area YSA Conference at the Salt Palace Convention Center in Salt Lake City on Saturday, August 15 at 11:15 AM — the two-day conference drew 20,000+ young single adults last year.",
     country: "US",
     body: [
-      "The Filibusters are a Festival Stage artist at the 2026 Utah Area YSA Conference, held August 14–15, 2026 at the Salt Palace Convention Center in Salt Lake City, Utah. Their set is on Saturday, August 15.",
+      "The Filibusters are a Festival Stage artist at the 2026 Utah Area YSA Conference, held August 14–15, 2026 at the Salt Palace Convention Center in Salt Lake City, Utah. Their set is Saturday, August 15 at 11:15 AM.",
       "Now in its fourth year, the Utah Area YSA Conference drew more than 20,000 young single adults last year — two days of teaching, music, and connection centered on Jesus Christ. The Festival Stage brings energy and warmth between the mainstage sessions, and The Filibusters are part of that experience.",
-      "The exact performance window is still being finalized. Registration and full conference details are on the official conference site."
+      "The Filibusters take the Festival Stage at 11:15 AM for a 45-minute set. Registration and full conference details are on the official conference site."
     ],
     lineup: ["The Filibusters"],
     notes:
-      "Festival Stage artist — performing Saturday, August 15. Exact performance window to be determined. Registration required via the official Utah Area YSA Conference site.",
+      "Festival Stage artist — Saturday, August 15, 11:15 AM set (45 minutes). Registration required via the official Utah Area YSA Conference site.",
     seoDescription:
-      "The Filibusters play the Festival Stage at the 2026 Utah Area YSA Conference at the Salt Palace Convention Center in Salt Lake City, Utah on Saturday, August 15, 2026."
+      "The Filibusters play the Festival Stage at the 2026 Utah Area YSA Conference at the Salt Palace Convention Center in Salt Lake City, Utah on Saturday, August 15, 2026 at 11:15 AM."
   },
   {
     title: "Back to School Bash — BYU New Student Orientation",
