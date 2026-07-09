@@ -263,8 +263,8 @@ export const upcomingShows = [
     title: "2026 Utah YSA Conference",
     slug: "utah-ysa-conference-2026",
     status: "announced",
-    startsAt: "2026-08-14T09:00:00-06:00",
-    endsAt: "2026-08-15T22:00:00-06:00",
+    startsAt: "2026-08-15T10:00:00-06:00",
+    endsAt: "2026-08-15T11:00:00-06:00",
     venue: "Salt Palace Convention Center",
     venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Salt+Palace+Convention+Center+Salt+Lake+City+UT",
     city: "Salt Lake City",
@@ -273,18 +273,18 @@ export const upcomingShows = [
     organizerName: "Utah YSA Conference",
     organizerUrl: "https://2026utahysaconference.eventsairsite.com/",
     summary:
-      "The Filibusters appear at the 2026 Utah YSA Conference at the Salt Palace Convention Center in Salt Lake City on August 14–15 — set day and time to be confirmed.",
+      "The Filibusters play the 2026 Utah YSA Conference at the Salt Palace Convention Center in Salt Lake City on Saturday morning, August 15 — exact set time to be confirmed.",
     country: "US",
     body: [
-      "The Filibusters are slated to perform at the 2026 Utah YSA Conference, held August 14–15, 2026 at the Salt Palace Convention Center in Salt Lake City, Utah.",
-      "The conference features live musical performances across the weekend alongside speakers and activities for young single adults. The Filibusters' exact set day and time are still being confirmed — check back for updates.",
+      "The Filibusters perform at the 2026 Utah YSA Conference on Saturday morning, August 15, 2026 at the Salt Palace Convention Center in Salt Lake City, Utah.",
+      "The conference features live musical performances alongside speakers and activities for young single adults. The Filibusters play a Saturday morning set — the exact time is still being confirmed, so check back for updates.",
       "Registration and full conference details are on the official conference site."
     ],
     lineup: ["The Filibusters"],
     notes:
-      "Set day and time to be confirmed. Registration required via the official 2026 Utah YSA Conference site.",
+      "Saturday morning set — exact time to be confirmed. Registration required via the official 2026 Utah YSA Conference site.",
     seoDescription:
-      "The Filibusters appear at the 2026 Utah YSA Conference at the Salt Palace Convention Center in Salt Lake City, Utah on August 14–15, 2026 — set day and time to be confirmed."
+      "The Filibusters play the 2026 Utah YSA Conference at the Salt Palace Convention Center in Salt Lake City, Utah on Saturday morning, August 15, 2026."
   },
   {
     title: "Back to School Bash — BYU New Student Orientation",
