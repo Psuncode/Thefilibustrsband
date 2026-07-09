@@ -2,7 +2,37 @@
 
 **Date:** 2026-07-08
 **Status:** Design approved (planning ahead of release — album details not yet final)
+**Launch target:** September 2026
 **Branch context:** builds on the music/discography structure in `src/data/discography.ts` + `src/pages/music/`
+
+## Launch Timeline (target: September 2026)
+
+Back-planned from a September drop (today is 2026-07-08, ~8 weeks out):
+
+- **Now → early Aug:** build the page shell + `MusicAlbum` structure against
+  placeholder data (this spec → implementation plan → build). No blocker on final
+  album metadata.
+- **Mid Aug (once metadata is known):** publish the page in a **pre-release
+  ("coming soon / pre-save")** state — real title, cover, expected release date, and a
+  pre-save link. Getting it live 2-4 weeks early lets search engines index it and lets
+  the band drive pre-saves. `MusicAlbum` with a future `datePublished` is valid.
+- **Release day (Sept):** flip status to released — swap pre-save CTAs for
+  Spotify/Apple/YouTube links, reveal full tracklist, and turn on the homepage / EPK /
+  music-index feature slots.
+- **Buffer:** keep ~1 week before the drop for QA + Rich Results validation.
+
+### Pre-release handling (small model addition)
+
+To support the coming-soon phase, `Album` gains:
+- `status: "upcoming" | "released"`
+- `preSaveUrl?: string`
+
+When `upcoming`: hero shows the expected release date + a "Pre-save" CTA; streaming
+buttons are hidden; tracklist may show as a teaser. When `released`: full streaming CTAs
++ tracklist, and the album is promoted into the feature slots.
+
+**Confirmed:** the pre-release page is wanted — the two-phase (`upcoming` → `released`)
+flow is part of the build, not optional.
 
 ## Context
 
@@ -57,13 +87,15 @@ export type AlbumReleaseType = "single" | "ep" | "album";
 export type Album = {
   slug: string;
   title: string;
-  releaseDate: string;       // ISO YYYY-MM-DD
+  releaseDate: string;       // ISO YYYY-MM-DD (may be future for an upcoming album)
+  status: "upcoming" | "released";
   releaseType: AlbumReleaseType;
   artwork: ImageMetadata;    // square cover
   artworkAlt: string;
   genre: string;             // e.g. "Alternative rock"
   oneLiner: string;          // 150-160 char hook -> meta description
   about: string;             // 80-150 word citable passage (themes/recording context)
+  preSaveUrl?: string;       // shown while status === "upcoming"
   spotifyUrl?: string;
   appleMusicUrl?: string;
   youtubeUrl?: string;
