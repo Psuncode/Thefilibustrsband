@@ -10,6 +10,10 @@ on:
       - "scripts/**"
       - "tests/e2e/**"
       - "playwright.config.ts"
+      - "astro.config.mjs"
+      - "tsconfig.json"
+      - "sanity.config.ts"
+      - "sanity.cli.ts"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/playwright.yml"
@@ -35,6 +39,20 @@ jobs:
 
       - name: Run drift guards (node:test)
         run: npm test
+
+      - name: Typecheck (astro check)
+        run: npm run check
+
+      - name: Resolve Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium

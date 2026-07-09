@@ -1,5 +1,10 @@
+// When a show has no explicit end time, assume it runs ~3 hours from the start so
+// it stays "upcoming" while it's happening instead of flipping to past at doors.
+const DEFAULT_SHOW_DURATION_MS = 3 * 60 * 60 * 1000;
+
 const getShowBoundary = (show) => {
-  return new Date(show.endsAt || show.startsAt);
+  if (show.endsAt) return new Date(show.endsAt);
+  return new Date(new Date(show.startsAt).getTime() + DEFAULT_SHOW_DURATION_MS);
 };
 
 export const isPastShow = (show, referenceDate = new Date()) => {

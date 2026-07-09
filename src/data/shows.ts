@@ -258,5 +258,92 @@ export const upcomingShows = [
       "Tickets are $6 at the door only — no advance sales. Dancing 9 PM–1 AM; The Filibusters live 10 PM–11 PM.",
     seoDescription:
       "The Filibusters play Marnell's Rustic Paradise in Orem, Utah on Thursday, June 25, 2026 — country and swing dancing all night with a live set from 10–11 PM."
+  },
+  {
+    title: "2026 Utah Area YSA Conference",
+    slug: "utah-ysa-conference-2026",
+    status: "announced",
+    startsAt: "2026-08-15T10:00:00-06:00",
+    endsAt: "2026-08-15T11:00:00-06:00",
+    venue: "Festival Stage — Salt Palace Convention Center",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Salt+Palace+Convention+Center+Salt+Lake+City+UT",
+    city: "Salt Lake City",
+    state: "Utah",
+    ticketUrl: "https://2026utahysaconference.eventsairsite.com/",
+    organizerName: "Utah YSA Conference",
+    organizerUrl: "https://2026utahysaconference.eventsairsite.com/",
+    summary:
+      "The Filibusters play the Festival Stage at the 2026 Utah Area YSA Conference at the Salt Palace Convention Center in Salt Lake City on Saturday, August 15 — the two-day conference drew 20,000+ young single adults last year.",
+    country: "US",
+    body: [
+      "The Filibusters are a Festival Stage artist at the 2026 Utah Area YSA Conference, held August 14–15, 2026 at the Salt Palace Convention Center in Salt Lake City, Utah. Their set is on Saturday, August 15.",
+      "Now in its fourth year, the Utah Area YSA Conference drew more than 20,000 young single adults last year — two days of teaching, music, and connection centered on Jesus Christ. The Festival Stage brings energy and warmth between the mainstage sessions, and The Filibusters are part of that experience.",
+      "The exact performance window is still being finalized. Registration and full conference details are on the official conference site."
+    ],
+    lineup: ["The Filibusters"],
+    notes:
+      "Festival Stage artist — performing Saturday, August 15. Exact performance window to be determined. Registration required via the official Utah Area YSA Conference site.",
+    seoDescription:
+      "The Filibusters play the Festival Stage at the 2026 Utah Area YSA Conference at the Salt Palace Convention Center in Salt Lake City, Utah on Saturday, August 15, 2026."
+  },
+  {
+    title: "Back to School Bash — BYU New Student Orientation",
+    slug: "byu-back-to-school-bash-2026",
+    status: "announced",
+    startsAt: "2026-09-01T17:00:00-06:00",
+    endsAt: "2026-09-01T19:00:00-06:00",
+    venue: "Brigham Square",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Brigham+Square+BYU+Provo+UT",
+    city: "Provo",
+    state: "Utah",
+    organizerName: "BYU Office of First-Year Experience",
+    organizerUrl: "https://fye.byu.edu/",
+    offers: {
+      isFree: true,
+      availability: "https://schema.org/InStock"
+    },
+    summary:
+      "The Filibusters play the free Back to School Bash at Brigham Square on BYU campus in Provo on Tuesday, September 1 — an outdoor set from 5–7 PM to kick off the new school year.",
+    country: "US",
+    body: [
+      "The Filibusters play the Back to School Bash at Brigham Square on BYU campus in Provo on Tuesday, September 1, 2026 — a free outdoor set from 5–7 PM as part of New Student Orientation.",
+      "Bring your friends and catch a loud, high-energy set to kick off the new school year. Admission is free.",
+      "The Back to School Bash is part of BYU's Fall 2026 New Student Orientation schedule; final timing is subject to change."
+    ],
+    lineup: ["The Filibusters"],
+    notes:
+      "Free event, 5–7 PM at Brigham Square. Part of BYU Fall 2026 New Student Orientation — schedule is subject to change.",
+    seoDescription:
+      "The Filibusters play the free Back to School Bash at Brigham Square on BYU campus in Provo, Utah on Tuesday, September 1, 2026, from 5–7 PM."
+  },
+  {
+    title: "Provo Farmers Market",
+    slug: "provo-farmers-market-2026-10-17",
+    status: "announced",
+    startsAt: "2026-10-17T12:30:00-06:00",
+    endsAt: "2026-10-17T14:00:00-06:00",
+    venue: "Pioneer Park",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Pioneer+Park+500+West+Center+Provo+UT",
+    city: "Provo",
+    state: "Utah",
+    organizerName: "Provo Farmers Market",
+    organizerUrl: "https://www.provofarmersmarket.com/",
+    offers: {
+      isFree: true,
+      availability: "https://schema.org/InStock"
+    },
+    summary:
+      "The Filibusters play a free set at the Provo Farmers Market at Pioneer Park on Saturday, October 17 — a 90-minute outdoor show from 12:30–2 PM.",
+    country: "US",
+    body: [
+      "The Filibusters play a live set at the Provo Farmers Market on Saturday, October 17, 2026 — a free outdoor show from 12:30–2 PM at Pioneer Park (500 West Center, Provo).",
+      "Come by for a loud, upbeat set while you shop the market. Admission is free and open to everyone.",
+      "The Provo Farmers Market runs Saturdays at Pioneer Park through the end of October; fall hours are 10 AM–2 PM."
+    ],
+    lineup: ["The Filibusters"],
+    notes:
+      "Free outdoor show, 12:30–2 PM at Pioneer Park. The Provo Farmers Market runs Saturdays 10 AM–2 PM through October.",
+    seoDescription:
+      "The Filibusters play a free outdoor set at the Provo Farmers Market, Pioneer Park in Provo, Utah on Saturday, October 17, 2026 from 12:30–2 PM."
   }
 ] as const;

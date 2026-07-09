@@ -37,7 +37,7 @@ const normalizeOffer = (offer: ShowEntry["offers"]): ShowEntry["offers"] => {
   return Object.values(normalized).some((value) => value !== undefined) ? normalized : undefined;
 };
 
-export const upcomingShowsQuery = `*[_type == "show" && startsAt >= now()] | order(startsAt asc){
+const showFieldProjection = `{
   title,
   "slug": slug.current,
   status,
@@ -59,6 +59,10 @@ export const upcomingShowsQuery = `*[_type == "show" && startsAt >= now()] | ord
   seoDescription,
   offers
 }`;
+
+export const upcomingShowsQuery = `*[_type == "show" && startsAt >= now()] | order(startsAt asc)${showFieldProjection}`;
+
+export const pastShowsQuery = `*[_type == "show" && startsAt < now()] | order(startsAt desc)${showFieldProjection}`;
 
 export const allShowSlugsQuery = `*[_type == "show"]{
   title,
@@ -70,28 +74,7 @@ export const allShowSlugsQuery = `*[_type == "show"]{
   state
 }`;
 
-export const showBySlugQuery = `*[_type == "show" && slug.current == $slug][0]{
-  title,
-  "slug": slug.current,
-  status,
-  startsAt,
-  endsAt,
-  venue,
-  venueMapUrl,
-  city,
-  state,
-  country,
-  ticketUrl,
-  summary,
-  "flyerUrl": flyer.asset->url,
-  body,
-  lineup,
-  notes,
-  organizerName,
-  organizerUrl,
-  seoDescription,
-  offers
-}`;
+export const showBySlugQuery = `*[_type == "show" && slug.current == $slug][0]${showFieldProjection}`;
 
 const blocksToParagraphs = (blocks: SanityBlock[] | undefined): string[] =>
   Array.isArray(blocks)

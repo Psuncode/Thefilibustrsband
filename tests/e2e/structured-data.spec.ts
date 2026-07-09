@@ -85,3 +85,26 @@ test("show detail page emits an Event JSON-LD node", async ({ page }) => {
   const eventNode = items.find((item) => isItem(item) && item["@type"] === "Event");
   expect(eventNode, `No Event JSON-LD on ${slugRoute}`).toBeTruthy();
 });
+
+test("EPK page emits WebPage and BreadcrumbList JSON-LD", async ({ page }) => {
+  const response = await page.goto("/press/epk");
+  expect(response?.ok(), "Failed to load /press/epk").toBe(true);
+  await page.waitForSelector("main");
+
+  const types = await page.$$eval('script[type="application/ld+json"]', (nodes) => {
+    const flatten = (v: unknown): unknown[] => {
+      if (!v || typeof v !== "object") return [];
+      if (Array.isArray(v)) return v.flatMap(flatten);
+      const g = (v as { "@graph"?: unknown })["@graph"];
+      if (Array.isArray(g)) return g.flatMap(flatten);
+      return [v];
+    };
+    return nodes
+      .flatMap((n) => {
+        try { return flatten(JSON.parse(n.textContent || "")); } catch { return []; }
+      })
+      .map((i) => (i as { "@type"?: string })?.["@type"]);
+  });
+  expect(types).toContain("WebPage");
+  expect(types).toContain("BreadcrumbList");
+});
