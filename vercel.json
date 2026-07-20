@@ -1,4 +1,5 @@
 {
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*)",
@@ -36,6 +37,11 @@
         }
       ],
       "destination": "https://www.thefilibustersband.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml",
       "permanent": true
     },
     {
