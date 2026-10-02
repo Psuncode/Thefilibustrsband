@@ -15,6 +15,7 @@ export const showLastmod = [
   { slug: "rustic-paradise-2026-06-25", startsAt: "2026-06-25T22:00:00-06:00" },
   { slug: "utah-ysa-conference-2026", startsAt: "2026-08-15T11:15:00-06:00" },
   { slug: "byu-back-to-school-bash-2026", startsAt: "2026-09-01T17:00:00-06:00" },
+  { slug: "audhe-album-release-2026-10-03", startsAt: "2026-10-03T19:30:00-06:00" },
   { slug: "provo-farmers-market-2026-10-17", startsAt: "2026-10-17T12:30:00-06:00" }
 ];
 

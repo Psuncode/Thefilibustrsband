@@ -6,6 +6,7 @@ import velourAlwaysHerImage from "../assets/images/velour-2026-06-19.png";
 import punkFestImage from "../assets/images/punk-fest-2026-05-30.jpg";
 import newSongShowcaseImage from "../assets/images/filibusters-new-song-showcase-2026-06-12.png";
 import rusticParadiseImage from "../assets/images/rustic-paradise-2026-06-25.png";
+import audheAlbumReleaseImage from "../assets/images/audhe-album-release-2026-10-03.jpg";
 
 export const upcomingShows = [
   {
@@ -315,6 +316,38 @@ export const upcomingShows = [
       "Free event, 5–7 PM at Brigham Square. Part of BYU Fall 2026 New Student Orientation — schedule is subject to change.",
     seoDescription:
       "The Filibusters play the free Back to School Bash at Brigham Square on BYU campus in Provo, Utah on Tuesday, September 1, 2026, from 5–7 PM."
+  },
+  {
+    title: "Audhe Album Release",
+    slug: "audhe-album-release-2026-10-03",
+    status: "announced",
+    startsAt: "2026-10-03T19:30:00-06:00",
+    venue: "Velour Live Music Gallery",
+    venueMapUrl: "https://www.google.com/maps/search/?api=1&query=Velour+Live+Music+Gallery+135+N+University+Ave+Provo+UT+84601",
+    city: "Provo",
+    state: "Utah",
+    ticketUrl: "https://www.24tix.com/",
+    flyerUrl: audheAlbumReleaseImage.src,
+    organizerName: "Velour Live Music Gallery",
+    organizerUrl: "https://www.velourlive.com/",
+    offers: {
+      url: "https://www.24tix.com/",
+      price: 10,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock"
+    },
+    summary:
+      "The Filibusters play Audhe's album release show at Velour Live Music Gallery in Provo on Saturday, October 3, with Chi Chi.",
+    country: "US",
+    body: [
+      "The Filibusters join Audhe's album release show at Velour Live Music Gallery on Saturday, October 3, 2026, on a bill with Chi Chi.",
+      "Velour Live Music Gallery is at 135 N University Ave, Provo, UT 84601. Doors are at 7:30 PM.",
+      "Tickets are $10 presale at https://www.24tix.com/ and $13 at the door. For updates, follow Velour at https://www.facebook.com/VelourLive/."
+    ],
+    lineup: ["The Filibusters", "Audhe", "Chi Chi"],
+    notes: "Doors at 7:30 PM. Tickets are $10 presale through 24Tix and $13 at the door. Set times should be confirmed directly with Velour.",
+    seoDescription:
+      "The Filibusters play Audhe's album release show at Velour Live Music Gallery in Provo, Utah on Saturday, October 3, 2026, with Chi Chi."
   },
   {
     title: "Provo Farmers Market",
